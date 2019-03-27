@@ -6,7 +6,7 @@
 This project aim to finalize some [previous
 attempts](https://en.wikipedia.org/wiki/Network_operations_center) to set up a
 Network Operations Center (so called
-[NOC](https://en.wikipedia.org/wiki/Network_operations_center)) to provide an
+[NOC](https://en.wikipedia.org/wiki/Network_operations_center)) providing an
 external monitoring for our School. In short, it will set up
 [Prometheus](https://prometheus.io/docs/introduction/overview/), [Prometheus
 Pushgateway](https://prometheus.io/docs/practices/pushing/), [Prometheus
@@ -44,6 +44,9 @@ As it stands, this need 3 manual actions to deploy this setup on a new place:
   1. Use [Let's encrypt certbot](https://certbot.eff.org/) to get a certificate 
      for the Grafana's frontend.
 
+After that, the `docker-compose up` command might pop the stuff up for you.
+
+
 ## .env
 This file will be sourced by docker-compose and will serve environment variables
 in the container. While it would not be necessary to explicitly named the 
@@ -56,7 +59,7 @@ Still, the `grafana.ini` file has been kept for comfort and comprehension
 purpose.
 
 ## Auth
-The authentication setup is straight forward if you replace the variable. You
+The authentication setup is straight forward if you replace the variables. You
 can specify access to an entire organization or add the teams ids, to limit the
 access scope. The mechanism won't work without the
 `GF_AUTH_GITHUB_ALLOW_SIGN_UP` set to true unless the users already exist in
