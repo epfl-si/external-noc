@@ -1,0 +1,52 @@
+version: '3'
+services:
+  nginx-redirect:   # Redirect common ports to grafana
+    image: nginx
+    volumes:
+      - ./grafana/nginx-redirect/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "80:80"
+      - "3000:80"
+    container_name: ${CONTAINER_PREFIX}nginx-redirect
+  prometheus:       # Prometheus service on port 9090
+    image: prom/prometheus
+    ports: 
+      - "${PROMETHEUS_PORT:-9090}:9090"
+    restart: always
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    container_name: ${CONTAINER_PREFIX}prometheus
+  pushgateway:      # Prometheus push gateway on port 9091
+    image: prom/pushgateway
+    ports: 
+      - "${PROMETHEUS_PUSHGW_PORT:-9091}:9091"
+    restart: always
+    container_name: ${CONTAINER_PREFIX}pushgateway
+  grafana:          # Grafana front end
+    image: grafana/grafana
+    ports:
+      - "${GRAFANA_PORT:-443}:3000"
+    restart: always
+    volumes:
+      - ./grafana/conf/grafana.ini:/etc/grafana/grafana.ini
+      - ./grafana/data:/var/lib/grafana
+      - ./grafana/logs:/var/log/grafana
+      - ./grafana/plugins:/var/lib/grafana/plugins
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/ssl/fullchain.pem:/var/ssl/server.crt
+      - ./grafana/ssl/privkey.pem:/var/ssl/server.key
+    environment:
+      GF_SERVER_ROOT_URL: ${GF_SERVER_ROOT_URL}
+      GF_SECURITY_ADMIN_PASSWORD: ${GF_SECURITY_ADMIN_PASSWORD}
+      GF_AUTH_GITHUB_ENABLED: ${GF_AUTH_GITHUB_ENABLED}
+      GF_AUTH_GITHUB_ALLOW_SIGN_UP: ${GF_AUTH_GITHUB_ALLOW_SIGN_UP}
+      GF_AUTH_GITHUB_CLIENT_ID: ${GF_AUTH_GITHUB_CLIENT_ID}
+      GF_AUTH_GITHUB_CLIENT_SECRET: ${GF_AUTH_GITHUB_CLIENT_SECRET}
+      GF_AUTH_GITHUB_SCOPES: ${GF_AUTH_GITHUB_SCOPES}
+      GF_AUTH_GITHUB_AUTH_URL: ${GF_AUTH_GITHUB_AUTH_URL}
+      GF_AUTH_GITHUB_TOKEN_URL: ${GF_AUTH_GITHUB_TOKEN_URL}
+      GF_AUTH_GITHUB_REDIRECT_URI: ${GF_AUTH_GITHUB_REDIRECT_URI}
+      GF_AUTH_GITHUB_API_URL: ${GF_AUTH_GITHUB_API_URL}
+      # - GF_AUTH_GITHUB_TEAM_IDS: ${GF_AUTH_GITHUB_TEAM_IDS}
+      GF_AUTH_GITHUB_ALLOWED_ORGANIZATIONS: ${GF_AUTH_GITHUB_ALLOWED_ORGANIZATIONS}
+    container_name: ${CONTAINER_PREFIX}grafana
