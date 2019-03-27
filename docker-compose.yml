@@ -1,28 +1,38 @@
 version: '3'
 services:
-  nginx-redirect:   # Redirect common ports to grafana
+  nginx-redirect:                             # Redirect common ports to Grafana
+    container_name: ${CONTAINER_PREFIX}nginx-redirect
     image: nginx
     volumes:
       - ./nginx-redirect/nginx.conf:/etc/nginx/nginx.conf
     ports:
       - "80:80"
       - "3000:80"
-    container_name: ${CONTAINER_PREFIX}nginx-redirect
-  prometheus:       # Prometheus service on port 9090
+  prometheus:                                  # Prometheus service on port 9090
+    container_name: ${CONTAINER_PREFIX}prometheus
     image: prom/prometheus
     ports: 
       - "${PROMETHEUS_PORT:-9090}:9090"
     restart: always
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-    container_name: ${CONTAINER_PREFIX}prometheus
-  pushgateway:      # Prometheus push gateway on port 9091
+  pushgateway:                            # Prometheus push gateway on port 9091
+    container_name: ${CONTAINER_PREFIX}pushgateway
     image: prom/pushgateway
     ports: 
       - "${PROMETHEUS_PUSHGW_PORT:-9091}:9091"
     restart: always
-    container_name: ${CONTAINER_PREFIX}pushgateway
-  grafana:          # Grafana front end
+  blackbox-exporter:                 # Prometheus blackbox-exporter on port 9115
+    container_name: ${CONTAINER_PREFIX}blackbox-exporter
+    image: prom/blackbox-exporter
+    volumes:
+      - ./blackbox-exporter/config/blackbox.yml:/config/blackbox.yml
+    ports: 
+      - "${PROMETHEUS_BLACKBOX_EXPORTER_PORT:-9115}:9115"
+    restart: always
+    command: --config.file=/config/blackbox.yml
+  grafana:                                       # Grafana front end on port 443
+    container_name: ${CONTAINER_PREFIX}grafana
     image: grafana/grafana
     ports:
       - "${GRAFANA_PORT:-443}:3000"
@@ -49,4 +59,3 @@ services:
       GF_AUTH_GITHUB_API_URL: ${GF_AUTH_GITHUB_API_URL}
       # - GF_AUTH_GITHUB_TEAM_IDS: ${GF_AUTH_GITHUB_TEAM_IDS}
       GF_AUTH_GITHUB_ALLOWED_ORGANIZATIONS: ${GF_AUTH_GITHUB_ALLOWED_ORGANIZATIONS}
-    container_name: ${CONTAINER_PREFIX}grafana

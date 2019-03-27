@@ -29,3 +29,25 @@ scrape_configs:
     # The targets have to match the docker-compose service name/port !
     static_configs:
     - targets: ['idevfsd-prometheus:9090', 'idevfsd-pushgateway:9091']
+
+  # Prometheus Blackbox exporter scraper
+  - job_name: 'blackbox'
+    metrics_path: /probe
+    params:
+      module: [http_get]  # Look for a HTTP 200 response.
+    static_configs:
+      - targets:
+        - https://www.epfl.ch
+        - https://go.epfl.ch
+        - https://people.epfl.ch
+        - https://memento.epfl.ch
+        - https://actu.epfl.ch
+        - https://it.epfl.ch
+        - https://igm.epfl.ch
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox-exporter:9115  # The blackbox exporter's real hostname:port.

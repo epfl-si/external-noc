@@ -32,7 +32,8 @@ which depends on [OpenStack Neutron Security
 Groups](https://wiki.openstack.org/wiki/Neutron/SecurityGroups).
 
 # New instance
-As it stands, this need 3 manual actions to deploy this setup on a new place:
+As it stands, this need a few manual actions to deploy this setup on a new 
+place:
   1. Copy of the [`sample.env`](sample.env) to a `.env` file, and configuration 
      of the project's variables;
   1. Get new secrets for the GitHub authentication (`GF_AUTH_GITHUB_CLIENT_ID` 
@@ -42,10 +43,11 @@ As it stands, this need 3 manual actions to deploy this setup on a new place:
      URL" and "Authorization callback URL" as defined in the 
      [Grafana's GitHub OAuth2 Authentication page](http://docs.grafana.org/auth/github/#configure-github-oauth-application);
   1. Use [Let's encrypt certbot](https://certbot.eff.org/) to get a certificate 
-     for the Grafana's frontend.
+     for the Grafana's frontend;
+  1. You may want to tune some target URLs in the 
+     [`prometheus/prometheus.yml`](prometheus/prometheus.yml) file.
 
 After that, the `docker-compose up` command might pop the stuff up for you.
-
 
 ## .env
 This file will be sourced by docker-compose and will serve environment variables
@@ -82,6 +84,20 @@ damn easy:
      files to the grafana ssl's directory (mounted as follow in docker):
      * `./grafana/ssl/fullchain.pem:/var/ssl/server.crt`
      * `./grafana/ssl/privkey.pem:/var/ssl/server.key`
+
+## Prometheus & Blackbox exporter
+Prometheus configuration stands in the
+[`prometheus/prometheus.yml`](prometheus/prometheus.yml) file. The Blackbox 
+exporter is used to probe some URLs which are defined in the config file. You 
+may need to understand how the [Blackbox exporter 
+modules](https://github.com/prometheus/blackbox_exporter/blob/master/CONFIGURATION.md#module),
+defined in 
+[`blackbox-exporter/config/blackbox.yml`](blackbox-exporter/config/blackbox.yml) 
+work in order to define new
+[scrape_config](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) 
+for Prometheus. The Blackbox exporter allow probing of endpoints over HTTP, 
+HTTPS, DNS, TCP and ICMP.
+
 
 # Links
   * [Prometheus](https://prometheus.io/docs/introduction/overview/)
