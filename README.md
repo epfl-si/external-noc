@@ -84,9 +84,15 @@ damn easy:
      * `./grafana/ssl/privkey.pem:/var/ssl/server.key`
 
 # Links
-  * [Grafana](https://prometheus.io/docs/visualization/grafana/)
-  * [Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager/)
-  * [Prometheus Blackbox exporter](https://github.com/prometheus/blackbox_exporter)
-  * [Prometheus Pushgateway](https://prometheus.io/docs/practices/pushing/)
-  * [Prometheus node_exporter](https://github.com/prometheus/node_exporter) 
   * [Prometheus](https://prometheus.io/docs/introduction/overview/)
+    * [Grafana](https://prometheus.io/docs/visualization/grafana/)
+    * [Alertmanager](https://prometheus.io/docs/alerting/alertmanager/)
+    * [Blackbox exporter](https://github.com/prometheus/blackbox_exporter)
+    * [Pushgateway](https://prometheus.io/docs/practices/pushing/)
+    * [node_exporter](https://github.com/prometheus/node_exporter) 
+  * [Grafana](https://grafana.com/)
+    * [Configuration](http://docs.grafana.org/installation/configuration/)
+    * [Docker](http://docs.grafana.org/installation/docker/)
+    * [Auth GitHub](http://docs.grafana.org/auth/github/)
+    * [Provisionning DataSource](http://docs.grafana.org/administration/provisioning/#example-datasource-config-file)
+    
