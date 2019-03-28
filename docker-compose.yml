@@ -15,7 +15,16 @@ services:
       - "${PROMETHEUS_PORT:-9090}:9090"
     restart: always
     volumes:
-      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus:/etc/prometheus
+  alertmanager:                                  # Prometheus service on port 9090
+    container_name: ${CONTAINER_PREFIX}alertmanager
+    image: quay.io/prometheus/alertmanager
+    ports:
+      - "${ALERTMANAGER_PORT:-9093}:9093"
+    restart: always
+    volumes:
+      - ./alertmanager/config:/config
+    command: --config.file=/config/simple.yml
   pushgateway:                            # Prometheus push gateway on port 9091
     container_name: ${CONTAINER_PREFIX}pushgateway
     image: prom/pushgateway
@@ -26,7 +35,7 @@ services:
     container_name: ${CONTAINER_PREFIX}blackbox-exporter
     image: prom/blackbox-exporter
     volumes:
-      - ./blackbox-exporter/config/blackbox.yml:/config/blackbox.yml
+      - ./blackbox-exporter/config:/config
     ports: 
       - "${PROMETHEUS_BLACKBOX_EXPORTER_PORT:-9115}:9115"
     restart: always

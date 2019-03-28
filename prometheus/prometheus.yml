@@ -8,12 +8,14 @@ global:
 # Alertmanager configuration
 alerting:
   alertmanagers:
-  - static_configs:
+  - scheme: http
+    static_configs:
     - targets:
-      # - alertmanager:9093
+      - "alertmanager:9093"
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
+  - "alert-all-the-time-for-tests.yml"
   # - "first_rules.yml"
   # - "second_rules.yml"
 
