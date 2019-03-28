@@ -10,6 +10,7 @@ services:
     ports:
       - "80:80"
       - "3000:80"
+    restart: always
 
 
   prometheus:                                  # Prometheus service on port 9090
@@ -20,6 +21,7 @@ services:
     restart: always
     volumes:
       - ./prometheus:/etc/prometheus
+    restart: always
 
 
   alertmanager:                                  # Prometheus service on port 9090
@@ -31,6 +33,7 @@ services:
     volumes:
       - ./alertmanager/config:/config
     command: --config.file=/config/simple.yml
+    restart: always
 
 
   telegram-bot:
@@ -66,6 +69,7 @@ services:
       - "${PROMETHEUS_BLACKBOX_EXPORTER_PORT:-9115}:9115"
     restart: always
     command: --config.file=/config/blackbox.yml
+    restart: always
 
 
   grafana:                                       # Grafana front end on port 443
