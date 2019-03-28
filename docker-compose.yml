@@ -1,5 +1,7 @@
 version: '3'
 services:
+
+
   nginx-redirect:                             # Redirect common ports to Grafana
     container_name: ${CONTAINER_PREFIX}nginx-redirect
     image: nginx
@@ -8,6 +10,8 @@ services:
     ports:
       - "80:80"
       - "3000:80"
+
+
   prometheus:                                  # Prometheus service on port 9090
     container_name: ${CONTAINER_PREFIX}prometheus
     image: prom/prometheus
@@ -16,6 +20,8 @@ services:
     restart: always
     volumes:
       - ./prometheus:/etc/prometheus
+
+
   alertmanager:                                  # Prometheus service on port 9090
     container_name: ${CONTAINER_PREFIX}alertmanager
     image: quay.io/prometheus/alertmanager
@@ -25,12 +31,16 @@ services:
     volumes:
       - ./alertmanager/config:/config
     command: --config.file=/config/simple.yml
+
+
   pushgateway:                            # Prometheus push gateway on port 9091
     container_name: ${CONTAINER_PREFIX}pushgateway
     image: prom/pushgateway
     ports: 
       - "${PROMETHEUS_PUSHGW_PORT:-9091}:9091"
     restart: always
+
+
   blackbox-exporter:                 # Prometheus blackbox-exporter on port 9115
     container_name: ${CONTAINER_PREFIX}blackbox-exporter
     image: prom/blackbox-exporter
@@ -40,6 +50,8 @@ services:
       - "${PROMETHEUS_BLACKBOX_EXPORTER_PORT:-9115}:9115"
     restart: always
     command: --config.file=/config/blackbox.yml
+
+
   grafana:                                       # Grafana front end on port 443
     container_name: ${CONTAINER_PREFIX}grafana
     image: grafana/grafana
