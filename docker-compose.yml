@@ -24,7 +24,7 @@ services:
     restart: always
 
 
-  alertmanager:                                  # Prometheus service on port 9090
+  alertmanager:                                  # Alert manager on port 9093
     container_name: ${CONTAINER_PREFIX}alertmanager
     image: quay.io/prometheus/alertmanager
     ports:
@@ -36,7 +36,7 @@ services:
     restart: always
 
 
-  telegram-bot:
+  telegram-bot:                            # Telegram bot
     image: metalmatze/alertmanager-bot:0.4.0
     environment:
       ALERTMANAGER_URL: http://alertmanager:9093
