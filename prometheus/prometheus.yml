@@ -13,6 +13,13 @@ alerting:
     - targets:
       - "alertmanager:9093"
 
+# Telegram bot
+receivers:
+- name: 'telegram-bot'
+  webhook_configs:
+  - send_resolved: true
+    url: 'http://telegram-bot:8080'
+
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
   - "alert-all-the-time-for-tests.yml"
