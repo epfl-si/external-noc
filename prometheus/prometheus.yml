@@ -13,16 +13,9 @@ alerting:
     - targets:
       - "alertmanager:9093"
 
-# Telegram bot
-receivers:
-- name: 'telegram-bot'
-  webhook_configs:
-  - send_resolved: true
-    url: 'http://telegram-bot:8080'
-
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
-  - "alert-all-the-time-for-tests.yml"
+  - "rules/*.yml"
   # - "first_rules.yml"
   # - "second_rules.yml"
 
@@ -60,3 +53,21 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: blackbox-exporter:9115  # The blackbox exporter's real hostname:port.
+
+  - job_name: 'ressenti'
+    metrics_path: /ressentiprobe
+    params:
+      module: [ressenti_firefox]
+    static_configs:
+      - targets:
+        - https://www.epfl.ch
+        - https://go.epfl.ch
+        - https://people.epfl.ch
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: http://prob1:wy3t727VYBz85pKJm8dT@prob.86.119.40.68.nip.io/
+

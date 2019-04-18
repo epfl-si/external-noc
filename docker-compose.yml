@@ -2,62 +2,92 @@ version: '3'
 services:
 
 
-  nginx-redirect:                             # Redirect common ports to Grafana
-    container_name: ${CONTAINER_PREFIX}nginx-redirect
-    image: nginx
-    volumes:
-      - ./nginx-redirect/nginx.conf:/etc/nginx/nginx.conf
-    ports:
-      - "80:80"
-      - "3000:80"
-    restart: always
-
+  # Use machine traefik instead
+  # nginx-redirect:                             # Redirect common ports to Grafana
+  #   container_name: ${CONTAINER_PREFIX}nginx-redirect
+  #   image: nginx
+  #   volumes:
+  #     - ./nginx-redirect/nginx.conf:/etc/nginx/nginx.conf
+  #   ports:
+  #     - "80:80"
+  #     - "3000:80"
+  #   restart: always
 
   prometheus:                                  # Prometheus service on port 9090
     container_name: ${CONTAINER_PREFIX}prometheus
     image: prom/prometheus
     ports: 
-      - "${PROMETHEUS_PORT:-9090}:9090"
-    restart: always
+      - "${PROMETHEUS_PORT:-9090}"
     volumes:
       - ./prometheus:/etc/prometheus
     restart: always
-
+    networks:
+      - traefik
+      - default    
+    labels:
+      - "traefik.frontend.rule=Host:prometheus-${PUBLIC_HOSTNAME}"
+      - "traefik.docker.network=traefik"
+      - "traefik.enable=true"
+      - "traefik.port=${PROMETHEUS_PORT:-9090}"
+      #- "traefik.frontend.auth.basic.users="
+      #- "traefik.frontend.redirect.entryPoint=https"
 
   alertmanager:                                  # Alert manager on port 9093
     container_name: ${CONTAINER_PREFIX}alertmanager
     image: quay.io/prometheus/alertmanager
     ports:
-      - "${ALERTMANAGER_PORT:-9093}:9093"
-    restart: always
+      - "${ALERTMANAGER_PORT:-9093}"
     volumes:
       - ./alertmanager/config:/config
     command: --config.file=/config/simple.yml
     restart: always
+    networks:
+      - traefik
+      - default    
+    labels:
+      - "traefik.frontend.rule=Host:am-${PUBLIC_HOSTNAME}"
+      - "traefik.docker.network=traefik"
+      - "traefik.enable=true"
+      - "traefik.port=${ALERTMANAGER_PORT:-9093}"
+      #- "traefik.frontend.redirect.entryPoint=https"
 
-
-  telegram-bot:                            # Telegram bot
-    image: metalmatze/alertmanager-bot:0.4.0
-    environment:
-      ALERTMANAGER_URL: http://alertmanager:9093
-      STORE: bolt
-      BOLT_PATH: /data/bot.db
-      TELEGRAM_ADMIN: "${TELEGRAM_BOT_ADMINISTRATOR_ID}"
-      TELEGRAM_TOKEN: "${TELEGRAM_BOT_TOKEN}"
-      TEMPLATE_PATHS: /templates/default.tmpl
-    volumes:
-      - './telegram-bot/data:/data'
-    command:
-      - '--listen.addr=0.0.0.0:8080'
-    restart: always
-
+  # telegram-bot:                            # Telegram bot
+  #   image: metalmatze/alertmanager-bot:0.4.0
+  #   environment:
+  #     ALERTMANAGER_URL: http://alertmanager:${ALERTMANAGER_PORT:-9093}
+  #     STORE: bolt
+  #     BOLT_PATH: /data/bot.db
+  #     TELEGRAM_ADMIN: "${TELEGRAM_BOT_ADMINISTRATOR_ID}"
+  #     TELEGRAM_TOKEN: "${TELEGRAM_BOT_TOKEN}"
+  #     TEMPLATE_PATHS: /templates/default.tmpl
+  #   volumes:
+  #     - './telegram-bot/data:/data'
+  #   command:
+  #     - '--listen.addr=0.0.0.0:${TELEGRAM_BOT_PORT:-8080}'
+  #   restart: always
+  #   networks:
+  #     - traefik
+  #     - default    
+  #   labels:
+  #     - "traefik.frontend.rule=Host:telegram-${PUBLIC_HOSTNAME}"
+  #     - "traefik.docker.network=traefik"
+  #     - "traefik.enable=true"
+  #     - "traefik.port=${TELEGRAM_BOT_PORT:-8080}"
 
   pushgateway:                            # Prometheus push gateway on port 9091
     container_name: ${CONTAINER_PREFIX}pushgateway
     image: prom/pushgateway
     ports: 
-      - "${PROMETHEUS_PUSHGW_PORT:-9091}:9091"
+      - "${PUSHGATEWAY_PORT:-9091}"
     restart: always
+    networks:
+      - traefik
+      - default    
+    labels:
+      - "traefik.frontend.rule=Host:pgw-${PUBLIC_HOSTNAME}"
+      - "traefik.docker.network=traefik"
+      - "traefik.enable=true"
+      - "traefik.port=${PUSHGATEWAY_PORT:-9091}"
 
 
   blackbox-exporter:                 # Prometheus blackbox-exporter on port 9115
@@ -66,17 +96,25 @@ services:
     volumes:
       - ./blackbox-exporter/config:/config
     ports: 
-      - "${PROMETHEUS_BLACKBOX_EXPORTER_PORT:-9115}:9115"
+      - "${PROMETHEUS_BLACKBOX_EXPORTER_PORT:-9115}"
     restart: always
     command: --config.file=/config/blackbox.yml
     restart: always
+    networks:
+      - traefik
+      - default    
+    labels:
+      - "traefik.frontend.rule=Host:bbe-${PUBLIC_HOSTNAME}"
+      - "traefik.docker.network=traefik"
+      - "traefik.enable=true"
+      - "traefik.port=${PROMETHEUS_BLACKBOX_EXPORTER_PORT:-9115}"
 
 
   grafana:                                       # Grafana front end on port 443
     container_name: ${CONTAINER_PREFIX}grafana
     image: grafana/grafana
     ports:
-      - "${GRAFANA_PORT:-443}:3000"
+      - "${GRAFANA_PORT:-3000}"
     restart: always
     volumes:
       - ./grafana/conf/grafana.ini:/etc/grafana/grafana.ini
@@ -101,3 +139,16 @@ services:
       GF_AUTH_GITHUB_API_URL: ${GF_AUTH_GITHUB_API_URL}
       # - GF_AUTH_GITHUB_TEAM_IDS: ${GF_AUTH_GITHUB_TEAM_IDS}
       GF_AUTH_GITHUB_ALLOWED_ORGANIZATIONS: ${GF_AUTH_GITHUB_ALLOWED_ORGANIZATIONS}
+    networks:
+      - traefik
+      - default    
+    labels:
+      - "traefik.frontend.rule=Host:grafana-${PUBLIC_HOSTNAME}"
+      - "traefik.docker.network=traefik"
+      - "traefik.enable=true"
+      - "traefik.port=${GRAPHANA_PORT:-3000}"
+      #- "traefik.frontend.redirect.entryPoint=https"
+
+networks:
+  traefik:
+    external: true
