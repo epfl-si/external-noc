@@ -63,11 +63,19 @@ scrape_configs:
         - https://www.epfl.ch
         - https://go.epfl.ch
         - https://people.epfl.ch
+        - https://memento.epfl.ch
+        - https://actu.epfl.ch
+        - https://it.epfl.ch
+        - https://igm.epfl.ch
+    basic_auth:
+      username: prob1
+      password: "wy3t727VYBz85pKJm8dT"
+
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
       - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
-        replacement: http://prob1:wy3t727VYBz85pKJm8dT@prob.86.119.40.68.nip.io/
+        replacement: prob.86.119.40.68.nip.io
 
