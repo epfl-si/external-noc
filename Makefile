@@ -22,4 +22,4 @@ ps:
 
 .PHONY: box
 box:
-	docker run -i -t busybox
+	docker run -i -t --network=traefik busybox
