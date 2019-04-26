@@ -13,6 +13,9 @@ defaultEntryPoints = ["https","http"]
 
   [entryPoints.https]
   address = ":443"
+    [entryPoints.https.auth]
+      [entryPoints.https.auth.basic]
+      usersFile = "/htpasswd"
 
   [entryPoints.https.tls]
 
