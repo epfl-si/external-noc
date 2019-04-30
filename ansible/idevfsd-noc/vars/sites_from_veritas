@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require 'net/http'
+require 'json'
+
+url = 'https://wp-veritas.epfl.ch/api/v1/sites'
+uri = URI(url)
+response = Net::HTTP.get(uri)
+
+struct = JSON.parse(response).select{|u| u['userExperience']}
+
+print JSON.pretty_generate struct.map {|u| u['url']}

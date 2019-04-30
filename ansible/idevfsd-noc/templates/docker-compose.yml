@@ -1,0 +1,145 @@
+version: '3'
+services:
+  prometheus:                                  # Prometheus service on port 9090
+    container_name: "{{container_prefix}}-prometheus"
+    image: prom/prometheus
+    ports:
+      - "${PROMETHEUS_PORT:-9090}"
+    volumes:
+      - ./prometheus:/etc/prometheus
+    restart: always
+    networks:
+      - traefik
+      - default
+    labels:
+      - "traefik.frontend.rule=Host:prometheus-${PUBLIC_HOSTNAME}"
+      - "traefik.docker.network=traefik"
+      - "traefik.enable=true"
+      - "traefik.port=${PROMETHEUS_PORT:-9090}"
+      # salt is constant otherwise it will trigger reload at each ansible run
+      - "traefik.frontend.auth.basic.users={{ frontend.htpass | htpasswd(salt=frontend.salt) }}"
+      #- "traefik.frontend.redirect.entryPoint=https"
+
+  alertmanager:                                  # Alert manager on port 9093
+    container_name: "{{container_prefix}}-alertmanager"
+    image: quay.io/prometheus/alertmanager
+    ports:
+      - "${ALERTMANAGER_PORT:-9093}"
+    volumes:
+      - ./alertmanager/config:/config
+    command: --config.file=/config/simple.yml
+    restart: always
+    networks:
+      - traefik
+      - default
+    labels:
+      - "traefik.frontend.rule=Host:am.{{frontend.domain}}"
+      - "traefik.docker.network=traefik"
+      - "traefik.enable=true"
+      - "traefik.port=${ALERTMANAGER_PORT:-9093}"
+      #- "traefik.frontend.redirect.entryPoint=https"
+
+  # telegram-bot:                            # Telegram bot
+  #   image: metalmatze/alertmanager-bot:0.4.0
+  #   environment:
+  #     ALERTMANAGER_URL: http://alertmanager:${ALERTMANAGER_PORT:-9093}
+  #     STORE: bolt
+  #     BOLT_PATH: /data/bot.db
+  #     TELEGRAM_ADMIN: "${TELEGRAM_BOT_ADMINISTRATOR_ID}"
+  #     TELEGRAM_TOKEN: "${TELEGRAM_BOT_TOKEN}"
+  #     TEMPLATE_PATHS: /templates/default.tmpl
+  #   volumes:
+  #     - './telegram-bot/data:/data'
+  #   command:
+  #     - '--listen.addr=0.0.0.0:${TELEGRAM_BOT_PORT:-8080}'
+  #   restart: always
+  #   networks:
+  #     - traefik
+  #     - default
+  #   labels:
+  #     - "traefik.frontend.rule=Host:telegram-${PUBLIC_HOSTNAME}"
+  #     - "traefik.docker.network=traefik"
+  #     - "traefik.enable=true"
+  #     - "traefik.port=${TELEGRAM_BOT_PORT:-8080}"
+
+  pushgateway:                            # Prometheus push gateway on port 9091
+    container_name: "{{container_prefix}}-pushgateway"
+    image: prom/pushgateway
+    ports:
+      - "${PUSHGATEWAY_PORT:-9091}"
+    restart: always
+    networks:
+      - traefik
+      - default
+    labels:
+      - "traefik.frontend.rule=Host:pgw.{{frontend.domain}}"
+      - "traefik.docker.network=traefik"
+      - "traefik.enable=true"
+      - "traefik.port=${PUSHGATEWAY_PORT:-9091}"
+
+
+  blackbox-exporter:                 # Prometheus blackbox-exporter on port 9115
+    container_name: "{{container_prefix}}-blackbox-exporter"
+    image: prom/blackbox-exporter
+    volumes:
+      - ./blackbox-exporter/config:/config
+    ports:
+      - "${PROMETHEUS_BLACKBOX_EXPORTER_PORT:-9115}"
+    restart: always
+    command: --config.file=/config/blackbox.yml
+    restart: always
+    networks:
+      - traefik
+      - default
+    labels:
+      - "traefik.frontend.rule=Host:bbe-${PUBLIC_HOSTNAME}"
+      - "traefik.docker.network=traefik"
+      - "traefik.enable=true"
+      - "traefik.port=${PROMETHEUS_BLACKBOX_EXPORTER_PORT:-9115}"
+
+
+  grafana:                                       # Grafana front end on port 443
+    container_name: "{{container_prefix}}-grafana"
+    image: grafana/grafana
+    ports:
+      - "${GRAFANA_PORT:-3000}"
+    restart: always
+    volumes:
+      - ./grafana/conf/grafana.ini:/etc/grafana/grafana.ini
+      - ./grafana/data:/var/lib/grafana
+      - ./grafana/logs:/var/log/grafana
+      - ./grafana/plugins:/var/lib/grafana/plugins
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/ssl/fullchain.pem:/var/ssl/server.crt
+      - ./grafana/ssl/privkey.pem:/var/ssl/server.key
+    environment:
+      GF_SERVER_PROTOCOL: "{{grafana.GF_SERVER_PROTOCOL}}"
+      GF_SERVER_ROOT_URL: "{{grafana.GF_SERVER_PROTOCOL}}://grafana.{{frontend.domain}}"
+      GF_SECURITY_ADMIN_PASSWORD: "{{grafana.GF_SECURITY_ADMIN_PASSWORD}}"
+      GF_AUTH_BASIC_ENABLED: "false"
+      GF_AUTH_GITHUB_ENABLED: "true"
+      GF_AUTH_GITHUB_ALLOW_SIGN_UP: "false"
+      GF_AUTH_GITHUB_SCOPES: user:email,read:org
+      GF_AUTH_GITHUB_AUTH_URL: https://github.com/login/oauth/authorize
+      GF_AUTH_GITHUB_TOKEN_URL: https://github.com/login/oauth/access_token
+      GF_AUTH_GITHUB_REDIRECT_URI: ${GF_SERVER_ROOT_URL}/login/github
+      GF_AUTH_GITHUB_API_URL: https://api.github.com/user
+      GF_AUTH_GITHUB_ALLOWED_ORGANIZATIONS: epfl-idevelop
+      GF_AUTH_GITHUB_CLIENT_ID: "{{grafana.GF_AUTH_GITHUB_CLIENT_ID}}"
+      GF_AUTH_GITHUB_CLIENT_SECRET: "{{grafana.GF_AUTH_GITHUB_CLIENT_SECRET}}"
+      GF_AUTH_GITHUB_ALLOWED_ORGANIZATIONS: epfl-idevelop
+
+    networks:
+      - traefik
+      - default
+    labels:
+      - "traefik.domain=idev-fsd.ml"
+      - "traefik.frontend.rule=Host:grafana.idev-fsd.ml"
+      - "traefik.docker.network=traefik"
+      - "traefik.enable=true"
+      - "traefik.port=${GRAPHANA_PORT:-3000}"
+      - "traefik.frontend.redirect.entryPoint=https"
+
+networks:
+  traefik:
+    external: true

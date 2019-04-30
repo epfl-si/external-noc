@@ -1,0 +1,6 @@
+- name: External Noc
+  hosts: all
+  gather_facts: no   # Not yet
+  roles:
+    - idevfsd-traefik
+    - idevfsd-noc

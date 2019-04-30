@@ -1,0 +1,7 @@
+---
+# vars file for idevfsd-traefik
+# This file contains eyaml encrypted records. Edit with `eyaml edit`
+
+traefik:
+  path: /root/anoc/traefik
+  network: traefik

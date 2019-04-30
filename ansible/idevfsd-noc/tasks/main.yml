@@ -1,0 +1,98 @@
+---
+# tasks file for idevfsd-noc using docker-compose
+
+- name: print traefik install dir
+  debug:
+    msg: "{{traefik.path}}"
+
+- name: "Create various destination directories for noc files"
+  file:
+    path: "{{install_dir}}/{{ item }}"
+    state: directory
+  with_items:
+    - /
+    - blackbox-exporter
+    - blackbox-exporter/config
+    - grafana
+    - grafana/conf
+    - grafana/data
+    - grafana/data/plugins
+    - grafana/data/png
+    - grafana/logs
+    - grafana/plugins
+    - grafana/provisioning
+    - prometheus
+    - prometheus/rules
+    - telegram-bot
+
+- name: Get URLs from wp-veritas API
+  local_action:
+    module: shell
+    cmd: "{{playbook_dir}}/idevfsd-noc/vars/sites_from_veritas"
+  register: sites_from_veritas
+
+- name: copy prometheus config
+  template:
+    src: "prometheus.yml"
+    dest: "{{install_dir}}/prometheus/prometheus.yml"
+
+- name: copy grafana config
+  template:
+    src: "grafana.ini"
+    dest: "{{install_dir}}/grafana/conf/grafana.ini"
+
+- name: copy grafana files
+  copy:
+    src: "grafana/{{ item }}"
+    dest: "{{install_dir}}/grafana/"
+  with_items:
+    - provisioning
+
+- name: copy blackbox-exporter config
+  template:
+    src: "blackbox.yml"
+    dest: "{{install_dir}}/blackbox-exporter/config/blackbox.yml"
+
+
+# - copy:
+#     content: "{{ lookup('template', 'prometheus.yaml') }}"
+#     dest: "{{install_dir}}/prometheus/prometheus.yml"
+#   register: prometheus_conf_file
+
+# - name: "Restart prometheus"
+#   shell:
+#     cmd: "cd {{install_dir}} && docker-compose restart prometheus"
+#   when: prometheus_conf_file is changed
+
+# - debug:
+#   msg: "{{env_vars}}"
+
+# - name: "Copy env file"
+#   template:
+#     src: "env_file"
+#     dest: "{{install_dir}}/.env"
+
+# - name: log ressenti_sources
+#   debug:
+#     msg: "{{ressenti_sources[0].module}}"
+
+- name: log urls
+  debug:
+    msg: "{{urls}}"
+
+- name: "Copy Makefile"
+  template:
+    src: "Makefile"
+    dest: "{{install_dir}}/Makefile"
+  register: compose_file
+
+# - name: "Copy env file"
+#   template:
+#     src: "docker-compose.yml"
+#     dest: "{{install_dir}}/docker-compose.yml"
+#   register: compose_file
+
+# - name: "Restart everything"
+#   shell:
+#     cmd: "cd {{install_dir}} && make restart"
+#   when: compose_file is changed

@@ -1,0 +1,102 @@
+# https://github.com/zuzu59/docker-prometheus-grafana/blob/master/prom/prometheus.conf
+# Global config
+global:
+  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  # scrape_timeout is set to the global default (10s).
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+  - scheme: http
+    static_configs:
+    - targets:
+      - "alertmanager:9093"
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+  - "rules/*.yml"
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'prometheus'
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+    # The targets have to match the docker-compose service name/port !
+    static_configs:
+    - targets: ['idevfsd-prometheus:9090', 'idevfsd-pushgateway:9091']
+
+  # Prometheus Blackbox exporter scraper
+  - job_name: 'blackbox'
+    metrics_path: /probe
+    params:
+      module: [http_get]  # Look for a HTTP 200 response.
+    static_configs:
+      - targets:
+{% for url in urls.c2c %}
+        - {{ url }}
+{% endfor %}
+{% for url in urls.veritas %}
+        - {{ url }}
+{% endfor %}
+        labels:
+          c2c: 'yes'
+      - targets:
+{% for url in urls.fsd %}
+        - {{ url }}
+{% endfor %}
+        labels:
+          c2c: 'no'
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox-exporter:9115  # The blackbox exporter's real hostname:port.
+
+{% for resconf in ressenti.sources %}
+  #-----------------------------------------------------------------------------
+  - job_name: 'ressenti_{{resconf.module}}_{{resconf.origin}}'
+    metrics_path: /ressentiprobe
+    params:
+      module: [ressenti_{{resconf.module}}]
+    static_configs:
+      - targets:
+{% for url in urls.c2c %}
+        - {{ url }}
+{% endfor %}
+{% for url in urls.veritas %}
+        - {{ url }}
+{% endfor %}
+        labels:
+          c2c: 'yes'
+      - targets:
+{% for url in urls.fsd %}
+        - {{ url }}
+{% endfor %}
+        labels:
+          c2c: 'no'
+    basic_auth:
+      username: "{{PM_AUTH_RESSENTI_USERNAME}}"
+      password: "{{PM_AUTH_RESSENTI_PASSWORD}}"
+
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: origin
+        replacement: {{ resconf.origin }}
+      - target_label: probe
+        replacement: ressenti_{{ resconf.module }}
+      - target_label: __address__
+        replacement: {{ resconf.server }}
+
+{% endfor %}

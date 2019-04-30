@@ -1,0 +1,46 @@
+version: '3'
+
+# This is a generic traefik configuration made for dockerised applications
+# For an application to be visible and integrated into this traefik:
+# 1. attach it to the "traefik" external network:
+#        networks:
+#          - traefik
+#    networks:
+#      traefik:
+#        external: true
+#
+# 2. attach configuration for trafick as "labels" for the application to be exposed
+#        labels:
+#          - "traefik.docker.network=traefik"
+#          - "traefik.enable=true"
+#          - "traefik.basic.frontend.rule=Host:app.my-awesome-app.org"
+#          - "traefik.basic.port=9000"
+#          - "traefik.basic.protocol=http"
+#          - "traefik.admin.frontend.rule=Host:admin-app.my-awesome-app.org"
+#          - "traefik.admin.protocol=https"
+#          - "traefik.admin.port=9443"
+
+
+services:
+  proxy:
+    image: traefik:alpine # The official Traefik docker image
+    command: --api --docker # Enables the web UI and tells Traefik to listen to docker
+    ports:
+      - "80:80"     # The HTTP port
+      - "443:443"
+      - "9199:8080" # The Web UI (enabled by --api)
+    volumes:
+    networks:
+      - traefik
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
+      - ./traefik.toml:/traefik.toml
+      - ./acme.json:/acme.json
+      - ./htpasswd:/htpasswd
+    container_name: traefik
+
+# An external network so the same traefik can be use for different project (all sharing ports 80,443)
+# This has to be created by hand otherwise the name is not correct
+networks:
+  traefik:
+    external: true

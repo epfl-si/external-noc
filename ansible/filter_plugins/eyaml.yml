@@ -1,0 +1,6 @@
+---
+# This file contains the paths to the private and public keys
+# for eyaml encryption/decryption. Paths are relative to the directory
+# from where ansible-playbook is executed. 
+eyaml_private_key: ./keys/private_key.pkcs7.pem
+eyaml_public_key:  ./keys/public_key.pkcs7.pem
