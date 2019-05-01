@@ -36,7 +36,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
       - ./traefik.toml:/traefik.toml
       - ./acme.json:/acme.json
-      - ./htpasswd:/htpasswd
     container_name: traefik
 
 # An external network so the same traefik can be use for different project (all sharing ports 80,443)

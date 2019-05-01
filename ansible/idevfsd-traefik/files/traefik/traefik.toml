@@ -6,16 +6,9 @@ defaultEntryPoints = ["https","http"]
 [entryPoints]
   [entryPoints.http]
   address = ":80"
-    [entryPoints.http.auth]
-      [entryPoints.http.auth.basic]
-      usersFile = "/htpasswd"
-
 
   [entryPoints.https]
   address = ":443"
-    [entryPoints.https.auth]
-      [entryPoints.https.auth.basic]
-      usersFile = "/htpasswd"
 
   [entryPoints.https.tls]
 
@@ -34,4 +27,3 @@ entryPoint = "https"
 onHostRule = true
 [acme.httpChallenge]
 entryPoint = "http"
-

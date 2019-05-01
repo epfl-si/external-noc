@@ -1,29 +1,11 @@
 ---
 # tasks file for idevfsd-noc using docker-compose
 
-- name: print traefik install dir
-  debug:
-    msg: "{{traefik.path}}"
+# - name: random debug
+#   debug:
+#     msg: "htpass: {{ frontend.htpass | htpasswd }}"
 
-- name: "Create various destination directories for noc files"
-  file:
-    path: "{{install_dir}}/{{ item }}"
-    state: directory
-  with_items:
-    - /
-    - blackbox-exporter
-    - blackbox-exporter/config
-    - grafana
-    - grafana/conf
-    - grafana/data
-    - grafana/data/plugins
-    - grafana/data/png
-    - grafana/logs
-    - grafana/plugins
-    - grafana/provisioning
-    - prometheus
-    - prometheus/rules
-    - telegram-bot
+# ------------------------------------------------------------ Load dynamic data
 
 - name: Get URLs from wp-veritas API
   local_action:
@@ -31,54 +13,54 @@
     cmd: "{{playbook_dir}}/idevfsd-noc/vars/sites_from_veritas"
   register: sites_from_veritas
 
-- name: copy prometheus config
-  template:
-    src: "prometheus.yml"
-    dest: "{{install_dir}}/prometheus/prometheus.yml"
-
-- name: copy grafana config
-  template:
-    src: "grafana.ini"
-    dest: "{{install_dir}}/grafana/conf/grafana.ini"
-
-- name: copy grafana files
-  copy:
-    src: "grafana/{{ item }}"
-    dest: "{{install_dir}}/grafana/"
-  with_items:
-    - provisioning
-
-- name: copy blackbox-exporter config
-  template:
-    src: "blackbox.yml"
-    dest: "{{install_dir}}/blackbox-exporter/config/blackbox.yml"
-
-
-# - copy:
-#     content: "{{ lookup('template', 'prometheus.yaml') }}"
-#     dest: "{{install_dir}}/prometheus/prometheus.yml"
-#   register: prometheus_conf_file
-
-# - name: "Restart prometheus"
-#   shell:
-#     cmd: "cd {{install_dir}} && docker-compose restart prometheus"
-#   when: prometheus_conf_file is changed
-
-# - debug:
-#   msg: "{{env_vars}}"
-
-# - name: "Copy env file"
-#   template:
-#     src: "env_file"
-#     dest: "{{install_dir}}/.env"
-
-# - name: log ressenti_sources
+# - name: log urls
 #   debug:
-#     msg: "{{ressenti_sources[0].module}}"
+#     msg: "{{urls}}"
 
-- name: log urls
-  debug:
-    msg: "{{urls}}"
+# ------------------------------------------------- Directories and static files
+
+- name: "Create various destination directories for noc files"
+  file:
+    path: "{{install_dir}}/{{ item }}"
+    state: directory
+  with_items:
+    - blackbox-exporter/config
+    - grafana/conf
+
+- name: "Create writable directories to be used as mount points"
+  file:
+    path: "{{install_dir}}/{{ item }}"
+    state: directory
+    mode: "u=rwx,g=rwx,o=rwx"
+  with_items:
+    - grafana/data
+    - grafana/logs
+    - grafana/plugins
+    - telegram-bot/data
+
+- name: copy alertmanager static files
+  copy:
+    src: "alertmanager/"
+    dest: "{{install_dir}}/alertmanager/"
+
+- name: copy grafana static files
+  copy:
+    src: "grafana/"
+    dest: "{{install_dir}}/grafana/"
+
+- name: copy prometheus static files
+  copy:
+    src: "prometheus/"
+    dest: "{{install_dir}}/prometheus/"
+
+# -------------------------------------------------------------------- Templates
+
+- name: "Copy docker-compose file"
+  template:
+    # src: "docker-compose.yml"
+    src: "docker-compose.yml"
+    dest: "{{install_dir}}/docker-compose.yml"
+  register: compose_file
 
 - name: "Copy Makefile"
   template:
@@ -86,11 +68,41 @@
     dest: "{{install_dir}}/Makefile"
   register: compose_file
 
-# - name: "Copy env file"
-#   template:
-#     src: "docker-compose.yml"
-#     dest: "{{install_dir}}/docker-compose.yml"
-#   register: compose_file
+- name: copy blackbox-exporter template config
+  template:
+    src: "blackbox-exporter/{{ item }}"
+    dest: "{{install_dir}}/blackbox-exporter/{{ item }}"
+  with_items:
+    - config/blackbox.yml
+
+- name: copy grafana template config
+  template:
+    src: "grafana/{{ item }}"
+    dest: "{{ install_dir }}/grafana/{{ item }}"
+  with_items:
+    - conf/grafana.ini
+    - provisioning/datasources/idevfsd-prometheus.yml
+  register: grafana_config_files
+
+- name: copy prometheus template configs
+  template:
+    src: "prometheus/{{ item }}"
+    dest: "{{ install_dir }}/prometheus/{{ item }}"
+  with_items:
+    - prometheus.yml
+    - rules/c2c_federate.yml
+  register: prometheus_config_files
+
+# ----------------------------------------------------------------- Init control
+# - name: "Restart prometheus"
+#   shell:
+#     cmd: "cd {{install_dir}} && docker-compose restart prometheus"
+#   when: prometheus_config_files is changed
+
+# - name: "Restart grafana"
+#   shell:
+#     cmd: "cd {{install_dir}} && docker-compose restart grafana"
+#   when: grafana_config_files is changed
 
 # - name: "Restart everything"
 #   shell:

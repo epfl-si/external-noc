@@ -8,7 +8,7 @@ traefik:
 	cd $(TRAEFIK_DIR) && make up
 
 .PHONY: up
-up: .env traefik
+up: traefik
 	docker-compose up -d
 
 .PHONY: down
