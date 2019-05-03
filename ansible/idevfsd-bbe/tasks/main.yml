@@ -1,0 +1,14 @@
+---
+- name: "Create config directory for blackbox"
+  file:
+    path: "{{ bbe.install_path }}/config"
+    state: directory
+
+- name: Copy templates for blackbox-exporter
+  template:
+    src: "{{ item }}"
+    dest: "{{ bbe.install_path }}/{{ item }}"
+  with_items:
+    - config/blackbox.yml
+    - Makefile
+    - docker-compose.yml

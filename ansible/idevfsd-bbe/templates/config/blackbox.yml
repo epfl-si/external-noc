@@ -15,6 +15,17 @@ modules:
     http:
       method: GET
       preferred_ip_protocol: ip4
+  # # TBD: The idea here would be to set the Header to the actual www name and instead do the GET with the IP of A10
+  # #      Something equivalent to curl -H "Host: www.epfl.ch" http://128.178.222.108
+  # #      In fact this does not work with https :(  we have to find a way to
+  # #      reproduce curl -Iv --connect-to www.epfl.ch:443:128.178.222.108:443 https://www.epfl.ch
+  # #      In alternative, we can try to figure out how to set a cookie with name wordpress_logged_in_.*
+  # http_get_nocache:
+  #   prober: http
+  #   timeout: 15s
+  #   http:
+  #     method: GET
+  #     preferred_ip_protocol: ip4
   tcp_connect:
     prober: tcp
     timeout: 5s

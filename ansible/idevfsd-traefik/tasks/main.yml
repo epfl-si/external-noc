@@ -3,9 +3,9 @@
 
 # - name: print traefik install dir
 #   debug:
-#     msg: "{{traefik.path}}"
+#     msg: "{{traefik.install_path}}"
 
 - name: copy traefik files
   copy:
     src: traefik/
-    dest: "{{traefik.path}}/"
+    dest: "{{traefik.install_path}}/"

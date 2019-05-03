@@ -11,7 +11,7 @@ alerting:
   - scheme: http
     static_configs:
     - targets:
-      - "alertmanager:9093"
+      - "alertmanager:{{ alertmanager.port }}"
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
@@ -30,9 +30,10 @@ scrape_configs:
 
     # The targets have to match the docker-compose service name/port !
     static_configs:
-    - targets: ['idevfsd-prometheus:9090', 'idevfsd-pushgateway:9091']
+    - targets: ['idevfsd-prometheus:{{ prometheus.port }}', 'idevfsd-pushgateway:{{ pushgateway.port }}']
 
   # Prometheus Blackbox exporter scraper
+{% for resconf in sources.blackbox %}
   - job_name: 'blackbox'
     metrics_path: /probe
     params:
@@ -53,15 +54,25 @@ scrape_configs:
 {% endfor %}
         labels:
           c2c: 'no'
+{% if resconf.auth %}
+    basic_auth:
+      username: "{{ sources.username }}"
+      password: "{{ sources.password }}"
+{% endif %}
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
       - source_labels: [__param_target]
         target_label: instance
+      - target_label: origin
+        replacement: {{ resconf.origin }}
+      - target_label: probe
+        replacement: blackbox
       - target_label: __address__
-        replacement: blackbox-exporter:9115  # The blackbox exporter's real hostname:port.
+        replacement: {{ resconf.server }}
 
-{% for resconf in ressenti.sources %}
+{% endfor %}
+{% for resconf in sources.ressenti %}
   #-----------------------------------------------------------------------------
   - job_name: 'ressenti_{{resconf.module}}_{{resconf.origin}}'
     metrics_path: /ressentiprobe
@@ -83,10 +94,11 @@ scrape_configs:
 {% endfor %}
         labels:
           c2c: 'no'
+{% if resconf.auth %}
     basic_auth:
-      username: "{{PM_AUTH_RESSENTI_USERNAME}}"
-      password: "{{PM_AUTH_RESSENTI_PASSWORD}}"
-
+      username: "{{ sources.username }}"
+      password: "{{ sources.password }}"
+{% endif %}
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target

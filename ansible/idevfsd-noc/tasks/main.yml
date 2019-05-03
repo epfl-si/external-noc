@@ -13,23 +13,22 @@
     cmd: "{{playbook_dir}}/idevfsd-noc/vars/sites_from_veritas"
   register: sites_from_veritas
 
-# - name: log urls
-#   debug:
-#     msg: "{{urls}}"
+- name: log urls
+  debug:
+    msg: "{{urls}}"
 
 # ------------------------------------------------- Directories and static files
 
 - name: "Create various destination directories for noc files"
   file:
-    path: "{{install_dir}}/{{ item }}"
+    path: "{{ noc.install_path }}/{{ item }}"
     state: directory
   with_items:
-    - blackbox-exporter/config
     - grafana/conf
 
 - name: "Create writable directories to be used as mount points"
   file:
-    path: "{{install_dir}}/{{ item }}"
+    path: "{{ noc.install_path }}/{{ item }}"
     state: directory
     mode: "u=rwx,g=rwx,o=rwx"
   with_items:
@@ -41,17 +40,17 @@
 - name: copy alertmanager static files
   copy:
     src: "alertmanager/"
-    dest: "{{install_dir}}/alertmanager/"
+    dest: "{{ noc.install_path }}/alertmanager/"
 
 - name: copy grafana static files
   copy:
     src: "grafana/"
-    dest: "{{install_dir}}/grafana/"
+    dest: "{{ noc.install_path }}/grafana/"
 
 - name: copy prometheus static files
   copy:
     src: "prometheus/"
-    dest: "{{install_dir}}/prometheus/"
+    dest: "{{ noc.install_path }}/prometheus/"
 
 # -------------------------------------------------------------------- Templates
 
@@ -59,26 +58,19 @@
   template:
     # src: "docker-compose.yml"
     src: "docker-compose.yml"
-    dest: "{{install_dir}}/docker-compose.yml"
+    dest: "{{ noc.install_path }}/docker-compose.yml"
   register: compose_file
 
 - name: "Copy Makefile"
   template:
     src: "Makefile"
-    dest: "{{install_dir}}/Makefile"
+    dest: "{{ noc.install_path }}/Makefile"
   register: compose_file
-
-- name: copy blackbox-exporter template config
-  template:
-    src: "blackbox-exporter/{{ item }}"
-    dest: "{{install_dir}}/blackbox-exporter/{{ item }}"
-  with_items:
-    - config/blackbox.yml
 
 - name: copy grafana template config
   template:
     src: "grafana/{{ item }}"
-    dest: "{{ install_dir }}/grafana/{{ item }}"
+    dest: "{{  noc.install_path  }}/grafana/{{ item }}"
   with_items:
     - conf/grafana.ini
     - provisioning/datasources/idevfsd-prometheus.yml
@@ -87,7 +79,7 @@
 - name: copy prometheus template configs
   template:
     src: "prometheus/{{ item }}"
-    dest: "{{ install_dir }}/prometheus/{{ item }}"
+    dest: "{{  noc.install_path  }}/prometheus/{{ item }}"
   with_items:
     - prometheus.yml
     - rules/c2c_federate.yml
@@ -96,15 +88,15 @@
 # ----------------------------------------------------------------- Init control
 # - name: "Restart prometheus"
 #   shell:
-#     cmd: "cd {{install_dir}} && docker-compose restart prometheus"
+#     cmd: "cd {{ noc.install_path }} && docker-compose restart prometheus"
 #   when: prometheus_config_files is changed
 
 # - name: "Restart grafana"
 #   shell:
-#     cmd: "cd {{install_dir}} && docker-compose restart grafana"
+#     cmd: "cd {{ noc.install_path }} && docker-compose restart grafana"
 #   when: grafana_config_files is changed
 
 # - name: "Restart everything"
 #   shell:
-#     cmd: "cd {{install_dir}} && make restart"
+#     cmd: "cd {{ noc.install_path }} && make restart"
 #   when: compose_file is changed

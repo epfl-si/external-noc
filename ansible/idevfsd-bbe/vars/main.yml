@@ -1,0 +1,6 @@
+---
+# vars file for idevfsd-bbe
+
+bbe:
+  install_path: "{{ install_path }}/bbe"
+  port: 9115

@@ -1,7 +1,7 @@
 # include .env
 # export $(shell sed 's/=.*//' .env)
 
-TRAEFIK_DIR={{traefik.path}}
+TRAEFIK_DIR={{ traefik.install_path }}
 
 .PHONY: traefik
 traefik:
@@ -26,3 +26,7 @@ ps:
 .PHONY: box
 box:
 	docker run -i -t --network={{traefik.network}} busybox
+
+.PHONY: testc2c
+testc2c:
+	curl --globoff -u {{frontend.htpass | regex_search('([^:]*:[^ ]*)') }} 'https://prometheus.{{ frontend.domain }}/federate?match[]={__name__=~%22^{{ c2c.prefix }}:.*%22}'
