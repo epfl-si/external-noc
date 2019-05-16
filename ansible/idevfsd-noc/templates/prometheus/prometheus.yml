@@ -39,21 +39,20 @@ scrape_configs:
     params:
       module: [http_get]  # Look for a HTTP 200 response.
     static_configs:
+{% for url in urls.c2c + urls.veritas %}
       - targets:
-{% for url in urls.c2c %}
-        - {{ url }}
+        - {{ url.url }}
+      - labels:
+        c2c: 'yes'
+        instance_label: '{{ url.label }}'
 {% endfor %}
-{% for url in urls.veritas %}
-        - {{ url }}
-{% endfor %}
-        labels:
-          c2c: 'yes'
-      - targets:
 {% for url in urls.fsd %}
-        - {{ url }}
-{% endfor %}
+      - targets:
+        - {{ url.url }}
         labels:
           c2c: 'no'
+          instance_label: '{{ url.label }}'
+{% endfor %}
 {% if resconf.auth %}
     basic_auth:
       username: "{{ sources.username }}"
@@ -62,7 +61,7 @@ scrape_configs:
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
-      - source_labels: [__param_target]
+      - source_labels: {{ [__param_target] }}
         target_label: instance
       - target_label: origin
         replacement: {{ resconf.origin }}
@@ -79,21 +78,20 @@ scrape_configs:
     params:
       module: [ressenti_{{resconf.module}}]
     static_configs:
+{% for url in urls.c2c + urls.veritas %}
       - targets:
-{% for url in urls.c2c %}
-        - {{ url }}
+        - {{ url.url }}
+      - labels:
+        c2c: 'yes'
+        instance_label: '{{ url.label }}'
 {% endfor %}
-{% for url in urls.veritas %}
-        - {{ url }}
-{% endfor %}
-        labels:
-          c2c: 'yes'
-      - targets:
 {% for url in urls.fsd %}
-        - {{ url }}
-{% endfor %}
+      - targets:
+        - {{ url.url }}
         labels:
           c2c: 'no'
+          instance_label: '{{ url.label }}'
+{% endfor %}
 {% if resconf.auth %}
     basic_auth:
       username: "{{ sources.username }}"

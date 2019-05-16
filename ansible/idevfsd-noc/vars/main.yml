@@ -32,14 +32,40 @@ telegram:
 
 urls:
    fsd:
-     - https://go.epfl.ch
-     - https://it.epfl.ch
-     - https://igm.epfl.ch
+     -
+      url: https://go.epfl.ch
+      label: go
+     - 
+      url: https://it.epfl.ch
+      label: it
+     - 
+      url: https://igm.epfl.ch
+      label: igm
    c2c:
-     - https://actu.epfl.ch
-     - https://memento.epfl.ch
-     - https://people.epfl.ch
+     - 
+      url: https://actu.epfl.ch
+      label: actu
+     - 
+       url: https://memento.epfl.ch
+       label: memento
+     - 
+      url: https://people.epfl.ch
+      label: people
+     -
+      url: https://www.epfl.ch/about/fr/a-propos/
+      label: www.epfl.ch_about
    veritas: "{{ sites_from_veritas.stdout | from_json }}"
+
+# urls:
+#    fsd:
+#      - https://go.epfl.ch
+#      - https://it.epfl.ch
+#      - https://igm.epfl.ch
+#    c2c:
+#      - https://actu.epfl.ch
+#      - https://memento.epfl.ch
+#      - https://people.epfl.ch
+#    veritas: "{{ sites_from_veritas.stdout | from_json }}"
 
 c2c:
   prefix: vpsi_wwp_federation

@@ -7,6 +7,15 @@ url = 'https://wp-veritas.epfl.ch/api/v1/sites'
 uri = URI(url)
 response = Net::HTTP.get(uri)
 
-struct = JSON.parse(response).select{|u| u['userExperience']}
+src = JSON.parse(response).select{|u| u['userExperience']}
+lst = src.map do |u|
+  uu = URI(u['url'])
+  ll =  if uu.path.empty?
+          uu.host
+        else
+          uu.host + uu.path.split("/")[0..2].join("_")
+        end
+  { url: uu.to_s, label: ll }
+end
 
-print JSON.pretty_generate struct.map {|u| u['url']}
+print JSON.pretty_generate(lst) 
