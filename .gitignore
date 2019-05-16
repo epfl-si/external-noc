@@ -5,3 +5,4 @@ grafana/data/grafana.db
 .DS_Store
 .ruby-version
 .python-version
+ansible/idevfsd-noc/vars/sites_from_veritas2
