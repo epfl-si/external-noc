@@ -34,7 +34,7 @@ scrape_configs:
 
   # Prometheus Blackbox exporter scraper
 {% for resconf in sources.blackbox %}
-  - job_name: 'blackbox'
+  - job_name: {% if resconf.origin == "zurich" %} "blackbox" {% else %} "blackbox-{{ resconf.origin }}" {% endif %}
     metrics_path: /probe
     params:
       module: [http_get]  # Look for a HTTP 200 response.

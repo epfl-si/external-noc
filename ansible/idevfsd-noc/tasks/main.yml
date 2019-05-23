@@ -13,9 +13,9 @@
     cmd: "{{playbook_dir}}/idevfsd-noc/vars/sites_from_veritas"
   register: sites_from_veritas
 
-- name: log urls
-  debug:
-    msg: "{{urls}}"
+# - name: log urls from veritas
+#   debug:
+#     msg: "{{sites_from_veritas}}"
 
 # ------------------------------------------------- Directories and static files
 
