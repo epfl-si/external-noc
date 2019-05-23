@@ -54,7 +54,48 @@ urls:
      -
       url: https://www.epfl.ch/about/fr/a-propos/
       label: www.epfl.ch_about
+    - 
+      url: https://www.epfl.ch/campus/associations/list/ishigo-g/
+      label: ishigo-g
+    - 
+      url: https://www.epfl.ch/campus/associations/list/ishigo-g/redirect
+      label: ishigo-g_redirect
+    - 
+      url: https://www.epfl.ch/campus/associations/list/ishigo-g/B117
+      label: ishigo-g_B117
+    - 
+      url: https://www.epfl.ch/campus/associations/list/ishigo-g/page-148545-en-html/page-154212-en-html/
+      label: ishigo-g_page
+    - 
+      url: https://www.epfl.ch/campus/associations/list/ishigo-g/memento/
+      label: ishigo-g_memento
+    - 
+      url: https://www.epfl.ch/campus/associations/list/ishigo-g/people/
+      label: ishigo-g_people
+    - 
+      url: https://www.epfl.ch/campus/associations/list/ishigo-g/actu/
+      label: ishigo-g_actu
+    - 
+      url: https://www.epfl.ch/campus/associations/list/ishigo-g/cover/
+      label: ishigo-g_actu
+    - 
+      url: https://www.epfl.ch/campus/associations/list/ishigo-g/hero/
+      label: ishigo-g_hero
+    - 
+      url: https://www.epfl.ch/campus/associations/list/ishigo-g/card/
+      label: ishigo-g_card
+    - 
+      url: https://www.epfl.ch/campus/associations/list/ishigo-g/gal/
+      label: ishigo-g_gal
+    - 
+      url: https://www.epfl.ch/campus/associations/list/ishigo-g/infoscience/
+      label: ishigo-g_infoscience
+
+
    veritas: "{{ sites_from_veritas.stdout | from_json }}"
+
+
+
 
 # urls:
 #    fsd:
@@ -92,6 +133,10 @@ sources:
       origin: zurich
       server: "blackbox-exporter:{{ bbe.port }}"
       auth: false
+    -
+      origin: paris
+      server: "bbe-paris.idev-fsd.ml:80"
+      auth: true
   ressenti:
     -
       module: firefox

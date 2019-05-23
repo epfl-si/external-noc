@@ -10,11 +10,14 @@ response = Net::HTTP.get(uri)
 src = JSON.parse(response).select{|u| u['userExperience']}
 lst = src.map do |u|
   uu = URI(u['url'])
-  ll =  if uu.path.empty?
-          uu.host
-        else
-          uu.host + uu.path.split("/")[0..2].join("_")
-        end
+  # ll = u['userExperienceLabel']
+  # if ll.empty?
+    ll =  if uu.path.empty?
+            uu.host
+          else
+            uu.host + uu.path.split("/")[0..2].join("_")
+          end
+  # end
   { url: uu.to_s, label: ll }
 end
 
