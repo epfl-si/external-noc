@@ -27,6 +27,7 @@ def htpasswd(arg, resalt=False, path='/tmp/ansible_htpasswd_salt.txt'):
   for up in ups:
     u, p = up.split(":")
     ep = hashpw(bytes(p, 'utf-8'), salt)
+    # FIXME: Python 3 only
     ep = str(ep, 'utf-8')
     ueps.append("%s:%s" % (u, ep))
   output = ", ".join(ueps)

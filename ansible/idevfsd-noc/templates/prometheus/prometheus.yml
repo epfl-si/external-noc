@@ -1,5 +1,5 @@
 # https://github.com/zuzu59/docker-prometheus-grafana/blob/master/prom/prometheus.conf
-# Global config
+# Global config TEST
 global:
   scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
   evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
@@ -39,25 +39,25 @@ scrape_configs:
     params:
       module: [http_get]  # Look for a HTTP 200 response.
     static_configs:
-{% for url in urls.c2c + urls.veritas %}
+{%   for url in urls.c2c + urls.veritas %}
       - targets:
         - {{ url.url }}
       - labels:
         c2c: 'yes'
         instance_label: '{{ url.label }}'
-{% endfor %}
-{% for url in urls.fsd %}
+{%   endfor %}
+{%   for url in urls.fsd %}
       - targets:
         - {{ url.url }}
         labels:
           c2c: 'no'
           instance_label: '{{ url.label }}'
-{% endfor %}
-{% if resconf.auth %}
+{%   endfor %}
+{%   if resconf.auth %}
     basic_auth:
-      username: "{{ sources.username }}"
-      password: "{{ sources.password }}"
-{% endif %}
+      username: "{{ resconf.auth.username }}"
+      password: "{{ resconf.auth.password }}"
+{%   endif %}
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
@@ -69,7 +69,6 @@ scrape_configs:
         replacement: blackbox
       - target_label: __address__
         replacement: {{ resconf.server }}
-
 {% endfor %}
 {% for resconf in sources.ressenti %}
   #-----------------------------------------------------------------------------
@@ -78,25 +77,25 @@ scrape_configs:
     params:
       module: [ressenti_{{resconf.module}}]
     static_configs:
-{% for url in urls.c2c + urls.veritas %}
+{%   for url in urls.c2c + urls.veritas %}
       - targets:
         - {{ url.url }}
       - labels:
         c2c: 'yes'
         instance_label: '{{ url.label }}'
-{% endfor %}
-{% for url in urls.fsd %}
+{%   endfor %}
+{%   for url in urls.fsd %}
       - targets:
         - {{ url.url }}
         labels:
           c2c: 'no'
           instance_label: '{{ url.label }}'
-{% endfor %}
-{% if resconf.auth %}
+{%   endfor %}
+{%   if resconf.auth %}
     basic_auth:
-      username: "{{ sources.username }}"
-      password: "{{ sources.password }}"
-{% endif %}
+      username: "{{ resconf.auth.username }}"
+      password: "{{ resconf.auth.password }}"
+{%   endif %}
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
@@ -108,5 +107,4 @@ scrape_configs:
         replacement: ressenti_{{ resconf.module }}
       - target_label: __address__
         replacement: {{ resconf.server }}
-
 {% endfor %}

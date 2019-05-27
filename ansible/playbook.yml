@@ -12,8 +12,7 @@
   vars:
     - container_prefix: "idevfsd2-"
     - install_path: "{{ noc_install_path }}"
-    -
-      frontend:
+    - frontend:
         domain: idev-fsd.ml
         protocol: https
         htpass: "{{ 'ENC[PKCS7,MIIBqQYJKoZIhvcNAQcDoIIBmjCCAZYCAQAxggEhMIIBHQIBADAFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEAQiRgtfEm9tVbN4M32YYGbdR235NKi8fh0H1o689QjW25YbdjVaGRRuJjwpl2FHq+TPNcu6+MEAFJXo25Q+wiFPRt2md1X2z+eiILCWcvEljeN2NoppSYHfRrE7OYQwA81bn4HJQKO6KUoJj/3CNGMY9MAtsdm5xnXh0dtz8nX2Ti/zZLSs9OOJGhaBhNN3C28FJJG7TYR09pNF1t6i+jyuH2EKDWJaPSupTzsnPwdhEt4UJSZEyN6fDqfGKHV4/C+qo4JZe7/QuTI7fEAlbl7d33s3BcgY4/eAozBCLB6M2Vltq00Ol2toImBkzmUYoiimjG3fFba+V/N/LguelKHTBsBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBDO9iweYhLHIpkqW9b6udBcgEDxRsmfqdXrqvo2wMVHhfEXKbl1guuxAwc3i/QiMGCSUOUkzkpXmoM6le5UVH0vbtiaGsvl6UiacmdsEI1ZK+Au]' | eyaml }}"
@@ -22,14 +21,20 @@
     - docker__channel: ["stable"]
     - docker__state: "present"
     - docker__users: ["{{ ansible_user }}"]
+    - traefik:
+          network: traefik
+          install_path: '{{ noc_install_path }}/traefik'
   roles:
     - 
       role: nickjj.docker
       become: yes
       become_user: root
+      tags: docker
     # - idevfsd-traefik
-    # - idevfsd-bbe
-    # - idevfsd-noc
+    - role: idevfsd-bbe
+      tags: bbe
+    - role: idevfsd-noc
+      tags: noc
 
 # - name: External bbox
 #   hosts: bbox
