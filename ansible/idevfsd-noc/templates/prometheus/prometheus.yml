@@ -81,20 +81,24 @@ scrape_configs:
       module: [ressenti_{{resconf.module}}]
     static_configs:
 {% for url in urls.c2c + urls.veritas %}
+{% if not '@' in url %}
       - 
         targets:
           - {{ url.url }}
         labels:
           c2c: 'yes'
           instance_label: '{{ url.label }}'
+{% endif %}
 {% endfor %}
 {% for url in urls.fsd %}
+{% if not '@' in url %}
       - 
         targets:
           - {{ url.url }}
         labels:
           c2c: 'no'
           instance_label: '{{ url.label }}'
+{% endif %}
 {% endfor %}
 {% if resconf.auth %}
     basic_auth:
