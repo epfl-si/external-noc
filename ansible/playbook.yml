@@ -27,9 +27,9 @@
       role: nickjj.docker
       become: yes
       become_user: root
-    # - idevfsd-traefik
-    # - idevfsd-bbe
-    # - idevfsd-noc
+    - idevfsd-traefik
+    - idevfsd-bbe
+    - idevfsd-noc
 
 # - name: External bbox
 #   hosts: bbox

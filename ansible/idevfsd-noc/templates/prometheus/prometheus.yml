@@ -34,21 +34,23 @@ scrape_configs:
 
   # Prometheus Blackbox exporter scraper
 {% for resconf in sources.blackbox %}
-  - job_name: 'blackbox'
+  - job_name: 'blackbox-{{ resconf.origin }}'
     metrics_path: /probe
     params:
       module: [http_get]  # Look for a HTTP 200 response.
     static_configs:
 {% for url in urls.c2c + urls.veritas %}
-      - targets:
-        - {{ url.url }}
-      - labels:
-        c2c: 'yes'
-        instance_label: '{{ url.label }}'
+      - 
+        targets:
+          - {{ url.url }}
+        labels:
+          c2c: 'yes'
+          instance_label: '{{ url.label }}'
 {% endfor %}
 {% for url in urls.fsd %}
-      - targets:
-        - {{ url.url }}
+      - 
+        targets:
+          - {{ url.url }}
         labels:
           c2c: 'no'
           instance_label: '{{ url.label }}'
@@ -79,15 +81,17 @@ scrape_configs:
       module: [ressenti_{{resconf.module}}]
     static_configs:
 {% for url in urls.c2c + urls.veritas %}
-      - targets:
-        - {{ url.url }}
-      - labels:
-        c2c: 'yes'
-        instance_label: '{{ url.label }}'
+      - 
+        targets:
+          - {{ url.url }}
+        labels:
+          c2c: 'yes'
+          instance_label: '{{ url.label }}'
 {% endfor %}
 {% for url in urls.fsd %}
-      - targets:
-        - {{ url.url }}
+      - 
+        targets:
+          - {{ url.url }}
         labels:
           c2c: 'no'
           instance_label: '{{ url.label }}'

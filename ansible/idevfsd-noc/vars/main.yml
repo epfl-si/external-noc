@@ -46,8 +46,8 @@ urls:
       url: https://actu.epfl.ch
       label: actu
     - 
-       url: https://memento.epfl.ch
-       label: memento
+      url: https://memento.epfl.ch
+      label: memento
     - 
       url: https://people.epfl.ch
       label: people
@@ -92,20 +92,6 @@ urls:
       label: ishigo-g_infoscience
 
   veritas: "{{ sites_from_veritas.stdout | from_json }}"
-
-
-
-
-# urls:
-#    fsd:
-#      - https://go.epfl.ch
-#      - https://it.epfl.ch
-#      - https://igm.epfl.ch
-#    c2c:
-#      - https://actu.epfl.ch
-#      - https://memento.epfl.ch
-#      - https://people.epfl.ch
-#    veritas: "{{ sites_from_veritas.stdout | from_json }}"
 
 c2c:
   prefix: vpsi_wwp_federation
