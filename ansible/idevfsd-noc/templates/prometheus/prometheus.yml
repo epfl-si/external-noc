@@ -94,7 +94,11 @@ scrape_configs:
           c2c: 'yes'
       - targets:
 {% for url in urls.fsd %}
+{% if '@' in url %}
+        # - {{ url }}
+{% else %}
         - {{ url }}
+{% endif %}
 {% endfor %}
         labels:
           c2c: 'no'
