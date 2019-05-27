@@ -30,7 +30,7 @@ scrape_configs:
 
     # The targets have to match the docker-compose service name/port !
     static_configs:
-    - targets: ['idevfsd-prometheus:{{ prometheus.port }}', 'idevfsd-pushgateway:{{ pushgateway.port }}']
+    - targets: ['prometheus:{{ prometheus.port }}', 'pushgateway:{{ pushgateway.port }}']
 
   # Prometheus Blackbox exporter scraper
 {% for resconf in sources.blackbox %}
