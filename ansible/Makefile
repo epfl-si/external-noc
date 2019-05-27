@@ -24,7 +24,7 @@ ansible:
 	@echo "This should install ansible but, for the moment, we just fail if it is not installed..."
 	which ansible
 
-$(ANSIBLE_DEPS): $(HOME)/.ansible/roles/
+$(ANSIBLE_MODDIRS): $(HOME)/.ansible/roles/
 	ansible-galaxy install $(notdir $@)
 
 $(HOME)/.ansible/roles/:
