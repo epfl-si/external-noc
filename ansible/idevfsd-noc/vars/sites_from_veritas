@@ -18,7 +18,7 @@ lst = src.map do |u|
             uu.host + uu.path.split("/")[0..2].join("_")
           end
   end
-  { url: uu.to_s, label: ll }
+  { url: uu.to_s, slug: ll }
 end
 
 print JSON.pretty_generate(lst) 

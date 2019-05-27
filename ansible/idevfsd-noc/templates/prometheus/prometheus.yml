@@ -45,7 +45,7 @@ scrape_configs:
           - {{ url.url }}
         labels:
           c2c: 'yes'
-          instance_label: '{{ url.label }}'
+          slug: '{{ url.slug }}'
 {% endfor %}
 {% for url in urls.fsd %}
       - 
@@ -53,7 +53,7 @@ scrape_configs:
           - {{ url.url }}
         labels:
           c2c: 'no'
-          instance_label: '{{ url.label }}'
+          slug: '{{ url.slug }}'
 {% endfor %}
 {% if resconf.auth %}
     basic_auth:
@@ -87,7 +87,7 @@ scrape_configs:
           - {{ url.url }}
         labels:
           c2c: 'yes'
-          instance_label: '{{ url.label }}'
+          slug: '{{ url.slug }}'
 {% endif %}
 {% endfor %}
 {% for url in urls.fsd %}
@@ -97,7 +97,7 @@ scrape_configs:
           - {{ url.url }}
         labels:
           c2c: 'no'
-          instance_label: '{{ url.label }}'
+          slug: '{{ url.slug }}'
 {% endif %}
 {% endfor %}
 {% if resconf.auth %}
