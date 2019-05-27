@@ -1,7 +1,6 @@
 version: '3'
 services:
   prometheus:                                  # Prometheus service on port 9090
-    container_name: "{{container_prefix}}prometheus"
     image: prom/prometheus
     volumes:
       - ./prometheus:/etc/prometheus
@@ -12,7 +11,7 @@ services:
       - default
     labels:
       - "traefik.domain={{ frontend.domain }}"
-      - "traefik.frontend.rule=Host:prometheus.{{ frontend.domain }}"
+      - "traefik.frontend.rule=Host:prometheus{{ dnspostfix }}.{{ frontend.domain }}"
       - "traefik.docker.network={{ traefik.network }}"
       - "traefik.enable=true"
       - "traefik.port={{ prometheus.port }}"
@@ -22,7 +21,6 @@ services:
 {% endif %}
 
   alertmanager:
-    container_name: "{{container_prefix}}alertmanager"
     image: quay.io/prometheus/alertmanager
     volumes:
       - ./alertmanager/config:/config
@@ -33,7 +31,7 @@ services:
       - default
     labels:
       - "traefik.domain={{ frontend.domain }}"
-      - "traefik.frontend.rule=Host:am.{{ frontend.domain }}"
+      - "traefik.frontend.rule=Host:am{{ dnspostfix }}.{{ frontend.domain }}"
       - "traefik.docker.network={{ traefik.network }}"
       - "traefik.enable=true"
       - "traefik.port={{ alertmanager.port }}"
@@ -67,7 +65,6 @@ services:
   #     - "traefik.port={{ telegram.port }}"
 
   pushgateway:
-    container_name: "{{container_prefix}}pushgateway"
     image: prom/pushgateway
     restart: always
     networks:
@@ -75,13 +72,12 @@ services:
       - default
     labels:
       - "traefik.domain={{ frontend.domain }}"
-      - "traefik.frontend.rule=Host:pgw.{{ frontend.domain }}"
+      - "traefik.frontend.rule=Host:pgw{{ dnspostfix }}.{{ frontend.domain }}"
       - "traefik.docker.network={{ traefik.network }}"
       - "traefik.enable=true"
       - "traefik.port={{ pushgateway.port }}"
 
   grafana:
-    container_name: "{{container_prefix}}grafana"
     image: grafana/grafana
     restart: always
     volumes:
@@ -99,7 +95,7 @@ services:
     labels:
       - "traefik.port={{ grafana.port }}"
       - "traefik.domain={{ frontend.domain }}"
-      - "traefik.frontend.rule=Host:grafana.{{ frontend.domain }}"
+      - "traefik.frontend.rule=Host:grafana{{ dnspostfix }}.{{ frontend.domain }}"
       - "traefik.docker.network={{ traefik.network }}"
       - "traefik.enable=true"
 {% if frontend.protocol == 'https' %}

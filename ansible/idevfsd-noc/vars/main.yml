@@ -31,27 +31,27 @@ telegram:
 # env_vars: "{{ 'idevfsd-noc/vars/env.yml' | eyaml_file | from_yaml }}"
 
 urls:
-   fsd:
-     -
+  fsd:
+    -
       url: https://go.epfl.ch
       label: go
-     - 
+    - 
       url: https://it.epfl.ch
       label: it
-     - 
+    - 
       url: https://igm.epfl.ch
       label: igm
-   c2c:
-     - 
+  c2c:
+    - 
       url: https://actu.epfl.ch
       label: actu
-     - 
+    - 
        url: https://memento.epfl.ch
        label: memento
-     - 
+    - 
       url: https://people.epfl.ch
       label: people
-     -
+    -
       url: https://www.epfl.ch/about/fr/a-propos/
       label: www.epfl.ch_about
     - 
@@ -91,8 +91,7 @@ urls:
       url: https://www.epfl.ch/campus/associations/list/ishigo-g/infoscience/
       label: ishigo-g_infoscience
 
-
-   veritas: "{{ sites_from_veritas.stdout | from_json }}"
+  veritas: "{{ sites_from_veritas.stdout | from_json }}"
 
 
 

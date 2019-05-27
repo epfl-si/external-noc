@@ -1,0 +1,18 @@
+all:
+  vars:
+    runenv: dev
+    dnspostfix: "-tst"
+noc:
+  hosts:
+    fsdnoc:
+      ansible_host: noc-tst.idev-fsd.ml
+      ansible_port: 22
+      ansible_user: ubuntu
+      noc_install_path: /home/ubuntu/anoc3
+
+# bbox:
+#   hosts:
+#     prometheus-scratch:
+#       ansible_host: prometheus-scratch.idev-fsd.ml
+#       ansible_port: 22
+#       ansible_user: ubuntu

@@ -12,7 +12,7 @@ services:
       - default
     labels:
       - "traefik.domain={{ frontend.domain }}"
-      - "traefik.frontend.rule=Host:bbe.{{ frontend.domain }}"
+      - "traefik.frontend.rule=Host:bbe{{ dnspostfix }}.{{ frontend.domain }}"
       - "traefik.docker.network={{ traefik.network }}"
       - "traefik.enable=true"
       - "traefik.port={{ bbe.port }}"
