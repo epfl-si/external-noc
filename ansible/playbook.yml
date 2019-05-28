@@ -5,7 +5,7 @@
       debug:
         msg: "Starting ansible with {{ runenv }} environment."
 
-- name: External Noc
+- name: External NOC
   hosts: noc
   gather_facts: no   # Not yet
   # Variables common to all roles
@@ -25,7 +25,8 @@
         network: traefik
         install_path: '{{ noc_install_path }}/traefik'
   roles:
-    - role: nickjj.docker
+    - name: docker
+      role: nickjj.docker
       become: yes
       become_user: root
       tags: docker
@@ -35,7 +36,7 @@
     - name: idevfsd-noc
       tags: noc
 
-# - name: External bbox
+# - name: External blackbox exporter
 #   hosts: bbox
 #   gather_facts: no   # Not yet
 #   # Variables common to all roles
