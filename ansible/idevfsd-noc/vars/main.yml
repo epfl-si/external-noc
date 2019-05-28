@@ -32,28 +32,31 @@ telegram:
 
 urls:
   fsd:
-    -
-      url: https://go.epfl.ch
+    - name: go
       slug: go
-    - 
-      url: https://it.epfl.ch
+      url: https://go.epfl.ch
+    - name: it
       slug: it
-    - 
-      url: https://igm.epfl.ch
+      url: https://it.epfl.ch
+    - name: igm
       slug: igm
+      url: https://igm.epfl.ch
+    - name: sti
+      slug: sti
+      url: https://sti.epfl.ch
   c2c:
-    - 
-      url: https://actu.epfl.ch
+    - name: actu
       slug: actu
-    - 
-      url: https://memento.epfl.ch
+      url: https://actu.epfl.ch
+    - name: memento
       slug: memento
-    - 
-      url: https://people.epfl.ch
+      url: https://memento.epfl.ch
+    - name: people
       slug: people
-    -
-      url: https://www.epfl.ch/about/fr/a-propos/
+      url: https://people.epfl.ch
+    - name: epfl-about
       slug: www.epfl.ch_about
+      url: https://www.epfl.ch/about/fr/a-propos/
     - 
       url: https://www.epfl.ch/campus/associations/list/ishigo-g/
       slug: ishigo-g
@@ -120,30 +123,26 @@ auth:
 
 sources:
   blackbox:
-    -
+    - name: bbe-ch-zh
       origin: zurich
       server: "blackbox-exporter:{{ bbe.port }}"
-      auth: false
-    -
+      auth:
+    - name: bbe-fr-par
       origin: paris
       server: "bbe-paris.idev-fsd.ml:80"
       auth: '{{ auth.legacy }}'
-    - 
-      origin: zurich
-      server: "gitlab.epfl.ch"
-      auth: '{{ auth.gitlab }}'
   ressenti:
-    -
+    - name: res-ch-zh
       module: firefox
       origin: zurich
       server: prob.86.119.40.68.nip.io
       auth: '{{ auth.legacy }}'
-    -
+    - name: res-fr-par
       module: firefox
       origin: paris
       server: ressenti-paris.idev-fsd.ml
       auth: '{{ auth.legacy }}'
-    -
+    - name: res-fr-par2
       module: firefox
       origin: paris2
       server: ressenti-paris2.idev-fsd.ml
