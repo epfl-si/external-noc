@@ -7,8 +7,8 @@ noc:
     fsdnoc:
       ansible_host: noc-tst.idev-fsd.ml
       ansible_port: 22
-      ansible_user: ubuntu
-      noc_install_path: /home/ubuntu/anoc3
+      ansible_user: root
+      noc_install_path: /root/anoc3
 
 # bbox:
 #   hosts:
