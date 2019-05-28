@@ -95,7 +95,7 @@ scrape_configs:
           slug: '{{ url.slug }}'
 {%     endif %}
 {%   endfor %}
-{% if resconf.auth %}
+{%   if resconf.auth %}
     basic_auth:
       username: "{{ resconf.auth.username }}"
       password: "{{ resconf.auth.password }}"
