@@ -1,5 +1,5 @@
 # https://github.com/zuzu59/docker-prometheus-grafana/blob/master/prom/prometheus.conf
-# Global config TEST
+# Global config
 global:
   scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
   evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
@@ -34,7 +34,7 @@ scrape_configs:
 
   # Prometheus Blackbox exporter scraper
 {% for resconf in sources.blackbox %}
-  - job_name: 'blackbox'
+  - job_name: 'blackbox-{{ resconf.origin }}'
     metrics_path: /probe
     params:
       module: [http_get]  # Look for a HTTP 200 response.
@@ -42,16 +42,16 @@ scrape_configs:
 {%   for url in urls.c2c + urls.veritas %}
       - targets:
         - {{ url.url }}
-      - labels:
-        c2c: 'yes'
-        instance_label: '{{ url.label }}'
+        labels:
+          c2c: 'yes'
+          slug: '{{ url.slug }}'
 {%   endfor %}
 {%   for url in urls.fsd %}
       - targets:
         - {{ url.url }}
         labels:
           c2c: 'no'
-          instance_label: '{{ url.label }}'
+          slug: '{{ url.slug }}'
 {%   endfor %}
 {%   if resconf.auth %}
     basic_auth:
@@ -78,20 +78,24 @@ scrape_configs:
       module: [ressenti_{{resconf.module}}]
     static_configs:
 {%   for url in urls.c2c + urls.veritas %}
+{%     if not '@' in url %}
       - targets:
-        - {{ url.url }}
-      - labels:
-        c2c: 'yes'
-        instance_label: '{{ url.label }}'
+          - {{ url.url }}
+        labels:
+          c2c: 'yes'
+          slug: '{{ url.slug }}'
+{%     endif %}
 {%   endfor %}
 {%   for url in urls.fsd %}
+{%     if not '@' in url %}
       - targets:
         - {{ url.url }}
         labels:
           c2c: 'no'
-          instance_label: '{{ url.label }}'
+          slug: '{{ url.slug }}'
+{%     endif %}
 {%   endfor %}
-{%   if resconf.auth %}
+{% if resconf.auth %}
     basic_auth:
       username: "{{ resconf.auth.username }}"
       password: "{{ resconf.auth.password }}"

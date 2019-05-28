@@ -22,18 +22,17 @@
     - docker__state: "present"
     - docker__users: ["{{ ansible_user }}"]
     - traefik:
-          network: traefik
-          install_path: '{{ noc_install_path }}/traefik'
+        network: traefik
+        install_path: '{{ noc_install_path }}/traefik'
   roles:
-    - 
-      role: nickjj.docker
+    - role: nickjj.docker
       become: yes
       become_user: root
       tags: docker
-    # - idevfsd-traefik
-    - role: idevfsd-bbe
+    - idevfsd-traefik
+    - idevfsd-bbe
       tags: bbe
-    - role: idevfsd-noc
+    - idevfsd-noc
       tags: noc
 
 # - name: External bbox
