@@ -29,10 +29,10 @@
       become: yes
       become_user: root
       tags: docker
-    - idevfsd-traefik
-    - idevfsd-bbe
+    - name: idevfsd-traefik
+    - name: idevfsd-bbe
       tags: bbe
-    - idevfsd-noc
+    - name: idevfsd-noc
       tags: noc
 
 # - name: External bbox
