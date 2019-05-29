@@ -1,5 +1,5 @@
 ---
-- name: "Create config directory for blackbox"
+- name: Create config directory for blackbox
   file:
     path: "{{ bbe.install_path }}/config"
     state: directory

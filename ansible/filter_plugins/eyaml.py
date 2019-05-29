@@ -8,7 +8,8 @@ import yaml
 def eyaml(arg):
   path_to_script = os.path.dirname(os.path.realpath(__file__))
   with open(path_to_script + "/eyaml.yml", 'r') as ymlfile:
-    cfg = yaml.load(ymlfile)
+    #cfg = yaml.load(ymlfile)
+    cfg = yaml.load(ymlfile, Loader=yaml.FullLoader)
 
     eyaml_private_key=cfg['eyaml_private_key']
     eyaml_public_key=cfg['eyaml_public_key']
@@ -26,7 +27,8 @@ def eyaml(arg):
 def eyaml_file(arg):
   path_to_script = os.path.dirname(os.path.realpath(__file__))
   with open(path_to_script + "/eyaml.yml", 'r') as ymlfile:
-    cfg = yaml.load(ymlfile)
+    #cfg = yaml.load(ymlfile)
+    cfg = yaml.load(ymlfile, Loader=yaml.FullLoader)
 
     eyaml_private_key=cfg['eyaml_private_key']
     eyaml_public_key=cfg['eyaml_public_key']

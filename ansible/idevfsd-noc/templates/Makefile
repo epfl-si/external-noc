@@ -15,6 +15,10 @@ up: traefik
 down:
 	docker-compose down
 
+.PHONY: pull
+logs:
+	docker-compose pull --include-deps
+
 .PHONY: logs
 logs:
 	docker-compose logs -f

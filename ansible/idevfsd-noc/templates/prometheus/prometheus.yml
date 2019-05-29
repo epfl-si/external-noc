@@ -32,6 +32,16 @@ scrape_configs:
     static_configs:
     - targets: ['prometheus:{{ prometheus.port }}', 'pushgateway:{{ pushgateway.port }}']
 
+  # gitlab.epfl.ch
+  - job_name: 'gitlab@epfl'
+    metrics_path: /-/metrics
+    scheme: 'https'
+    static_configs:
+    - targets: ['gitlab.epfl.ch']
+    basic_auth:
+      username: "{{ auth.gitlab.username }}"
+      password: "{{ auth.gitlab.password }}"
+
   # Prometheus Blackbox exporter scraper
 {% for resconf in sources.blackbox %}
   - job_name: 'blackbox-{{ resconf.origin }}'
@@ -39,27 +49,25 @@ scrape_configs:
     params:
       module: [http_get]  # Look for a HTTP 200 response.
     static_configs:
-{% for url in urls.c2c + urls.veritas %}
-      - 
-        targets:
-          - {{ url.url }}
+{%   for url in urls.c2c + urls.veritas %}
+      - targets:
+        - {{ url.url }}
         labels:
           c2c: 'yes'
           slug: '{{ url.slug }}'
-{% endfor %}
-{% for url in urls.fsd %}
-      - 
-        targets:
-          - {{ url.url }}
+{%   endfor %}
+{%   for url in urls.fsd %}
+      - targets:
+        - {{ url.url }}
         labels:
           c2c: 'no'
           slug: '{{ url.slug }}'
-{% endfor %}
-{% if resconf.auth %}
+{%   endfor %}
+{%   if resconf.auth %}
     basic_auth:
-      username: "{{ sources.username }}"
-      password: "{{ sources.password }}"
-{% endif %}
+      username: "{{ resconf.auth.username }}"
+      password: "{{ resconf.auth.password }}"
+{%   endif %}
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
@@ -71,7 +79,6 @@ scrape_configs:
         replacement: blackbox
       - target_label: __address__
         replacement: {{ resconf.server }}
-
 {% endfor %}
 {% for resconf in sources.ressenti %}
   #-----------------------------------------------------------------------------
@@ -80,31 +87,29 @@ scrape_configs:
     params:
       module: [ressenti_{{resconf.module}}]
     static_configs:
-{% for url in urls.c2c + urls.veritas %}
-{% if not '@' in url %}
-      - 
-        targets:
+{%   for url in urls.c2c + urls.veritas %}
+{%     if not '@' in url %}
+      - targets:
           - {{ url.url }}
         labels:
           c2c: 'yes'
           slug: '{{ url.slug }}'
-{% endif %}
-{% endfor %}
-{% for url in urls.fsd %}
-{% if not '@' in url %}
-      - 
-        targets:
-          - {{ url.url }}
+{%     endif %}
+{%   endfor %}
+{%   for url in urls.fsd %}
+{%     if not '@' in url %}
+      - targets:
+        - {{ url.url }}
         labels:
           c2c: 'no'
           slug: '{{ url.slug }}'
-{% endif %}
-{% endfor %}
-{% if resconf.auth %}
+{%     endif %}
+{%   endfor %}
+{%   if resconf.auth %}
     basic_auth:
-      username: "{{ sources.username }}"
-      password: "{{ sources.password }}"
-{% endif %}
+      username: "{{ resconf.auth.username }}"
+      password: "{{ resconf.auth.password }}"
+{%   endif %}
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
@@ -116,5 +121,4 @@ scrape_configs:
         replacement: ressenti_{{ resconf.module }}
       - target_label: __address__
         replacement: {{ resconf.server }}
-
 {% endfor %}
