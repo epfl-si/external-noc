@@ -4,7 +4,7 @@ services:
     image: prom/prometheus
     volumes:
       - ./prometheus:/etc/prometheus
-      - prometheus_data:/prometheus
+      - ./data/prometheus:/prometheus
     restart: always
     networks:
       - {{ traefik.network }}
@@ -57,7 +57,7 @@ services:
     image: grafana/grafana
     restart: always
     volumes:
-      - grafana_data:/var/lib/grafana
+      - ./data/grafana:/var/lib/grafana
       - ./grafana/plugins:/var/lib/grafana/plugins
       - ./grafana/conf/grafana.ini:/etc/grafana/grafana.ini
       - ./grafana/provisioning:/etc/grafana/provisioning
@@ -78,11 +78,11 @@ services:
       - "traefik.frontend.redirect.entryPoint={{ frontend.protocol }}"
 {% endif %}
 
-volumes:
-  prometheus_data:
-    driver: local
-  grafana_data:
-    driver: local
+# volumes:
+#   prometheus_data:
+#     driver: local
+#   grafana_data:
+#     driver: local
 
 networks:
   {{ traefik.network }}:
