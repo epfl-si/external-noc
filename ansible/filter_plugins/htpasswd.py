@@ -21,7 +21,7 @@ def htpasswd(arg, resalt=False, path='/tmp/ansible_htpasswd_salt.txt'):
     f = open(path, "rb")
     salt = f.read()
     f.close()
-
+  
   ups=re.split(r'\s+', arg)
   ueps=[]
   for up in ups:
@@ -35,5 +35,5 @@ def htpasswd(arg, resalt=False, path='/tmp/ansible_htpasswd_salt.txt'):
   return output
 
 class FilterModule(object):
-   def filters(self):
-       return {'htpasswd': htpasswd}
+  def filters(self):
+    return {'htpasswd': htpasswd}
