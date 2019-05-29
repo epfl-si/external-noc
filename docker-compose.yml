@@ -51,29 +51,6 @@ services:
       - "traefik.port=${ALERTMANAGER_PORT:-9093}"
       #- "traefik.frontend.redirect.entryPoint=https"
 
-  # telegram-bot:                            # Telegram bot
-  #   image: metalmatze/alertmanager-bot:0.4.0
-  #   environment:
-  #     ALERTMANAGER_URL: http://alertmanager:${ALERTMANAGER_PORT:-9093}
-  #     STORE: bolt
-  #     BOLT_PATH: /data/bot.db
-  #     TELEGRAM_ADMIN: "${TELEGRAM_BOT_ADMINISTRATOR_ID}"
-  #     TELEGRAM_TOKEN: "${TELEGRAM_BOT_TOKEN}"
-  #     TEMPLATE_PATHS: /templates/default.tmpl
-  #   volumes:
-  #     - './telegram-bot/data:/data'
-  #   command:
-  #     - '--listen.addr=0.0.0.0:${TELEGRAM_BOT_PORT:-8080}'
-  #   restart: always
-  #   networks:
-  #     - traefik
-  #     - default    
-  #   labels:
-  #     - "traefik.frontend.rule=Host:telegram-${PUBLIC_HOSTNAME}"
-  #     - "traefik.docker.network=traefik"
-  #     - "traefik.enable=true"
-  #     - "traefik.port=${TELEGRAM_BOT_PORT:-8080}"
-
   pushgateway:                            # Prometheus push gateway on port 9091
     container_name: ${CONTAINER_PREFIX}pushgateway
     image: prom/pushgateway

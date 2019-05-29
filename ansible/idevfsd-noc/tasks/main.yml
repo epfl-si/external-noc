@@ -32,10 +32,8 @@
     state: directory
     mode: "u=rwx,g=rwx,o=rwx"
   with_items:
-    - grafana/data
     - grafana/logs
     - grafana/plugins
-    - telegram-bot/data
 
 - name: Copy alertmanager static files
   copy:

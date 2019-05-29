@@ -40,30 +40,6 @@ services:
       - "traefik.frontend.redirect.entryPoint=https"
 {% endif %}
 
-  # telegram-bot:                            # Telegram bot
-  #   image: metalmatze/alertmanager-bot:0.4.0
-  #   environment:
-  #     ALERTMANAGER_URL: http://alertmanager:{{ alertmanager.port }}
-  #     STORE: bolt
-  #     BOLT_PATH: /data/bot.db
-  #     TELEGRAM_ADMIN: "{{ telegram.ADMINISTRATOR_ID1 }}"
-  #     TELEGRAM_TOKEN: "{{ telegram.TOKEN }}"
-  #     TEMPLATE_PATHS: /templates/default.tmpl
-  #   volumes:
-  #     - './telegram-bot/data:/data'
-  #   command:
-  #     -  '--listen.addr=0.0.0.0:{{ telegram.port }}'
-  #   restart: always
-  #   networks:
-  #     - traefik
-  #     - default
-  #   labels:
-  #     - "traefik.domain={{ frontend.domain }}"
-  #     - "traefik.frontend.rule=Host:telegram.{{ frontend.domain }}"
-  #     - "traefik.docker.network={{ traefik.network }}"
-  #     - "traefik.enable=true"
-  #     - "traefik.port={{ telegram.port }}"
-
   pushgateway:
     image: prom/pushgateway
     restart: always
