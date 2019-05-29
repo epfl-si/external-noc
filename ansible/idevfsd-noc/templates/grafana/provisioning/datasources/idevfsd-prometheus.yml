@@ -18,7 +18,7 @@ datasources:
   # <int> org id. will default to orgId 1 if not specified
   orgId: 1
   # <string> url
-  url: http://idevfsd-prometheus:9090
+  url: http://prometheus:{{ prometheus.port }}
   # <string> database password, if used
   password:
   # <string> database user, if used
@@ -37,4 +37,3 @@ datasources:
   isDefault: true
   # <bool> allow users to edit datasources from the UI.
   editable: false
-
