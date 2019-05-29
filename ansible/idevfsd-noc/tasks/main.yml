@@ -5,12 +5,30 @@
 #   debug:
 #     msg: "htpass: {{ frontend.htpass | htpasswd }}"
 
+# ------------------------------------------------ Check that keybase is mounted
+
+- name: Check whether "keys/private_key.pkcs7.pem" is present
+  tags: prefly
+  local_action: command grep -sq 'END RSA PRIVATE KEY' "{{ playbook_dir }}/keys/private_key.pkcs7.pem"
+  register: checkprivatekey
+  check_mode: no
+  ignore_errors: yes
+  changed_when: no
+- name: Greet the world if "keys/private_key.pkcs7.pem" is present
+  tags: prefly
+  debug: msg="{{ playbook_dir }}/keys/private_key.pkcs7.pem is present"
+  when: checkprivatekey.rc == 0
+- name: Alarm the world if "keys/private_key.pkcs7.pem" is NOT present
+  tags: prefly
+  fail: msg="Dude, be sure to have {{ playbook_dir }}/keys/private_key.pkcs7.pem present, i.e. launch keybase"
+  when: checkprivatekey.rc != 0
+
 # ------------------------------------------------------------ Load dynamic data
 
 - name: Get URLs from wp-veritas API
   local_action:
     module: shell
-    cmd: "{{playbook_dir}}/idevfsd-noc/vars/sites_from_veritas"
+    cmd: "{{ playbook_dir }}/idevfsd-noc/vars/sites_from_veritas"
   register: sites_from_veritas
 
 - name: Log urls
