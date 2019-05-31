@@ -86,7 +86,7 @@
 - name: Copy grafana template config
   template:
     src: "grafana/{{ item }}"
-    dest: "{{  noc.install_path  }}/grafana/{{ item }}"
+    dest: "{{ noc.install_path }}/grafana/{{ item }}"
   with_items:
     - conf/grafana.ini
     - provisioning/datasources/idevfsd-prometheus.yml
@@ -95,7 +95,7 @@
 - name: Copy prometheus template configs
   template:
     src: "prometheus/{{ item }}"
-    dest: "{{  noc.install_path  }}/prometheus/{{ item }}"
+    dest: "{{ noc.install_path }}/prometheus/{{ item }}"
   with_items:
     - prometheus.yml
     - rules/c2c_federate.yml
