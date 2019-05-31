@@ -41,10 +41,10 @@ urls:
     - https://it.epfl.ch
     - https://igm.epfl.ch
     - https://www.makerspace-lausanne.ch
-    - https://www.bolo.ch
-    - https://www.abcm.ch
-    - https://cdj.museebolo.ch
-    - https://segafish.museebolo.ch
+#    - https://www.bolo.ch
+#    - https://www.abcm.ch
+#    - https://cdj.museebolo.ch
+#    - https://segafish.museebolo.ch
 #    - "https://{{ zuzupass.bolo1 }}@po.museebolo.ch/"
 #    - "https://{{ zuzupass.bolo2 }}@segafish.museebolo.ch/presentation/"
 #    - "https://{{ zuzupass.bolo1 }}@wp.museebolo.ch/"
