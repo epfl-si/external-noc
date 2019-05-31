@@ -10,7 +10,6 @@
   gather_facts: no   # Not yet
   # Variables common to all roles
   vars:
-    - container_prefix: "idevfsd2-"
     - install_path: "{{ noc_install_path }}"
     - frontend:
         domain: idev-fsd.ml
@@ -36,13 +35,14 @@
     - name: idevfsd-noc
       tags: noc
 
+
+
 # - name: External blackbox exporter
 #   hosts: bbox
 #   gather_facts: no   # Not yet
 #   # Variables common to all roles
 #   vars:
 #     - install_path: /ubuntu/anoc2
-#     - container_prefix: "idevfsd2-"
 #     -
 #       frontend:
 #         domain: idev-fsd.ml
