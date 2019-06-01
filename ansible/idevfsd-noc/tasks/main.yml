@@ -52,6 +52,8 @@
   with_items:
     - grafana/logs
     - grafana/plugins
+    - data/grafana
+    - data/prometheus
 
 - name: Copy alertmanager static files
   copy:
