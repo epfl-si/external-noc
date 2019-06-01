@@ -104,13 +104,14 @@
   register: prometheus_config_files
 
 # ----------------------------------------------------------------- Init control
-- name: Restart prometheus
-  become: yes
-  shell:
-    cmd: "cd {{ noc.install_path }} \
-       && docker-compose pull --ignore-pull-failures prometheus \
-       && docker-compose restart prometheus"
-  when: prometheus_config_files is changed
+# This works well until all the containers are stopped...
+# - name: Restart prometheus
+#   become: yes
+#   shell:
+#     cmd: "cd {{ noc.install_path }} \
+#        && docker-compose pull --ignore-pull-failures prometheus \
+#        && docker-compose restart prometheus"
+#   when: prometheus_config_files is changed
 
 # - name: Restart grafana
 #   shell:
