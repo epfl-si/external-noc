@@ -4,6 +4,9 @@
 noc:
   install_path: "{{ install_path }}/noc"
 
+nodeexporter:
+  port: 9100
+
 alertmanager:
   port: 9093
 
