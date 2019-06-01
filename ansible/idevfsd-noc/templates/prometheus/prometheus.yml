@@ -32,6 +32,10 @@ scrape_configs:
     static_configs:
     - targets: ['prometheus:{{ prometheus.port }}', 'pushgateway:{{ pushgateway.port }}']
 
+  - job_name: 'nodeexporter'
+    static_configs:
+    - targets: ['nodeexporter:{{ nodeexporter.port }}']
+
   # gitlab.epfl.ch
   - job_name: 'gitlab@epfl'
     metrics_path: /-/metrics
