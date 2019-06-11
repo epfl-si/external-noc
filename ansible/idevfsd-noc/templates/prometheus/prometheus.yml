@@ -38,7 +38,12 @@ scrape_configs:
 
   # gitlab.epfl.ch
   - job_name: 'gitlab@epfl'
-    metrics_path: /-/metrics
+    metrics_path: /federate
+    honor_labels: true
+    params:
+      'match[]':
+#        - '{__name__=~"git.*"}'
+        - '{service="gitlab"}'
     scheme: 'https'
     static_configs:
     - targets: ['gitlab.epfl.ch']
