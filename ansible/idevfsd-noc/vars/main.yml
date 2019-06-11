@@ -37,15 +37,18 @@ telegram:
 
 urls:
   fsd:
+    - name: gitlab
+      slug: gitlab
+      url: https://gitlab.epfl.ch
     - name: go
       slug: go
       url: https://go.epfl.ch
-    - name: it
-      slug: it
-      url: https://it.epfl.ch
     - name: igm
       slug: igm
       url: https://igm.epfl.ch
+    - name: it
+      slug: it
+      url: https://it.epfl.ch
     - name: sti
       slug: sti
       url: https://sti.epfl.ch
