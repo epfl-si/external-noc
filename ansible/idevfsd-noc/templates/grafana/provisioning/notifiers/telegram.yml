@@ -1,0 +1,16 @@
+notifiers:
+  - name: Telegram
+    type: telegram
+    uid: notifier-tg
+    org_name: Main Org.
+    is_default: true
+    send_reminder: true
+    frequency: 15m
+    disable_resolve_message: false
+    # See `Supported Settings` section for settings supporter for each
+    # alert notification type.
+    # https://grafana.com/docs/administration/provisioning/#alert-notification-channels
+    settings:
+      bottoken: "{{ telegram.TOKEN }}"
+      chatid: "-1001251582783"
+      uploadImage: true

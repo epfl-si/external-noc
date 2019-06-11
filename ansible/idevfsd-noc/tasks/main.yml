@@ -111,6 +111,7 @@
   with_items:
     - conf/grafana.ini
     - provisioning/datasources/idevfsd-prometheus.yml
+    - provisioning/notifiers/telegram.yml
   register: grafana_config_files
 
 - name: Copy prometheus template configs
