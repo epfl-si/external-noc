@@ -1,16 +1,24 @@
 ANSIBLE_MODULES=nickjj.docker
 
 .PHONY: dev
-dev: install keys/private_key.pkcs7.pem
+dev: install eyaml_key
 	ansible-playbook playbook.yml -i hosts-dev.yml
 
+.PHONY: devnoc
+devnoc: install eyaml_key
+	ansible-playbook playbook.yml -i hosts-dev.yml -t noc
+
 .PHONY: prod
-prod: install keys/private_key.pkcs7.pem
+prod: install eyaml_key
 	ansible-playbook playbook.yml -i hosts-prod.yml
 
-keys/private_key.pkcs7.pem: /keybase/team/epfl_ressenti/private_key.pkcs7.pem
-	ln -s $< $@
+.PHONY: eyaml_key
+eyaml_key: keys/private_key.pkcs7.pem
+	[ -f $< ] || [ -L $< ] && [ -e $< ]
 
+keys/private_key.pkcs7.pem: /keybase/team/epfl_ressenti/private_key.pkcs7.pem
+	[ -f $< ]
+	ln -s $< $@
 
 # -------------------------------------------------------------
 
