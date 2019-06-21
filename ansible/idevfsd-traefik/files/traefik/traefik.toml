@@ -1,6 +1,6 @@
 debug = false
 
-logLevel = "DEBUG"
+logLevel = "INFO" # WARN, DEBUG
 defaultEntryPoints = ["https","http"]
 
 [entryPoints]
@@ -25,5 +25,6 @@ email = "giovanni.cangiani@epfl.ch"
 storage = "acme.json"
 entryPoint = "https"
 onHostRule = true
+
 [acme.httpChallenge]
 entryPoint = "http"
