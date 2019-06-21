@@ -1,0 +1,9 @@
+---
+# tasks file for idevfsd-noc using docker-compose
+
+# -------------------------------------------------------------------- Templates
+
+- name: Copy pushgateway static files
+  copy:
+    src: "pushgateway/"
+    dest: "{{ noc.install_path }}/pushgateway/"

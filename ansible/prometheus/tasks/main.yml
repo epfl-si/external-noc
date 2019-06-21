@@ -1,0 +1,76 @@
+---
+# tasks file for idevfsd-noc using docker-compose
+
+# - name: Random debug
+#   debug:
+#     msg: "htpass: {{ frontend.htpass | htpasswd }}"
+
+
+- name: Get URLs from wp-veritas API
+  local_action:
+    module: shell
+    cmd: "{{ playbook_dir }}/noc/vars/sites_from_veritas"
+  register: sites_from_veritas
+
+- name: Log urls
+  debug:
+    msg: "{{urls}}"
+
+# ------------------------------------------------- Directories and static files
+
+- name: Create writable directories to be used as mount points
+  file:
+    path: "{{ noc.install_path }}/{{ item }}"
+    state: directory
+    mode: "u=rwx,g=rwx,o=rwx"
+  with_items:
+    - data/prometheus
+
+- name: Copy prometheus static files
+  copy:
+    src: "prometheus/"
+    dest: "{{ noc.install_path }}/prometheus/"
+
+# -------------------------------------------------------------------- Templates
+
+# - name: Copy docker-compose file
+#   template:
+#     # src: "docker-compose.yml"
+#     src: "docker-compose.yml"
+#     dest: "{{ noc.install_path }}/docker-compose.yml"
+#   register: compose_file
+
+- name: Copy Makefile
+  template:
+    src: "Makefile"
+    dest: "{{ noc.install_path }}/Makefile"
+  register: compose_file
+
+- name: Copy prometheus template configs
+  template:
+    src: "prometheus/{{ item }}"
+    dest: "{{ noc.install_path }}/prometheus/{{ item }}"
+  with_items:
+    - prometheus.yml
+    - rules/c2c_federate.yml
+  register: prometheus_config_files
+
+# ----------------------------------------------------------------- Init control
+# This works well until all the containers are stopped...
+# - name: Restart prometheus
+#   become: yes
+#   shell:
+#     cmd: "cd {{ noc.install_path }} \
+#        && docker-compose pull --ignore-pull-failures prometheus \
+#        && docker-compose restart prometheus"
+#   when: prometheus_config_files is changed
+
+# - name: Restart grafana
+#   shell:
+#     cmd: "cd {{ noc.install_path }} && docker-compose restart grafana"
+#   when: grafana_config_files is changed
+
+# - name: Restart everything
+#   shell:
+#     cmd: "cd {{ noc.install_path }} && make restart"
+#   when: compose_file is changed
