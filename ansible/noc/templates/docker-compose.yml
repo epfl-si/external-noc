@@ -1,0 +1,102 @@
+version: '3'
+services:
+  prometheus:                                  # Prometheus service on port 9090
+    image: prom/prometheus
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - ./data/prometheus:/prometheus
+    restart: always
+    networks:
+      - {{ traefik.network }}
+      - default
+    labels:
+      - "traefik.domain={{ frontend.domain }}"
+      - "traefik.frontend.rule=Host:prometheus{{ dnspostfix }}.{{ frontend.domain }}"
+      - "traefik.docker.network={{ traefik.network }}"
+      - "traefik.enable=true"
+      - "traefik.port={{ prometheus.port }}"
+      - "traefik.frontend.auth.basic={{ frontend.htpass | htpasswd }}"
+{% if frontend.protocol == 'https' %}
+      - "traefik.frontend.redirect.entryPoint={{ frontend.protocol }}"
+{% endif %}
+
+  alertmanager:
+    image: quay.io/prometheus/alertmanager
+    volumes:
+      - ./alertmanager/config:/config
+    command: --config.file=/config/simple.yml
+    restart: always
+    networks:
+      - {{ traefik.network }}
+      - default
+    labels:
+      - "traefik.domain={{ frontend.domain }}"
+      - "traefik.frontend.rule=Host:am{{ dnspostfix }}.{{ frontend.domain }}"
+      - "traefik.docker.network={{ traefik.network }}"
+      - "traefik.enable=true"
+      - "traefik.port={{ alertmanager.port }}"
+      - "traefik.frontend.auth.basic={{ frontend.htpass | htpasswd }}"
+{% if frontend.protocol == 'https' %}
+      - "traefik.frontend.redirect.entryPoint=https"
+{% endif %}
+
+  pushgateway:
+    image: prom/pushgateway
+    restart: always
+    networks:
+      - {{ traefik.network }}
+      - default
+    labels:
+      - "traefik.domain={{ frontend.domain }}"
+      - "traefik.frontend.rule=Host:pgw{{ dnspostfix }}.{{ frontend.domain }}"
+      - "traefik.docker.network={{ traefik.network }}"
+      - "traefik.enable=true"
+      - "traefik.port={{ pushgateway.port }}"
+
+  grafana:
+    image: grafana/grafana
+    restart: always
+    volumes:
+      - "{{ noc.install_path }}/data/grafana/data:/var/lib/grafana"
+      - "{{ noc.install_path }}/data/grafana/conf/grafana.ini:/etc/grafana/grafana.ini"
+      - "{{ noc.install_path }}/data/grafana/provisioning:/etc/grafana/provisioning"
+    networks:
+      - {{ traefik.network }}
+      - default
+    labels:
+      - "traefik.port={{ grafana.port }}"
+      - "traefik.domain={{ frontend.domain }}"
+      - "traefik.frontend.rule=Host:grafana{{ dnspostfix }}.{{ frontend.domain }}"
+      - "traefik.docker.network={{ traefik.network }}"
+      - "traefik.enable=true"
+{% if frontend.protocol == 'https' %}
+      - "traefik.frontend.redirect.entryPoint={{ frontend.protocol }}"
+{% endif %}
+
+# https://github.com/prometheus/node_exporter#using-docker
+  nodeexporter:
+    image: quay.io/prometheus/node-exporter
+    restart: always
+    pid: "host"
+#    network_mode: host
+    networks:
+      - {{ traefik.network }}
+      - default
+    command:
+      - '--path.rootfs=/host'
+    volumes:
+      - /:/host:ro,rslave
+    labels:
+      - "traefik.port={{ nodeexporter.port }}"
+      - "traefik.domain={{ frontend.domain }}"
+      - "traefik.frontend.rule=Host:nodeexporter{{ dnspostfix }}.{{ frontend.domain }}"
+      - "traefik.docker.network={{ traefik.network }}"
+      - "traefik.enable=true"
+{% if frontend.protocol == 'https' %}
+      - "traefik.frontend.redirect.entryPoint={{ frontend.protocol }}"
+{% endif %}
+
+
+networks:
+  {{ traefik.network }}:
+    external: true

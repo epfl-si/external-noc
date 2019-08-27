@@ -4,11 +4,11 @@ all:
     dnspostfix: "-tst"
 noc:
   hosts:
-    fsdnoc:
+    noc-test:
       ansible_host: noc-tst.idev-fsd.ml
       ansible_port: 22
       ansible_user: root
-      noc_install_path: /root/anoc3
+      noc_install_path: /srv/noc
 
 # bbox:
 #   hosts:
