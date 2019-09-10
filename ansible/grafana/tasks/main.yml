@@ -36,18 +36,6 @@
 
 # -------------------------------------------------------------------- Templates
 
-- name: Copy docker-compose file
-  template:
-    src: "docker-compose.yml"
-    dest: "{{ noc.install_path }}/grafana/docker-compose.yml"
-  register: compose_file
-
-- name: Copy Makefile
-  template:
-    src: "Makefile"
-    dest: "{{ noc.install_path }}/Makefile"
-  register: compose_file
-
 - name: Copy grafana template config
   template:
     src: "grafana/{{ item }}"
