@@ -1,16 +1,15 @@
 # iDev-FSD external NOC
-
-<!-- TOC titleSize:2 tabSpaces:3 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 -->
+<!-- This Table of content use https://github.com/ponsfrilus/markdown-toc#installation -->
+<!-- TOC titleSize:2 tabSpaces:3 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:1 title:1 -->
 
 ## Table of Contents
-- [iDev-FSD external NOC](#idev-fsd-external-noc)
 - [About](#about)
 - [Pre-requisites](#pre-requisites)
+   - [Installation](#installation)
+   - [Keybase](#keybase)
 - [Deployment](#deployment)
 - [Project's bricks](#projects-bricks)
-   - [Prometheus & Blackbox exporter](#prometheus-blackbox-exporter)
-   - [Grafana](#grafana)
-   - [Traefik](#traefik)
+- [Usage](#usage)
 - [Links](#links)
 
 <!-- /TOC -->
@@ -23,20 +22,33 @@ external monitoring for our School. In short, it will set up
 [Prometheus](https://prometheus.io/docs/introduction/overview/), [Prometheus
 Pushgateway](https://prometheus.io/docs/practices/pushing/), [Prometheus
 Blackbox exporter](https://github.com/prometheus/blackbox_exporter), [Prometheus
-Alertmanager](https://prometheus.io/docs/alerting/alertmanager/) and
+Alertmanager](https://prometheus.io/docs/alerting/alertmanager/), [Prometheus
+Node Exporter](https://github.com/prometheus/node_exporter) and
 [Grafana](https://prometheus.io/docs/visualization/grafana/) on a server, using
-docker containers and deployed with [Ansible](https://www.ansible.com).
+docker containers and deployed with [Ansible](https://www.ansible.com). On top
+of that, [Traefik](https://traefik.io/) reverse proxy / load balancer handle the
+HTTP requests.
 
 # Pre-requisites
 
-We assume that the NOC will be deployed on a Ubuntu server, on which you can 
+We assume that the NOC will be deployed on a Ubuntu server, on which you can
 access with your SSH key with the root rights. Ansible is needed on the machine
-you are using to deploy. As the secret are hidden using `eyaml`, you will also 
+you are using to deploy. As the secret are hidden using `eyaml`, you will also
 need it on your machine.
 
-// @TODO: List all the pre-requisites and the commands to install them 
+## Installation
+
+Ansible and modules installation are described in the [INSTALL.md](./INSTALL.md)
+file.
+
+## Keybase
+
+The secrets in this project are handled with eyaml, and the decryption key is on
+keybase. You'll need the keybase drive to be mounted with access to the
+`/keybase/team/epfl_ressenti/private_key.pkcs7.pem` relevant private key.
 
 # Deployment
+
 In our case, the deployment in done on a virtual machine hosted on a OpenStack
 setup by [SWITCHEngines](https://www.switch.ch/engines/). Thus, some of the
 explanations might be related to that, more particularly the access rules which
@@ -45,22 +57,20 @@ Groups](https://wiki.openstack.org/wiki/Neutron/SecurityGroups).
 
 # Project's bricks
 
-## Prometheus & Blackbox exporter
-Prometheus configuration stands in the
-[`prometheus/prometheus.yml`](prometheus/prometheus.yml) file. The Blackbox 
-exporter is used to probe some URLs which are defined in the config file. You 
-may need to understand how the [Blackbox exporter 
-modules](https://github.com/prometheus/blackbox_exporter/blob/master/CONFIGURATION.md#module),
-defined in 
-[`blackbox-exporter/config/blackbox.yml`](blackbox-exporter/config/blackbox.yml) 
-work in order to define new
-[scrape_config](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) 
-for Prometheus. The Blackbox exporter allow probing of endpoints over HTTP, 
-HTTPS, DNS, TCP and ICMP.
+Each bricks of the project is meant to be self-contained. It should be possible
+to deploy each brick individually, either using ansible tags or docker-compose
+commands — we're still not there when these lines are typed. The glue between
+the bricks is the **noc** folder which contains the project's
+[docker-compose.yml](./ansible/noc/templates/docker-compose.yml) file and the
+deployed [Makefile](./ansible/noc/templates/Makefile).
 
-## Grafana
+# Usage
 
-## Traefik
+1. Deploy the jam to the server, e.g.:  
+`$ ansible-playbook playbook.yml -i hosts-dev.yml`
+1. On the server, go to the `/srv/noc` directory.
+1. Use the `Makefile` to spawn the containers:  
+`make up`
 
 
 # Links
@@ -69,10 +79,9 @@ HTTPS, DNS, TCP and ICMP.
     * [Alertmanager](https://prometheus.io/docs/alerting/alertmanager/)
     * [Blackbox exporter](https://github.com/prometheus/blackbox_exporter)
     * [Pushgateway](https://prometheus.io/docs/practices/pushing/)
-    * [node_exporter](https://github.com/prometheus/node_exporter) 
+    * [node_exporter](https://github.com/prometheus/node_exporter)
   * [Grafana](https://grafana.com/)
     * [Configuration](http://docs.grafana.org/installation/configuration/)
     * [Docker](http://docs.grafana.org/installation/docker/)
     * [Auth GitHub](http://docs.grafana.org/auth/github/)
     * [Provisionning DataSource](http://docs.grafana.org/administration/provisioning/#example-datasource-config-file)
-    
