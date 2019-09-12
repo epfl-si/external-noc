@@ -14,11 +14,11 @@ import re
 def htpasswd(arg, resalt=False, path='/tmp/ansible_htpasswd_salt.txt'):
   if (resalt or not os.path.exists(path)):
     salt = gensalt()
-    f = open(path,"w")
+    f = open(path,"wb")
     f.write(salt)
     f.close()
   else:
-    f = open(path, "r")
+    f = open(path, "rb")
     salt = f.read()
     f.close()
 
@@ -27,6 +27,7 @@ def htpasswd(arg, resalt=False, path='/tmp/ansible_htpasswd_salt.txt'):
   for up in ups:
     u, p = up.split(":")
     ep = hashpw(bytes(p, 'utf-8'), salt)
+    ep = str(ep, 'utf-8')
     ueps.append("%s:%s" % (u, ep))
   output = ", ".join(ueps)
   output = re.sub('\$', '$$', output)

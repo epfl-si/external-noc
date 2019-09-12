@@ -6,3 +6,4 @@ grafana/data/grafana.db
 .ruby-version
 .python-version
 ansible/idevfsd-noc/vars/sites_from_veritas2
+.idea
