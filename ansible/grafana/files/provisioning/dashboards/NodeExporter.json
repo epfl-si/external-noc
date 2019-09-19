@@ -20849,7 +20849,8 @@
   "schemaVersion": 18,
   "style": "dark",
   "tags": [
-    "nodeExporter"
+    "nodeExporter",
+    "provisionned"
   ],
   "templating": {
     "list": [

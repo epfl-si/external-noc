@@ -242,7 +242,8 @@
   "schemaVersion": 18,
   "style": "dark",
   "tags": [
-    "gitlab"
+    "gitlab",
+    "provisionned"
   ],
   "templating": {
     "list": []
