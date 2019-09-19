@@ -33,6 +33,7 @@
   copy:
     src: "provisioning/"
     dest: "{{ noc.install_path }}/data/grafana/provisioning/"
+  tags: dashboards
 
 # -------------------------------------------------------------------- Templates
 
