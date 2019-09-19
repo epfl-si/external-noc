@@ -1,7 +1,7 @@
 version: '3'
 services:
   prometheus:                                  # Prometheus service on port 9090
-    image: prom/prometheus:v0.14.0
+    image: prom/prometheus
     volumes:
       - ./prometheus:/etc/prometheus
       - ./data/prometheus:/prometheus
