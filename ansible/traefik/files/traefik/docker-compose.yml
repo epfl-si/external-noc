@@ -26,6 +26,7 @@ services:
     container_name: traefik
     image: traefik:alpine # The official Traefik docker image
     command: --api --docker # Enables the web UI and tells Traefik to listen to docker
+    restart: always
     ports:
       - "80:80"     # The HTTP port
       - "443:443"
