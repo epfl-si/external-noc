@@ -34,3 +34,10 @@ box:
 .PHONY: testc2c
 testc2c:
 	curl --globoff -u {{frontend.htpass | regex_search('([^:]*:[^ ]*)') }} 'https://prometheus.{{ frontend.domain }}/federate?match[]={__name__=~%22^{{ c2c.prefix }}:.*%22}'
+
+.PHONY: purge
+purge:
+	docker container rm -f -v $(docker container ls -a -q)
+	docker image rm -f $(docker image ls -a -q)
+	docker volume rm $(docker volume ls -q)
+	docker network rm $(docker network ls -q)
