@@ -1,40 +1,4 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_IDEVFSD-PROMETHEUS",
-      "label": "idevfsd-prometheus",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "prometheus",
-      "pluginName": "Prometheus"
-    }
-  ],
-  "__requires": [
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "6.3.5"
-    },
-    {
-      "type": "panel",
-      "id": "graph",
-      "name": "Graph",
-      "version": ""
-    },
-    {
-      "type": "datasource",
-      "id": "prometheus",
-      "name": "Prometheus",
-      "version": "1.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "singlestat",
-      "name": "Singlestat",
-      "version": ""
-    }
-  ],
   "annotations": {
     "list": [
       {
@@ -51,8 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": null,
-  "iteration": 1568895742764,
+  "iteration": 1572876523336,
   "links": [
     {
       "icon": "external link",
@@ -66,6 +29,7 @@
   "panels": [
     {
       "collapsed": false,
+      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -80,12 +44,195 @@
     {
       "cacheTimeout": null,
       "colorBackground": false,
+      "colorPostfix": false,
+      "colorPrefix": false,
       "colorValue": false,
       "colors": [
         "#299c46",
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
+      "datasource": null,
+      "decimals": 2,
+      "description": "",
+      "format": "percent",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": true,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 8,
+        "x": 0,
+        "y": 1
+      },
+      "id": 12,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "options": {},
+      "pluginVersion": "6.2.1",
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": true
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "100-(100*instance:node_filesystem_avail:ratio{device=\"rootfs\",environment=\"prod\",fstype=\"rootfs\",instance=\"$instance\",job=\"node\",mountpoint=\"/\",service=\"gitlab\"})",
+          "format": "time_series",
+          "instant": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "% used",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "75,90",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "gitlab.epfl.ch % disc used",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorPostfix": false,
+      "colorPrefix": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": null,
+      "decimals": 2,
+      "description": "",
+      "format": "percent",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": true,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 8,
+        "x": 8,
+        "y": 1
+      },
+      "id": 14,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "options": {},
+      "pluginVersion": "6.2.1",
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "#8AB8FF",
+        "show": true
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "100-(100*instance:node_filesystem_avail:ratio{device=\"nas-app-ma-nfs1:/si_gitlab_app/backup\",environment=\"prod\",fstype=\"nfs\",instance=\"$instance\",job=\"node\",mountpoint=\"/var/opt/gitlab/backups\",service=\"gitlab\"})",
+          "format": "time_series",
+          "instant": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "% NAS used",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "75,90",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "gitlab.epfl.ch % NAS used",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": null,
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -96,9 +243,9 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 2,
+        "w": 4,
         "x": 0,
-        "y": 1
+        "y": 11
       },
       "id": 20,
       "interval": null,
@@ -179,6 +326,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
+      "datasource": null,
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -189,9 +337,9 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 2,
-        "x": 2,
-        "y": 1
+        "w": 4,
+        "x": 4,
+        "y": 11
       },
       "id": 23,
       "interval": null,
@@ -263,6 +411,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
+      "datasource": null,
       "decimals": null,
       "format": "none",
       "gauge": {
@@ -274,9 +423,9 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 2,
-        "x": 4,
-        "y": 1
+        "w": 4,
+        "x": 8,
+        "y": 11
       },
       "id": 21,
       "interval": null,
@@ -359,6 +508,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
+      "datasource": null,
       "decimals": null,
       "format": "none",
       "gauge": {
@@ -370,9 +520,9 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 2,
-        "x": 6,
-        "y": 1
+        "w": 4,
+        "x": 12,
+        "y": 11
       },
       "id": 18,
       "interval": null,
@@ -440,197 +590,18 @@
       "valueName": "avg"
     },
     {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorPostfix": false,
-      "colorPrefix": false,
-      "colorValue": false,
-      "colors": [
-        "#299c46",
-        "rgba(237, 129, 40, 0.89)",
-        "#d44a3a"
-      ],
-      "decimals": 2,
-      "description": "",
-      "format": "percent",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": true,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 2,
-        "x": 8,
-        "y": 1
-      },
-      "id": 12,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "options": {},
-      "pluginVersion": "6.2.1",
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": true
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "100-(100*instance:node_filesystem_avail:ratio{device=\"rootfs\",environment=\"prod\",fstype=\"rootfs\",instance=\"$instance\",job=\"node\",mountpoint=\"/\",service=\"gitlab\"})",
-          "format": "time_series",
-          "instant": false,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "% used",
-          "refId": "A"
-        }
-      ],
-      "thresholds": "75,90",
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "gitlab.epfl.ch % disc used",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorPostfix": false,
-      "colorPrefix": false,
-      "colorValue": false,
-      "colors": [
-        "#299c46",
-        "rgba(237, 129, 40, 0.89)",
-        "#d44a3a"
-      ],
-      "decimals": 2,
-      "description": "",
-      "format": "percent",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": true,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 2,
-        "x": 10,
-        "y": 1
-      },
-      "id": 14,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "options": {},
-      "pluginVersion": "6.2.1",
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "#8AB8FF",
-        "show": true
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "100-(100*instance:node_filesystem_avail:ratio{device=\"nas-app-ma-nfs1:/si_gitlab_app/backup\",environment=\"prod\",fstype=\"nfs\",instance=\"$instance\",job=\"node\",mountpoint=\"/var/opt/gitlab/backups\",service=\"gitlab\"})",
-          "format": "time_series",
-          "instant": false,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "% NAS used",
-          "refId": "A"
-        }
-      ],
-      "thresholds": "75,90",
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "gitlab.epfl.ch % NAS used",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": null,
       "fill": 0,
       "fillGradient": 0,
       "gridPos": {
-        "h": 8,
-        "w": 12,
+        "h": 10,
+        "w": 16,
         "x": 0,
-        "y": 5
+        "y": 15
       },
       "id": 8,
       "legend": {
@@ -747,11 +718,12 @@
     },
     {
       "collapsed": false,
+      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 13
+        "y": 25
       },
       "id": 27,
       "panels": [],
@@ -763,13 +735,14 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": null,
       "fill": 1,
       "fillGradient": 8,
       "gridPos": {
-        "h": 8,
-        "w": 12,
+        "h": 9,
+        "w": 16,
         "x": 0,
-        "y": 14
+        "y": 26
       },
       "id": 6,
       "legend": {
@@ -810,7 +783,7 @@
           "fill": false,
           "line": true,
           "op": "gt",
-          "value": 1000,
+          "value": 1500,
           "yaxis": "left"
         }
       ],
@@ -833,12 +806,12 @@
       },
       "yaxes": [
         {
-          "decimals": null,
+          "decimals": -1,
           "format": "none",
           "label": "",
           "logBase": 1,
-          "max": "1400",
-          "min": "1000",
+          "max": null,
+          "min": null,
           "show": true
         },
         {
@@ -861,13 +834,14 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": null,
       "fill": 1,
       "fillGradient": 2,
       "gridPos": {
-        "h": 8,
-        "w": 12,
+        "h": 9,
+        "w": 16,
         "x": 0,
-        "y": 22
+        "y": 35
       },
       "id": 4,
       "legend": {
@@ -965,13 +939,14 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": null,
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 9,
-        "w": 12,
+        "h": 10,
+        "w": 16,
         "x": 0,
-        "y": 30
+        "y": 44
       },
       "id": 2,
       "legend": {
@@ -1054,13 +1029,14 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": null,
       "fill": 0,
       "fillGradient": 1,
       "gridPos": {
-        "h": 8,
-        "w": 12,
+        "h": 9,
+        "w": 16,
         "x": 0,
-        "y": 39
+        "y": 54
       },
       "id": 33,
       "legend": {
@@ -1170,11 +1146,12 @@
     },
     {
       "collapsed": false,
+      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 47
+        "y": 63
       },
       "id": 29,
       "panels": [],
@@ -1222,13 +1199,14 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": null,
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
         "h": 8,
-        "w": 12,
+        "w": 16,
         "x": 0,
-        "y": 48
+        "y": 64
       },
       "id": 31,
       "legend": {
@@ -1317,7 +1295,7 @@
     }
   ],
   "refresh": "30s",
-  "schemaVersion": 19,
+  "schemaVersion": 20,
   "style": "dark",
   "tags": [
     "gitlab",
@@ -1327,7 +1305,10 @@
     "list": [
       {
         "allValue": null,
-        "current": {},
+        "current": {
+          "text": "docker-2a619a04205c",
+          "value": "docker-2a619a04205c"
+        },
         "datasource": "idevfsd-prometheus",
         "definition": "label_values(up{service=\"gitlab\"},instance)",
         "hide": 0,
@@ -1349,7 +1330,10 @@
       },
       {
         "allValue": null,
-        "current": {},
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        },
         "datasource": "idevfsd-prometheus",
         "definition": "node_network_iface_id{environment=\"prod\",instance=\"$instance\"}",
         "hide": 0,
@@ -1392,5 +1376,5 @@
   "timezone": "",
   "title": "GitLab EPFL",
   "uid": "O816VntWz",
-  "version": 4
+  "version": 1
 }
