@@ -14,14 +14,14 @@
   with_items:
     - conf
 
-- name: Create grafana default folder
-  file:
-    path: "{{ noc.install_path }}/grafana"
-    state: directory
+# - name: Create grafana default folder
+#   file:
+#     path: "{{ noc.install_path }}/grafana"
+#     state: directory
 
 - name: Create writable directories to be used as mount points
   file:
-    path: "{{ noc.install_path }}//data/grafana/{{ item }}"
+    path: "{{ noc.install_path }}/data/grafana/{{ item }}"
     state: directory
     mode: "u=rwx,g=rwx,o=rwx"
   with_items:
