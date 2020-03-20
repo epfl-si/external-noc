@@ -37,7 +37,10 @@ testc2c:
 
 .PHONY: purge
 purge:
-	docker container rm -f -v $(docker container ls -a -q)
-	docker image rm -f $(docker image ls -a -q)
-	docker volume rm $(docker volume ls -q)
-	docker network rm $(docker network ls -q)
+	read -p "Would you like to purge containers, images, volumes and networks ? [Yy]: " -n 1 -r; \
+	if [[ $$REPLY =~ ^[Yy]$$ ]]; then \
+		docker container rm -f -v $(docker container ls -a -q) ; \
+		docker image rm -f $(docker image ls -a -q) ; \
+		docker volume rm $(docker volume ls -q) ; \
+		docker network rm $(docker network ls -q) ; \
+	fi
