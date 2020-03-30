@@ -51,3 +51,36 @@ index 67c155f..5ee2ef2 100644
    output = ", ".join(ueps)
    output = re.sub('\$', '$$', output)
 ```
+
+## MacOs (with asdf)
+#### Install ruby and hiera-eyaml
+
+```
+asdf install ruby $(grep python .tool-versions | cut -d ' ' -f 2)
+asdf reshim ruby
+gem install hiera-eyaml
+```
+
+####  Install python 3.6.8
+For this task I suggest to use either [pyenv](https://github.com/pyenv/pyenv)
+or [asdf](https://github.com/asdf-vm/asdf). The latter is more cumbersome 
+because as it lacks support for virtual environments. I suggest to use it in 
+combination with [pipenv](https://github.com/pypa/pipenv)
+
+```
+asdf install python $(grep python .tool-versions | cut -d ' ' -f 2)
+pip install --upgrade pip
+pip install pipenv
+asdf reshim python
+cd ansible
+pipenv install 
+```
+
+this will install the correct python version and all the necessary packages in 
+a virtual python environment. Before running ansible, you will need to 
+**activate** the environment with 
+
+```
+pipenv shell
+ansible-playbook etc.
+```
