@@ -1,5 +1,25 @@
 # Install
 
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [Install](#install)
+	- [Goal](#goal)
+	- [Ubuntu](#ubuntu)
+		- [Notes](#notes)
+	- [MacOs](#macos)
+		- [with asdf](#with-asdf)
+			- [Install ruby and hiera-eyaml](#install-ruby-and-hiera-eyaml)
+			- [Install python 3.6.8](#install-python-368)
+		- [with brew](#with-brew)
+			- [Installation de Ansible](#installation-de-ansible)
+			- [Installation de Ruby](#installation-de-ruby)
+			- [Installation de hiera-eyaml](#installation-de-hiera-eyaml)
+			- [Installation de bcrypt](#installation-de-bcrypt)
+			- [Installation de nickjj.docker](#installation-de-nickjjdocker)
+
+<!-- /TOC -->
+
+
 ## Goal
 ```
 $ ansible --version
@@ -52,7 +72,10 @@ index 67c155f..5ee2ef2 100644
    output = re.sub('\$', '$$', output)
 ```
 
-## MacOs (with asdf)
+## MacOs
+
+### with asdf
+
 #### Install ruby and hiera-eyaml
 
 ```
@@ -84,3 +107,33 @@ a virtual python environment. Before running ansible, you will need to
 pipenv shell
 ansible-playbook etc.
 ```
+
+
+### with brew
+Cette procédure fonctionne sur un macbook pro avec Catalina (zf200330.1915)
+
+#### Installation de Ansible
+```
+brew install ansible
+```
+
+#### Installation de Ruby
+```
+brew install ruby
+```
+
+#### Installation de hiera-eyaml
+```
+sudo gem install hiera-eyaml
+```
+
+#### Installation de bcrypt
+```
+sudo -H pip3 install bcrypt
+```
+
+#### Installation de nickjj.docker
+```
+ansible-galaxy install nickjj.docker
+```
+
