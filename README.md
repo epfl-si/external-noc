@@ -67,8 +67,6 @@ deployed [Makefile](./ansible/noc/templates/Makefile).
 # Usage
 
 1. On his machine, Deploy the jam to the server, :  
-**ATTENTION: il faut être avec le VPN à cause de wpveritas !**
-
 ```
 cd external-noc
 git pull
@@ -88,7 +86,8 @@ cd /srv/noc
 3. Use the *Makefile* to spawn the containers:  
 ```
 make up
-``
+```
+
 
 
 # Links
