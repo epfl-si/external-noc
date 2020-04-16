@@ -3,14 +3,23 @@
 
 TRAEFIK_DIR={{ traefik.install_path }}
 
+.PHONY: nothing
+nothing:
+	@cat Makefile |grep '.[P]HONY: '| sed 's/^.*: /make /' |sort
+
 .PHONY: traefik
 traefik:
 	cd $(TRAEFIK_DIR) && make up
 
 .PHONY: up
-up: traefik
+up:
+	traefik
 	docker-compose up -d
 
+.PHONY: up_blackbox-exporter
+up_blackbox-exporter:
+	cd ./blackbox-exporter && make up
+	
 .PHONY: down
 down:
 	docker-compose down --remove-orphans

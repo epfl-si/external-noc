@@ -66,11 +66,29 @@ deployed [Makefile](./ansible/noc/templates/Makefile).
 
 # Usage
 
-1. Deploy the jam to the server, e.g.:  
-`$ ansible-playbook playbook.yml -i hosts-dev.yml`
-1. On the server, go to the `/srv/noc` directory.
-1. Use the `Makefile` to spawn the containers:  
-`make up`
+1. On his machine, Deploy the jam to the server, :  
+**ATTENTION: il faut être avec le VPN à cause de wpveritas !**
+
+```
+cd external-noc
+git pull
+cd ansible/
+make prod
+```
+For the test machine:
+```
+make dev
+```
+
+2. On the server, go to the **/srv/noc** directory.
+```
+cd /srv/noc
+```
+
+3. Use the *Makefile* to spawn the containers:  
+```
+make up
+``
 
 
 # Links
