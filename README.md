@@ -1,12 +1,11 @@
 # iDev-FSD external NOC
-<!-- This Table of content use https://github.com/ponsfrilus/markdown-toc#installation -->
-<!-- TOC titleSize:2 tabSpaces:3 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:1 title:1 -->
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
-## Table of Contents
+- [iDev-FSD external NOC](#idev-fsd-external-noc)
 - [About](#about)
 - [Pre-requisites](#pre-requisites)
-   - [Installation](#installation)
-   - [Keybase](#keybase)
+	- [Installation](#installation)
+	- [Keybase](#keybase)
 - [Deployment](#deployment)
 - [Project's bricks](#projects-bricks)
 - [Usage](#usage)
@@ -71,9 +70,12 @@ deployed [Makefile](./ansible/noc/templates/Makefile).
 cd external-noc
 git pull
 cd ansible/
+```
+For the *prod* machine:
+```
 make prod
 ```
-For the test machine:
+For the *test* machine:
 ```
 make dev
 ```
@@ -87,7 +89,6 @@ cd /srv/noc
 ```
 make up
 ```
-
 
 
 # Links
