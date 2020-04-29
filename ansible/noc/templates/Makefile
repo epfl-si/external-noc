@@ -1,5 +1,6 @@
 # include .env
 # export $(shell sed 's/=.*//' .env)
+#zf200429.1331
 
 TRAEFIK_DIR={{ traefik.install_path }}
 
@@ -12,8 +13,7 @@ traefik:
 	cd $(TRAEFIK_DIR) && make up
 
 .PHONY: up
-up:
-	traefik
+up: traefik
 	docker-compose up -d
 
 .PHONY: up_blackbox-exporter
