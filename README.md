@@ -65,7 +65,12 @@ deployed [Makefile](./ansible/noc/templates/Makefile).
 
 # Usage
 
-1. On his machine, Deploy the jam to the server, :  
+0. On his machine verify Keybase:
+```
+ls /keybase/team
+```
+
+1. On his machine, Deploy the jam to the server :  
 ```
 cd external-noc
 git pull
@@ -80,7 +85,7 @@ For the *test* machine:
 make dev
 ```
 
-2. On the server, go to the **/srv/noc** directory.
+2. On the server, go to the **/srv/noc** directory :
 ```
 cd /srv/noc
 ```
