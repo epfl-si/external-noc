@@ -1,15 +1,9 @@
 # include .env
 # export $(shell sed 's/=.*//' .env)
-#zf200429.1654
+#zf200429.1758
 
 TRAEFIK_DIR={{ traefik.install_path }}
 BBE_DIR={{ bbe.install_path }}
-
-# NOC_DIR=/srv/noc
-# TRAEFIK_DIR=$(NOC_DIR)/traefik
-# BLACKBOX-EXPORTER_DIR=$(NOC_DIR)/blackbox-exporter
-
-
 
 .PHONY: nothing
 nothing:

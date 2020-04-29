@@ -1,5 +1,5 @@
 # Listes de commandes souvent utilisées pour le dev du NOC
-#zf200429.1630
+#zf200429.1755
 
 
 # Accès via ssh
@@ -18,6 +18,7 @@ https://grafana.idev-fsd.ml/login
 
 
 # Copier le contenu du fichier *Makefile* dans le clipboard du MAC
+**ATTENTION AUX PASSWORDS QUI POURRAIENT S'Y TROUVER**
 ```
 sshg czufferey@noc-tst.idev-fsd.ml cat /srv/noc/Makefile | pbcopy
 sshg czufferey@noc-tst.idev-fsd.ml cat /srv/noc/traefik/Makefile | pbcopy
