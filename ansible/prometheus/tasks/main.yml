@@ -5,7 +5,6 @@
 #   debug:
 #     msg: "htpass: {{ frontend.htpass | htpasswd }}"
 
-
 - name: Get URLs from wp-veritas API
   local_action:
     module: shell
@@ -16,7 +15,7 @@
   debug:
     msg: "{{urls}}"
 
-# ------------------------------------------------- Directories and static files
+# ------------------------------------------------------------------ Directories
 
 - name: Create writable directories to be used as mount points
   file:
@@ -26,10 +25,15 @@
   with_items:
     - data/prometheus
 
+# ----------------------------------------------------------------- static files
+
 - name: Copy prometheus static files
   copy:
-    src: "prometheus/"
+    src: "{{ role_path }}/files/"
     dest: "{{ noc.install_path }}/prometheus/"
+  tags:
+    - prometheus_copy
+    - statics_files_copy
 
 # -------------------------------------------------------------------- Templates
 
@@ -41,6 +45,9 @@
     - prometheus.yml
     - rules/c2c_federate.yml
   register: prometheus_config_files
+  tags:
+    - prometheus_copy
+    - statics_files_copy
 
 # ----------------------------------------------------------------- Init control
 # This works well until all the containers are stopped...
@@ -61,3 +68,5 @@
 #   shell:
 #     cmd: "cd {{ noc.install_path }} && make restart"
 #   when: compose_file is changed
+
+
