@@ -124,7 +124,7 @@
 #   register: prometheus_config_files
 
 
-# -----------------------------------------------------------------static files
+# ----------------------------------------------------------------- static files
 
 - name: Copy NOC static files
   copy:
