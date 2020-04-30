@@ -8,7 +8,7 @@
 # ------------------------------------------------ Check that keybase is mounted
 
 
-- name: Copy alertmanager static files
+- name: Copy alertmanager statics files
   copy:
     src: "{{ role_path }}/files/"
     dest: "{{ noc.install_path }}/alertmanager/"

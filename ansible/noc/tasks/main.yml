@@ -54,7 +54,7 @@
   debug:
     msg: "{{urls}}"
 
-# ------------------------------------------------- Directories and static files
+# ------------------------------------------------- Directories and statics files
 
 # - name: Create various destination directories for noc files
 #   file:
@@ -74,17 +74,17 @@
 #     - grafana/data
 #     - data/prometheus
 #
-# - name: Copy alertmanager static files
+# - name: Copy alertmanager statics files
 #   copy:
 #     src: "alertmanager/"
 #     dest: "{{ noc.install_path }}/alertmanager/"
 #
-# - name: Copy grafana static files
+# - name: Copy grafana statics files
 #   copy:
 #     src: "grafana/"
 #     dest: "{{ noc.install_path }}/grafana/"
 #
-# - name: Copy prometheus static files
+# - name: Copy prometheus statics files
 #   copy:
 #     src: "prometheus/"
 #     dest: "{{ noc.install_path }}/prometheus/"
@@ -122,6 +122,22 @@
 #     - prometheus.yml
 #     - rules/c2c_federate.yml
 #   register: prometheus_config_files
+
+
+# -----------------------------------------------------------------Statics files
+
+- name: Copy NOC statics files
+  copy:
+    src: "{{ role_path }}/files/"
+    dest: "{{ noc.install_path }}/"
+  tags:
+    - noc_copy
+    - statics_files_copy
+
+
+
+
+
 
 # ----------------------------------------------------------------- Init control
 # This works well until all the containers are stopped...
