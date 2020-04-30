@@ -1,4 +1,4 @@
-- name: Copy node exporter statics files
+- name: Copy node exporter static files
   copy:
     src: "node_exporter/"
     dest: "{{ noc.install_path }}/node_exporter/"

@@ -3,7 +3,7 @@
 
 # -------------------------------------------------------------------- Templates
 
-- name: Copy pushgateway statics files
+- name: Copy pushgateway static files
   copy:
     src: "{{ role_path }}/files/"
     dest: "{{ noc.install_path }}/pushgateway/"

@@ -16,7 +16,7 @@
   debug:
     msg: "{{urls}}"
 
-# ------------------------------------------------- Directories and statics files
+# ------------------------------------------------- Directories and static files
 
 - name: Create writable directories to be used as mount points
   file:
@@ -26,7 +26,7 @@
   with_items:
     - data/prometheus
 
-- name: Copy prometheus statics files
+- name: Copy prometheus static files
   copy:
     src: "prometheus/"
     dest: "{{ noc.install_path }}/prometheus/"

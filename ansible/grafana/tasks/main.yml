@@ -5,7 +5,7 @@
 #   debug:
 #     msg: "htpass: {{ frontend.htpass | htpasswd }}"
 
-# ------------------------------------------------- Directories and statics files
+# ------------------------------------------------- Directories and static files
 
 - name: Create various destination directories for noc files
   file:
@@ -29,7 +29,7 @@
     - data
     - data/plugins
 
-- name: Copy grafana statics files
+- name: Copy grafana static files
   copy:
     src: "provisioning/"
     dest: "{{ noc.install_path }}/data/grafana/provisioning/"

@@ -54,7 +54,7 @@
   debug:
     msg: "{{urls}}"
 
-# ------------------------------------------------- Directories and statics files
+# ------------------------------------------------- Directories and static files
 
 # - name: Create various destination directories for noc files
 #   file:
@@ -74,17 +74,17 @@
 #     - grafana/data
 #     - data/prometheus
 #
-# - name: Copy alertmanager statics files
+# - name: Copy alertmanager static files
 #   copy:
 #     src: "alertmanager/"
 #     dest: "{{ noc.install_path }}/alertmanager/"
 #
-# - name: Copy grafana statics files
+# - name: Copy grafana static files
 #   copy:
 #     src: "grafana/"
 #     dest: "{{ noc.install_path }}/grafana/"
 #
-# - name: Copy prometheus statics files
+# - name: Copy prometheus static files
 #   copy:
 #     src: "prometheus/"
 #     dest: "{{ noc.install_path }}/prometheus/"
@@ -124,9 +124,9 @@
 #   register: prometheus_config_files
 
 
-# -----------------------------------------------------------------Statics files
+# -----------------------------------------------------------------static files
 
-- name: Copy NOC statics files
+- name: Copy NOC static files
   copy:
     src: "{{ role_path }}/files/"
     dest: "{{ noc.install_path }}/"
