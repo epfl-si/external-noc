@@ -1,16 +1,24 @@
 ANSIBLE_MODULES=nickjj.docker
 
+.PHONY: nothing
+nothing:
+	@cat Makefile |grep '.[P]HONY: '| sed 's/^.*: /make /' |sort
+
+
+
+.PHONY: toto
+toto:
+	echo $(arg)
+
+
+
 .PHONY: dev
 dev: install eyaml_key
-	ansible-playbook playbook.yml -i hosts-dev.yml
-
-.PHONY: devnoc
-devnoc: install eyaml_key
-	ansible-playbook playbook.yml -i hosts-dev.yml -t noc
+	ansible-playbook playbook.yml -i hosts-dev.yml $(arg)
 
 .PHONY: prod
 prod: install eyaml_key
-	ansible-playbook playbook.yml -i hosts-prod.yml
+	ansible-playbook playbook.yml -i hosts-prod.yml $(arg)
 
 .PHONY: eyaml_key
 eyaml_key: keys/private_key.pkcs7.pem

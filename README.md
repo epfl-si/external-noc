@@ -76,14 +76,19 @@ cd external-noc
 git pull
 cd ansible/
 ```
-For the *prod* machine:
+For the ***prod*** machine:
 ```
-make prod
+make prod arg='ansible arguments'
 ```
-For the *test* machine:
+For the ***test*** machine:
 ```
-make dev
+make dev arg='ansible arguments'
 ```
+Example:
+```
+make dev arg='-t pushgateway_copy'
+```
+
 
 2. On the server, go to the **/srv/noc** directory :
 ```

@@ -5,5 +5,7 @@
 
 - name: Copy pushgateway static files
   copy:
-    src: "pushgateway/"
+    src: "{{ role_path }}/files/"
     dest: "{{ noc.install_path }}/pushgateway/"
+  tags:
+    - pushgateway_copy
