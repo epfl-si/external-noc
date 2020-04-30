@@ -33,7 +33,10 @@
   copy:
     src: "provisioning/"
     dest: "{{ noc.install_path }}/data/grafana/provisioning/"
-  tags: dashboards
+  tags: 
+    - dashboards
+    - grafana_copy
+    - statics_files_copy
 
 # -------------------------------------------------------------------- Templates
 
@@ -45,4 +48,8 @@
     - conf/grafana.ini
     - provisioning/datasources/idevfsd-prometheus.yml
     - provisioning/notifiers/telegram.yml
+    - README.md
   register: grafana_config_files
+  tags:
+    - grafana_copy
+    - statics_files_copy

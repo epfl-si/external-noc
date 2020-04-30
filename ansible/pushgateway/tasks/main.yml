@@ -9,3 +9,4 @@
     dest: "{{ noc.install_path }}/pushgateway/"
   tags:
     - pushgateway_copy
+    - statics_files_copy

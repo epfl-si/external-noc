@@ -4,14 +4,6 @@ ANSIBLE_MODULES=nickjj.docker
 nothing:
 	@cat Makefile |grep '.[P]HONY: '| sed 's/^.*: /make /' |sort
 
-
-
-.PHONY: toto
-toto:
-	echo $(arg)
-
-
-
 .PHONY: dev
 dev: install eyaml_key
 	ansible-playbook playbook.yml -i hosts-dev.yml $(arg)
