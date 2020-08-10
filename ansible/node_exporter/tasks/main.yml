@@ -1,4 +1,10 @@
+
+# ----------------------------------------------------------------- static files
+
 - name: Copy node exporter static files
   copy:
-    src: "node_exporter/"
+    src: "{{ role_path }}/files/"
     dest: "{{ noc.install_path }}/node_exporter/"
+  tags:
+    - node_exporter_copy
+    - statics_files_copy

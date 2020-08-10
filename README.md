@@ -1,12 +1,11 @@
 # iDev-FSD external NOC
-<!-- This Table of content use https://github.com/ponsfrilus/markdown-toc#installation -->
-<!-- TOC titleSize:2 tabSpaces:3 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:1 title:1 -->
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
-## Table of Contents
+- [iDev-FSD external NOC](#idev-fsd-external-noc)
 - [About](#about)
 - [Pre-requisites](#pre-requisites)
-   - [Installation](#installation)
-   - [Keybase](#keybase)
+	- [Installation](#installation)
+	- [Keybase](#keybase)
 - [Deployment](#deployment)
 - [Project's bricks](#projects-bricks)
 - [Usage](#usage)
@@ -66,19 +65,32 @@ deployed [Makefile](./ansible/noc/templates/Makefile).
 
 # Usage
 
-1. On his machine, Deploy the jam to the server, :  
+0. On his machine verify Keybase:
+```
+ls /keybase/team
+```
+
+1. On his machine, Deploy the jam to the server :  
 ```
 cd external-noc
 git pull
 cd ansible/
-make prod
 ```
-For the test machine:
+For the ***prod*** machine:
 ```
-make dev
+make prod arg='ansible arguments'
+```
+For the ***test*** machine:
+```
+make dev arg='ansible arguments'
+```
+Example:
+```
+make dev arg='-t pushgateway_copy'
 ```
 
-2. On the server, go to the **/srv/noc** directory.
+
+2. On the server, go to the **/srv/noc** directory :
 ```
 cd /srv/noc
 ```
@@ -87,7 +99,6 @@ cd /srv/noc
 ```
 make up
 ```
-
 
 
 # Links

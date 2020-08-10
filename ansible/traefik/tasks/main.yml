@@ -5,7 +5,12 @@
 #   debug:
 #     msg: "{{traefik.install_path}}"
 
-- name: Copy traefik files
+# ----------------------------------------------------------------- static files
+
+- name: Copy traefik static files
   copy:
-    src: traefik/
+    src: "{{ role_path }}/files/"
     dest: "{{traefik.install_path}}/"
+  tags:
+    - traefik_copy
+    - statics_files_copy

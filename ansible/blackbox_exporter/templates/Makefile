@@ -1,16 +1,12 @@
-TRAEFIK_DIR={{ traefik.install_path }}
-
-.PHONY: traefik
-traefik:
-	cd $(TRAEFIK_DIR) && make up
+#canary200429.1516
 
 .PHONY: up
-up: traefik
+up:
 	docker-compose up -d
 
 .PHONY: down
 down:
-	docker-compose down
+	docker-compose down --remove-orphans
 
 .PHONY: logs
 logs:

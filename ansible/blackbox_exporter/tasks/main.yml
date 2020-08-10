@@ -12,3 +12,7 @@
     - config/blackbox.yml
     - Makefile
     - docker-compose.yml
+    - README.md
+  tags:
+    - blackbox_exporter_copy
+    - statics_files_copy

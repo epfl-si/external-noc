@@ -1,10 +1,12 @@
+#canary200429.1514
+
 .PHONY: up
 up: acme.json network
 	docker-compose up -d
 
 .PHONY: down
 down:
-	docker-compose down
+	docker-compose down --remove-orphans
 
 .PHONY: logs
 logs:

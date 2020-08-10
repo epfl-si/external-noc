@@ -10,5 +10,9 @@
 
 - name: Copy alertmanager static files
   copy:
-    src: "alertmanager/"
+    src: "{{ role_path }}/files/"
     dest: "{{ noc.install_path }}/alertmanager/"
+  tags:
+    - alertmanager_copy
+    - statics_files_copy
+    

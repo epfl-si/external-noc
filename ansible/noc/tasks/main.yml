@@ -123,6 +123,22 @@
 #     - rules/c2c_federate.yml
 #   register: prometheus_config_files
 
+
+# ----------------------------------------------------------------- static files
+
+- name: Copy NOC static files
+  copy:
+    src: "{{ role_path }}/files/"
+    dest: "{{ noc.install_path }}/"
+  tags:
+    - noc_copy
+    - statics_files_copy
+
+
+
+
+
+
 # ----------------------------------------------------------------- Init control
 # This works well until all the containers are stopped...
 # - name: Restart prometheus

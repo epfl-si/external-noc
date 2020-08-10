@@ -1,28 +1,39 @@
 # include .env
 # export $(shell sed 's/=.*//' .env)
+#canary200429.1758
 
 TRAEFIK_DIR={{ traefik.install_path }}
+BBE_DIR={{ bbe.install_path }}
 
 .PHONY: nothing
 nothing:
 	@cat Makefile |grep '.[P]HONY: '| sed 's/^.*: /make /' |sort
 
-.PHONY: traefik
-traefik:
+.PHONY: traefik_up
+traefik_up:
 	cd $(TRAEFIK_DIR) && make up
 
-.PHONY: up
-up:
-	traefik
-	docker-compose up -d
+.PHONY: traefik_down
+traefik_down:
+	cd $(TRAEFIK_DIR) && make down
 
-.PHONY: up_blackbox-exporter
-up_blackbox-exporter:
-	cd ./blackbox-exporter && make up
-	
+.PHONY: blackbox-exporter_up
+blackbox-exporter_up:
+	cd $(BBE_DIR) && make up
+
+.PHONY: blackbox-exporter_down
+blackbox-exporter_down:
+	cd $(BBE_DIR) && make down
+
+.PHONY: up
+up: traefik_up blackbox-exporter_up
+	docker-compose up -d
+	docker container ls -a
+
 .PHONY: down
-down:
+down: traefik_down blackbox-exporter_down
 	docker-compose down --remove-orphans
+	docker container ls -a
 
 .PHONY: pull
 pull:
@@ -34,7 +45,7 @@ logs:
 
 .PHONY: ps
 ps:
-	docker-compose ps
+	docker container ls -a
 
 .PHONY: box
 box:
