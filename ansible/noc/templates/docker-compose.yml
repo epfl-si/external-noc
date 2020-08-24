@@ -56,6 +56,14 @@ services:
   grafana:
     image: grafana/grafana
     restart: always
+    environment:
+      # when plugin list changes docker-compose up -d --build grafana is required
+      GF_INSTALL_PLUGINS: "{{ grafana.plugins | join(',') }}"
+
+      # GF_RENDERING_SERVER_URL: http://renderer:8081/render
+      # GF_RENDERING_CALLBACK_URL: http://grafana:3000/
+      # GF_LOG_FILTERS: rendering:debug
+
     volumes:
       - "{{ noc.install_path }}/data/grafana/data:/var/lib/grafana"
       - "{{ noc.install_path }}/data/grafana/conf/grafana.ini:/etc/grafana/grafana.ini"
@@ -72,6 +80,11 @@ services:
 {% if frontend.protocol == 'https' %}
       - "traefik.frontend.redirect.entryPoint={{ frontend.protocol }}"
 {% endif %}
+
+  # renderer:
+  #   image: grafana/grafana-image-renderer:latest
+  #   ports:
+  #     - 8081
 
 # https://github.com/prometheus/node_exporter#using-docker
   nodeexporter:

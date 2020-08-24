@@ -51,6 +51,14 @@ scrape_configs:
       username: "{{ auth.gitlab.username }}"
       password: "{{ auth.gitlab.password }}"
 
+  # gitlab.epfl.ch
+  - job_name: 'gitlab_traefik'
+    metrics_path: /metrics
+    honor_labels: true
+    scheme: 'https'
+    static_configs:
+    - targets: ['gitlab.epfl.ch']
+
   # Prometheus Blackbox exporter scraper
 {% for resconf in sources.blackbox %}
   - job_name: 'blackbox-{{ resconf.origin }}'

@@ -5,22 +5,25 @@
 #   debug:
 #     msg: "htpass: {{ frontend.htpass | htpasswd }}"
 
+- include_vars: "{{ role_path }}/../grafana/vars/main.yml"
+  tags: always
+
 # ------------------------------------------------ Check that keybase is mounted
 
 - name: Check whether "keys/private_key.pkcs7.pem" is present
   tags: prefly
-  local_action: command grep -sq 'END RSA PRIVATE KEY' "{{ playbook_dir }}/keys/private_key.pkcs7.pem"
+  local_action: command grep -sq 'END RSA PRIVATE KEY' "/keybase/team/epfl_idevfsd/idevfsd-NOC/keys/private_key.pkcs7.pem"
   register: checkprivatekey
   check_mode: no
   ignore_errors: yes
   changed_when: no
 - name: Greet the world if "keys/private_key.pkcs7.pem" is present
   tags: prefly
-  debug: msg="{{ playbook_dir }}/keys/private_key.pkcs7.pem is present"
+  debug: msg="/keybase/team/epfl_idevfsd/idevfsd-NOC/keys/private_key.pkcs7.pem is present"
   when: checkprivatekey.rc == 0
-- name: Alarm the world if "keys/private_key.pkcs7.pem" is NOT present
+- name: Alarm the world if "/keybase/team/epfl_idevfsd/idevfsd-NOC/keys/private_key.pkcs7.pem" is NOT present
   tags: prefly
-  fail: msg="Dude, be sure to have {{ playbook_dir }}/keys/private_key.pkcs7.pem present, i.e. launch keybase"
+  fail: msg="Dude, be sure to have /keybase/team/epfl_idevfsd/idevfsd-NOC/keys/private_key.pkcs7.pem present, i.e. launch keybase"
   when: checkprivatekey.rc != 0
 
 # -------------------------------------------------------------------------- Log
@@ -37,22 +40,11 @@
     var: loguserhost.stdout
 
 - name: Log username@hostname on log file
+  when: loguserhost.stdout is defined
   shell: echo {{ loguserhost.stdout }} >> ansible_log.txt
   args:
     executable: /bin/bash
     chdir: "{{ noc_install_path }}/"
-
-# ------------------------------------------------------------ Load dynamic data
-
-- name: Get URLs from wp-veritas API
-  local_action:
-    module: shell
-    cmd: "{{ playbook_dir }}/noc/vars/sites_from_veritas"
-  register: sites_from_veritas
-
-- name: Log urls
-  debug:
-    msg: "{{urls}}"
 
 # ------------------------------------------------- Directories and static files
 
@@ -92,6 +84,8 @@
 # -------------------------------------------------------------------- Templates
 
 - name: Copy docker-compose file
+  tags:
+    - docker-compose
   template:
     # src: "docker-compose.yml"
     src: "docker-compose.yml"

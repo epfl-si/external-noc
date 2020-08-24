@@ -100,7 +100,7 @@ urls:
       url: https://www.epfl.ch/campus/associations/list/ishigo-g/infoscience/
       slug: ishigo-g_infoscience
 
-  veritas: "{{ sites_from_veritas.stdout | from_json }}"
+  veritas: "{{ sites_from_veritas.stdout | default('[]') | from_json }}"
 
 c2c:
   prefix: vpsi_wwp_federation
