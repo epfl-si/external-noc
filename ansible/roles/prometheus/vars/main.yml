@@ -92,11 +92,11 @@ c2c:
 
 auth:
   legacy:
-    username: "{{ 'ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEAYIMx1PuCr7APQ7pZADN9QW68RnD9Jyv+oUcwIaTh5bpn4mCMMy6KNZz3wa9U62FTQ3TQSx/rrC7Zmm7o1UF5MuxxR34mvsJovL/uxHLXrzRK96suiIAZp7hm2tNTMmmI9wh0zEgxiaP5g8FJWIr5TAobjdpPabJ9uB4kVv7zHhSd3kOEFwV/AZylBSzQg/Abv6IMDG9hZUt2awL9UQZMgm+5MLtMAIkUnwVHkJRHR+k849HSaAbJJz2pfFA74YaiPCkvabZgYGn8MIaNvVYBdGd5zR/YVYfA95BP7sqIpFbSNLsIug9srsEAFD661LzTKkl5RFiioOlLPzpJfal1UzA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBBc+xVDHObQw9nhusvZHKF6gBChhjI/OXim7dBOrSPEQEdl]' | eyaml }}"
-    password: "{{ 'ENC[PKCS7,MIIBiQYJKoZIhvcNAQcDoIIBejCCAXYCAQAxggEhMIIBHQIBADAFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEApMuiCPiPcXbiXwPBkyXH8lNv98JCMlhKi1FbGI3of41XcVnHb58RW4+4pBwmuIhFqfbhqx6e/vkpanMcaj5OENTVAAqAk+sCPVoYpChD1JtGQTBA3Snnj9AIM0JHTAvgGVHG+RkQXwZB60nWE+DkaBKJ8N1J4zrXALiGZfbXRVwuRhbHZPDfVYv9vAntIrqtbhv1oG6pYzGdAl4RS0HEzKPR45YeuSrZePuxSRIC5X90VdNQe54k3ADaWp2qiZqEXAZ/RtNBnlzt/bk3OtqthhvHMsoY2Vh4VbdHnRiG90wIK2v8i2nVXzv+CgGpTP3pkW4EkSkTAuvz6Tzc3EXYDDBMBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBBGuuO1AX1yeU2njDQ2WSdHgCCuakh3gBOmNKwZjzDdyf3aIv4eOpYLiXFJkRf1VJoFBQ==]' | eyaml }}"
+    username: "{{ _noc_secrets.prometheus.auth.legacy.username }}"
+    password: "{{ _noc_secrets.prometheus.auth.legacy.password }}"
   gitlab:
-    username: "{{ 'ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEAYsgvRWHm5Z4aUo7WWMmIQpuaAvw+0gje91nu/3o4+MtadCmFGl+lyPD9M8Mkm134Sr3NdpxeBER/2EofxK2iij18zKF9E3+UKtYcddhMV2excEvaSknEgpMjBBq04DIMnoVoWWF9lcsL06JLDqDVr4/3yQzASpJMmR0SoTxAxmijMsdIvifl3XrvigDuAqd/fdKzRij9fLYrXoCdhW3w2RvNN9LL0kFwdzju2RXvOqE8QO+xowv4hnE/EitymL7QY26rWNQ8eYl34W8UpZSGGFuRQ/CxsySAD+ykLOJMDVr6D78O/a72uMhmEj+fWRRMRrhMo7XzqxCQmVweUsQp+TA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBCrMQZE9qIs7lsY6nVPTGO9gBDYvp3colgbuwJqL5+TEDqA]' | eyaml }}"
-    password: "{{ 'ENC[PKCS7,MIIBiQYJKoZIhvcNAQcDoIIBejCCAXYCAQAxggEhMIIBHQIBADAFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEAnkJBs4kc9Sqv5IAUWTPhI7ES4X3HMa0ApIlTBzY0/XMILHHlbj61FSFeg1Ddq8O7MZc8O+I7rOwNiDwCyj/XKfr1dAgt5LAcJWJXETkVxinsyY/zFgqNExVBYlrQk+r4NL/gTmOYS/LbQz1pw7CFFC5Hcgf7vTMz5ddvMljlw9ovtjzc47bP1N4xKxf+/CdZ5LnKveePnysdyu90uPZ1WbupumPsl0Y8GdBAOkeKlLy12MKQfiRpBM2W7A1v3ZiuV+Oq5CnQ0Uu4NyFURUX9FXi5I3qZzMlxW53JARL1xH1eA5UZMqsn/TwawEo4eqrONhwyz+vJ6DXCIZ9VX1lpLzBMBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBABizNYHbEzygJ+nbiyJ23lgCAdLlpAVEXZgXfPIskZbxicRyx6c3yktVXli+egko7czQ==]' | eyaml }}"
+    username: "{{ _noc_secrets.prometheus.auth.gitlab.username }}"
+    password: "{{ _noc_secrets.prometheus.auth.gitlab.password }}"
 
 sources:
   blackbox:
