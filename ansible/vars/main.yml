@@ -1,0 +1,2 @@
+_noc_secrets: "{{ lookup('file', '/keybase/team/epfl_idevfsd/idevfsd-NOC/ansible_noc_secrets.yml') | from_yaml }}"
+install_path: '/srv/noc'

@@ -5,12 +5,6 @@
       debug:
         msg: "Starting ansible with {{ runenv }} environment."
 
-- name: Importing global secrets from keybase
-  hosts: all
-  tasks:
-    - include_vars: "{{ playbook_dir }}/vars/main.yml"
-      tags: always
-
 - name: External NOC
   hosts: noc
   gather_facts: no   # Not yet
