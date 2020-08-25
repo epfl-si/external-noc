@@ -19,7 +19,7 @@
       - "80:80" # The HTTP port
       - "443:443"
       - "{{ traefik_web_ui_port }}:8080" # The Web UI (enabled by --api)
-    network_mode: "{{ traefik_network_name }}"
+    network_mode: "{{ backend_network_name }}"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
       - "{{ traefik_state_path }}/traefik.toml:/traefik.toml"

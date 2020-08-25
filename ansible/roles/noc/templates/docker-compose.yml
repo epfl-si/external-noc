@@ -1,25 +1,5 @@
 version: '3'
 services:
-  prometheus:                                  # Prometheus service on port 9090
-    image: prom/prometheus
-    volumes:
-      - ./prometheus:/etc/prometheus
-      - ./data/prometheus:/prometheus
-    restart: always
-    networks:
-      - {{ traefik.network }}
-      - default
-    labels:
-      - "traefik.domain={{ frontend.domain }}"
-      - "traefik.frontend.rule=Host:prometheus{{ dnspostfix }}.{{ frontend.domain }}"
-      - "traefik.docker.network={{ traefik.network }}"
-      - "traefik.enable=true"
-      - "traefik.port={{ prometheus.port }}"
-      - "traefik.frontend.auth.basic={{ frontend.htpass | htpasswd }}"
-{% if frontend.protocol == 'https' %}
-      - "traefik.frontend.redirect.entryPoint={{ frontend.protocol }}"
-{% endif %}
-
   pushgateway:
     image: prom/pushgateway
     restart: always

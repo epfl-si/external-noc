@@ -1,7 +1,6 @@
 ---
 # vars file for idevfsd-traefik
 traefik_state_path: "{{ install_path }}/traefik"
-traefik_network_name: traefik
 traefik_container_name: traefik
 traefik_image: traefik
 traefik_version: 1.7

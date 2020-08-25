@@ -16,32 +16,51 @@
 
 - name: Create writable directories to be used as mount points
   file:
-    path: "{{ noc.install_path }}/{{ item }}"
+    path: "{{ install_path }}/prometheus"
     state: directory
     mode: "u=rwx,g=rwx,o=rwx"
-  with_items:
-    - data/prometheus
 
 # ----------------------------------------------------------------- static files
 
 - name: Copy prometheus static files
   copy:
     src: "{{ role_path }}/files/"
-    dest: "{{ noc.install_path }}/prometheus/"
-  tags:
-    - prometheus_copy
-    - statics_files_copy
+    dest: "{{ install_path }}/prometheus/"
 
 # -------------------------------------------------------------------- Templates
 
 - name: Copy prometheus template configs
   template:
     src: "prometheus/{{ item }}"
-    dest: "{{ noc.install_path }}/prometheus/{{ item }}"
+    dest: "{{ install_path }}/prometheus/{{ item }}"
   with_items:
     - prometheus.yml
     - rules/c2c_federate.yml
   register: prometheus_config_files
-  tags:
-    - prometheus_copy
-    - statics_files_copy
+
+# -------------------------------------------------------------------- Container
+
+- name: Run prometheus
+  docker_container:
+    name: "{{ prometheus_container_name }}"
+    image: "{{ prometheus_image }}:{{ prometheus_version }}"
+    detach: yes
+    restart_policy: unless-stopped
+    network_mode: "{{ backend_network_name }}"
+    volumes:
+      - "{{ install_path }}/prometheus:/etc/prometheus"
+      - "{{ data_path }}/prometheus:/prometheus"
+    log_driver: json-file
+    log_options:
+      max-size: 50m
+      max-file: "3"
+    labels:
+      traefik.domain: "{{ frontend.domain }}"
+      traefik.frontend.rule: "Host:prometheus{{ dnspostfix }}.{{ frontend.domain }}"
+      traefik.docker.network: "{{ backend_network_name }}"
+      traefik.enable: "true"
+      traefik.port: "{{ prometheus_port | string }}"
+      traefik.frontend.auth.basic.users: "{{ frontend.htpass }}"
+      traefik.frontend.redirect.entryPoint: "https"
+
+
