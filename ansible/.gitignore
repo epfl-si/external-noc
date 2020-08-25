@@ -1,4 +1,0 @@
-*.pyc
-*.retry
-.DS_Store
-/ansible-deps-cache/

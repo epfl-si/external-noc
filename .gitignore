@@ -1,10 +1,10 @@
-.env
 !grafana/ssl/README
-grafana/ssl/*
-grafana/data/grafana.db
 .DS_Store
-.ruby-version
-.python-version
-ansible/idevfsd-noc/vars/sites_from_veritas2
+.env
 .idea
-zf_commands.md
+.python-version
+.ruby-version
+*.pyc
+*.retry
+/ansible/ansible-deps-cache
+zf_*
