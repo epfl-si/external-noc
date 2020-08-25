@@ -31,37 +31,45 @@
       tags: docker
 
     - name: traefik
+      role: ../roles/traefik
       tags: traefik
 
     - name: noc
+      role: ../roles/noc
       tags: noc
 
     - name: alertmanager
+      role: ../roles/alertmanager
       tags:
         - noc
         - alertmanager
 
     - name: blackbox_exporter
+      role: ../roles/blackbox_exporter
       tags:
         - noc
         - bbe
 
     - name: grafana
+      role: ../roles/grafana
       tags:
         - noc
         - grafana
 
     - name: node_exporter
+      role: ../roles/node_exporter
       tags:
         - noc
         - nodeexporter
 
     - name: prometheus
+      role: ../roles/prometheus
       tags:
         - noc
         - prometheus
 
     - name: pushgateway
+      role: ../roles/pushgateway
       tags:
         - noc
         - pushgateway

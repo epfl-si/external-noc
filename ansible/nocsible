@@ -51,8 +51,8 @@ platform_check () {
 inventory_mode="dev"
 inventories () {
     case "$inventory_mode" in
-        dev) echo "-i hosts-dev.yml"  ;;
-        prod) echo "-i hosts-prod.yml"  ;;
+        dev) echo "-i inventory/hosts-dev.yml"  ;;
+        prod) echo "-i inventory/hosts-prod.yml"  ;;
         *) fatal "Invalid inventory_mode" ;;
     esac
 

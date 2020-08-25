@@ -1,5 +1,5 @@
 collections:
   - community.general
-  
+
 roles:
   - name: nickjj.docker
