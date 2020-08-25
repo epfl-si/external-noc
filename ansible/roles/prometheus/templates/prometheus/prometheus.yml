@@ -30,7 +30,7 @@ scrape_configs:
 
     # The targets have to match the docker-compose service name/port !
     static_configs:
-    - targets: ['prometheus:{{ prometheus_port }}', 'pushgateway:{{ pushgateway.port }}']
+    - targets: ['prometheus:{{ prometheus_port }}', 'pushgateway:{{ pushgateway.port | default('9091') }}']
 
   - job_name: 'nodeexporter'
     static_configs:

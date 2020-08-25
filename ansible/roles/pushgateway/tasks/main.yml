@@ -1,12 +1,17 @@
----
-# tasks file for idevfsd-noc using docker-compose
-
-# ----------------------------------------------------------------- static files
-
-- name: Copy pushgateway static files
-  copy:
-    src: "{{ role_path }}/files/"
-    dest: "{{ noc.install_path }}/pushgateway/"
-  tags:
-    - pushgateway_copy
-    - statics_files_copy
+- name: Run prometheus push gateway
+  docker_container:
+    name: "{{ pushgateway_container_name }}"
+    image: "{{ pushgateway_image }}:{{ pushgateway_version }}"
+    detach: yes
+    restart_policy: unless-stopped
+    network_mode: "{{ backend_network_name }}"
+    log_driver: json-file
+    log_options:
+      max-size: 50m
+      max-file: "3"
+    labels:
+      traefik.domain: "{{ frontend.domain }}"
+      traefik.frontend.rule: "Host:pgw{{ dnspostfix }}.{{ frontend.domain }}"
+      traefik.docker.network: "{{ backend_network_name }}"
+      traefik.enable: "true"
+      traefik.port: "{{ pushgateway_port | string }}"

@@ -1,18 +1,5 @@
 version: '3'
 services:
-  pushgateway:
-    image: prom/pushgateway
-    restart: always
-    networks:
-      - {{ backend_network_name }}
-      - default
-    labels:
-      - "traefik.domain={{ frontend.domain }}"
-      - "traefik.frontend.rule=Host:pgw{{ dnspostfix }}.{{ frontend.domain }}"
-      - "traefik.docker.network={{ backend_network_name }}"
-      - "traefik.enable=true"
-      - "traefik.port={{ pushgateway.port }}"
-
   grafana:
     image: grafana/grafana
     restart: always
