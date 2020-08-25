@@ -1,6 +1,7 @@
 ---
-# vars file for idevfsd-bbe
-
-bbe:
-  install_path: "{{ install_path }}/blackbox-exporter"
-  port: 9115
+# vars for blackboxexporter
+blackboxexporter_state_path: "{{ install_path }}/blackboxexporter"
+blackboxexporter_container_name: blackboxexporter
+blackboxexporter_image: prom/blackbox-exporter
+blackboxexporter_version: v0.14.0
+blackboxexporter_port: 9115

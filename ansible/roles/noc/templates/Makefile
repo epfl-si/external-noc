@@ -1,17 +1,6 @@
-BBE_DIR={{ bbe.install_path }}
-
 .PHONY: nothing
 nothing:
 	@cat Makefile |grep '.[P]HONY: '| sed 's/^.*: /make /' |sort
-
-
-.PHONY: blackbox-exporter_up
-blackbox-exporter_up:
-	cd $(BBE_DIR) && make up
-
-.PHONY: blackbox-exporter_down
-blackbox-exporter_down:
-	cd $(BBE_DIR) && make down
 
 .PHONY: up
 up: traefik_up blackbox-exporter_up

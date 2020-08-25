@@ -1,18 +1,34 @@
 ---
-- name: Create config directory for blackbox-exporter
+- name: Create config directory for blackbox exporter
   file:
-    path: "{{ bbe.install_path }}/config"
+    path: "{{ blackboxexporter_state_path }}/config"
     state: directory
 
-- name: Copy templates for blackbox-exporter
+- name: Copy templates for blackbox exporter
   template:
-    src: "{{ item }}"
-    dest: "{{ bbe.install_path }}/{{ item }}"
-  with_items:
-    - config/blackbox.yml
-    - Makefile
-    - docker-compose.yml
-    - README.md
-  tags:
-    - blackbox_exporter_copy
-    - statics_files_copy
+    src: "config/blackbox.yml"
+    dest: "{{ blackboxexporter_state_path }}/config/blackbox.yml"
+
+# -------------------------------------------------------------------- Container
+- name: Run blackbox exporter
+  docker_container:
+    name: "{{ blackboxexporter_container_name }}"
+    image: "{{ blackboxexporter_image }}:{{ blackboxexporter_version }}"
+    detach: yes
+    restart_policy: unless-stopped
+    network_mode: "{{ backend_network_name }}"
+    volumes:
+      - "{{ blackboxexporter_state_path }}/config/:/config"
+    command: --config.file=/config/blackbox.yml
+    log_driver: json-file
+    log_options:
+      max-size: 50m
+      max-file: "3"
+    labels:
+      traefik.domain: "{{ frontend.domain }}"
+      traefik.frontend.rule: "Host:bbe{{ dnspostfix }}.{{ frontend.domain }}"
+      traefik.docker.network: "{{ backend_network_name }}"
+      traefik.enable: "true"
+      traefik.port: "{{ blackboxexporter_port | string }}"
+      traefik.frontend.auth.basic.users: "{{ frontend.htpass }}"
+      traefik.frontend.redirect.entryPoint: "https"
