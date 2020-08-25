@@ -1,21 +1,9 @@
-# include .env
-# export $(shell sed 's/=.*//' .env)
-#canary200429.1758
-
-TRAEFIK_DIR={{ traefik.install_path }}
 BBE_DIR={{ bbe.install_path }}
 
 .PHONY: nothing
 nothing:
 	@cat Makefile |grep '.[P]HONY: '| sed 's/^.*: /make /' |sort
 
-.PHONY: traefik_up
-traefik_up:
-	cd $(TRAEFIK_DIR) && make up
-
-.PHONY: traefik_down
-traefik_down:
-	cd $(TRAEFIK_DIR) && make down
 
 .PHONY: blackbox-exporter_up
 blackbox-exporter_up:
@@ -49,7 +37,7 @@ ps:
 
 .PHONY: box
 box:
-	docker run -i -t --network={{traefik.network}} busybox
+	docker run -i -t --network={{backend_network_name}} busybox
 
 .PHONY: testc2c
 testc2c:

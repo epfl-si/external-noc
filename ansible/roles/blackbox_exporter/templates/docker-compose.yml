@@ -8,16 +8,16 @@ services:
     command: --config.file=/config/blackbox.yml
     restart: always
     networks:
-      - {{ traefik.network }}
+      - {{ backend_network_name }}
       - default
     labels:
       - "traefik.domain={{ frontend.domain }}"
       - "traefik.frontend.rule=Host:bbe{{ dnspostfix }}.{{ frontend.domain }}"
-      - "traefik.docker.network={{ traefik.network }}"
+      - "traefik.docker.network={{ backend_network_name }}"
       - "traefik.enable=true"
       - "traefik.port={{ bbe.port }}"
       - "traefik.frontend.auth.basic={{ frontend.htpass }}"
 
 networks:
-  {{ traefik.network }}:
+  {{ backend_network_name }}:
     external: true

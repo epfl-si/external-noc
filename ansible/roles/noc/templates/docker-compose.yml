@@ -4,12 +4,12 @@ services:
     image: prom/pushgateway
     restart: always
     networks:
-      - {{ traefik.network }}
+      - {{ backend_network_name }}
       - default
     labels:
       - "traefik.domain={{ frontend.domain }}"
       - "traefik.frontend.rule=Host:pgw{{ dnspostfix }}.{{ frontend.domain }}"
-      - "traefik.docker.network={{ traefik.network }}"
+      - "traefik.docker.network={{ backend_network_name }}"
       - "traefik.enable=true"
       - "traefik.port={{ pushgateway.port }}"
 
@@ -29,13 +29,13 @@ services:
       - "{{ noc.install_path }}/data/grafana/conf/grafana.ini:/etc/grafana/grafana.ini"
       - "{{ noc.install_path }}/data/grafana/provisioning:/etc/grafana/provisioning"
     networks:
-      - {{ traefik.network }}
+      - {{ backend_network_name }}
       - default
     labels:
       - "traefik.port={{ grafana.port }}"
       - "traefik.domain={{ frontend.domain }}"
       - "traefik.frontend.rule=Host:grafana{{ dnspostfix }}.{{ frontend.domain }}"
-      - "traefik.docker.network={{ traefik.network }}"
+      - "traefik.docker.network={{ backend_network_name }}"
       - "traefik.enable=true"
 {% if frontend.protocol == 'https' %}
       - "traefik.frontend.redirect.entryPoint={{ frontend.protocol }}"
@@ -47,5 +47,5 @@ services:
   #     - 8081
 
 networks:
-  {{ traefik.network }}:
+  {{ backend_network_name }}:
     external: true

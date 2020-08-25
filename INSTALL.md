@@ -1,23 +1,6 @@
 # Install
 
-<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
-- [Install](#install)
-	- [Goal](#goal)
-	- [Ubuntu](#ubuntu)
-		- [Notes](#notes)
-	- [MacOs](#macos)
-		- [with asdf](#with-asdf)
-			- [Install ruby and hiera-eyaml](#install-ruby-and-hiera-eyaml)
-			- [Install python 3.6.8](#install-python-368)
-		- [with brew](#with-brew)
-			- [Installation de Ansible](#installation-de-ansible)
-			- [Installation de Ruby](#installation-de-ruby)
-			- [Installation de hiera-eyaml](#installation-de-hiera-eyaml)
-			- [Installation de bcrypt](#installation-de-bcrypt)
-			- [Installation de nickjj.docker](#installation-de-nickjjdocker)
-
-<!-- /TOC -->
 
 
 ## Goal
@@ -110,7 +93,7 @@ ansible-playbook etc.
 
 
 ### with brew
-Cette procédure fonctionne sur un macbook pro avec Catalina (zf200330.1915)
+Cette procédure fonctionne sur un macbook pro avec Catalina
 
 #### Installation de Ansible
 ```

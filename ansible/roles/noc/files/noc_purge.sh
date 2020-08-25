@@ -1,8 +1,6 @@
 #!/bin/bash
-#Small script to clean all the NOC binz
-#zf200810.1215
-
-#source: http://patatos.over-blog.com/2016/09/commet-faire-du-menage-dans-les-conteneurs-et-images-docker.html
+# Small script to clean all the NOC binz
+# source: http://patatos.over-blog.com/2016/09/commet-faire-du-menage-dans-les-conteneurs-et-images-docker.html
 
 echo -e "
 Stop the service and remove the container AND also the data"

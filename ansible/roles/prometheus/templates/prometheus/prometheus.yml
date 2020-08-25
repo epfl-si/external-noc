@@ -34,7 +34,7 @@ scrape_configs:
 
   - job_name: 'nodeexporter'
     static_configs:
-    - targets: ['nodeexporter:{{ nodeexporter.port }}']
+    - targets: ['nodeexporter:{{ nodeexporter.port | default('9100') }}']
 
   # gitlab.epfl.ch
   - job_name: 'gitlab@epfl'
