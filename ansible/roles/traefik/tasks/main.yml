@@ -1,11 +1,32 @@
 ---
 # tasks file for idevfsd-traefik
-# ----------------------------------------------------------------- static files
 
-- name: Copy traefik static files
+- name: Copy traefik config
   copy:
-    src: "{{ role_path }}/files/"
-    dest: "{{traefik.install_path}}/"
+    src: "{{ role_path }}/files/traefik.toml"
+    dest: "{{ traefik_state_path }}/traefik.toml"
   tags:
-    - traefik_copy
-    - statics_files_copy
+    - traefik
+
+- name: Run traefik
+  docker_container:
+    name: "{{ traefik_container_name }}"
+    image: "{{ traefik_image }}:{{ traefik_version }}"
+    detach: yes
+    command: --api --docker # Enables the web UI and tells Traefik to listen to docker
+    restart_policy: unless-stopped
+    ports:
+      - "80:80" # The HTTP port
+      - "443:443"
+      - "{{ traefik_web_ui_port }}:8080" # The Web UI (enabled by --api)
+    network_mode: "{{ traefik_network_name }}"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
+      - "{{ traefik_state_path }}/traefik.toml:/traefik.toml"
+      - "{{ traefik_state_path }}/acme.json:/acme.json"
+    log_driver: json-file
+    log_options:
+      max-size: 50m
+      max-file: "3"
+  tags:
+    - traefik
