@@ -1,19 +1,14 @@
 ---
-# tasks file for idevfsd-noc using docker-compose
+# tasks file for prometheus
 
+# ------------------------------------------------------------------- wp-veritas
 - name: Get URLs from wp-veritas API
   local_action:
     module: shell
     cmd: "{{ role_path }}/vars/sites_from_veritas"
   register: sites_from_veritas
 
-- name: Log urls
-  check_mode: no
-  debug:
-    msg: "{{urls}}"
-
 # ------------------------------------------------------------------ Directories
-
 - name: Create writable directories to be used as mount points
   file:
     path: "{{ install_path }}/prometheus"
@@ -21,14 +16,12 @@
     mode: "u=rwx,g=rwx,o=rwx"
 
 # ----------------------------------------------------------------- static files
-
 - name: Copy prometheus static files
   copy:
     src: "{{ role_path }}/files/"
     dest: "{{ install_path }}/prometheus/"
 
 # -------------------------------------------------------------------- Templates
-
 - name: Copy prometheus template configs
   template:
     src: "prometheus/{{ item }}"
@@ -39,7 +32,6 @@
   register: prometheus_config_files
 
 # -------------------------------------------------------------------- Container
-
 - name: Run prometheus
   docker_container:
     name: "{{ prometheus_container_name }}"
@@ -62,5 +54,3 @@
       traefik.port: "{{ prometheus_port | string }}"
       traefik.frontend.auth.basic.users: "{{ frontend.htpass }}"
       traefik.frontend.redirect.entryPoint: "https"
-
-
