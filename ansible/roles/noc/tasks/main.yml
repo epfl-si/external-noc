@@ -1,15 +1,9 @@
----
 # tasks file for idevfsd-noc using docker-compose
-
-# - name: Random debug
-#   debug:
-#     msg: "htpass: {{ frontend.htpass | htpasswd }}"
-
+---
 - include_vars: "{{ role_path }}/../grafana/vars/main.yml"
   tags: always
 
 # ------------------------------------------------ Check that keybase is mounted
-
 - name: Check whether "keys/private_key.pkcs7.pem" is present
   tags: prefly
   local_action: command grep -sq 'END RSA PRIVATE KEY' "/keybase/team/epfl_idevfsd/idevfsd-NOC/keys/private_key.pkcs7.pem"
@@ -27,7 +21,6 @@
   when: checkprivatekey.rc != 0
 
 # -------------------------------------------------------------------------- Log
-
 - name: Register username@hostname for logs
   tags: prefly
   local_action: shell echo $(date '+%Y-%m-%d %H:%M:%S') $USER@$HOSTNAME
@@ -46,43 +39,7 @@
     executable: /bin/bash
     chdir: "{{ noc_install_path }}/"
 
-# ------------------------------------------------- Directories and static files
-
-# - name: Create various destination directories for noc files
-#   file:
-#     path: "{{ noc.install_path }}/{{ item }}"
-#     state: directory
-#   with_items:
-#     - grafana/conf
-#
-# - name: Create writable directories to be used as mount points
-#   file:
-#     path: "{{ noc.install_path }}/{{ item }}"
-#     state: directory
-#     mode: "u=rwx,g=rwx,o=rwx"
-#   with_items:
-#     - grafana/logs
-#     - grafana/plugins
-#     - grafana/data
-#     - data/prometheus
-#
-# - name: Copy alertmanager static files
-#   copy:
-#     src: "alertmanager/"
-#     dest: "{{ noc.install_path }}/alertmanager/"
-#
-# - name: Copy grafana static files
-#   copy:
-#     src: "grafana/"
-#     dest: "{{ noc.install_path }}/grafana/"
-#
-# - name: Copy prometheus static files
-#   copy:
-#     src: "prometheus/"
-#     dest: "{{ noc.install_path }}/prometheus/"
-
 # -------------------------------------------------------------------- Templates
-
 - name: Copy docker-compose file
   tags:
     - docker-compose
@@ -98,28 +55,7 @@
     dest: "{{ noc.install_path }}/Makefile"
   register: compose_file
 
-# - name: Copy grafana template config
-#   template:
-#     src: "grafana/{{ item }}"
-#     dest: "{{ noc.install_path }}/grafana/{{ item }}"
-#   with_items:
-#     - conf/grafana.ini
-#     - provisioning/datasources/idevfsd-prometheus.yml
-#     - provisioning/notifiers/telegram.yml
-#   register: grafana_config_files
-#
-# - name: Copy prometheus template configs
-#   template:
-#     src: "prometheus/{{ item }}"
-#     dest: "{{ noc.install_path }}/prometheus/{{ item }}"
-#   with_items:
-#     - prometheus.yml
-#     - rules/c2c_federate.yml
-#   register: prometheus_config_files
-
-
 # ----------------------------------------------------------------- static files
-
 - name: Copy NOC static files
   copy:
     src: "{{ role_path }}/files/"
@@ -127,28 +63,3 @@
   tags:
     - noc_copy
     - statics_files_copy
-
-
-
-
-
-
-# ----------------------------------------------------------------- Init control
-# This works well until all the containers are stopped...
-# - name: Restart prometheus
-#   become: yes
-#   shell:
-#     cmd: "cd {{ noc.install_path }} \
-#        && docker-compose pull --ignore-pull-failures prometheus \
-#        && docker-compose restart prometheus"
-#   when: prometheus_config_files is changed
-
-# - name: Restart grafana
-#   shell:
-#     cmd: "cd {{ noc.install_path }} && docker-compose restart grafana"
-#   when: grafana_config_files is changed
-
-# - name: Restart everything
-#   shell:
-#     cmd: "cd {{ noc.install_path }} && make restart"
-#   when: compose_file is changed
