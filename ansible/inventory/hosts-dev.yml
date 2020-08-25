@@ -9,10 +9,3 @@ noc:
       ansible_port: 22
       ansible_user: root
       noc_install_path: /srv/noc
-
-# bbox:
-#   hosts:
-#     prometheus-scratch:
-#       ansible_host: prometheus-scratch.idev-fsd.ml
-#       ansible_port: 22
-#       ansible_user: ubuntu

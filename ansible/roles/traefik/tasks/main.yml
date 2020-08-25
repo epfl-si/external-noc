@@ -1,10 +1,5 @@
 ---
 # tasks file for idevfsd-traefik
-
-# - name: Print traefik install dir
-#   debug:
-#     msg: "{{traefik.install_path}}"
-
 # ----------------------------------------------------------------- static files
 
 - name: Copy traefik static files

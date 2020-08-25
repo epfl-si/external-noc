@@ -1,10 +1,6 @@
 ---
 # tasks file for idevfsd-noc using docker-compose
 
-# - name: Random debug
-#   debug:
-#     msg: "htpass: {{ frontend.htpass | htpasswd }}"
-
 # ------------------------------------------------- Directories and static files
 
 - name: Create various destination directories for noc files
@@ -13,11 +9,6 @@
     state: directory
   with_items:
     - conf
-
-# - name: Create grafana default folder
-#   file:
-#     path: "{{ noc.install_path }}/grafana"
-#     state: directory
 
 - name: Create writable directories to be used as mount points
   file:

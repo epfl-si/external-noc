@@ -1,13 +1,7 @@
 ---
 # tasks file for idevfsd-noc using docker-compose
 
-# - name: Random debug
-#   debug:
-#     msg: "htpass: {{ frontend.htpass | htpasswd }}"
-
 # ------------------------------------------------ Check that keybase is mounted
-
-
 - name: Copy alertmanager static files
   copy:
     src: "{{ role_path }}/files/"

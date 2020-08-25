@@ -20,26 +20,6 @@ services:
       - "traefik.frontend.redirect.entryPoint={{ frontend.protocol }}"
 {% endif %}
 
-#   alertmanager:
-#     image: quay.io/prometheus/alertmanager
-#     volumes:
-#       - ./alertmanager/config:/config
-#     command: --config.file=/config/simple.yml
-#     restart: always
-#     networks:
-#       - {{ traefik.network }}
-#       - default
-#     labels:
-#       - "traefik.domain={{ frontend.domain }}"
-#       - "traefik.frontend.rule=Host:am{{ dnspostfix }}.{{ frontend.domain }}"
-#       - "traefik.docker.network={{ traefik.network }}"
-#       - "traefik.enable=true"
-#       - "traefik.port={{ alertmanager.port }}"
-#       - "traefik.frontend.auth.basic={{ frontend.htpass | htpasswd }}"
-# {% if frontend.protocol == 'https' %}
-#       - "traefik.frontend.redirect.entryPoint=https"
-# {% endif %}
-
   pushgateway:
     image: prom/pushgateway
     restart: always
