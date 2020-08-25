@@ -5,6 +5,12 @@
       debug:
         msg: "Starting ansible with {{ runenv }} environment."
 
+- name: Importing global secrets from keybase
+  hosts: all
+  tasks:
+    - include_vars: "{{ playbook_dir }}/vars/main.yml"
+      tags: always
+
 - name: External NOC
   hosts: noc
   gather_facts: no   # Not yet
@@ -14,7 +20,7 @@
     - frontend:
         domain: idev-fsd.ml
         protocol: https
-        htpass: "{{ 'ENC[PKCS7,MIIBuQYJKoZIhvcNAQcDoIIBqjCCAaYCAQAxggEhMIIBHQIBADAFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEAJRyWwSK8uBp5AscvBZiMt34Xm0oSEbw2tT4OwjOY0o6xLJEnCwvkDpepbzYXgc67Xv+mznaaOY34TacW/nLOcC0xLnlamKj62J0vacqIZSCBhvgFT0kUOcovXSZyqmRt3iKPcfV+01BoXqUAKqUBBaMbEyyizAZP0xdU02ParPmetlgyWuZqesDfx1Owa8uSYD42DAWRvxK0Btql1BBXlc8mh9GGe3fB5EcsF7sp9nqTxZ9Fdv8kALxO/bUHaJlhu9jXno9gncO56SCLMSu24ETEOEWFpw/Kfbn0LH9kCqjZhkGdj7lQkxMKrj45RXaZW+53gCxsrAaIbTfhfkz6gjB8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBAzfXIu4CDeFs9Dd00vGANGgFDmZH4QY32Rn44N9EmMkf4UYiFSo2g91wg/F4Isvjckwxhf8YAdSgVz8tC5WU8ODpg10E052XyB1Rqul8t3vk2H0JhvGqc49uL+Bnw2OqWUxQ==]' | eyaml }}"
+        htpass: '{{ _noc_secrets.frontend.htpasswd }}'
     # vars for nickjj.docker
     - docker__edition: "ce"
     - docker__channel: ["stable"]
