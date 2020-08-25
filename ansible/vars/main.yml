@@ -1,2 +1,16 @@
 _noc_secrets: "{{ lookup('file', '/keybase/team/epfl_idevfsd/idevfsd-NOC/ansible_noc_secrets.yml') | from_yaml }}"
 install_path: '/srv/noc'
+data_path: "/volumes/data1/noc/data/"
+
+backend_network_name: "traefik"
+
+frontend:
+  domain: idev-fsd.ml
+  protocol: https
+  htpass: "{%for cred in _noc_secrets.frontend.credentials%}{{ cred.user }}:{{ cred.pass | password_hash('bcrypt') }}, {%endfor%}"
+
+# vars for nickjj.docker
+docker__edition: "ce"
+docker__channel: ["stable"]
+docker__state: "present"
+docker__users: ["{{ ansible_user }}"]

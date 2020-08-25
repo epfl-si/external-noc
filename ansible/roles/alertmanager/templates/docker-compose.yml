@@ -15,7 +15,7 @@ services:
       - "traefik.docker.network={{ traefik.network }}"
       - "traefik.enable=true"
       - "traefik.port={{ alertmanager.port }}"
-      - "traefik.frontend.auth.basic={{ frontend.htpass | htpasswd }}"
+      - "traefik.frontend.auth.basic={{ frontend.htpass }}"
 {% if frontend.protocol == 'https' %}
       - "traefik.frontend.redirect.entryPoint=https"
 {% endif %}

@@ -16,7 +16,7 @@ services:
       - "traefik.docker.network={{ traefik.network }}"
       - "traefik.enable=true"
       - "traefik.port={{ bbe.port }}"
-      - "traefik.frontend.auth.basic={{ frontend.htpass | htpasswd }}"
+      - "traefik.frontend.auth.basic={{ frontend.htpass }}"
 
 networks:
   {{ traefik.network }}:

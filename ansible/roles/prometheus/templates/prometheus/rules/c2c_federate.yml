@@ -5,5 +5,3 @@ groups:
    - record: "{{ c2c.prefix }}:{{ metric }}"
      expr: "{{ metric }}{c2c='yes'}"
 {% endfor %}
-
-# curl --globoff -u {{frontend.htpass | regex_search('([^:]*:[^ ]*)') }} 'https://prometheus.{{ frontend.domain }}/federate?match[]={__name__=~%22^{{ c2c.prefix }}:.*%22}'

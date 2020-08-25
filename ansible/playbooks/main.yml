@@ -9,20 +9,6 @@
   hosts: noc
   gather_facts: no   # Not yet
   # Variables common to all roles
-  vars:
-    - install_path: "{{ noc_install_path }}"
-    - frontend:
-        domain: idev-fsd.ml
-        protocol: https
-        htpass: '{{ _noc_secrets.frontend.htpasswd }}'
-    # vars for nickjj.docker
-    - docker__edition: "ce"
-    - docker__channel: ["stable"]
-    - docker__state: "present"
-    - docker__users: ["{{ ansible_user }}"]
-    - traefik:
-        network: traefik
-        install_path: '{{ noc_install_path }}/traefik'
   roles:
     - name: docker
       role: nickjj.docker
