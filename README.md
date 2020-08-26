@@ -1,17 +1,4 @@
 # iDev-FSD external NOC
-<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
-
-- [iDev-FSD external NOC](#idev-fsd-external-noc)
-- [About](#about)
-- [Pre-requisites](#pre-requisites)
-	- [Installation](#installation)
-	- [Keybase](#keybase)
-- [Deployment](#deployment)
-- [Project's bricks](#projects-bricks)
-- [Usage](#usage)
-- [Links](#links)
-
-<!-- /TOC -->
 
 # About
 
@@ -31,20 +18,21 @@ HTTP requests.
 # Pre-requisites
 
 We assume that the NOC will be deployed on a Ubuntu server, on which you can
-access with your SSH key with the root rights. Ansible is needed on the machine
-you are using to deploy. As the secret are hidden using `eyaml`, you will also
-need it on your machine.
+access with your SSH key with the root rights.
 
 ## Installation
 
-Ansible and modules installation are described in the [INSTALL.md](./INSTALL.md)
-file.
+The installation is self-managed by the `nocsible` script, which will download
+the [Ansible suitcase](https://github.com/epfl-si/ansible.suitcase/) if needed.
+This will ensure that every member of the team will be using the same versions
+of the tools such as python, pip module, ansible modules, ruby, etc.
 
 ## Keybase
 
-The secrets in this project are handled with eyaml, and the decryption key is on
-keybase. You'll need the keybase drive to be mounted with access to the
-`/keybase/team/epfl_ressenti/private_key.pkcs7.pem` relevant private key.
+The secrets in this project are stored on a static yaml file on the team's 
+keybase (`keybase/team/epfl_idevfsd/idevfsd-NOC/ansible_noc_secrets.yml`). An 
+Ansible file lookup will get them, meaning that access to this file is mandatory 
+and that it has to be mounted.
 
 # Deployment
 
@@ -57,59 +45,36 @@ Groups](https://wiki.openstack.org/wiki/Neutron/SecurityGroups).
 # Project's bricks
 
 Each bricks of the project is meant to be self-contained. It should be possible
-to deploy each brick individually, either using ansible tags or docker-compose
-commands — we're still not there when these lines are typed. The glue between
-the bricks is the **noc** folder which contains the project's
-[docker-compose.yml](./ansible/noc/templates/docker-compose.yml) file and the
-deployed [Makefile](./ansible/noc/templates/Makefile).
+to deploy each brick individually, using Ansible tags.
 
 # Usage
 
-0. On his machine verify Keybase:
+## Install
 ```
-ls /keybase/team
-```
-
-1. On his machine, Deploy the jam to the server :  
-```
-cd external-noc
-git pull
-cd ansible/
-```
-For the ***prod*** machine:
-```
-make prod arg='ansible arguments'
-```
-For the ***test*** machine:
-```
-make dev arg='ansible arguments'
-```
-Example:
-```
-make dev arg='-t pushgateway_copy'
+$ git clone git@github.com:epfl-si/external-noc.git
+$ cd external-noc
+$ ./ansible/nocsible --check
 ```
 
-
-2. On the server, go to the **/srv/noc** directory :
+## Test
 ```
-cd /srv/noc
-```
-
-3. Use the *Makefile* to spawn the containers:  
-```
-make up
+./ansible/nocsible
 ```
 
+## Prod
+```
+./ansible/nocsible --prod
+```
 
 # Links
-  * [Prometheus](https://prometheus.io/docs/introduction/overview/)
-    * [Grafana](https://prometheus.io/docs/visualization/grafana/)
-    * [Alertmanager](https://prometheus.io/docs/alerting/alertmanager/)
-    * [Blackbox exporter](https://github.com/prometheus/blackbox_exporter)
-    * [Pushgateway](https://prometheus.io/docs/practices/pushing/)
-    * [node_exporter](https://github.com/prometheus/node_exporter)
-  * [Grafana](https://grafana.com/)
-    * [Configuration](http://docs.grafana.org/installation/configuration/)
-    * [Docker](http://docs.grafana.org/installation/docker/)
-    * [Auth GitHub](http://docs.grafana.org/auth/github/)
-    * [Provisionning DataSource](http://docs.grafana.org/administration/provisioning/#example-datasource-config-file)
+* [Prometheus](https://prometheus.io/docs/introduction/overview/)
+  * [Grafana](https://prometheus.io/docs/visualization/grafana/)
+  * [Alertmanager](https://prometheus.io/docs/alerting/alertmanager/)
+  * [Blackbox exporter](https://github.com/prometheus/blackbox_exporter)
+  * [Pushgateway](https://prometheus.io/docs/practices/pushing/)
+  * [node_exporter](https://github.com/prometheus/node_exporter)
+* [Grafana](https://grafana.com/)
+  * [Configuration](http://docs.grafana.org/installation/configuration/)
+  * [Docker](http://docs.grafana.org/installation/docker/)
+  * [Auth GitHub](http://docs.grafana.org/auth/github/)
+  * [Provisionning DataSource](http://docs.grafana.org/administration/provisioning/#example-datasource-config-file)
