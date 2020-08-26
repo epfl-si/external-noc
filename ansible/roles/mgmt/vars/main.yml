@@ -1,0 +1,5 @@
+---
+# vars for mgmt
+mgmt_container_name: mgmt
+mgmt_image: ubuntu
+mgmt_version: latest

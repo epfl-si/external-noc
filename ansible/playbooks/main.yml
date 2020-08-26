@@ -16,6 +16,10 @@
       become_user: root
       tags: docker
 
+    - name: mgmt
+      role: ../roles/mgmt
+      tags: mgmt
+
     - name: traefik
       role: ../roles/traefik
       tags: traefik
