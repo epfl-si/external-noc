@@ -7,7 +7,7 @@ backend_network_name: "traefik"
 frontend:
   domain: idev-fsd.ml
   protocol: https
-  htpass: "{%for cred in _noc_secrets.frontend.credentials%}{{ cred.user }}:{{ cred.pass | password_hash('bcrypt') }}, {%endfor%}"
+  htpass: "{% set comma = joiner(', ') %}{% for cred in _noc_secrets.frontend.credentials%}{{ comma() }}{{ cred.user }}:{{ cred.pass | password_hash('bcrypt') }}{% endfor %}"
 
 # vars for nickjj.docker
 docker__edition: "ce"
