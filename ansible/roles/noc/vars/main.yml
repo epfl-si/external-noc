@@ -1,4 +1,0 @@
----
-noc:
-  install_path: "{{ install_path }}"
-

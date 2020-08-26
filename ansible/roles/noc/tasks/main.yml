@@ -11,10 +11,12 @@
   check_mode: no
   ignore_errors: yes
   changed_when: no
+
 - name: Greet the world if "keys/private_key.pkcs7.pem" is present
   tags: prefly
   debug: msg="/keybase/team/epfl_idevfsd/idevfsd-NOC/keys/private_key.pkcs7.pem is present"
   when: checkprivatekey.rc == 0
+
 - name: Alarm the world if "/keybase/team/epfl_idevfsd/idevfsd-NOC/keys/private_key.pkcs7.pem" is NOT present
   tags: prefly
   fail: msg="Dude, be sure to have /keybase/team/epfl_idevfsd/idevfsd-NOC/keys/private_key.pkcs7.pem present, i.e. launch keybase"
@@ -38,28 +40,3 @@
   args:
     executable: /bin/bash
     chdir: "{{ noc_install_path }}/"
-
-# -------------------------------------------------------------------- Templates
-- name: Copy docker-compose file
-  tags:
-    - docker-compose
-  template:
-    # src: "docker-compose.yml"
-    src: "docker-compose.yml"
-    dest: "{{ noc.install_path }}/docker-compose.yml"
-  register: compose_file
-
-- name: Copy Makefile
-  template:
-    src: "Makefile"
-    dest: "{{ noc.install_path }}/Makefile"
-  register: compose_file
-
-# ----------------------------------------------------------------- static files
-- name: Copy NOC static files
-  copy:
-    src: "{{ role_path }}/files/"
-    dest: "{{ noc.install_path }}/"
-  tags:
-    - noc_copy
-    - statics_files_copy
