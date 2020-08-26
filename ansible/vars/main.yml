@@ -1,6 +1,6 @@
 _noc_secrets: "{{ lookup('file', '/keybase/team/epfl_idevfsd/idevfsd-NOC/ansible_noc_secrets.yml') | from_yaml }}"
 install_path: '/srv/noc'
-data_path: "/volumes/data1/noc/data/"
+data_path: "/volumes/data1/noc/data"
 
 backend_network_name: "traefik"
 

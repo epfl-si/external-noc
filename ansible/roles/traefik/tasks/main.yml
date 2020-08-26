@@ -1,10 +1,28 @@
 ---
 # tasks file for idevfsd-traefik
+- name: Create writable directories to be used as mount points
+  file:
+    path: "{{ traefik_state_path }}"
+    state: directory
+    mode: "644"
+
+- name: Create writable directories to be used as mount points
+  file:
+    path: "{{ data_path }}/traefik/"
+    state: directory
+    mode: "644"
 
 - name: Copy traefik config
   copy:
     src: "{{ role_path }}/files/traefik.toml"
     dest: "{{ traefik_state_path }}/traefik.toml"
+  tags:
+    - traefik
+
+- name: Touch traefik acme.json
+  file:
+    path: "{{ data_path }}/traefik/acme.json"
+    state: touch
   tags:
     - traefik
 
@@ -23,7 +41,7 @@
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
       - "{{ traefik_state_path }}/traefik.toml:/traefik.toml"
-      - "{{ traefik_state_path }}/acme.json:/acme.json"
+      - "{{ data_path }}/traefik/acme.json:/acme.json"
     log_driver: json-file
     log_options:
       max-size: 50m

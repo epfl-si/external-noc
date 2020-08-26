@@ -20,11 +20,12 @@ domain = "nip.io"
 watch = true
 exposedByDefault = false
 
+# https://docs.traefik.io/https/acme/
 [acme]
-email = "giovanni.cangiani@epfl.ch"
+email = "idev-fsd@groupes.epfl.ch"
 storage = "acme.json"
 entryPoint = "https"
 onHostRule = true
 
-[acme.httpChallenge]
-entryPoint = "http"
+  [acme.httpChallenge]
+  entryPoint = "http"
