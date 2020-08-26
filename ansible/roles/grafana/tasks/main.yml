@@ -57,5 +57,4 @@
       traefik.docker.network: "{{ backend_network_name }}"
       traefik.enable: "true"
       traefik.port: "{{ grafana_port | string }}"
-      #traefik.frontend.auth.basic.users: "{{ frontend.htpass }}"
       traefik.frontend.redirect.entryPoint: "https"

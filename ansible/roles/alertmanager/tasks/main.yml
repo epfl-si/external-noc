@@ -1,12 +1,27 @@
 ---
-# tasks file for idevfsd-noc using docker-compose
-
-# ------------------------------------------------ Check that keybase is mounted
 - name: Copy alertmanager static files
   copy:
     src: "{{ role_path }}/files/"
-    dest: "{{ noc.install_path }}/alertmanager/"
-  tags:
-    - alertmanager_copy
-    - statics_files_copy
-    
+    dest: "{{ install_path }}/alertmanager/"
+
+- name: Run alertmanager
+  docker_container:
+    name: "{{ alertmanager_container_name }}"
+    image: "{{ alertmanager_image }}:{{ alertmanager_version }}"
+    detach: yes
+    command: --config.file=/config/simple.yml
+    restart_policy: unless-stopped
+    network_mode: "{{ backend_network_name }}"
+    volumes:
+      - "{{ alertmanager_state_path }}/config:/config"
+    log_driver: json-file
+    log_options:
+      max-size: 50m
+      max-file: "3"
+    labels:
+      alertmanager.domain: "{{ frontend.domain }}"
+      alertmanager.frontend.rule: "Host:alertmanager{{ dnspostfix }}.{{ frontend.domain }}"
+      alertmanager.docker.network: "{{ backend_network_name }}"
+      alertmanager.enable: "true"
+      traefik.frontend.auth.basic.users: "{{ frontend.htpass }}"
+      alertmanager.port: "{{ alertmanager_port | string }}"

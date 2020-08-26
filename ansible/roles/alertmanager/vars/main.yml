@@ -1,6 +1,7 @@
 ---
-noc:
-  install_path: "{{ install_path }}"
-
-alertmanager:
-  port: 9093
+# vars file for idevfsd-traefik
+alertmanager_state_path: "{{ install_path }}/alertmanager"
+alertmanager_container_name: alertmanager
+alertmanager_image: quay.io/prometheus/alertmanager
+alertmanager_version: "latest"
+alertmanager_port: 9093
