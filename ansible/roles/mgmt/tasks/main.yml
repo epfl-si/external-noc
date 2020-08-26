@@ -1,5 +1,4 @@
 ---
-
 - name: Create writable directories to be used as mount points
   file:
     path: "{{ install_path }}/mgmt"
@@ -17,7 +16,7 @@
     name: "{{ mgmt_container_name }}"
     source: build
     build:
-      pull: no     # Don't re-pull
+      pull: no
       path: "{{ install_path }}/mgmt/"
 
 - name: Run mgmt container
@@ -33,3 +32,6 @@
     log_options:
       max-size: 50m
       max-file: "3"
+    volumes:
+      - "{{ install_path }}:/srv/noc"
+      - "{{ data_path }}:/srv/data"

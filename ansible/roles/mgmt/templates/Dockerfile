@@ -1,9 +1,13 @@
 FROM "{{ mgmt_image }}:{{ mgmt_version }}"
 LABEL maintainer="idev-fsd@groupes.epfl.ch"
 
+ENV DEBIAN_FRONTEND=noninteractive 
+ENV TZ=Europe/Zurich
+
 RUN apt-get -qy update && apt-get -qy install --no-install-recommends \
     bash-completion \
     curl \
+    git \
     htop \
     iputils-arping \
     iputils-ping \
@@ -15,8 +19,11 @@ RUN apt-get -qy update && apt-get -qy install --no-install-recommends \
     telnet \
     tmux \
     tree \
+    vim \
     wget \
-    zsh \
   && \
     apt-get -qy autoremove && \
     apt-get clean
+
+ENV TERM xterm-256color
+
