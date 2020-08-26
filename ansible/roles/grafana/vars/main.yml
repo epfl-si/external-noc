@@ -1,6 +1,6 @@
 ---
 # vars for grafana
-grafana_port: 9090
+grafana_port: 3000
 grafana_container_name: "grafana"
 grafana_image: "grafana/grafana"
 grafana_version: "latest"
