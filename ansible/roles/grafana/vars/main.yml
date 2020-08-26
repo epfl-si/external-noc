@@ -1,9 +1,11 @@
 ---
-noc:
-  install_path: "{{ install_path }}"
+# vars for grafana
+grafana_port: 9090
+grafana_container_name: "grafana"
+grafana_image: "grafana/grafana"
+grafana_version: "latest"
 
 grafana:
-  port: 3000
   security:
     admin_password: '{{ _noc_secrets.grafana.security.admin_password }}'
   github:

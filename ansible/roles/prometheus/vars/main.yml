@@ -1,6 +1,5 @@
 ---
-# This file contains eyaml encrypted records. Edit with `eyaml edit`
-
+# vars for prometheus
 prometheus_port: 9090
 prometheus_container_name: "prometheus"
 prometheus_image: "prom/prometheus"

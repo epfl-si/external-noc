@@ -1,18 +1,15 @@
 ---
-# tasks file for idevfsd-noc using docker-compose
-
 # ------------------------------------------------- Directories and static files
-
 - name: Create various destination directories for noc files
   file:
-    path: "{{ noc.install_path }}/data/grafana/{{ item }}"
+    path: "{{ data_path }}/grafana/{{ item }}"
     state: directory
   with_items:
     - conf
 
 - name: Create writable directories to be used as mount points
   file:
-    path: "{{ noc.install_path }}/data/grafana/{{ item }}"
+    path: "{{ data_path }}/grafana/{{ item }}"
     state: directory
     mode: "u=rwx,g=rwx,o=rwx"
   with_items:
@@ -23,24 +20,42 @@
 - name: Copy grafana static files
   copy:
     src: "provisioning/"
-    dest: "{{ noc.install_path }}/data/grafana/provisioning/"
-  tags: 
-    - dashboards
-    - grafana_copy
-    - statics_files_copy
+    dest: "{{ data_path }}/grafana/provisioning/"
 
 # -------------------------------------------------------------------- Templates
-
 - name: Copy grafana template config
   template:
     src: "grafana/{{ item }}"
-    dest: "{{ noc.install_path }}/data/grafana/{{ item }}"
+    dest: "{{ data_path }}/grafana/{{ item }}"
   with_items:
     - conf/grafana.ini
     - provisioning/datasources/idevfsd-prometheus.yml
     - provisioning/notifiers/telegram.yml
-    - README.md
   register: grafana_config_files
-  tags:
-    - grafana_copy
-    - statics_files_copy
+
+# -------------------------------------------------------------------- Container
+- name: Run grafana
+  docker_container:
+    name: "{{ grafana_container_name }}"
+    image: "{{ grafana_image }}:{{ grafana_version }}"
+    detach: yes
+    restart_policy: unless-stopped
+    network_mode: "{{ backend_network_name }}"
+    volumes:
+      - "{{ data_path }}/grafana/data:/var/lib/grafana"
+      - "{{ data_path }}/grafana/conf/grafana.ini:/etc/grafana/grafana.ini"
+      - "{{ data_path }}/grafana/provisioning:/etc/grafana/provisioning"
+    env:
+      GF_INSTALL_PLUGINS: "{{ grafana.plugins | join(',') }}"
+    log_driver: json-file
+    log_options:
+      max-size: 50m
+      max-file: "3"
+    labels:
+      traefik.domain: "{{ frontend.domain }}"
+      traefik.frontend.rule: "Host:grafana{{ dnspostfix }}.{{ frontend.domain }}"
+      traefik.docker.network: "{{ backend_network_name }}"
+      traefik.enable: "true"
+      traefik.port: "{{ grafana_port | string }}"
+      #traefik.frontend.auth.basic.users: "{{ frontend.htpass }}"
+      traefik.frontend.redirect.entryPoint: "https"
