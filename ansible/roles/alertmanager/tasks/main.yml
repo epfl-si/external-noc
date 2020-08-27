@@ -19,9 +19,11 @@
       max-size: 50m
       max-file: "3"
     labels:
-      alertmanager.domain: "{{ frontend.domain }}"
-      alertmanager.frontend.rule: "Host:alertmanager{{ dnspostfix }}.{{ frontend.domain }}"
-      alertmanager.docker.network: "{{ backend_network_name }}"
-      alertmanager.enable: "true"
-      traefik.frontend.auth.basic.users: "{{ frontend.htpass }}"
-      alertmanager.port: "{{ alertmanager_port | string }}"
+      traefik.enable: "true"
+      traefik.http.routers.alertmanager.rule: "Host(`am{{ dnspostfix }}.{{ frontend.domain }}`)"
+      traefik.http.routers.alertmanager.entrypoints: "websecure"
+      traefik.http.routers.alertmanager.tls.certresolver: "letsencrypt"
+      traefik.docker.network: "{{ backend_network_name }}"
+      traefik.http.routers.alertmanager.middlewares: "alertmanager_auth"
+      traefik.http.middlewares.alertmanager_auth.basicauth.users: "{{ frontend.htpass }}"
+      traefik.http.middlewares.alertmanager_auth.basicauth.removeheader: "true"
