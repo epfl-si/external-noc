@@ -3,6 +3,12 @@ global:
   sendAnonymousUsage: false
 
 providers:
+  # Point to the so-called “dynamic” configuration, managed by
+  # Ansible
+  file:
+    directory: /etc/traefik/dynamic
+    watch: true
+  # Additionally, read Docker container labels as a dynamic configuration source.
   docker: {}
 
 {% if traefik_debug %}

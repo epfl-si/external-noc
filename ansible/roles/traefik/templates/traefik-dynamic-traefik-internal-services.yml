@@ -1,0 +1,16 @@
+{% set letsencrypt_boilerplate = '
+      tls:
+        certresolver: letsencrypt
+'%}
+
+http:
+  routers:
+    traefik:
+      rule: "Host(`traefik{{ dnspostfix }}.{{ frontend.domain }}`)"
+      service: "api@internal"
+      {{ letsencrypt_boilerplate }}
+
+    metrics:
+      rule: "Host(`traefik{{ dnspostfix }}.{{ frontend.domain }}`) && PathPrefix(`/metrics`)"
+      service: "prometheus@internal"
+      {{ letsencrypt_boilerplate }}

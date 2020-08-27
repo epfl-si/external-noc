@@ -1,43 +1,37 @@
 ---
 # tasks file for idevfsd-traefik
-- name: Create writable directories to be used as mount points
+
+- name: Create directories
   file:
-    path: "{{ traefik_state_path }}"
+    path: "{{ item }}"
     state: directory
     mode: "755"
   tags:
     - traefik
+  with_items:
+    - "{{ traefik_state_path }}/dynamic"
+    - "{{ data_path }}/traefik/acme/"
 
-- name: Create writable directories to be used as mount points
-  file:
-    path: "{{ data_path }}/traefik/acme/"
-    state: directory
-    mode: "755"
-  tags:
-    - traefik
-
-- name: Copy traefik config
+- name: Copy traefik static config
   template:
     src: "traefik.yml"
     dest: "{{ traefik_state_path }}/traefik.yml"
   tags:
     - traefik
+    - traefik.config
+    - traefik.config.static
   register: _traefik_config
-# 
-# - name: Copy traefik config
-#   copy:
-#     src: "{{ role_path }}/files/traefik.toml"
-#     dest: "{{ traefik_state_path }}/traefik.toml"
-#   tags:
-#     - traefik
 
-- name: Touch traefik acme.json
-  file:
-    path: "{{ data_path }}/traefik/acme/acme.json"
-    state: touch
-    mode: "600"
+- name: Copy traefik dynamic config
+  template:
+    src: "{{ item }}"
+    dest: "{{ traefik_state_path }}/dynamic/{{ item }}"
   tags:
     - traefik
+    - traefik.config
+    - traefik.config.dynamic
+  with_items:
+    - traefik-dynamic-traefik-internal-services.yml
 
 - name: Run traefik
   docker_container:
@@ -49,34 +43,17 @@
     ports:
       - "80:80" # The HTTP port
       - "443:443"
-      # - "{{ traefik_web_ui_port }}:8080" # The Web UI (enabled by --api)
+      - "{{ traefik_web_ui_port }}:8080" # The Web UI
     network_mode: "{{ backend_network_name }}"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
-      # - "{{ traefik_state_path }}/traefik.toml:/traefik.toml"
       - "{{ traefik_state_path }}/traefik.yml:/traefik.yml"
+      - "{{ traefik_state_path }}/dynamic:/etc/traefik/dynamic"
       - "{{ data_path }}/traefik/acme:/acme"
     log_driver: json-file
     log_options:
       max-size: 50m
       max-file: "3"
-    labels:
-      traefik.enable: "true"
-      traefik.http.routers.traefik.rule: "Host(`traefik{{ dnspostfix }}.{{ frontend.domain }}`)"
-      traefik.http.routers.traefik.service: "api@internal"
-      traefik.http.routers.traefik.tls: "true"
-      traefik.http.routers.traefik.tls.certresolver: letsencrypt
-      traefik.http.routers.metrics.rule: "Host(`traefik{{ dnspostfix }}.{{ frontend.domain }}`) && PathPrefix(`/metrics`)"
-      traefik.http.routers.metrics.service: "prometheus@internal"
-      traefik.http.routers.metrics.tls: "true"
-      # traefik.http.routers.traefik.rule: "Host(`traefik{{ dnspostfix }}.{{ frontend.domain }}`)"
-      # traefik.http.routers.traefik.entrypoints: "websecure"
-      # traefik.http.routers.traefik.tls: "true"
-      # traefik.http.routers.traefik.tls.certresolver: "letsencrypt"
-      # traefik.http.routers.traefik.service: "api@internal"
-      # traefik.http.routers.metrics.rule: "Host(`traefik{{ dnspostfix }}.{{ frontend.domain }}` && PathPrefix(`/metrics`))"
-      # traefik.http.routers.metrics.service: "prometheus@internal"
-      # traefik.http.routers.metrics.tls: "true "
   tags:
     - traefik
 
