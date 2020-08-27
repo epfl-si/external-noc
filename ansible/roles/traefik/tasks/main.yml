@@ -22,6 +22,7 @@
     dest: "{{ traefik_state_path }}/traefik.yml"
   tags:
     - traefik
+  register: _traefik_config
 # 
 # - name: Copy traefik config
 #   copy:
@@ -43,7 +44,8 @@
     name: "{{ traefik_container_name }}"
     image: "{{ traefik_image }}:{{ traefik_version }}"
     detach: yes
-    command: --api.insecure=true --providers.docker=true # Enables the web UI and tells Traefik to listen to docker
+    command: --api.insecure=true # Enables the web UI and tells Traefik to listen to docker
+    restart: "{{ _traefik_config is changed }}"
     restart_policy: unless-stopped
     ports:
       - "80:80" # The HTTP port
@@ -60,13 +62,13 @@
       max-size: 50m
       max-file: "3"
     labels:
+      traefik.enable: "true"
       traefik.http.routers.traefik.rule: "Host(`traefik{{ dnspostfix }}.{{ frontend.domain }}`)"
       traefik.http.routers.traefik.service: "api@internal"
       traefik.http.routers.traefik.tls: "true"
       traefik.http.routers.metrics.rule: "Host(`traefik{{ dnspostfix }}.{{ frontend.domain }}`) && PathPrefix(`/metrics`)"
       traefik.http.routers.metrics.service: "prometheus@internal"
       traefik.http.routers.metrics.tls: "true"
-      # traefik.enable: "true"
       # traefik.http.routers.traefik.rule: "Host(`traefik{{ dnspostfix }}.{{ frontend.domain }}`)"
       # traefik.http.routers.traefik.entrypoints: "websecure"
       # traefik.http.routers.traefik.tls: "true"
@@ -88,3 +90,6 @@
       traefik.http.routers.whoami.rule: "Host(`grafana-tst.idev-fsd.ml`)"
       traefik.http.routers.whoami.entrypoints: "websecure"
       traefik.http.routers.whoami.tls.certresolver: "letsencrypt"
+  tags:
+    - whoami
+
