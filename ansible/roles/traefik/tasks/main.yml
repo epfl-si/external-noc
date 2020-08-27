@@ -10,7 +10,7 @@
 
 - name: Create writable directories to be used as mount points
   file:
-    path: "{{ data_path }}/traefik/"
+    path: "{{ data_path }}/traefik/acme/"
     state: directory
     mode: "755"
   tags:
@@ -33,7 +33,7 @@
 
 - name: Touch traefik acme.json
   file:
-    path: "{{ data_path }}/traefik/acme.json"
+    path: "{{ data_path }}/traefik/acme/acme.json"
     state: touch
     mode: "600"
   tags:
@@ -55,7 +55,7 @@
       - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
       # - "{{ traefik_state_path }}/traefik.toml:/traefik.toml"
       - "{{ traefik_state_path }}/traefik.yml:/traefik.yml"
-      - "{{ data_path }}/traefik/acme.json:/acme.json"
+      - "{{ data_path }}/traefik/acme:/acme"
     log_driver: json-file
     log_options:
       max-size: 50m
@@ -65,6 +65,7 @@
       traefik.http.routers.traefik.rule: "Host(`traefik{{ dnspostfix }}.{{ frontend.domain }}`)"
       traefik.http.routers.traefik.service: "api@internal"
       traefik.http.routers.traefik.tls: "true"
+      traefik.http.routers.traefik.tls.certresolver: letsencrypt
       traefik.http.routers.metrics.rule: "Host(`traefik{{ dnspostfix }}.{{ frontend.domain }}`) && PathPrefix(`/metrics`)"
       traefik.http.routers.metrics.service: "prometheus@internal"
       traefik.http.routers.metrics.tls: "true"

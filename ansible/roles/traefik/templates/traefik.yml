@@ -22,7 +22,7 @@ certificatesResolvers:
   letsencrypt:
     acme:
       caServer: https://acme-staging-v02.api.letsencrypt.org/directory
-      storage: {{ data_path }}/traefik/acme.json
+      storage: /acme/acme.json
       email: idev-fsd@groupes.epfl.ch
       tlsChallenge: true
 
