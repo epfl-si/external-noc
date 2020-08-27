@@ -15,5 +15,6 @@ docker__channel: ["stable"]
 docker__state: "present"
 docker__users: ["{{ ansible_user }}"]
 
-# Comment this out once the outage is resolved (20200827)
-traefik_letsencrypt_staging: true
+# Comment this out to temporarily go back to the staging
+# (blacklist-immune) instance of Let's Encrypt:
+# traefik_letsencrypt_staging: true
