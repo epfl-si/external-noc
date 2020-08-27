@@ -63,9 +63,10 @@
     image: "containous/whoami"
     labels:
       traefik.enable: "true"
-      traefik.http.routers.whoami.rule: "Host(`grafana-tst.idev-fsd.ml`)"
+      traefik.http.routers.whoami.rule: "Host(`whoami-tst.idev-fsd.ml`)"
       traefik.http.routers.whoami.entrypoints: "websecure"
       traefik.http.routers.whoami.tls.certresolver: "letsencrypt"
     network_mode: "{{ backend_network_name }}"
+  when: "{{ traefik_debug }}"
   tags:
     - whoami
