@@ -1,0 +1,44 @@
+global:
+  checkNewVersion: false
+  sendAnonymousUsage: false
+
+log:
+  level: DEBUG
+  # filePath: {{ traefik_state_path }}/traefik.log
+  # format: json
+
+api:
+  insecure: true
+  dashboard: true
+
+metrics:
+  prometheus: {}
+
+# https://docs.traefik.io/https/acme/
+certificatesResolvers:
+  letsencrypt:
+    acme:
+      caServer: https://acme-staging-v02.api.letsencrypt.org/directory
+      storage: {{ data_path }}/traefik/acme.json
+      email: idev-fsd@groupes.epfl.ch
+      tlsChallenge: true
+
+entryPoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entrypoint:
+          to: websecure
+          scheme: https
+          permanent: true
+
+  websecure:
+    address: ":443"
+    http:
+      tls:
+        certResolver: letsencrypt
+        domains:
+          - {{ frontend.domain }}
+
+

@@ -5,19 +5,30 @@
     path: "{{ traefik_state_path }}"
     state: directory
     mode: "755"
+  tags:
+    - traefik
 
 - name: Create writable directories to be used as mount points
   file:
     path: "{{ data_path }}/traefik/"
     state: directory
     mode: "755"
-
-- name: Copy traefik config
-  copy:
-    src: "{{ role_path }}/files/traefik.toml"
-    dest: "{{ traefik_state_path }}/traefik.toml"
   tags:
     - traefik
+
+- name: Copy traefik config
+  template:
+    src: "traefik.yml"
+    dest: "{{ traefik_state_path }}/traefik.yml"
+  tags:
+    - traefik
+# 
+# - name: Copy traefik config
+#   copy:
+#     src: "{{ role_path }}/files/traefik.toml"
+#     dest: "{{ traefik_state_path }}/traefik.toml"
+#   tags:
+#     - traefik
 
 - name: Touch traefik acme.json
   file:
@@ -32,7 +43,7 @@
     name: "{{ traefik_container_name }}"
     image: "{{ traefik_image }}:{{ traefik_version }}"
     detach: yes
-    command: --api --docker # Enables the web UI and tells Traefik to listen to docker
+    command: --api.insecure=true --providers.docker=true # Enables the web UI and tells Traefik to listen to docker
     restart_policy: unless-stopped
     ports:
       - "80:80" # The HTTP port
@@ -41,11 +52,39 @@
     network_mode: "{{ backend_network_name }}"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
-      - "{{ traefik_state_path }}/traefik.toml:/traefik.toml"
+      # - "{{ traefik_state_path }}/traefik.toml:/traefik.toml"
+      - "{{ traefik_state_path }}/traefik.yml:/traefik.yml"
       - "{{ data_path }}/traefik/acme.json:/acme.json"
     log_driver: json-file
     log_options:
       max-size: 50m
       max-file: "3"
+    labels:
+      traefik.http.routers.traefik.rule: "Host(`traefik{{ dnspostfix }}.{{ frontend.domain }}`)"
+      traefik.http.routers.traefik.service: "api@internal"
+      traefik.http.routers.traefik.tls: "true"
+      traefik.http.routers.metrics.rule: "Host(`traefik{{ dnspostfix }}.{{ frontend.domain }}`) && PathPrefix(`/metrics`)"
+      traefik.http.routers.metrics.service: "prometheus@internal"
+      traefik.http.routers.metrics.tls: "true"
+      # traefik.enable: "true"
+      # traefik.http.routers.traefik.rule: "Host(`traefik{{ dnspostfix }}.{{ frontend.domain }}`)"
+      # traefik.http.routers.traefik.entrypoints: "websecure"
+      # traefik.http.routers.traefik.tls: "true"
+      # traefik.http.routers.traefik.tls.certresolver: "letsencrypt"
+      # traefik.http.routers.traefik.service: "api@internal"
+      # traefik.http.routers.metrics.rule: "Host(`traefik{{ dnspostfix }}.{{ frontend.domain }}` && PathPrefix(`/metrics`))"
+      # traefik.http.routers.metrics.service: "prometheus@internal"
+      # traefik.http.routers.metrics.tls: "true "
   tags:
     - traefik
+
+# https://docs.traefik.io/user-guides/docker-compose/acme-tls/
+- name: Run whoami
+  docker_container:
+    name: "whoami"
+    image: "containous/whoami"
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.whoami.rule: "Host(`grafana-tst.idev-fsd.ml`)"
+      traefik.http.routers.whoami.entrypoints: "websecure"
+      traefik.http.routers.whoami.tls.certresolver: "letsencrypt"
