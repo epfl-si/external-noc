@@ -52,10 +52,9 @@
       max-size: 50m
       max-file: "3"
     labels:
-      traefik.domain: "{{ frontend.domain }}"
-      traefik.frontend.rule: "Host:grafana{{ dnspostfix }}.{{ frontend.domain }}"
-      traefik.http.routers.router0.rule : "Host(`grafana{{ dnspostfix }}.{{ frontend.domain }}`)"
-      traefik.docker.network: "{{ backend_network_name }}"
       traefik.enable: "true"
-      traefik.port: "{{ grafana_port | string }}"
-      traefik.frontend.redirect.entryPoint: "https"
+      traefik.http.routers.grafana.rule: "Host(`grafana{{ dnspostfix }}.{{ frontend.domain }}`)"
+      traefik.http.routers.grafana.entrypoints: "websecure"
+      traefik.http.routers.grafana.tls.certresolver: "letsencrypt"
+      traefik.docker.network: "{{ backend_network_name }}"
+      #traefik.http.services.grafana.loadbalancer.server.port: "{{ grafana_port | string }}"
