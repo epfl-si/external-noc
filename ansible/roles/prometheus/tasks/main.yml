@@ -47,10 +47,11 @@
       max-size: 50m
       max-file: "3"
     labels:
-      traefik.domain: "{{ frontend.domain }}"
-      traefik.frontend.rule: "Host:prometheus{{ dnspostfix }}.{{ frontend.domain }}"
-      traefik.docker.network: "{{ backend_network_name }}"
       traefik.enable: "true"
-      traefik.port: "{{ prometheus_port | string }}"
-      traefik.frontend.auth.basic.users: "{{ frontend.htpass }}"
-      traefik.frontend.redirect.entryPoint: "https"
+      traefik.http.routers.prometheus.rule: "Host(`prometheus{{ dnspostfix }}.{{ frontend.domain }}`)"
+      traefik.http.routers.prometheus.entrypoints: "websecure"
+      traefik.http.routers.prometheus.tls.certresolver: "letsencrypt"
+      traefik.docker.network: "{{ backend_network_name }}"
+      traefik.http.routers.prometheus.middlewares: "prometheus_auth"
+      traefik.http.middlewares.prometheus_auth.basicauth.users: "{{ frontend.htpass }}"
+      traefik.http.middlewares.prometheus_auth.basicauth.removeheader: "true"
