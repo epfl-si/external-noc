@@ -1,6 +1,6 @@
 {% set letsencrypt_boilerplate = '
       tls:
-        certresolver: letsencrypt
+        certResolver: letsencrypt
 '%}
 
 http:
