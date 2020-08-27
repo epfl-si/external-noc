@@ -27,7 +27,9 @@ metrics:
 certificatesResolvers:
   letsencrypt:
     acme:
+{% if traefik_letsencrypt_staging is defined %}
       caServer: https://acme-staging-v02.api.letsencrypt.org/directory
+{% endif %}
       storage: /acme/acme.json
       email: idev-fsd@groupes.epfl.ch
       tlsChallenge: true
