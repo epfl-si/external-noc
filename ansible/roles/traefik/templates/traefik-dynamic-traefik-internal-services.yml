@@ -1,7 +1,4 @@
-{% set letsencrypt_boilerplate = '
-      tls:
-        certResolver: letsencrypt
-'%}
+{% set letsencrypt_boilerplate = 'tls: { certResolver: letsencrypt }' %}
 
 http:
   routers:
