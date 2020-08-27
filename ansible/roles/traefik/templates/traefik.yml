@@ -18,11 +18,11 @@ log:
 {% endif %}
 
 api:
-  insecure: true
   dashboard: true
 
 metrics:
-  prometheus: {}
+  prometheus:
+    entryPoint: websecure
 
 # https://docs.traefik.io/https/acme/
 certificatesResolvers:

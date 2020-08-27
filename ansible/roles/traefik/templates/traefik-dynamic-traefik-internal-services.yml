@@ -8,9 +8,11 @@ http:
     traefik:
       rule: "Host(`traefik{{ dnspostfix }}.{{ frontend.domain }}`)"
       service: "api@internal"
+      entryPoints: ["websecure"]
       {{ letsencrypt_boilerplate }}
 
     metrics:
       rule: "Host(`traefik{{ dnspostfix }}.{{ frontend.domain }}`) && PathPrefix(`/metrics`)"
       service: "prometheus@internal"
+      entryPoints: ["websecure"]
       {{ letsencrypt_boilerplate }}
