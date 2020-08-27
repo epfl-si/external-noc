@@ -40,3 +40,7 @@
   args:
     executable: /bin/bash
     chdir: "{{ noc_install_path }}/"
+
+- name: "Create docker {{ backend_network_name }} network"
+  docker_network:
+    name: "{{ backend_network_name }}"

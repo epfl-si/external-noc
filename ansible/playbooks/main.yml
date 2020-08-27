@@ -16,6 +16,10 @@
       become_user: root
       tags: docker
 
+    - name: noc
+      role: ../roles/noc
+      tags: noc
+
     - name: mgmt
       role: ../roles/mgmt
       tags: mgmt
@@ -23,10 +27,6 @@
     - name: traefik
       role: ../roles/traefik
       tags: traefik
-
-    - name: noc
-      role: ../roles/noc
-      tags: noc
 
     - name: alertmanager
       role: ../roles/alertmanager
