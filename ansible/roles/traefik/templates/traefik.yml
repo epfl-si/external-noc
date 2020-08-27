@@ -5,10 +5,10 @@ global:
 providers:
   docker: {}
 
+{% if traefik_debug %}
 log:
   level: DEBUG
-  # filePath: {{ traefik_state_path }}/traefik.log
-  # format: json
+{% endif %}
 
 api:
   insecure: true
