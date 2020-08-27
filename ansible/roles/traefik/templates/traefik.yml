@@ -2,6 +2,9 @@ global:
   checkNewVersion: false
   sendAnonymousUsage: false
 
+providers:
+  docker: {}
+
 log:
   level: DEBUG
   # filePath: {{ traefik_state_path }}/traefik.log
