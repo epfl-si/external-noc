@@ -9,7 +9,8 @@ providers:
     directory: /etc/traefik/dynamic
     watch: true
   # Additionally, read Docker container labels as a dynamic configuration source.
-  docker: {}
+  docker:
+    exposedByDefault: false
 
 {% if traefik_debug %}
 log:
