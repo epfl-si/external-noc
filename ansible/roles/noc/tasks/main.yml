@@ -23,6 +23,12 @@
   when: checkprivatekey.rc != 0
 
 # -------------------------------------------------------------------------- Log
+- name: Create default noc directory
+  file:
+    path: "{{ install_path }}"
+    state: directory
+    mode: "755"
+
 - name: Register username@hostname for logs
   tags: prefly
   local_action: shell echo $(date '+%Y-%m-%d %H:%M:%S') $USER@$HOSTNAME
@@ -40,6 +46,23 @@
   args:
     executable: /bin/bash
     chdir: "{{ noc_install_path }}/"
+
+- name: Removed unnecessary docker-py
+  pip:
+    name:
+      - docker-py
+    state: absent
+
+- name: Install the required Python APIs
+  pip:
+    name:
+      - docker
+      - docker-compose
+      - requests
+      # For the latter, a dab of
+      # https://stackoverflow.com/a/57607284/435004 may or may not be
+      # required.
+    state: latest
 
 - name: "Create docker {{ backend_network_name }} network"
   docker_network:
