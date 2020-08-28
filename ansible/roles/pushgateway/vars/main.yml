@@ -1,0 +1,6 @@
+---
+# vars for pushgateway
+pushgateway_container_name: pushgateway
+pushgateway_image: prom/pushgateway
+pushgateway_version: latest
+pushgateway_port: 9091

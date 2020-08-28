@@ -1,0 +1,25 @@
+---
+# vars for grafana
+grafana_port: 3000
+grafana_container_name: "grafana"
+grafana_image: "grafana/grafana"
+grafana_version: "latest"
+
+grafana:
+  security:
+    admin_password: '{{ _noc_secrets.grafana.security.admin_password }}'
+  github:
+    client_id: '{{ _noc_secrets.grafana.github.client_id }}'
+    client_secret: '{{ _noc_secrets.grafana.github.client_secret }}'
+    client_id_tst: '{{ _noc_secrets.grafana.github.client_id_tst }}'
+    client_secret_tst: '{{ _noc_secrets.grafana.github.client_secret_tst }}'
+  plugins:
+    - grafana-piechart-panel
+    - grafana-clock-panel
+
+# The TELEGRAM_BOT_ADMINISTRATOR_ID is @ponsfrilus' account ID 9917772
+telegram:
+  port: 8080
+  ADMINISTRATOR_ID1: '{{ _noc_secrets.telegram.ADMINISTRATOR_ID1 }}'
+  ADMINISTRATOR_ID2: '{{ _noc_secrets.telegram.ADMINISTRATOR_ID2 }}'
+  TOKEN: '{{ _noc_secrets.telegram.TOKEN }}'

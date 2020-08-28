@@ -1,0 +1,35 @@
+---
+- name: Create config directory for blackbox exporter
+  file:
+    path: "{{ blackboxexporter_state_path }}/config"
+    state: directory
+
+- name: Copy templates for blackbox exporter
+  template:
+    src: "config/blackbox.yml"
+    dest: "{{ blackboxexporter_state_path }}/config/blackbox.yml"
+
+# -------------------------------------------------------------------- Container
+- name: Run blackbox exporter
+  docker_container:
+    name: "{{ blackboxexporter_container_name }}"
+    image: "{{ blackboxexporter_image }}:{{ blackboxexporter_version }}"
+    detach: yes
+    restart_policy: unless-stopped
+    network_mode: "{{ backend_network_name }}"
+    volumes:
+      - "{{ blackboxexporter_state_path }}/config/:/config"
+    command: --config.file=/config/blackbox.yml
+    log_driver: json-file
+    log_options:
+      max-size: 50m
+      max-file: "3"
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.bbe.rule: "Host(`bbe{{ dnspostfix }}.{{ frontend.domain }}`)"
+      traefik.http.routers.bbe.entrypoints: "websecure"
+      traefik.http.routers.bbe.tls.certresolver: "letsencrypt"
+      traefik.docker.network: "{{ backend_network_name }}"
+      traefik.http.routers.bbe.middlewares: "bbe_auth"
+      traefik.http.middlewares.bbe_auth.basicauth.users: "{{ frontend.htpass }}"
+      traefik.http.middlewares.bbe_auth.basicauth.removeheader: "true"

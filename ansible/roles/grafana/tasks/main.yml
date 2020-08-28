@@ -1,0 +1,60 @@
+---
+# ------------------------------------------------- Directories and static files
+- name: Create various destination directories for noc files
+  file:
+    path: "{{ data_path }}/grafana/{{ item }}"
+    state: directory
+  with_items:
+    - conf
+
+- name: Create writable directories to be used as mount points
+  file:
+    path: "{{ data_path }}/grafana/{{ item }}"
+    state: directory
+    mode: "u=rwx,g=rwx,o=rwx"
+  with_items:
+    - logs
+    - data
+    - data/plugins
+
+- name: Copy grafana static files
+  copy:
+    src: "provisioning/"
+    dest: "{{ data_path }}/grafana/provisioning/"
+
+# -------------------------------------------------------------------- Templates
+- name: Copy grafana template config
+  template:
+    src: "grafana/{{ item }}"
+    dest: "{{ data_path }}/grafana/{{ item }}"
+  with_items:
+    - conf/grafana.ini
+    - provisioning/datasources/idevfsd-prometheus.yml
+    - provisioning/notifiers/telegram.yml
+  register: grafana_config_files
+
+# -------------------------------------------------------------------- Container
+- name: Run grafana
+  docker_container:
+    name: "{{ grafana_container_name }}"
+    image: "{{ grafana_image }}:{{ grafana_version }}"
+    detach: yes
+    restart_policy: unless-stopped
+    network_mode: "{{ backend_network_name }}"
+    volumes:
+      - "{{ data_path }}/grafana/data:/var/lib/grafana"
+      - "{{ data_path }}/grafana/conf/grafana.ini:/etc/grafana/grafana.ini"
+      - "{{ data_path }}/grafana/provisioning:/etc/grafana/provisioning"
+    env:
+      GF_INSTALL_PLUGINS: "{{ grafana.plugins | join(',') }}"
+    log_driver: json-file
+    log_options:
+      max-size: 50m
+      max-file: "3"
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.grafana.rule: "Host(`grafana{{ dnspostfix }}.{{ frontend.domain }}`)"
+      traefik.http.routers.grafana.entrypoints: "websecure"
+      traefik.http.routers.grafana.tls.certresolver: "letsencrypt"
+      traefik.docker.network: "{{ backend_network_name }}"
+      #traefik.http.services.grafana.loadbalancer.server.port: "{{ grafana_port | string }}"

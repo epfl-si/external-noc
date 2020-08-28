@@ -1,0 +1,20 @@
+- name: Run prometheus push gateway
+  docker_container:
+    name: "{{ pushgateway_container_name }}"
+    image: "{{ pushgateway_image }}:{{ pushgateway_version }}"
+    detach: yes
+    restart_policy: unless-stopped
+    network_mode: "{{ backend_network_name }}"
+    log_driver: json-file
+    log_options:
+      max-size: 50m
+      max-file: "3"
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.pushgateway.rule: "Host(`pgw{{ dnspostfix }}.{{ frontend.domain }}`)"
+      traefik.http.routers.pushgateway.entrypoints: "websecure"
+      traefik.http.routers.pushgateway.tls.certresolver: "letsencrypt"
+      traefik.docker.network: "{{ backend_network_name }}"
+      traefik.http.routers.pushgateway.middlewares: "pushgateway_auth"
+      traefik.http.middlewares.pushgateway_auth.basicauth.users: "{{ frontend.htpass }}"
+      traefik.http.middlewares.pushgateway_auth.basicauth.removeheader: "true"

@@ -1,0 +1,69 @@
+# tasks file for idevfsd-noc using docker-compose
+---
+- include_vars: "{{ role_path }}/../grafana/vars/main.yml"
+  tags: always
+
+# ------------------------------------------------ Check that keybase is mounted
+- name: Check whether "keys/private_key.pkcs7.pem" is present
+  tags: prefly
+  local_action: command grep -sq 'END RSA PRIVATE KEY' "/keybase/team/epfl_idevfsd/idevfsd-NOC/keys/private_key.pkcs7.pem"
+  register: checkprivatekey
+  check_mode: no
+  ignore_errors: yes
+  changed_when: no
+
+- name: Greet the world if "keys/private_key.pkcs7.pem" is present
+  tags: prefly
+  debug: msg="/keybase/team/epfl_idevfsd/idevfsd-NOC/keys/private_key.pkcs7.pem is present"
+  when: checkprivatekey.rc == 0
+
+- name: Alarm the world if "/keybase/team/epfl_idevfsd/idevfsd-NOC/keys/private_key.pkcs7.pem" is NOT present
+  tags: prefly
+  fail: msg="Dude, be sure to have /keybase/team/epfl_idevfsd/idevfsd-NOC/keys/private_key.pkcs7.pem present, i.e. launch keybase"
+  when: checkprivatekey.rc != 0
+
+# -------------------------------------------------------------------------- Log
+- name: Create default noc directory
+  file:
+    path: "{{ install_path }}"
+    state: directory
+    mode: "755"
+
+- name: Register username@hostname for logs
+  tags: prefly
+  local_action: shell echo $(date '+%Y-%m-%d %H:%M:%S') $USER@$HOSTNAME
+  register: loguserhost
+  args:
+    executable: /bin/bash
+
+- name: Show username@hostname that will be logged
+  debug:
+    var: loguserhost.stdout
+
+- name: Log username@hostname on log file
+  when: loguserhost.stdout is defined
+  shell: echo {{ loguserhost.stdout }} >> ansible_log.txt
+  args:
+    executable: /bin/bash
+    chdir: "{{ noc_install_path }}/"
+
+- name: Removed unnecessary docker-py
+  pip:
+    name:
+      - docker-py
+    state: absent
+
+- name: Install the required Python APIs
+  pip:
+    name:
+      - docker
+      - docker-compose
+      - requests
+      # For the latter, a dab of
+      # https://stackoverflow.com/a/57607284/435004 may or may not be
+      # required.
+    state: latest
+
+- name: "Create docker {{ backend_network_name }} network"
+  docker_network:
+    name: "{{ backend_network_name }}"

@@ -1,0 +1,29 @@
+---
+- name: Copy alertmanager static files
+  copy:
+    src: "{{ role_path }}/files/"
+    dest: "{{ install_path }}/alertmanager/"
+
+- name: Run alertmanager
+  docker_container:
+    name: "{{ alertmanager_container_name }}"
+    image: "{{ alertmanager_image }}:{{ alertmanager_version }}"
+    detach: yes
+    command: --config.file=/config/simple.yml
+    restart_policy: unless-stopped
+    network_mode: "{{ backend_network_name }}"
+    volumes:
+      - "{{ alertmanager_state_path }}/config:/config"
+    log_driver: json-file
+    log_options:
+      max-size: 50m
+      max-file: "3"
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.alertmanager.rule: "Host(`am{{ dnspostfix }}.{{ frontend.domain }}`)"
+      traefik.http.routers.alertmanager.entrypoints: "websecure"
+      traefik.http.routers.alertmanager.tls.certresolver: "letsencrypt"
+      traefik.docker.network: "{{ backend_network_name }}"
+      traefik.http.routers.alertmanager.middlewares: "alertmanager_auth"
+      traefik.http.middlewares.alertmanager_auth.basicauth.users: "{{ frontend.htpass }}"
+      traefik.http.middlewares.alertmanager_auth.basicauth.removeheader: "true"

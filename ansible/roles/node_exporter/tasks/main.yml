@@ -1,0 +1,23 @@
+# https://github.com/prometheus/node_exporter#using-docker
+- name: Run node_exporter
+  docker_container:
+    name: "{{ nodeexporter_container_name }}"
+    image: "{{ nodeexporter_image }}:{{ nodeexporter_version }}"
+    detach: yes
+    restart_policy: unless-stopped
+    pid_mode: host
+    command:
+      - '--path.rootfs=/host'
+    network_mode: "{{ backend_network_name }}"
+    volumes:
+      - /:/host:ro,rslave
+    log_driver: json-file
+    log_options:
+      max-size: 50m
+      max-file: "3"
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.nodeexporter.rule: "Host(`nodeexporter{{ dnspostfix }}.{{ frontend.domain }}`)"
+      traefik.http.routers.nodeexporter.entrypoints: "websecure"
+      traefik.http.routers.nodeexporter.tls.certresolver: "letsencrypt"
+      traefik.docker.network: "{{ backend_network_name }}"

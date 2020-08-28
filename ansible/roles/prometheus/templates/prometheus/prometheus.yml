@@ -1,0 +1,141 @@
+# https://github.com/zuzu59/docker-prometheus-grafana/blob/master/prom/prometheus.conf
+# Global config
+global:
+  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  # scrape_timeout is set to the global default (10s).
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+  - scheme: http
+    static_configs:
+    - targets:
+      - "alertmanager:9093"
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+  - "rules/*.yml"
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'prometheus'
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+    # The targets have to match the docker-compose service name/port !
+    static_configs:
+    - targets: ['prometheus:9090', 'pushgateway:9091']
+
+  - job_name: 'nodeexporter'
+    static_configs:
+    - targets: ['nodeexporter:9100']
+
+  # gitlab.epfl.ch
+  - job_name: 'gitlab@epfl'
+    metrics_path: /federate
+    honor_labels: true
+    params:
+      'match[]':
+#        - '{__name__=~"git.*"}'
+        - '{service="gitlab"}'
+    scheme: 'https'
+    static_configs:
+    - targets: ['gitlab.epfl.ch']
+    basic_auth:
+      username: "{{ auth.gitlab.username }}"
+      password: "{{ auth.gitlab.password }}"
+
+  # gitlab.epfl.ch
+  - job_name: 'gitlab_traefik'
+    metrics_path: /metrics
+    honor_labels: true
+    scheme: 'https'
+    static_configs:
+    - targets: ['gitlab.epfl.ch']
+
+  # Prometheus Blackbox exporter scraper
+{% for resconf in sources.blackbox %}
+  - job_name: 'blackbox-{{ resconf.origin }}'
+    metrics_path: /probe
+    params:
+      module: [http_get]  # Look for a HTTP 200 response.
+    static_configs:
+{%   for url in urls.c2c + urls.veritas %}
+      - targets:
+        - {{ url.url }}
+        labels:
+          c2c: 'yes'
+          slug: '{{ url.slug }}'
+{%   endfor %}
+{%   for url in urls.fsd %}
+      - targets:
+        - {{ url.url }}
+        labels:
+          c2c: 'no'
+          slug: '{{ url.slug }}'
+{%   endfor %}
+{%   if resconf.auth %}
+    basic_auth:
+      username: "{{ resconf.auth.username }}"
+      password: "{{ resconf.auth.password }}"
+{%   endif %}
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: {{ [__param_target] }}
+        target_label: instance
+      - target_label: origin
+        replacement: {{ resconf.origin }}
+      - target_label: probe
+        replacement: blackbox
+      - target_label: __address__
+        replacement: {{ resconf.server }}
+{% endfor %}
+{% for resconf in sources.ressenti %}
+  #-----------------------------------------------------------------------------
+  - job_name: 'ressenti_{{resconf.module}}_{{resconf.origin}}'
+    metrics_path: /ressentiprobe
+    params:
+      module: [ressenti_{{resconf.module}}]
+    static_configs:
+{%   for url in urls.c2c + urls.veritas %}
+{%     if not '@' in url %}
+      - targets:
+          - {{ url.url }}
+        labels:
+          c2c: 'yes'
+          slug: '{{ url.slug }}'
+{%     endif %}
+{%   endfor %}
+{%   for url in urls.fsd %}
+{%     if not '@' in url %}
+      - targets:
+        - {{ url.url }}
+        labels:
+          c2c: 'no'
+          slug: '{{ url.slug }}'
+{%     endif %}
+{%   endfor %}
+{%   if resconf.auth %}
+    basic_auth:
+      username: "{{ resconf.auth.username }}"
+      password: "{{ resconf.auth.password }}"
+{%   endif %}
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: origin
+        replacement: {{ resconf.origin }}
+      - target_label: probe
+        replacement: ressenti_{{ resconf.module }}
+      - target_label: __address__
+        replacement: {{ resconf.server }}
+{% endfor %}

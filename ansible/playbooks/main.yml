@@ -1,0 +1,65 @@
+- name: Check if environment is set
+  hosts: all
+  tasks:
+    -
+      debug:
+        msg: "Starting ansible with {{ runenv }} environment."
+
+- name: External NOC
+  hosts: noc
+  gather_facts: no   # Not yet
+  # Variables common to all roles
+  roles:
+    - name: docker
+      role: nickjj.docker
+      become: yes
+      become_user: root
+      tags: docker
+
+    - name: noc
+      role: ../roles/noc
+      tags: noc
+
+    - name: traefik
+      role: ../roles/traefik
+      tags: traefik
+
+    - name: alertmanager
+      role: ../roles/alertmanager
+      tags:
+        - noc
+        - alertmanager
+
+    - name: blackbox_exporter
+      role: ../roles/blackbox_exporter
+      tags:
+        - noc
+        - bbe
+
+    - name: grafana
+      role: ../roles/grafana
+      tags:
+        - noc
+        - grafana
+
+    - name: node_exporter
+      role: ../roles/node_exporter
+      tags:
+        - noc
+        - nodeexporter
+
+    - name: prometheus
+      role: ../roles/prometheus
+      tags:
+        - noc
+        - prometheus
+
+    - name: pushgateway
+      role: ../roles/pushgateway
+      tags:
+        - noc
+        - pushgateway
+
+    - name: mgmt
+      role: ../roles/mgmt
+      tags: mgmt

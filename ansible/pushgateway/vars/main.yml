@@ -1,8 +1,0 @@
----
-# This file contains eyaml encrypted records. Edit with `eyaml edit`
-
-noc:
-  install_path: "{{ install_path }}"
-
-pushgateway:
-  port: 9091

@@ -1,0 +1,12 @@
+all:
+  vars:
+    runenv: prod
+    dnspostfix: ""
+
+noc:
+  hosts:
+    noc_prod1:
+      ansible_host: noc1.idev-fsd.ml
+      ansible_port: 22
+      ansible_user: root
+      noc_install_path: /srv/noc

@@ -1,0 +1,7 @@
+---
+# vars for nodeexporter
+nodeexporter_container_name: nodeexporter
+# TODO: change to https://hub.docker.com/r/prom/node-exporter
+nodeexporter_image: quay.io/prometheus/node-exporter
+nodeexporter_version: latest
+nodeexporter_port: 9100

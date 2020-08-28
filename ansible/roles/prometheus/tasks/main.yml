@@ -1,0 +1,57 @@
+---
+# tasks file for prometheus
+
+# ------------------------------------------------------------------- wp-veritas
+- name: Get URLs from wp-veritas API
+  local_action:
+    module: shell
+    cmd: "{{ role_path }}/vars/sites_from_veritas"
+  register: sites_from_veritas
+
+# ------------------------------------------------------------------ Directories
+- name: Create writable directories to be used as mount points
+  file:
+    path: "{{ install_path }}/prometheus"
+    state: directory
+    mode: "u=rwx,g=rwx,o=rwx"
+
+# ----------------------------------------------------------------- static files
+- name: Copy prometheus static files
+  copy:
+    src: "{{ role_path }}/files/"
+    dest: "{{ install_path }}/prometheus/"
+
+# -------------------------------------------------------------------- Templates
+- name: Copy prometheus template configs
+  template:
+    src: "prometheus/{{ item }}"
+    dest: "{{ install_path }}/prometheus/{{ item }}"
+  with_items:
+    - prometheus.yml
+    - rules/c2c_federate.yml
+  register: prometheus_config_files
+
+# -------------------------------------------------------------------- Container
+- name: Run prometheus
+  docker_container:
+    name: "{{ prometheus_container_name }}"
+    image: "{{ prometheus_image }}:{{ prometheus_version }}"
+    detach: yes
+    restart_policy: unless-stopped
+    network_mode: "{{ backend_network_name }}"
+    volumes:
+      - "{{ install_path }}/prometheus:/etc/prometheus"
+      - "{{ data_path }}/prometheus:/prometheus"
+    log_driver: json-file
+    log_options:
+      max-size: 50m
+      max-file: "3"
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.prometheus.rule: "Host(`prometheus{{ dnspostfix }}.{{ frontend.domain }}`)"
+      traefik.http.routers.prometheus.entrypoints: "websecure"
+      traefik.http.routers.prometheus.tls.certresolver: "letsencrypt"
+      traefik.docker.network: "{{ backend_network_name }}"
+      traefik.http.routers.prometheus.middlewares: "prometheus_auth"
+      traefik.http.middlewares.prometheus_auth.basicauth.users: "{{ frontend.htpass }}"
+      traefik.http.middlewares.prometheus_auth.basicauth.removeheader: "true"

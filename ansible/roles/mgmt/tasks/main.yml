@@ -1,0 +1,37 @@
+---
+- name: Create writable directories to be used as mount points
+  file:
+    path: "{{ install_path }}/mgmt"
+    state: directory
+    mode: "u=rwx,g=rwx,o=rwx"
+
+- name: Copy mgmt Dockerfile
+  template:
+    src: "Dockerfile"
+    dest: "{{ install_path }}/mgmt/Dockerfile"
+  register: _mgmt_dockerile_change
+
+- name: Build mgmt image
+  docker_image:
+    name: "{{ mgmt_container_name }}"
+    source: build
+    build:
+      pull: no
+      path: "{{ install_path }}/mgmt/"
+
+- name: Run mgmt container
+  docker_container:
+    name: "{{ mgmt_container_name }}"
+    image: "{{ mgmt_container_name }}"
+    detach: yes
+    recreate: "{{ _mgmt_dockerile_change is changed }}"
+    command: '/bin/bash -c "trap : TERM INT; sleep infinity & wait"'
+    restart_policy: unless-stopped
+    network_mode: "{{ backend_network_name }}"
+    log_driver: json-file
+    log_options:
+      max-size: 50m
+      max-file: "3"
+    volumes:
+      - "{{ install_path }}:/srv/noc"
+      - "{{ data_path }}:/srv/data"

@@ -1,0 +1,127 @@
+---
+# vars for prometheus
+prometheus_port: 9090
+prometheus_container_name: "prometheus"
+prometheus_image: "prom/prometheus"
+prometheus_version: "v2.20.1"
+
+urls:
+  fsd:
+    - name: gitlab
+      slug: gitlab
+      url: https://gitlab.epfl.ch
+    - name: go
+      slug: go
+      url: https://go.epfl.ch
+    - name: igm
+      slug: igm
+      url: https://igm.epfl.ch
+    - name: it
+      slug: it
+      url: https://it.epfl.ch
+    - name: sti
+      slug: sti
+      url: https://sti.epfl.ch
+  c2c:
+    - name: actu
+      slug: actu
+      url: https://actu.epfl.ch
+    - name: memento
+      slug: memento
+      url: https://memento.epfl.ch
+    - name: people
+      slug: people
+      url: https://people.epfl.ch
+    - name: epfl-about
+      slug: www.epfl.ch_about
+      url: https://www.epfl.ch/about/fr/a-propos/
+    -
+      url: https://www.epfl.ch/campus/associations/list/ishigo-g/
+      slug: ishigo-g
+    -
+      url: https://www.epfl.ch/campus/associations/list/ishigo-g/redirect
+      slug: ishigo-g_redirect
+    -
+      url: https://www.epfl.ch/campus/associations/list/ishigo-g/B117
+      slug: ishigo-g_B117
+    -
+      url: https://www.epfl.ch/campus/associations/list/ishigo-g/page-148545-en-html/page-154212-en-html/
+      slug: ishigo-g_page
+    -
+      url: https://www.epfl.ch/campus/associations/list/ishigo-g/memento/
+      slug: ishigo-g_memento
+    -
+      url: https://www.epfl.ch/campus/associations/list/ishigo-g/people/
+      slug: ishigo-g_people
+    -
+      url: https://www.epfl.ch/campus/associations/list/ishigo-g/actu/
+      slug: ishigo-g_actu
+    -
+      url: https://www.epfl.ch/campus/associations/list/ishigo-g/cover/
+      slug: ishigo-g_cover
+    -
+      url: https://www.epfl.ch/campus/associations/list/ishigo-g/hero/
+      slug: ishigo-g_hero
+    -
+      url: https://www.epfl.ch/campus/associations/list/ishigo-g/card/
+      slug: ishigo-g_card
+    -
+      url: https://www.epfl.ch/campus/associations/list/ishigo-g/gal/
+      slug: ishigo-g_gal
+    -
+      url: https://www.epfl.ch/campus/associations/list/ishigo-g/infoscience/
+      slug: ishigo-g_infoscience
+
+  veritas: "{{ sites_from_veritas.stdout | default('[]') | from_json }}"
+
+c2c:
+  prefix: vpsi_wwp_federation
+  metrics:
+    - probe_dns_lookup_time_seconds
+    - probe_duration_seconds
+    - probe_http_content_length
+    - probe_http_duration_seconds
+    - probe_http_last_modified_timestamp_seconds
+    - probe_http_status_code
+    - probe_http_redirects
+    - probe_failed_due_to_regex
+    - probe_http_ssl
+    - probe_http_version
+    - probe_ip_protocol
+    - probe_ssl_earliest_cert_expiry
+    - probe_success
+
+auth:
+  legacy:
+    username: "{{ _noc_secrets.prometheus.auth.legacy.username }}"
+    password: "{{ _noc_secrets.prometheus.auth.legacy.password }}"
+  gitlab:
+    username: "{{ _noc_secrets.prometheus.auth.gitlab.username }}"
+    password: "{{ _noc_secrets.prometheus.auth.gitlab.password }}"
+
+sources:
+  blackbox:
+    - name: bbe-ch-zh
+      origin: zurich
+      server: "blackbox-exporter:{{ bbe.port | default('9115')}}"
+      auth:
+    - name: bbe-fr-par
+      origin: paris
+      server: "bbe-paris.idev-fsd.ml:80"
+      auth: '{{ auth.legacy }}'
+  ressenti:
+    - name: res-ch-zh
+      module: firefox
+      origin: zurich
+      server: prob.86.119.40.68.nip.io
+      auth: '{{ auth.legacy }}'
+    - name: res-fr-par
+      module: firefox
+      origin: paris
+      server: ressenti-paris.idev-fsd.ml
+      auth: '{{ auth.legacy }}'
+    - name: res-fr-par2
+      module: firefox
+      origin: paris2
+      server: ressenti-paris2.idev-fsd.ml
+      auth: '{{ auth.legacy }}'

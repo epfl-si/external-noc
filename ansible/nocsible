@@ -1,0 +1,96 @@
+#!/bin/bash
+#
+# This is a wrapper around ansible / ansible-playbook.
+#
+# Usage ("ansible" mode):
+#
+#   ./ansible/nocsible -m raw all -a 'date'
+#
+# Usage ("ansible-playbook" mode):
+#
+#   ./ansible/nocsible -l prod
+#
+#
+# If you are unfamiliar with Ansible, read up on it at
+# - https://www.ansible.com/overview/how-ansible-works
+# - https://github.com/jdauphant/awesome-ansible
+
+cd "$(dirname "$0")"; cd "$(/bin/pwd)"
+
+git_current_branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
+case "$git_current_branch" in
+    "") : ;;
+    *) playbook_flags="$playbook_flags -e @vars/main.yml -e git_current_branch=$git_current_branch" ;;
+esac
+
+warn () {
+    if [ -n "$1" ]; then
+        echo "$@" >&2
+    else
+        cat >&2
+    fi
+}
+
+fatal () {
+    warn "$@"
+    exit 1
+}
+
+platform_check () {
+    if ! test -f ansible-deps-cache/.versions 2>/dev/null; then
+        curl https://raw.githubusercontent.com/epfl-si/ansible.suitcase/master/install.sh | \
+            SUITCASE_DIR=$PWD/ansible-deps-cache \
+            SUITCASE_PIP_EXTRA="bcrypt passlib" \
+            SUITCASE_ANSIBLE_REQUIREMENTS=requirements.yml \
+            bash -x
+    fi
+    export PATH="$PWD/ansible-deps-cache/bin:$PATH"
+    export ANSIBLE_ROLES_PATH="$PWD/ansible-deps-cache/roles"
+}
+
+inventory_mode="dev"
+inventories () {
+    case "$inventory_mode" in
+        dev) echo "-i inventory/hosts-dev.yml"  ;;
+        prod) echo "-i inventory/hosts-prod.yml"  ;;
+        *) fatal "Invalid inventory_mode" ;;
+    esac
+
+}
+
+###########################################################################
+
+mode=ansible-playbook
+
+declare -a ansible_args
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+        -m) mode=ansible
+            ansible_args+=("-m")
+            shift ;;
+        --prod) inventory_mode="prod"
+            shift ;;
+        *)
+            ansible_args+=("$1")
+            shift ;;
+    esac
+done
+
+# https://github.com/ansible/ansible/issues/32499, https://bugs.python.org/issue35219
+case "$(uname -s)" in
+    Darwin) export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES ;;
+esac
+
+set -e
+
+platform_check
+case "$mode" in
+    ansible-playbook)
+        ansible-playbook $playbook_flags $(inventories) "${ansible_args[@]}" \
+                         -e "wpsible_cwd=$OLDPWD" \
+                         playbooks/main.yml
+        ;;
+    ansible)
+        ansible $(inventories) $ansible_flags "${ansible_args[@]}"
+        ;;
+esac
