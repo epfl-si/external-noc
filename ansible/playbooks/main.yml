@@ -20,10 +20,6 @@
       role: ../roles/noc
       tags: noc
 
-    - name: mgmt
-      role: ../roles/mgmt
-      tags: mgmt
-
     - name: traefik
       role: ../roles/traefik
       tags: traefik
@@ -63,3 +59,7 @@
       tags:
         - noc
         - pushgateway
+
+    - name: mgmt
+      role: ../roles/mgmt
+      tags: mgmt
