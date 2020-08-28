@@ -13,6 +13,7 @@ RUN apt-get -qy update && apt-get -qy install --no-install-recommends \
     iputils-ping \
     less \
     make \
+    net-tools \
     openssl \
     pwgen \
     software-properties-common \
