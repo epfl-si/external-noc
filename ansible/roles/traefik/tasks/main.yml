@@ -61,6 +61,7 @@
   docker_container:
     name: "whoami"
     image: "containous/whoami"
+    restart_policy: unless-stopped
     labels:
       traefik.enable: "true"
       traefik.http.routers.whoami.rule: "Host(`whoami-tst.idev-fsd.ml`)"
