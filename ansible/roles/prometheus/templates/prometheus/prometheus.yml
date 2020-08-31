@@ -36,13 +36,12 @@ scrape_configs:
     static_configs:
     - targets: ['nodeexporter:9100']
 
-  # gitlab.epfl.ch
+  # gitlab.epfl.ch built-in metrics
   - job_name: 'gitlab@epfl'
     metrics_path: /federate
     honor_labels: true
     params:
       'match[]':
-#        - '{__name__=~"git.*"}'
         - '{service="gitlab"}'
     scheme: 'https'
     static_configs:
@@ -51,13 +50,24 @@ scrape_configs:
       username: "{{ auth.gitlab.username }}"
       password: "{{ auth.gitlab.password }}"
 
-  # gitlab.epfl.ch
+  # gitlab.epfl.ch traefik built-in
   - job_name: 'gitlab_traefik'
     metrics_path: /metrics
     honor_labels: true
     scheme: 'https'
     static_configs:
     - targets: ['gitlab.epfl.ch']
+
+  # Home made statistics exporter (https://gitlab.epfl.ch/GitlabStatistics)
+  - job_name: 'gitlab-statistics@epfl'
+    metrics_path: /GitlabStatistics
+    honor_labels: true
+    scheme: 'https'
+    static_configs:
+    - targets: ['gitlab.epfl.ch']
+    basic_auth:
+      username: "{{ _gitlab_statistics_exporter_secrets.basic_auth_user }}"
+      password: "{{ _gitlab_statistics_exporter_secrets.basic_auth_pass }}"
 
   # Prometheus Blackbox exporter scraper
 {% for resconf in sources.blackbox %}

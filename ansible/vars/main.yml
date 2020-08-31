@@ -18,3 +18,7 @@ docker__users: ["{{ ansible_user }}"]
 # Comment this out to temporarily go back to the staging
 # (blacklist-immune) instance of Let's Encrypt:
 # traefik_letsencrypt_staging: true
+
+# To scrape https://gitlab.epfl.ch/GitlabStatistics
+_gitlab_statistics_exporter_secrets: "{{ lookup('file', '/keybase/team/epfl_gitlab/GitlabStatisticsPrometheusExporter.yml') | from_yaml }}"
+gitlab_stats_exporter_htpasswd_line: "{{ _gitlab_statistics_exporter_secrets.basic_auth_user }}:{{ _gitlab_statistics_exporter_secrets.basic_auth_pass | password_hash('bcrypt') }}"
