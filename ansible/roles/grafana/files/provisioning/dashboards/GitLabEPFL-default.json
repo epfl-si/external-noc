@@ -1191,7 +1191,7 @@
         "frequency": "4h",
         "handler": 1,
         "message": "Gitlab disk usage is above 90% !",
-        "name": "GitLab disk usage alert",
+        "name": "Gitlab disk usage alert",
         "noDataState": "no_data",
         "notifications": []
       },
@@ -1374,7 +1374,7 @@
     ]
   },
   "timezone": "",
-  "title": "GitLab EPFL",
+  "title": "Gitlab EPFL",
   "uid": "O816VntWz",
   "version": 1
 }
