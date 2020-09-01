@@ -20,6 +20,7 @@
   copy:
     src: "{{ role_path }}/files/"
     dest: "{{ install_path }}/prometheus/"
+  register: _prometheus_static_file
 
 # -------------------------------------------------------------------- Templates
 - name: Copy prometheus template configs
@@ -29,13 +30,14 @@
   with_items:
     - prometheus.yml
     - rules/c2c_federate.yml
-  register: prometheus_config_files
+  register: _prometheus_template_file
 
 # -------------------------------------------------------------------- Container
 - name: Run prometheus
   docker_container:
     name: "{{ prometheus_container_name }}"
     image: "{{ prometheus_image }}:{{ prometheus_version }}"
+    restart: "{{ _prometheus_static_file is changed or _prometheus_template_file is changed }}"
     detach: yes
     restart_policy: unless-stopped
     network_mode: "{{ backend_network_name }}"
