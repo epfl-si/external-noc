@@ -57,4 +57,3 @@
       traefik.http.routers.grafana.entrypoints: "websecure"
       traefik.http.routers.grafana.tls.certresolver: "letsencrypt"
       traefik.docker.network: "{{ backend_network_name }}"
-      #traefik.http.services.grafana.loadbalancer.server.port: "{{ grafana_port | string }}"
