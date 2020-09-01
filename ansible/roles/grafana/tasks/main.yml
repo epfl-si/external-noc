@@ -47,6 +47,9 @@
       - "{{ data_path }}/grafana/provisioning:/etc/grafana/provisioning"
     env:
       GF_INSTALL_PLUGINS: "{{ grafana.plugins | join(',') }}"
+      GF_RENDERING_SERVER_URL: http://renderer:8081/render
+      GF_RENDERING_CALLBACK_URL: http://grafana:3000/
+      GF_LOG_FILTERS: rendering:debug
     log_driver: json-file
     log_options:
       max-size: 50m
@@ -57,3 +60,11 @@
       traefik.http.routers.grafana.entrypoints: "websecure"
       traefik.http.routers.grafana.tls.certresolver: "letsencrypt"
       traefik.docker.network: "{{ backend_network_name }}"
+
+- name: Run grafana image renderer
+  docker_container:
+    name: renderer
+    image: grafana/grafana-image-renderer:latest
+    detach: yes
+    restart_policy: unless-stopped
+    network_mode: "{{ backend_network_name }}"
