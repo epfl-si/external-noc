@@ -35,6 +35,7 @@
   register: loguserhost
   args:
     executable: /bin/bash
+  changed_when: false
 
 - name: Show username@hostname that will be logged
   debug:
@@ -46,6 +47,7 @@
   args:
     executable: /bin/bash
     chdir: "{{ noc_install_path }}/"
+  changed_when: false
 
 - name: Removed unnecessary docker-py
   pip:

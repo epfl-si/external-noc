@@ -7,7 +7,7 @@ backend_network_name: "traefik"
 frontend:
   domain: idev-fsd.ml
   protocol: https
-  htpass: "{% set comma = joiner(', ') %}{% for cred in _noc_secrets.frontend.credentials%}{{ comma() }}{{ cred.user }}:{{ cred.pass | password_hash('bcrypt') }}{% endfor %}"
+  htpass: "{% set comma = joiner(', ') %}{% for cred in _noc_secrets.frontend.credentials %}{{ comma() }}{{ cred.user }}:{{ cred.pass | password_hash('bcrypt', _noc_secrets.frontend.salt) }}{% endfor %}"
 
 # vars for nickjj.docker
 docker__edition: "ce"
@@ -21,4 +21,4 @@ docker__users: ["{{ ansible_user }}"]
 
 # To scrape https://gitlab.epfl.ch/GitlabStatistics
 _gitlab_statistics_exporter_secrets: "{{ lookup('file', '/keybase/team/epfl_gitlab/GitlabStatisticsPrometheusExporter.yml') | from_yaml }}"
-gitlab_stats_exporter_htpasswd_line: "{{ _gitlab_statistics_exporter_secrets.basic_auth_user }}:{{ _gitlab_statistics_exporter_secrets.basic_auth_pass | password_hash('bcrypt') }}"
+gitlab_stats_exporter_htpasswd_line: "{{ _gitlab_statistics_exporter_secrets.basic_auth_user }}:{{ _gitlab_statistics_exporter_secrets.basic_auth_pass | password_hash('bcrypt', _noc_secrets.frontend.salt) }}"

@@ -3,17 +3,20 @@
   file:
     path: "{{ blackboxexporter_state_path }}/config"
     state: directory
+  register: _blackboxexporter_static_file
 
 - name: Copy templates for blackbox exporter
   template:
     src: "config/blackbox.yml"
     dest: "{{ blackboxexporter_state_path }}/config/blackbox.yml"
+  register: _blackboxexporter_template_file
 
 # -------------------------------------------------------------------- Container
 - name: Run blackbox exporter
   docker_container:
     name: "{{ blackboxexporter_container_name }}"
     image: "{{ blackboxexporter_image }}:{{ blackboxexporter_version }}"
+    restart: "{{ _blackboxexporter_static_file is changed or _blackboxexporter_template_file is changed }}"
     detach: yes
     restart_policy: unless-stopped
     network_mode: "{{ backend_network_name }}"

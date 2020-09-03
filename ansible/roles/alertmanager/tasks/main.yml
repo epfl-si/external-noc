@@ -3,11 +3,13 @@
   copy:
     src: "{{ role_path }}/files/"
     dest: "{{ install_path }}/alertmanager/"
+  register: _alertmanager_static_file
 
 - name: Run alertmanager
   docker_container:
     name: "{{ alertmanager_container_name }}"
     image: "{{ alertmanager_image }}:{{ alertmanager_version }}"
+    restart: "{{ _alertmanager_static_file is changed }}"
     detach: yes
     command: --config.file=/config/simple.yml
     restart_policy: unless-stopped
