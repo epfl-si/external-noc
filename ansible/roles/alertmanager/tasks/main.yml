@@ -21,7 +21,6 @@
       max-size: 50m
       max-file: "3"
     labels:
-      maintainer: "The Prometheus Authors <prometheus-developers@googlegroups.com>"
       traefik.enable: "true"
       traefik.http.routers.alertmanager.rule: "Host(`am{{ dnspostfix }}.{{ frontend.domain }}`)"
       traefik.http.routers.alertmanager.entrypoints: "websecure"
