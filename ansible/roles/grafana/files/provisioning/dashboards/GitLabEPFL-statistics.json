@@ -24,6 +24,15 @@
       "tooltip": "GitlabStatisticsPrometheusExporter",
       "type": "link",
       "url": "https://github.com/epfl-dojo/GitlabStatisticsPrometheusExporter"
+    },
+    {
+      "icon": "bolt",
+      "tags": [],
+      "targetBlank": true,
+      "title": "Render",
+      "tooltip": "Render this dashboard in PNG",
+      "type": "link",
+      "url": "https://grafana.idev-fsd.ml/render/d/rDWoD7vGz/gitlab-statistics?orgId=1&refresh=10s&from=now-24h&to=now-1m&width=2000&height=2400"
     }
   ],
   "panels": [
@@ -83,7 +92,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
           "expr": "gitlab_users_total",
@@ -140,7 +149,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
           "expr": "gitlab_groups_total",
@@ -197,7 +206,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
           "expr": "gitlab_projects_total",
@@ -257,7 +266,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
           "expr": "gitlab_issues_total",
@@ -328,7 +337,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
           "expr": "gitlab_forks_total",
@@ -385,7 +394,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
           "expr": "gitlab_merge_requests_total",
@@ -442,7 +451,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
           "expr": "gitlab_ssh_keys_total",
@@ -499,7 +508,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
           "expr": "gitlab_notes_total",
@@ -556,7 +565,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
           "expr": "gitlab_snippets_total",
@@ -613,7 +622,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
           "expr": "gitlab_milestones_total",
@@ -670,7 +679,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
           "expr": "gitlab_active_users_total",
@@ -737,7 +746,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "pointradius": 2,
       "points": true,
       "renderer": "flot",
@@ -841,7 +850,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
           "expr": "floor(delta(gitlab_active_users_total[4w]))",
@@ -901,7 +910,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
           "expr": "floor(delta(gitlab_active_users_total[1w]))",
@@ -961,7 +970,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
           "expr": "floor(delta(gitlab_active_users_total[1d]))",
@@ -1029,7 +1038,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "pointradius": 2,
       "points": true,
       "renderer": "flot",
@@ -1137,7 +1146,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
           "expr": "floor(delta(gitlab_groups_total[4w]))",
@@ -1197,7 +1206,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
           "expr": "floor(delta(gitlab_groups_total[1w]))",
@@ -1257,7 +1266,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
           "expr": "floor(delta(gitlab_groups_total[1d]))",
@@ -1325,7 +1334,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "pointradius": 2,
       "points": true,
       "renderer": "flot",
@@ -1433,7 +1442,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
           "expr": "floor(delta(gitlab_projects_total[4w]))",
@@ -1493,7 +1502,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
           "expr": "floor(delta(gitlab_projects_total[1w]))",
@@ -1553,7 +1562,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
           "expr": "floor(delta(gitlab_projects_total[1d]))",
@@ -1621,7 +1630,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "pointradius": 2,
       "points": true,
       "renderer": "flot",
@@ -1723,7 +1732,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "pointradius": 2,
       "points": true,
       "renderer": "flot",
@@ -1825,7 +1834,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "pointradius": 2,
       "points": true,
       "renderer": "flot",
@@ -1933,7 +1942,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
           "expr": "floor(delta(gitlab_issues_total[4w]))",
@@ -1993,7 +2002,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
           "expr": "floor(delta(gitlab_issues_total[1w]))",
@@ -2053,7 +2062,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
           "expr": "floor(delta(gitlab_forks_total[4w]))",
@@ -2113,7 +2122,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
           "expr": "floor(delta(gitlab_forks_total[1w]))",
@@ -2173,7 +2182,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
           "expr": "floor(delta(gitlab_merge_requests_total[4w]))",
@@ -2233,7 +2242,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
           "expr": "floor(delta(gitlab_merge_requests_total[1w]))",
@@ -2301,7 +2310,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "pointradius": 2,
       "points": true,
       "renderer": "flot",
@@ -2396,7 +2405,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "pointradius": 2,
       "points": true,
       "renderer": "flot",
@@ -2491,7 +2500,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "pointradius": 2,
       "points": true,
       "renderer": "flot",
@@ -2571,5 +2580,5 @@
   "timezone": "",
   "title": "Gitlab Statistics",
   "uid": "rDWoD7vGz",
-  "version": 38
+  "version": 4
 }
