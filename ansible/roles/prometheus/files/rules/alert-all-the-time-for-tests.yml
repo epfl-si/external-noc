@@ -1,10 +1,20 @@
-# groups:
-# - name: example
-#   rules:
-#   - alert: TestingOneTwoThree
-#     expr: 1
-#     for: 1m
-#     labels:
-#       severity: page
-#     annotations:
-#       summary: Math has gone haywire on us
+groups:
+  - name: example8
+    rules:
+    - alert: TestingOneTwoThreeZero8
+      expr: up{} == 0
+      for: 1m
+      labels:
+        severity: page
+      annotations:
+        summary: Math has gone haywire on us
+        description: My Description
+  - name: Test Canari 3
+    rules:
+    - alert: "Test if canari is 404"
+      expr: probe_http_status_code{slug="canari"} != 404
+      for: 1m
+      labels:
+        severity: page
+      annotations:
+        summary: Test Greg & Nicolas 3
