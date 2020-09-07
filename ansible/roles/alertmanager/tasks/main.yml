@@ -11,11 +11,12 @@
     image: "{{ alertmanager_image }}:{{ alertmanager_version }}"
     restart: "{{ _alertmanager_static_file is changed }}"
     detach: yes
-    command: --config.file=/config/simple.yml
+    command: >-
+      --config.file=/config/config.yml
+      {% if runenv == "dev" %} --storage.path=/tmp {% endif %}
     restart_policy: unless-stopped
     network_mode: "{{ backend_network_name }}"
-    volumes:
-      - "{{ alertmanager_state_path }}/config:/config"
+    mounts: "{{ mounts[runenv] }}"
     log_driver: json-file
     log_options:
       max-size: 50m
@@ -29,3 +30,14 @@
       traefik.http.routers.alertmanager.middlewares: "alertmanager_auth"
       traefik.http.middlewares.alertmanager_auth.basicauth.users: "{{ frontend.htpass }}"
       traefik.http.middlewares.alertmanager_auth.basicauth.removeheader: "true"
+  vars:
+    mounts:
+      prod: "{{ [config_mount] }}"
+      dev: "{{ [config_mount, fake_alertmanager_state_volume] }}"
+    config_mount:
+      type: bind
+      source: "{{ alertmanager_state_path }}/config"
+      target: "/config"
+    fake_alertmanager_state_volume:
+      type: tmpfs
+      target: "/alertmanager2"
