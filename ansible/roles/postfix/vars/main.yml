@@ -1,0 +1,1 @@
+postfix_config_path: "{{ install_path }}/postfix"

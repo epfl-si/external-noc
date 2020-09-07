@@ -5,6 +5,14 @@
       debug:
         msg: "Starting ansible with {{ runenv }} environment."
 
+- name: Postfix mail black hole
+  hosts: noc_dev
+  gather_facts: no   # Not yet
+  roles:
+    - name: postfix
+      role: ../roles/postfix
+      tags: postfix
+
 - name: External NOC
   hosts: noc
   gather_facts: no   # Not yet

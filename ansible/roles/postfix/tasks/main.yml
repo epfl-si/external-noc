@@ -1,0 +1,24 @@
+- name: Postfix configuration directory
+  file:
+    path: "{{ postfix_config_path }}"
+    state: directory
+
+- name: Postfix configuration script
+  copy:
+    dest: "{{ postfix_config_path }}/postfix-config.sh"
+    content: '{{ lookup("template", "postfix-config.sh.j2") }}'
+    mode: "0755"
+  register: _postfix_config
+
+- name: Postfix black hole
+  docker_container:
+    name: postfix-blackhole
+    image: boky/postfix
+    restart: "{{ _postfix_config is changed }}"
+    ports:
+      - '25:25'
+    network_mode: "{{ backend_network_name }}"
+    volumes:
+      - "{{ postfix_config_path }}:/docker-init.db"
+    env:
+      ALLOW_EMPTY_SENDER_DOMAINS: "1"

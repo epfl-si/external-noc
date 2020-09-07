@@ -1,7 +1,12 @@
 global:
   # The smarthost and SMTP sender used for mail notifications.
-  smtp_smarthost: 'mx1.epfl.ch:25'
   smtp_from: 'alertmanager@fl-5-70.zhdk.cloud.switch.ch'
+{% if runenv == 'prod' %}
+  smtp_smarthost: 'mx1.epfl.ch:25'
+{% else %}
+  smtp_smarthost: 'postfix-blackhole:25'
+  smtp_require_tls: false
+{% endif %}
 
 # The directory from which notification templates are read.
 templates: 
