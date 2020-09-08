@@ -10,3 +10,13 @@ groups:
       annotations:
         summary: Math has gone haywire on us
         description: My Description
+  - name: Canary
+    rules:
+    - alert: Canari status code is not 200
+      expr: probe_http_status_code{slug="canari"} != 200
+      for: 1m
+      labels:
+        severity: page
+      annotations:
+        summary: Canari HTTP status is not 200
+        description: "Expr is probe_http_status_code{slug='canari'} != 200"

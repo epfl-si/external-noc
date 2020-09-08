@@ -1,9 +1,13 @@
 global:
   # The smarthost and SMTP sender used for mail notifications.
-  smtp_from: 'alertmanager@fl-5-70.zhdk.cloud.switch.ch'
+  smtp_from: "{{ _noc_secrets.mail_epfl.address }}"
 {% if runenv == 'prod' %}
-  smtp_smarthost: 'mx1.epfl.ch:25'
+  smtp_smarthost: 'mail.epfl.ch:465'
+  smtp_auth_username: "{{ _noc_secrets.mail_epfl.username }}"
+  smtp_auth_password: "{{ _noc_secrets.mail_epfl.password }}"
+  smtp_require_tls: false
 {% else %}
+  # Do not duplicate alerts
   smtp_smarthost: 'postfix-blackhole:25'
   smtp_require_tls: false
 {% endif %}
