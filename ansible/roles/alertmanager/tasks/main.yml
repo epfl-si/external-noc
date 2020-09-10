@@ -46,3 +46,11 @@
     fake_alertmanager_state_volume:
       type: tmpfs
       target: "/alertmanager2"
+
+- name: Run debugapi
+  docker_container:
+    name: alertmanager-tg-bot
+    image: ponsfrilus/debugapi
+    detach: yes
+    restart_policy: unless-stopped
+    network_mode: "{{ backend_network_name }}"

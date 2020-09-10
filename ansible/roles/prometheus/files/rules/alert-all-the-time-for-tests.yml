@@ -6,6 +6,7 @@ groups:
       for: 1m
       labels:
         severity: page
+        sendto: telegram
       annotations:
         summary: Canari HTTP status is not 200
         description: "Expr is probe_http_status_code{slug='canari'} != 200"
