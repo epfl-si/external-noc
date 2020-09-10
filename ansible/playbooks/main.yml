@@ -38,6 +38,12 @@
         - noc
         - alertmanager
 
+    - name: alert_tg_bot
+      role: ../roles/alert_tg_bot
+      tags:
+        - noc
+        - alert_tg_bot
+
     - name: blackbox_exporter
       role: ../roles/blackbox_exporter
       tags:
