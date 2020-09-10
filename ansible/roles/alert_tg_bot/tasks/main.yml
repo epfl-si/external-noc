@@ -1,0 +1,9 @@
+- name: Run alert telegram bot
+  docker_container:
+    name: alert-tg-bot
+    image: epflsi/alert-tg-bot
+    env:
+      TELEGRAM_BOT_TOKEN: "{{ _noc_secrets.telegram.TOKEN }}"
+    detach: yes
+    restart_policy: unless-stopped
+    network_mode: "{{ backend_network_name }}"

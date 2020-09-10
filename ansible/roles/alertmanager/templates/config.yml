@@ -29,6 +29,8 @@ route:
   # its own grouping. Example: group_by: [...]
   group_by: [...]
 
+  #continue: true
+
   # When a new group of alerts is created by an incoming alert, wait at
   # least 'group_wait' to send the initial notification.
   # This way ensures that you get multiple alerts for the same group that start
@@ -51,7 +53,15 @@ route:
   # overwritten on each.
   
   routes:
-    - receiver: 'alertmanager-tg-bot'
+    - receiver: 'alert-tg-bot'
+      group_by: [...]
+      # https://prometheus.io/docs/alerting/latest/configuration/#route
+      # If continue is true on a matching node, the alert will continue matching 
+      # against subsequent siblings
+      continue: true
+      match:
+        sendto: telegram
+    - receiver: 'debugapi'
       group_by: [...]
       match:
         sendto: telegram
@@ -69,7 +79,12 @@ receivers:
   email_configs:
   - to: 'idev-fsd-monitoring@groupes.epfl.ch'
 
-- name: 'alertmanager-tg-bot'
+- name: 'alert-tg-bot'
   webhook_configs:
   - send_resolved: true
-    url: 'http://alertmanager-tg-bot:3000'
+    url: 'http://alert-tg-bot:3000/-460587583'
+
+- name: 'debugapi'
+  webhook_configs:
+  - send_resolved: true
+    url: 'http://debugapi:3000/'

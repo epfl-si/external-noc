@@ -7,7 +7,7 @@
 - name: alertmanager configuration
   copy:
     dest: "{{ alertmanager_state_path }}/config/config.yml"
-    content: '{{ lookup("template", "config.yml.j2") }}'
+    content: '{{ lookup("template", "config.yml") }}'
   register: _alertmanager_static_config
 
 - name: Run alertmanager
@@ -49,7 +49,7 @@
 
 - name: Run debugapi
   docker_container:
-    name: alertmanager-tg-bot
+    name: debugapi
     image: ponsfrilus/debugapi
     detach: yes
     restart_policy: unless-stopped
