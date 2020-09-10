@@ -49,6 +49,12 @@ route:
 
   # All the above attributes are inherited by all child routes and can 
   # overwritten on each.
+  
+  routes:
+    - receiver: 'alertmanager-tg-bot'
+      group_by: [...]
+      match:
+        sendto: telegram
 
 receivers:
 - name: 'idev-fsd-ops-mails'
@@ -63,3 +69,7 @@ receivers:
   email_configs:
   - to: 'idev-fsd-monitoring@groupes.epfl.ch'
 
+- name: 'alertmanager-tg-bot'
+  webhook_configs:
+  - send_resolved: true
+    url: 'http://alertmanager-tg-bot:3000'
