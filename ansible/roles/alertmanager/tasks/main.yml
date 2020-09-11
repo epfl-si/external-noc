@@ -18,7 +18,11 @@
     detach: yes
     command: >-
       --config.file=/config/config.yml
-      {% if runenv == "dev" %} --storage.path=/tmp --log.level=debug{% endif %}
+      {% if runenv == "dev" %}
+        --storage.path=/tmp 
+        --log.level=debug
+      {% endif %}
+      --web.external-url=https://am{{ dnspostfix }}.{{ frontend.domain }}
     restart_policy: unless-stopped
     network_mode: "{{ backend_network_name }}"
     mounts: "{{ mounts[runenv] }}"
