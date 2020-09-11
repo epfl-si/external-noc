@@ -38,6 +38,12 @@
     name: "{{ prometheus_container_name }}"
     image: "{{ prometheus_image }}:{{ prometheus_version }}"
     restart: "{{ _prometheus_static_file is changed or _prometheus_template_file is changed }}"
+    command: >-
+      --config.file=/etc/prometheus/prometheus.yml
+      --web.external-url=https://prometheus{{ dnspostfix }}.{{ frontend.domain }}
+      {% if runenv == "dev" %}
+        --log.level=debug
+      {% endif %}
     detach: yes
     restart_policy: unless-stopped
     network_mode: "{{ backend_network_name }}"
