@@ -5,6 +5,7 @@
     pull: "{{ 'no' if runenv == 'prod' else 'yes' }}"
     env:
       TELEGRAM_BOT_TOKEN: "{{ _noc_secrets.telegram.TOKEN }}"
+      DEBUG: "{{ 'false' if runenv == 'prod' else 'true' }}"
     detach: yes
     restart_policy: unless-stopped
     network_mode: "{{ backend_network_name }}"
