@@ -54,7 +54,9 @@ route:
   
   routes:
     - receiver: 'alert-tg-bot'
-      group_by: [...]
+      group_by: ['instance', 'slug']
+      group_wait: 45s
+      group_interval: 10m # Usually ~5 mins or more.
       # https://prometheus.io/docs/alerting/latest/configuration/#route
       # If continue is true on a matching node, the alert will continue matching 
       # against subsequent siblings
@@ -63,6 +65,7 @@ route:
         sendto: telegram
     - receiver: 'debugapi'
       group_by: [...]
+      continue: true
       match:
         sendto: telegram
 
