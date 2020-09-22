@@ -54,7 +54,7 @@ route:
   
   routes:
     - receiver: 'alert-tg-bot'
-      group_by: ['instance', 'slug']
+      group_by: ['instance']
       group_wait: 45s
       group_interval: 10m # Usually ~5 mins or more.
       # https://prometheus.io/docs/alerting/latest/configuration/#route
@@ -64,7 +64,7 @@ route:
       match:
         sendto: telegram
     - receiver: 'debugapi'
-      group_by: [...]
+      group_by: ['instance']
       continue: true
       match:
         sendto: telegram

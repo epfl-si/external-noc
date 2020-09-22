@@ -16,9 +16,9 @@ urls:
     - name: igm
       slug: igm
       url: https://sti.epfl.ch/research/institutes/igm/
-    - name: it
-      slug: it
-      url: https://it.epfl.ch
+    - name: support-epfl
+      slug: support-epfl
+      url: https://support.epfl.ch/epfl
     - name: sti
       slug: sti
       url: https://sti.epfl.ch
@@ -87,10 +87,10 @@ auth:
 
 sources:
   blackbox:
-    # - name: bbe-ch-zh
-    #   origin: zurich
-    #   server: "blackbox-exporter:{{ bbe.port | default('9115')}}"
-    #   auth:
+    - name: bbe-ch-zh
+      origin: zurich
+      server: "{{ blackboxexporter_container_name }}:{{ bbe.port | default('9115')}}"
+      auth: '{{ auth.legacy }}'
     - name: bbe-fr-par
       origin: paris
       server: "bbe-paris.idev-fsd.ml:80"
