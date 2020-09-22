@@ -22,6 +22,7 @@ api:
 
 metrics:
   prometheus:
+    manualRouting: true # https://docs.traefik.io/observability/metrics/prometheus/#manualrouting
     entryPoint: websecure
 
 # https://docs.traefik.io/https/acme/
