@@ -15,7 +15,7 @@ urls:
       url: https://go.epfl.ch
     - name: igm
       slug: igm
-      url: https://sti.epfl.ch/research/institutes/igm/
+      url: https://sti.epfl.ch/research/institutes/igm
     - name: support-epfl
       slug: support-epfl
       url: https://support.epfl.ch/epfl
@@ -34,28 +34,28 @@ urls:
       url: https://people.epfl.ch
     - name: epfl-about
       slug: www_epfl_ch_about
-      url: https://www.epfl.ch/about/fr/a-propos/
+      url: https://www.epfl.ch/about/fr/a-propos
     - name: education
       slug: www_epfl_ch_education
-      url: https://www.epfl.ch/education/
+      url: https://www.epfl.ch/education
     - name: research
       slug: www_epfl_ch_research
-      url: https://www.epfl.ch/research/
+      url: https://www.epfl.ch/research
     - name: innovation
       slug: www_epfl_ch_innovation
-      url: https://www.epfl.ch/innovation/
+      url: https://www.epfl.ch/innovation
     - name: schools
       slug: www_epfl_ch_schools
-      url: https://www.epfl.ch/schools/
+      url: https://www.epfl.ch/schools
     - name: campus
       slug: www_epfl_ch_campus
-      url: https://www.epfl.ch/campus/
+      url: https://www.epfl.ch/campus
     - name: services
       slug: www_epfl_ch_campus_services
-      url: https://www.epfl.ch/campus/services/
+      url: https://www.epfl.ch/campus/services
     - name: labs
       slug: www.epfl.ch_labs
-      url: https://www.epfl.ch/labs/
+      url: https://www.epfl.ch/labs
 
 
   veritas: "{{ sites_from_veritas.stdout | default('[]') | from_json }}"
