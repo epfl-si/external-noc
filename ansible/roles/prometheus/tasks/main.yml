@@ -11,9 +11,20 @@
 # ------------------------------------------------------------------ Directories
 - name: Create writable directories to be used as mount points
   file:
-    path: "{{ install_path }}/prometheus"
+    path: "{{ item }}"
     state: directory
     mode: "u=rwx,g=rwx,o=rwx"
+  with_items:
+    - "{{ install_path }}/prometheus"
+    - "{{ install_path }}/prometheus/dynamic"
+
+- name: ensure dynamic/targets.json is present
+  file:
+    path: "{{ install_path }}/prometheus/dynamic/targets.json"
+    owner: root
+    group: root
+    mode: '1777'
+    state: touch
 
 # ----------------------------------------------------------------- static files
 - name: Copy prometheus static files
@@ -31,6 +42,27 @@
     - prometheus.yml
     - rules/c2c_federate.yml
   register: _prometheus_template_file
+
+- name: Copy prometheus-site-service-discovery.py
+  template:
+    src: "prometheus-site-service-discovery.py"
+    dest: "{{ install_path }}/prometheus/prometheus-site-service-discovery.py"
+  register: _prometheus_configurator
+
+- name: configurator
+  docker_container:
+    name: configurator
+    image: python:3.7-alpine
+    restart: "{{ _prometheus_configurator is changed or _prometheus_configurator is changed }}"
+    command:
+      - /usr/bin/env
+      - python3
+      - "/srv/prometheus-site-service-discovery.py"
+    detach: yes
+    restart_policy: unless-stopped
+    network_mode: "{{ backend_network_name }}"
+    volumes:
+      - "{{ install_path }}/prometheus:/srv"
 
 # -------------------------------------------------------------------- Container
 - name: Run prometheus
