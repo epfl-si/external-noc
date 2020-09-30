@@ -1,15 +1,4 @@
 groups:
-  - name: CanaryCanarded
-    rules:
-    - alert: CanaryCanarded
-      expr: |
-        up{slug="canari"} == 0
-      for: 1m
-      labels:
-        severity: page
-      annotations:
-        summary: Math has gone haywire on us
-        description: My Description
   - name: Canary
     rules:
     - alert: Canari status code is not 200
