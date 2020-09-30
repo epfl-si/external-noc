@@ -15,25 +15,47 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 10,
+  "id": 11,
   "links": [],
   "panels": [
     {
       "datasource": null,
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "custom": {},
-          "mappings": [],
+          "mappings": [
+            {
+              "from": "",
+              "id": 0,
+              "text": "N/A",
+              "to": "",
+              "type": 1,
+              "value": "null"
+            },
+            {
+              "from": "",
+              "id": 1,
+              "text": "DOWN",
+              "to": "",
+              "type": 1,
+              "value": "0"
+            },
+            {
+              "from": "",
+              "id": 2,
+              "text": "UP",
+              "to": "",
+              "type": 1,
+              "value": "1"
+            }
+          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           }
@@ -41,12 +63,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 3,
         "w": 5,
         "x": 0,
         "y": 0
       },
-      "id": 4,
+      "id": 11,
       "options": {
         "colorMode": "value",
         "graphMode": "none",
@@ -64,7 +86,7 @@
       "pluginVersion": "7.2.0-343c53d6pre",
       "targets": [
         {
-          "expr": "probe_http_version{job=\"wordpresses@epfl\",origin=\"noc-zurich\", instance=\"https://www.epfl.ch\"}",
+          "expr": "probe_success{instance=\"https://www.epfl.ch\"}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -72,7 +94,8 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "HTTP version",
+      "title": "Status",
+      "transformations": [],
       "type": "stat"
     },
     {
@@ -100,6 +123,8 @@
       "legend": {
         "avg": false,
         "current": false,
+        "hideEmpty": false,
+        "hideZero": false,
         "max": false,
         "min": false,
         "show": true,
@@ -123,16 +148,17 @@
       "steppedLine": false,
       "targets": [
         {
+          "expr": "probe_duration_seconds{job=\"wordpresses@epfl\",origin=\"noc-zurich\", instance=\"https://www.epfl.ch\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "total",
+          "refId": "C"
+        },
+        {
           "expr": "probe_http_duration_seconds{job=\"wordpresses@epfl\",origin=\"noc-zurich\", instance=\"https://www.epfl.ch\"}",
           "interval": "",
           "legendFormat": "{{phase}}",
           "refId": "A"
-        },
-        {
-          "expr": "sum(probe_http_duration_seconds{job=\"wordpresses@epfl\",origin=\"noc-zurich\", instance=\"https://www.epfl.ch\"})",
-          "interval": "",
-          "legendFormat": "total",
-          "refId": "B"
         }
       ],
       "thresholds": [],
@@ -140,6 +166,101 @@
       "timeRegions": [],
       "timeShift": null,
       "title": "probe http duration seconds",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 6,
+        "x": 18,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 13,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.2.0-343c53d6pre",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "avg(probe_duration_seconds{job=\"wordpresses@epfl\",origin=\"noc-zurich\", instance=\"https://www.epfl.ch\"})",
+          "interval": "1m",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Avg probe duration",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -207,14 +328,14 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 5,
         "x": 0,
-        "y": 4
+        "y": 3
       },
       "id": 2,
       "options": {
-        "colorMode": "value",
+        "colorMode": "background",
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
@@ -245,9 +366,157 @@
       "datasource": null,
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
           },
+          "unit": "dateTimeAsIso"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 0,
+        "y": 7
+      },
+      "id": 9,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "7.2.0-343c53d6pre",
+      "targets": [
+        {
+          "expr": "probe_ssl_earliest_cert_expiry{job=\"wordpresses@epfl\",origin=\"noc-zurich\",instance=\"https://www.epfl.ch\"}*1000",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "SSL Expiry",
+      "type": "stat"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 6,
+        "x": 18,
+        "y": 9
+      },
+      "hiddenSeries": false,
+      "id": 14,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.2.0-343c53d6pre",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "avg(probe_dns_lookup_time_seconds{instance=\"https://www.epfl.ch\"})",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Avg DNS lookup",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -257,48 +526,48 @@
                 "value": null
               },
               {
-                "color": "#EAB839",
-                "value": 0
-              },
-              {
-                "color": "green",
-                "value": 200
-              },
-              {
                 "color": "red",
-                "value": 400
+                "value": 80
               }
             ]
-          },
-          "unit": "s"
+          }
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
+        "h": 3,
         "w": 5,
-        "x": 5,
-        "y": 9
+        "x": 0,
+        "y": 10
       },
-      "id": 7,
+      "id": 4,
       "options": {
-        "showHeader": true
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
       },
       "pluginVersion": "7.2.0-343c53d6pre",
       "targets": [
         {
-          "expr": "sum(probe_ssl_earliest_cert_expiry{}-time()) by (instance, path)",
-          "format": "table",
-          "instant": false,
+          "expr": "probe_http_version{job=\"wordpresses@epfl\",origin=\"noc-zurich\", instance=\"https://www.epfl.ch\"}",
           "interval": "",
-          "legendFormat": "Status",
+          "legendFormat": "",
           "refId": "A"
         }
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "HTTP Status",
-      "type": "table"
+      "title": "HTTP version",
+      "type": "stat"
     }
   ],
   "schemaVersion": 26,
@@ -331,5 +600,5 @@
   "timezone": "",
   "title": "WordPress Detail",
   "uid": "WPDetails",
-  "version": 1
+  "version": 2
 }
