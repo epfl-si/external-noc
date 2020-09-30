@@ -17,7 +17,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 8,
-  "iteration": 1601452692910,
+  "iteration": 1601459605788,
   "links": [],
   "panels": [
     {
@@ -35,7 +35,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 13,
+        "h": 15,
         "w": 12,
         "x": 0,
         "y": 0
@@ -162,13 +162,117 @@
       ]
     },
     {
+      "columns": [],
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 15,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 39,
+      "links": [],
+      "pageSize": null,
+      "scroll": true,
+      "showHeader": true,
+      "sort": {
+        "col": 2,
+        "desc": false
+      },
+      "styles": [
+        {
+          "alias": "Time",
+          "align": "auto",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "pattern": "Time",
+          "type": "hidden"
+        },
+        {
+          "alias": "Expires In",
+          "align": "auto",
+          "colorMode": "cell",
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "Value",
+          "thresholds": [
+            "7889231.49",
+            "15778463"
+          ],
+          "type": "number",
+          "unit": "dtdurations"
+        },
+        {
+          "alias": "Node",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "kubernetes_pod_node_name",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "Path",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "link": false,
+          "mappingType": 1,
+          "pattern": "path",
+          "preserveFormat": false,
+          "sanitize": false,
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "expr": "sum(probe_ssl_earliest_cert_expiry{}-time()) by (instance, path)",
+          "format": "table",
+          "instant": true,
+          "interval": "15s",
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "Node Certificates",
+      "transform": "table",
+      "type": "table-old"
+    },
+    {
       "collapsed": false,
       "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 13
+        "y": 15
       },
       "id": 23,
       "panels": [],
@@ -203,7 +307,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 14
+        "y": 16
       },
       "id": 25,
       "options": {
@@ -258,7 +362,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 14
+        "y": 16
       },
       "hiddenSeries": false,
       "id": 35,
@@ -345,7 +449,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 22
+        "y": 24
       },
       "id": 15,
       "panels": [],
@@ -388,7 +492,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 23
+        "y": 25
       },
       "id": 11,
       "interval": null,
@@ -446,7 +550,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 23
+        "y": 25
       },
       "id": 4,
       "interval": null,
@@ -504,7 +608,7 @@
         "h": 12,
         "w": 12,
         "x": 0,
-        "y": 31
+        "y": 33
       },
       "id": 13,
       "options": {
@@ -574,7 +678,7 @@
         "h": 12,
         "w": 12,
         "x": 12,
-        "y": 31
+        "y": 33
       },
       "id": 9,
       "interval": null,
@@ -613,7 +717,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 43
+        "y": 45
       },
       "id": 21,
       "panels": [],
@@ -638,7 +742,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 44
+        "y": 46
       },
       "hiddenSeries": false,
       "id": 2,
@@ -722,7 +826,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 53
+        "y": 55
       },
       "id": 19,
       "panels": [],
@@ -762,7 +866,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 54
+        "y": 56
       },
       "hiddenSeries": false,
       "id": 8,
@@ -885,7 +989,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 54
+        "y": 56
       },
       "id": 6,
       "options": {
@@ -935,7 +1039,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 62
+        "y": 64
       },
       "hiddenSeries": false,
       "id": 33,
@@ -1020,7 +1124,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 70
+        "y": 72
       },
       "id": 17,
       "panels": [],
@@ -1055,7 +1159,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 71
+        "y": 73
       },
       "id": 27,
       "options": {
@@ -1123,7 +1227,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 71
+        "y": 73
       },
       "id": 28,
       "options": {
@@ -1230,7 +1334,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 79
+        "y": 81
       },
       "id": 29,
       "options": {
@@ -1365,7 +1469,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 79
+        "y": 81
       },
       "id": 30,
       "options": {
@@ -1451,7 +1555,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 87
+        "y": 89
       },
       "id": 31,
       "options": {
@@ -1567,7 +1671,6 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "tags": [],
           "text": [
             "All"
           ],
@@ -1617,5 +1720,5 @@
   "timezone": "",
   "title": "WordPress general",
   "uid": "BL6kB5KGk",
-  "version": 21
+  "version": 22
 }
