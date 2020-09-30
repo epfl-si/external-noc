@@ -1594,7 +1594,8 @@
   "schemaVersion": 26,
   "style": "dark",
   "tags": [
-    "wordpress"
+    "wordpress",
+    "provisionned"
   ],
   "templating": {
     "list": [
