@@ -2,7 +2,7 @@ groups:
   - name: Site not 200
     rules:
     - alert: Site status code is not 200
-      expr: probe_http_status_code != 200
+      expr: probe_http_status_code{job="wordpresses@epfl",origin="noc-zurich"} != 200 and probe_http_status_code{job="wordpresses@epfl",origin="noc-zurich"}  != 0
       for: 10m
       labels:
         severity: page
@@ -14,7 +14,7 @@ groups:
   - name: Site down
     rules:
     - alert: Site down
-      expr: up == 0
+      expr: up{job="wordpresses@epfl",origin="noc-zurich"} == 0
       for: 5m
       labels:
         severity: page
