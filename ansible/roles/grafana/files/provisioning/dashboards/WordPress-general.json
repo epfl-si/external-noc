@@ -17,7 +17,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 8,
-  "iteration": 1601460161061,
+  "iteration": 1601547018576,
   "links": [],
   "panels": [
     {
@@ -814,6 +814,74 @@
       }
     },
     {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "Pages"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 43
+      },
+      "id": 40,
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Value"
+          }
+        ]
+      },
+      "pluginVersion": "7.2.0-343c53d6pre",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "expr": "sort_desc(sum(epfl_wp_site_pages{wp_env=~'$wp_env'}) by (url))",
+          "format": "table",
+          "instant": true,
+          "interval": "1",
+          "intervalFactor": 1,
+          "legendFormat": "{{ url }}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Pages per site ($wp_env)",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true
+            },
+            "indexByName": {},
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
       "collapsed": false,
       "datasource": null,
       "gridPos": {
@@ -1603,7 +1671,6 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "tags": [],
           "text": [
             "All"
           ],
@@ -1627,27 +1694,35 @@
         "tagValuesQuery": "$tag",
         "tags": [
           {
+            "selected": false,
             "text": "form"
           },
           {
+            "selected": false,
             "text": "inside"
           },
           {
+            "selected": false,
             "text": "labs"
           },
           {
+            "selected": false,
             "text": "manager"
           },
           {
+            "selected": false,
             "text": "sandbox"
           },
           {
+            "selected": false,
             "text": "subdomains"
           },
           {
+            "selected": false,
             "text": "subdomains-lite"
           },
           {
+            "selected": false,
             "text": "www"
           }
         ],
@@ -1659,7 +1734,6 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "tags": [],
           "text": [
             "All"
           ],
@@ -1689,7 +1763,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {
@@ -1708,6 +1782,6 @@
   },
   "timezone": "",
   "title": "WordPress general",
-  "uid": "BL6kB5KGk",
-  "version": 23
+  "uid": "WordPressMain",
+  "version": 25
 }
