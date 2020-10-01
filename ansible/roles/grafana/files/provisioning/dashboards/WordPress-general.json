@@ -17,7 +17,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 8,
-  "iteration": 1601553849237,
+  "iteration": 1601571713371,
   "links": [],
   "panels": [
     {
@@ -49,7 +49,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 10,
         "w": 12,
         "x": 0,
         "y": 1
@@ -69,8 +69,8 @@
       "pluginVersion": "7.2.0-343c53d6pre",
       "polystat": {
         "animationSpeed": 2500,
-        "columnAutoSize": true,
-        "columns": 20,
+        "columnAutoSize": false,
+        "columns": 30,
         "defaultClickThrough": "",
         "defaultClickThroughNewTab": false,
         "defaultClickThroughSanitize": false,
@@ -201,7 +201,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 10,
         "w": 12,
         "x": 12,
         "y": 1
@@ -266,7 +266,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 9
+        "y": 11
       },
       "id": 39,
       "links": [],
@@ -368,7 +368,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 9
+        "y": 11
       },
       "hiddenSeries": false,
       "id": 35,
@@ -455,7 +455,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 17
+        "y": 19
       },
       "id": 15,
       "panels": [],
@@ -498,7 +498,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 18
+        "y": 20
       },
       "id": 11,
       "interval": null,
@@ -556,7 +556,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 18
+        "y": 20
       },
       "id": 4,
       "interval": null,
@@ -614,7 +614,7 @@
         "h": 12,
         "w": 12,
         "x": 0,
-        "y": 26
+        "y": 28
       },
       "id": 13,
       "options": {
@@ -684,7 +684,7 @@
         "h": 12,
         "w": 12,
         "x": 12,
-        "y": 26
+        "y": 28
       },
       "id": 9,
       "interval": null,
@@ -723,7 +723,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 38
+        "y": 40
       },
       "id": 21,
       "panels": [],
@@ -748,7 +748,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 39
+        "y": 41
       },
       "hiddenSeries": false,
       "id": 2,
@@ -851,7 +851,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 39
+        "y": 41
       },
       "id": 40,
       "options": {
@@ -900,7 +900,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 48
+        "y": 50
       },
       "id": 19,
       "panels": [],
@@ -940,7 +940,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 49
+        "y": 51
       },
       "hiddenSeries": false,
       "id": 8,
@@ -1063,7 +1063,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 49
+        "y": 51
       },
       "id": 6,
       "options": {
@@ -1113,7 +1113,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 57
+        "y": 59
       },
       "hiddenSeries": false,
       "id": 33,
@@ -1198,7 +1198,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 65
+        "y": 67
       },
       "id": 17,
       "panels": [],
@@ -1233,7 +1233,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 66
+        "y": 68
       },
       "id": 27,
       "options": {
@@ -1301,7 +1301,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 66
+        "y": 68
       },
       "id": 28,
       "options": {
@@ -1408,7 +1408,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 74
+        "y": 76
       },
       "id": 29,
       "options": {
@@ -1543,7 +1543,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 74
+        "y": 76
       },
       "id": 30,
       "options": {
@@ -1629,7 +1629,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 82
+        "y": 84
       },
       "id": 31,
       "options": {
@@ -1746,7 +1746,6 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "tags": [],
           "text": [
             "All"
           ],
@@ -1796,5 +1795,5 @@
   "timezone": "",
   "title": "WordPress general",
   "uid": "WordPressMain",
-  "version": 28
+  "version": 29
 }
