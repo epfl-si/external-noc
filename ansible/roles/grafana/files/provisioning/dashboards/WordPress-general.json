@@ -17,9 +17,23 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 8,
-  "iteration": 1601552856142,
+  "iteration": 1601553849237,
   "links": [],
   "panels": [
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 23,
+      "panels": [],
+      "title": "General",
+      "type": "row"
+    },
     {
       "colors": [
         "#299c46",
@@ -35,10 +49,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 12,
+        "h": 8,
         "w": 12,
         "x": 0,
-        "y": 0
+        "y": 1
       },
       "id": 37,
       "mappingType": 1,
@@ -162,6 +176,83 @@
       ]
     },
     {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "id": 25,
+      "options": {
+        "frameIndex": 0,
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Value"
+          }
+        ]
+      },
+      "pluginVersion": "7.2.0-343c53d6pre",
+      "targets": [
+        {
+          "expr": "probe_http_status_code{job=\"wordpresses@epfl\",origin=\"noc-zurich\",wp_env=~\"$wp_env\"} != 200",
+          "format": "table",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "HTTP status != 200",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "__name__": true,
+              "job": true,
+              "origin": true,
+              "probe": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "instance": "URL",
+              "job": ""
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
       "columns": [],
       "datasource": null,
       "fieldConfig": {
@@ -172,10 +263,10 @@
       },
       "fontSize": "100%",
       "gridPos": {
-        "h": 12,
+        "h": 8,
         "w": 12,
-        "x": 12,
-        "y": 0
+        "x": 0,
+        "y": 9
       },
       "id": 39,
       "links": [],
@@ -260,85 +351,6 @@
       "type": "table-old"
     },
     {
-      "collapsed": false,
-      "datasource": null,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 12
-      },
-      "id": 23,
-      "panels": [],
-      "title": "General",
-      "type": "row"
-    },
-    {
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
-            "align": null
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 13
-      },
-      "id": 25,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "last"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "value_and_name"
-      },
-      "pluginVersion": "7.2.0-343c53d6pre",
-      "targets": [
-        {
-          "expr": "vprobe_http_status_code != 200",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        },
-        {
-          "expr": "",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "B"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Site http_code != 200",
-      "type": "stat"
-    },
-    {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -356,7 +368,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 13
+        "y": 9
       },
       "hiddenSeries": false,
       "id": 35,
@@ -443,7 +455,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 21
+        "y": 17
       },
       "id": 15,
       "panels": [],
@@ -486,7 +498,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 22
+        "y": 18
       },
       "id": 11,
       "interval": null,
@@ -544,7 +556,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 22
+        "y": 18
       },
       "id": 4,
       "interval": null,
@@ -602,7 +614,7 @@
         "h": 12,
         "w": 12,
         "x": 0,
-        "y": 30
+        "y": 26
       },
       "id": 13,
       "options": {
@@ -672,7 +684,7 @@
         "h": 12,
         "w": 12,
         "x": 12,
-        "y": 30
+        "y": 26
       },
       "id": 9,
       "interval": null,
@@ -711,7 +723,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 42
+        "y": 38
       },
       "id": 21,
       "panels": [],
@@ -736,7 +748,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 43
+        "y": 39
       },
       "hiddenSeries": false,
       "id": 2,
@@ -839,7 +851,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 43
+        "y": 39
       },
       "id": 40,
       "options": {
@@ -888,7 +900,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 52
+        "y": 48
       },
       "id": 19,
       "panels": [],
@@ -928,7 +940,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 53
+        "y": 49
       },
       "hiddenSeries": false,
       "id": 8,
@@ -1051,7 +1063,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 53
+        "y": 49
       },
       "id": 6,
       "options": {
@@ -1101,7 +1113,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 61
+        "y": 57
       },
       "hiddenSeries": false,
       "id": 33,
@@ -1186,7 +1198,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 69
+        "y": 65
       },
       "id": 17,
       "panels": [],
@@ -1221,7 +1233,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 70
+        "y": 66
       },
       "id": 27,
       "options": {
@@ -1289,7 +1301,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 70
+        "y": 66
       },
       "id": 28,
       "options": {
@@ -1396,7 +1408,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 78
+        "y": 74
       },
       "id": 29,
       "options": {
@@ -1531,7 +1543,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 78
+        "y": 74
       },
       "id": 30,
       "options": {
@@ -1617,7 +1629,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 86
+        "y": 82
       },
       "id": 31,
       "options": {
@@ -1658,7 +1670,7 @@
       "type": "table"
     }
   ],
-  "refresh": "",
+  "refresh": "30s",
   "schemaVersion": 26,
   "style": "dark",
   "tags": [
@@ -1764,7 +1776,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {
@@ -1784,5 +1796,5 @@
   "timezone": "",
   "title": "WordPress general",
   "uid": "WordPressMain",
-  "version": 26
+  "version": 28
 }
