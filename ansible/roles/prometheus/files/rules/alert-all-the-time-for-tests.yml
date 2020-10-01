@@ -2,14 +2,14 @@ groups:
   - name: Site not 200
     rules:
     - alert: Site status code is not 200
-      expr: probe_http_status_code == 200
-      for: 1m
+      expr: probe_http_status_code != 200
+      for: 10m
       labels:
         severity: page
         sendto: telegram
       annotations:
-        summary: "HTTP status of {{$labels.instance}} is not 200"
-        description: "{{$labels.instance}} of job {{$labels.job}} has not HTTP status == 200 for more than 5 minutes."
+        summary: "HTTP status of {{$labels.instance}} is not 200 ({{$labels.slug}})"
+        description: "{{$labels.instance}} of job {{$labels.job}} has not HTTP status == 200 for more than 5 minutes ({{$labels.slug}})."
 
   - name: Site down
     rules:
