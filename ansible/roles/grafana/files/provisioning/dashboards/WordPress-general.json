@@ -17,7 +17,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 8,
-  "iteration": 1601571713371,
+  "iteration": 1601580696828,
   "links": [],
   "panels": [
     {
@@ -42,6 +42,7 @@
         "#4040a0"
       ],
       "datasource": null,
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -49,7 +50,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 10,
+        "h": 8,
         "w": 12,
         "x": 0,
         "y": 1
@@ -70,7 +71,7 @@
       "polystat": {
         "animationSpeed": 2500,
         "columnAutoSize": false,
-        "columns": 30,
+        "columns": 40,
         "defaultClickThrough": "",
         "defaultClickThroughNewTab": false,
         "defaultClickThroughSanitize": false,
@@ -85,8 +86,8 @@
         "globalOperatorName": "avg",
         "globalUnitFormat": "short",
         "gradientEnabled": true,
-        "hexagonSortByDirection": 1,
-        "hexagonSortByField": "name",
+        "hexagonSortByDirection": 2,
+        "hexagonSortByField": "value",
         "maxMetrics": 0,
         "polygonBorderColor": "black",
         "polygonBorderSize": 2,
@@ -198,10 +199,47 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "URL"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 732
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "wp_env"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 178
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 86
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
-        "h": 10,
+        "h": 8,
         "w": 12,
         "x": 12,
         "y": 1
@@ -266,7 +304,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 11
+        "y": 9
       },
       "id": 39,
       "links": [],
@@ -368,7 +406,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 11
+        "y": 9
       },
       "hiddenSeries": false,
       "id": 35,
@@ -455,7 +493,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 19
+        "y": 17
       },
       "id": 15,
       "panels": [],
@@ -498,7 +536,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 20
+        "y": 18
       },
       "id": 11,
       "interval": null,
@@ -556,7 +594,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 20
+        "y": 18
       },
       "id": 4,
       "interval": null,
@@ -614,7 +652,7 @@
         "h": 12,
         "w": 12,
         "x": 0,
-        "y": 28
+        "y": 26
       },
       "id": 13,
       "options": {
@@ -684,7 +722,7 @@
         "h": 12,
         "w": 12,
         "x": 12,
-        "y": 28
+        "y": 26
       },
       "id": 9,
       "interval": null,
@@ -723,7 +761,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 40
+        "y": 38
       },
       "id": 21,
       "panels": [],
@@ -748,7 +786,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 41
+        "y": 39
       },
       "hiddenSeries": false,
       "id": 2,
@@ -851,7 +889,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 41
+        "y": 39
       },
       "id": 40,
       "options": {
@@ -900,7 +938,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 50
+        "y": 48
       },
       "id": 19,
       "panels": [],
@@ -940,7 +978,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 51
+        "y": 49
       },
       "hiddenSeries": false,
       "id": 8,
@@ -1063,7 +1101,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 51
+        "y": 49
       },
       "id": 6,
       "options": {
@@ -1113,7 +1151,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 59
+        "y": 57
       },
       "hiddenSeries": false,
       "id": 33,
@@ -1198,7 +1236,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 67
+        "y": 65
       },
       "id": 17,
       "panels": [],
@@ -1233,7 +1271,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 68
+        "y": 66
       },
       "id": 27,
       "options": {
@@ -1301,7 +1339,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 68
+        "y": 66
       },
       "id": 28,
       "options": {
@@ -1408,7 +1446,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 76
+        "y": 74
       },
       "id": 29,
       "options": {
@@ -1543,7 +1581,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 76
+        "y": 74
       },
       "id": 30,
       "options": {
@@ -1629,7 +1667,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 84
+        "y": 82
       },
       "id": 31,
       "options": {
@@ -1682,7 +1720,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
+          "selected": false,
           "text": [
             "All"
           ],
@@ -1746,6 +1784,7 @@
         "allValue": null,
         "current": {
           "selected": true,
+          "tags": [],
           "text": [
             "All"
           ],
