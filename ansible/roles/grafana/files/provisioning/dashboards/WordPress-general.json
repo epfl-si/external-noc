@@ -17,7 +17,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 8,
-  "iteration": 1601547018576,
+  "iteration": 1601552856142,
   "links": [],
   "panels": [
     {
@@ -103,7 +103,7 @@
       "savedComposites": [],
       "savedOverrides": [
         {
-          "clickThrough": "",
+          "clickThrough": "/d/WPDetails/wordpress-detail?var-wp_site=${__cell_name}",
           "colors": [
             "#299c46",
             "#e5ac0e",
@@ -117,7 +117,7 @@
           "newTabEnabled": true,
           "operatorName": "avg",
           "prefix": "",
-          "sanitizeURLEnabled": true,
+          "sanitizeURLEnabled": false,
           "scaledDecimals": null,
           "suffix": "",
           "thresholds": [
@@ -1658,7 +1658,7 @@
       "type": "table"
     }
   ],
-  "refresh": "30s",
+  "refresh": "",
   "schemaVersion": 26,
   "style": "dark",
   "tags": [
@@ -1734,6 +1734,7 @@
         "allValue": null,
         "current": {
           "selected": true,
+          "tags": [],
           "text": [
             "All"
           ],
@@ -1763,7 +1764,7 @@
     ]
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {
@@ -1783,5 +1784,5 @@
   "timezone": "",
   "title": "WordPress general",
   "uid": "WordPressMain",
-  "version": 25
+  "version": 26
 }
