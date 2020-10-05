@@ -17,7 +17,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 8,
-  "iteration": 1601580696828,
+  "iteration": 1601913277297,
   "links": [],
   "panels": [
     {
@@ -137,7 +137,7 @@
           "suffix": "",
           "thresholds": [
             {
-              "color": "#e5ac0e",
+              "color": "#FFF899",
               "state": 1,
               "value": 0
             },
@@ -147,9 +147,14 @@
               "value": 200
             },
             {
-              "color": "#bf1b00",
+              "color": "#FF9830",
               "state": 2,
               "value": 400
+            },
+            {
+              "color": "#bf1b00",
+              "state": 2,
+              "value": 500
             }
           ],
           "unitFormat": "none"
@@ -158,7 +163,7 @@
       "targets": [
         {
           "expr": "probe_http_status_code{job=\"wordpresses@epfl\",origin=\"noc-zurich\",wp_env=~\"$wp_env\"}",
-          "instant": false,
+          "instant": true,
           "interval": "",
           "legendFormat": "  {{ instance }}",
           "refId": "A"
@@ -1720,7 +1725,8 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
+          "selected": true,
+          "tags": [],
           "text": [
             "All"
           ],
@@ -1744,35 +1750,27 @@
         "tagValuesQuery": "$tag",
         "tags": [
           {
-            "selected": false,
             "text": "form"
           },
           {
-            "selected": false,
             "text": "inside"
           },
           {
-            "selected": false,
             "text": "labs"
           },
           {
-            "selected": false,
             "text": "manager"
           },
           {
-            "selected": false,
             "text": "sandbox"
           },
           {
-            "selected": false,
             "text": "subdomains"
           },
           {
-            "selected": false,
             "text": "subdomains-lite"
           },
           {
-            "selected": false,
             "text": "www"
           }
         ],
@@ -1784,7 +1782,6 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "tags": [],
           "text": [
             "All"
           ],
@@ -1834,5 +1831,5 @@
   "timezone": "",
   "title": "WordPress general",
   "uid": "WordPressMain",
-  "version": 29
+  "version": 30
 }
