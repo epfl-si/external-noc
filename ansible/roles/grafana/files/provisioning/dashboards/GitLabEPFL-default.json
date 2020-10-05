@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1598894474547,
+  "iteration": 1599151726004,
   "links": [
     {
       "icon": "external link",
@@ -110,7 +110,7 @@
         "lineColor": "rgb(31, 120, 193)",
         "show": true
       },
-      "tableColumn": "% used",
+      "tableColumn": "",
       "targets": [
         {
           "expr": "100-(100*instance:node_filesystem_avail:ratio{device=\"rootfs\",environment=\"prod\",fstype=\"rootfs\",instance=\"$instance\",job=\"node\",mountpoint=\"/\",service=\"gitlab\"})",
@@ -206,7 +206,7 @@
         "lineColor": "#8AB8FF",
         "show": true
       },
-      "tableColumn": "% NAS used",
+      "tableColumn": "",
       "targets": [
         {
           "expr": "100-(100*instance:node_filesystem_avail:ratio{device=\"nas-app-ma-nfs1:/si_gitlab_app/backup\",environment=\"prod\",fstype=\"nfs\",instance=\"$instance\",job=\"node\",mountpoint=\"/var/opt/gitlab/backups\",service=\"gitlab\"})",
@@ -309,11 +309,11 @@
         "ymax": null,
         "ymin": null
       },
-      "tableColumn": "gitlab_users_total{instance=\"gitlab.epfl.ch:443\", job=\"gitlab-statistics@epfl\"}",
+      "tableColumn": "",
       "targets": [
         {
-          "expr": "gitlab_users_total",
-          "instant": true,
+          "expr": "gitlab_active_users_total",
+          "instant": false,
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -345,6 +345,7 @@
         "#d44a3a"
       ],
       "datasource": null,
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -401,11 +402,10 @@
         "ymax": null,
         "ymin": null
       },
-      "tableColumn": "gitlab_groups_total{instance=\"gitlab.epfl.ch:443\", job=\"gitlab-statistics@epfl\"}",
+      "tableColumn": "",
       "targets": [
         {
           "expr": "gitlab_groups_total",
-          "instant": true,
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -502,14 +502,17 @@
         "ymax": null,
         "ymin": null
       },
-      "tableColumn": "gitlab_projects_total{instance=\"gitlab.epfl.ch:443\", job=\"gitlab-statistics@epfl\"}",
+      "tableColumn": "",
       "targets": [
         {
           "expr": "gitlab_projects_total",
-          "instant": true,
           "interval": "",
           "legendFormat": "",
           "refId": "A"
+        },
+        {
+          "expr": "",
+          "refId": "B"
         }
       ],
       "thresholds": "",
@@ -597,14 +600,17 @@
         "ymax": null,
         "ymin": null
       },
-      "tableColumn": "gitlab_issues_total{instance=\"gitlab.epfl.ch:443\", job=\"gitlab-statistics@epfl\"}",
+      "tableColumn": "",
       "targets": [
         {
           "expr": "gitlab_issues_total",
-          "instant": true,
           "interval": "",
           "legendFormat": "",
           "refId": "A"
+        },
+        {
+          "expr": "",
+          "refId": "B"
         }
       ],
       "thresholds": "",
@@ -660,13 +666,17 @@
       "lines": true,
       "linewidth": 1,
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
-      "pluginVersion": "7.1.5",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [
         {
+          "$$hashKey": "object:494",
           "alias": "avg_over_time",
           "color": "#C0D8FF",
           "dashLength": 5,
@@ -682,34 +692,40 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "probe_http_duration_seconds{slug=\"go\",origin=\"zurich\",phase=\"connect\"}",
+          "expr": "probe_http_duration_seconds{slug=\"gitlab\",origin=\"paris\",phase=\"connect\"}",
           "hide": false,
+          "interval": "",
           "legendFormat": "connect",
           "refId": "A"
         },
         {
-          "expr": "probe_http_duration_seconds{slug=\"go\",origin=\"zurich\",phase=\"resolve\"}",
+          "expr": "probe_http_duration_seconds{slug=\"gitlab\",origin=\"paris\",phase=\"resolve\"}",
           "hide": false,
+          "interval": "",
           "legendFormat": "resolve",
           "refId": "B"
         },
         {
-          "expr": "probe_http_duration_seconds{slug=\"go\",origin=\"zurich\",phase=\"tls\"}",
+          "expr": "probe_http_duration_seconds{slug=\"gitlab\",origin=\"paris\",phase=\"tls\"}",
+          "interval": "",
           "legendFormat": "tls",
           "refId": "C"
         },
         {
-          "expr": "probe_http_duration_seconds{slug=\"go\",origin=\"zurich\",phase=\"transfer\"}",
+          "expr": "probe_http_duration_seconds{slug=\"gitlab\",origin=\"paris\",phase=\"transfer\"}",
+          "interval": "",
           "legendFormat": "transfer",
           "refId": "D"
         },
         {
-          "expr": "probe_http_duration_seconds{slug=\"go\",origin=\"zurich\",phase=\"processing\"}",
+          "expr": "probe_http_duration_seconds{slug=\"gitlab\",origin=\"paris\",phase=\"processing\"}",
+          "interval": "",
           "legendFormat": "processing",
           "refId": "E"
         },
         {
-          "expr": "sum(avg_over_time(probe_http_duration_seconds{slug=\"go\",origin=\"zurich\"}[5m]))",
+          "expr": "sum(avg_over_time(probe_http_duration_seconds{slug=\"gitlab\",origin=\"paris\"}[5m]))",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "avg_over_time",
           "refId": "G"
@@ -735,6 +751,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:513",
           "format": "ms",
           "label": null,
           "logBase": 1,
@@ -743,6 +760,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:514",
           "format": "short",
           "label": "",
           "logBase": 1,
@@ -771,109 +789,157 @@
       "type": "row"
     },
     {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
       "datasource": null,
       "fieldConfig": {
         "defaults": {
           "custom": {},
-          "links": [],
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
+          "links": []
         },
         "overrides": []
       },
+      "fill": 1,
+      "fillGradient": 8,
       "gridPos": {
         "h": 9,
         "w": 16,
         "x": 0,
         "y": 26
       },
+      "hiddenSeries": false,
       "id": 6,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": false,
+        "total": false,
+        "values": false
       },
-      "pluginVersion": "7.1.5",
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.2.0-e616dea4pre",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
       "targets": [
         {
-          "expr": "gitlab_users_total",
+          "expr": "gitlab_active_users_total",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
           "refId": "A"
         }
       ],
+      "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Users count",
-      "type": "stat"
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:596",
+          "decimals": -1,
+          "format": "none",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:597",
+          "decimals": null,
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
       "datasource": null,
       "fieldConfig": {
         "defaults": {
           "custom": {},
-          "links": [],
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
+          "links": []
         },
         "overrides": []
       },
+      "fill": 1,
+      "fillGradient": 2,
       "gridPos": {
         "h": 9,
         "w": 16,
         "x": 0,
         "y": 35
       },
+      "hiddenSeries": false,
       "id": 4,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
+      "legend": {
+        "avg": false,
+        "current": true,
+        "hideEmpty": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": false,
+        "total": false,
+        "values": true
       },
-      "pluginVersion": "7.1.5",
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.2.0-e616dea4pre",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
       "targets": [
         {
           "expr": "gitlab_projects_total",
@@ -882,10 +948,49 @@
           "refId": "A"
         }
       ],
+      "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Projects count",
-      "type": "stat"
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:683",
+          "decimals": null,
+          "format": "none",
+          "label": null,
+          "logBase": 1,
+          "max": "2000",
+          "min": "900",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:684",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -922,8 +1027,11 @@
       "lines": true,
       "linewidth": 1,
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
-      "pluginVersion": "7.1.5",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1018,8 +1126,11 @@
       "lines": true,
       "linewidth": 1,
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
-      "pluginVersion": "7.1.5",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1156,7 +1267,7 @@
         "frequency": "4h",
         "handler": 1,
         "message": "Gitlab disk usage is above 90% !",
-        "name": "Gitlab disk usage alert",
+        "name": "GitLab disk usage alert",
         "noDataState": "no_data",
         "notifications": []
       },
@@ -1194,8 +1305,11 @@
       "lines": true,
       "linewidth": 1,
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
-      "pluginVersion": "7.1.5",
+      "pluginVersion": "7.2.0-e616dea4pre",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1277,9 +1391,14 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
-          "text": "docker-c31650dc4358",
-          "value": "docker-c31650dc4358"
+          "selected": true,
+          "tags": [],
+          "text": [
+            "docker-cd664cffaef9"
+          ],
+          "value": [
+            "docker-cd664cffaef9"
+          ]
         },
         "datasource": "idevfsd-prometheus",
         "definition": "label_values(up{service=\"gitlab\"},instance)",
@@ -1304,6 +1423,7 @@
         "allValue": null,
         "current": {
           "selected": true,
+          "tags": [],
           "text": [
             "All"
           ],
@@ -1351,7 +1471,7 @@
     ]
   },
   "timezone": "",
-  "title": "Gitlab EPFL",
-  "uid": "O816VntWz",
-  "version": 1
+  "title": "GitLab EPFL",
+  "uid": "GitlabEPFL",
+  "version": 20926
 }

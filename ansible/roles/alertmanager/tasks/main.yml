@@ -1,21 +1,31 @@
 ---
-- name: Copy alertmanager static files
+- name: alertmanager configuration directory
+  file:
+    path: "{{ alertmanager_state_path }}/config"
+    state: directory
+
+- name: alertmanager configuration
   copy:
-    src: "{{ role_path }}/files/"
-    dest: "{{ install_path }}/alertmanager/"
-  register: _alertmanager_static_file
+    dest: "{{ alertmanager_state_path }}/config/config.yml"
+    content: '{{ lookup("template", "config.yml") }}'
+  register: _alertmanager_static_config
 
 - name: Run alertmanager
   docker_container:
     name: "{{ alertmanager_container_name }}"
     image: "{{ alertmanager_image }}:{{ alertmanager_version }}"
-    restart: "{{ _alertmanager_static_file is changed }}"
+    restart: "{{ _alertmanager_static_config is changed }}"
     detach: yes
-    command: --config.file=/config/simple.yml
+    command: >-
+      --config.file=/config/config.yml
+      {% if runenv == "dev" %}
+        --storage.path=/tmp 
+        --log.level=debug
+      {% endif %}
+      --web.external-url=https://am{{ dnspostfix }}.{{ frontend.domain }}
     restart_policy: unless-stopped
     network_mode: "{{ backend_network_name }}"
-    volumes:
-      - "{{ alertmanager_state_path }}/config:/config"
+    mounts: "{{ mounts[runenv] }}"
     log_driver: json-file
     log_options:
       max-size: 50m
@@ -29,3 +39,22 @@
       traefik.http.routers.alertmanager.middlewares: "alertmanager_auth"
       traefik.http.middlewares.alertmanager_auth.basicauth.users: "{{ frontend.htpass }}"
       traefik.http.middlewares.alertmanager_auth.basicauth.removeheader: "true"
+  vars:
+    mounts:
+      prod: "{{ [config_mount] }}"
+      dev: "{{ [config_mount, fake_alertmanager_state_volume] }}"
+    config_mount:
+      type: bind
+      source: "{{ alertmanager_state_path }}/config"
+      target: "/config"
+    fake_alertmanager_state_volume:
+      type: tmpfs
+      target: "/alertmanager2"
+
+- name: Run debugapi
+  docker_container:
+    name: debugapi
+    image: ponsfrilus/debugapi
+    detach: yes
+    restart_policy: unless-stopped
+    network_mode: "{{ backend_network_name }}"

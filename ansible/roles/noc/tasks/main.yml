@@ -54,6 +54,7 @@
     name:
       - docker-py
     state: absent
+  tags: pip
 
 - name: Install the required Python APIs
   pip:
@@ -64,7 +65,8 @@
       # For the latter, a dab of
       # https://stackoverflow.com/a/57607284/435004 may or may not be
       # required.
-    state: latest
+    state: present
+  tags: pip
 
 - name: "Create docker {{ backend_network_name }} network"
   docker_network:

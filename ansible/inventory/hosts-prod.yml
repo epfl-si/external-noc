@@ -4,6 +4,10 @@ all:
     dnspostfix: ""
 
 noc:
+  children:
+    noc_prod
+
+noc_prod:
   hosts:
     noc_prod1:
       ansible_host: noc1.idev-fsd.ml

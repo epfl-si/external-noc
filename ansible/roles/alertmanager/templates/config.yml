@@ -1,0 +1,93 @@
+global:
+  # The smarthost and SMTP sender used for mail notifications.
+  smtp_from: "{{ _noc_secrets.mail_epfl.address }}"
+{% if runenv == 'prod' %}
+  smtp_smarthost: 'mail.epfl.ch:465'
+  smtp_auth_username: "{{ _noc_secrets.mail_epfl.username }}"
+  smtp_auth_password: "{{ _noc_secrets.mail_epfl.password }}"
+  smtp_require_tls: false
+{% else %}
+  # Do not duplicate alerts
+  smtp_smarthost: 'postfix-blackhole:25'
+  smtp_require_tls: false
+{% endif %}
+
+# The directory from which notification templates are read.
+templates: 
+- '/etc/alertmanager/template/*.tmpl'
+
+# The root route on which each incoming alert enters.
+route:
+  # The labels by which incoming alerts are grouped together. For example,
+  # multiple alerts coming in for cluster=A and alertname=LatencyHigh would
+  # be batched into a single group.
+  #
+  # To aggregate by all possible labels use '...' as the sole label name.
+  # This effectively disables aggregation entirely, passing through all
+  # alerts as-is. This is unlikely to be what you want, unless you have
+  # a very low alert volume or your upstream notification system performs
+  # its own grouping. Example: group_by: [...]
+  group_by: [...]
+
+  #continue: true
+
+  # When a new group of alerts is created by an incoming alert, wait at
+  # least 'group_wait' to send the initial notification.
+  # This way ensures that you get multiple alerts for the same group that start
+  # firing shortly after another are batched together on the first 
+  # notification.
+  group_wait: 30s
+
+  # When the first notification was sent, wait 'group_interval' to send a batch
+  # of new alerts that started firing for that group.
+  group_interval: 5m
+
+  # If an alert has successfully been sent, wait 'repeat_interval' to
+  # resend them.
+  repeat_interval: 3h 
+
+  # A default receiver
+  receiver: idev-fsd-ops-mails
+
+  # All the above attributes are inherited by all child routes and can 
+  # overwritten on each.
+  
+  routes:
+    - receiver: 'alert-tg-bot'
+      group_by: ['instance']
+      group_wait: 45s
+      group_interval: 10m # Usually ~5 mins or more.
+      # https://prometheus.io/docs/alerting/latest/configuration/#route
+      # If continue is true on a matching node, the alert will continue matching 
+      # against subsequent siblings
+      continue: true
+      match:
+        sendto: telegram
+    - receiver: 'debugapi'
+      group_by: ['instance']
+      continue: true
+      match:
+        sendto: telegram
+
+receivers:
+- name: 'idev-fsd-ops-mails'
+  email_configs:
+  - to: 'idev-fsd-monitoring@groupes.epfl.ch'
+
+- name: 'idev-fsd-ops-pager'
+  email_configs:
+  - to: 'idev-fsd-monitoring@groupes.epfl.ch'
+
+- name: 'idev-fsd-mails'
+  email_configs:
+  - to: 'idev-fsd-monitoring@groupes.epfl.ch'
+
+- name: 'alert-tg-bot'
+  webhook_configs:
+  - send_resolved: true
+    url: 'http://alert-tg-bot:3000/-460587583'
+
+- name: 'debugapi'
+  webhook_configs:
+  - send_resolved: true
+    url: 'http://debugapi:3000/'

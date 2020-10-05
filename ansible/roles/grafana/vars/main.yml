@@ -16,6 +16,7 @@ grafana:
   plugins:
     - grafana-piechart-panel
     - grafana-clock-panel
+    - grafana-polystat-panel
 
 # The TELEGRAM_BOT_ADMINISTRATOR_ID is @ponsfrilus' account ID 9917772
 telegram:

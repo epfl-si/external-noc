@@ -1,0 +1,14 @@
+- name: Run alert telegram bot
+  docker_container:
+    name: alert-tg-bot
+    image: epflsi/alert-tg-bot
+    pull: "{{ 'no' if runenv == 'prod' else 'yes' }}"
+    env:
+      TELEGRAM_BOT_TOKEN: "{{ _noc_secrets.telegram.TOKEN }}"
+      DEBUG: "{{ 'false' if runenv == 'prod' else 'true' }}"
+      AM_BASIC_AUTH_USER: "{{ _noc_secrets.frontend.credentials[2].user }}"
+      AM_BASIC_AUTH_PASS: "{{ _noc_secrets.frontend.credentials[2].pass }}"
+      AM_URL: "https://am{{ dnspostfix }}.{{ frontend.domain }}"
+    detach: yes
+    restart_policy: unless-stopped
+    network_mode: "{{ backend_network_name }}"

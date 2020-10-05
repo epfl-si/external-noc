@@ -15,10 +15,10 @@ urls:
       url: https://go.epfl.ch
     - name: igm
       slug: igm
-      url: https://igm.epfl.ch
-    - name: it
-      slug: it
-      url: https://it.epfl.ch
+      url: https://sti.epfl.ch/research/institutes/igm
+    - name: support-epfl
+      slug: support-epfl
+      url: https://support.epfl.ch/epfl
     - name: sti
       slug: sti
       url: https://sti.epfl.ch
@@ -33,44 +33,30 @@ urls:
       slug: people
       url: https://people.epfl.ch
     - name: epfl-about
-      slug: www.epfl.ch_about
-      url: https://www.epfl.ch/about/fr/a-propos/
-    -
-      url: https://www.epfl.ch/campus/associations/list/ishigo-g/
-      slug: ishigo-g
-    -
-      url: https://www.epfl.ch/campus/associations/list/ishigo-g/redirect
-      slug: ishigo-g_redirect
-    -
-      url: https://www.epfl.ch/campus/associations/list/ishigo-g/B117
-      slug: ishigo-g_B117
-    -
-      url: https://www.epfl.ch/campus/associations/list/ishigo-g/page-148545-en-html/page-154212-en-html/
-      slug: ishigo-g_page
-    -
-      url: https://www.epfl.ch/campus/associations/list/ishigo-g/memento/
-      slug: ishigo-g_memento
-    -
-      url: https://www.epfl.ch/campus/associations/list/ishigo-g/people/
-      slug: ishigo-g_people
-    -
-      url: https://www.epfl.ch/campus/associations/list/ishigo-g/actu/
-      slug: ishigo-g_actu
-    -
-      url: https://www.epfl.ch/campus/associations/list/ishigo-g/cover/
-      slug: ishigo-g_cover
-    -
-      url: https://www.epfl.ch/campus/associations/list/ishigo-g/hero/
-      slug: ishigo-g_hero
-    -
-      url: https://www.epfl.ch/campus/associations/list/ishigo-g/card/
-      slug: ishigo-g_card
-    -
-      url: https://www.epfl.ch/campus/associations/list/ishigo-g/gal/
-      slug: ishigo-g_gal
-    -
-      url: https://www.epfl.ch/campus/associations/list/ishigo-g/infoscience/
-      slug: ishigo-g_infoscience
+      slug: www_epfl_ch_about
+      url: https://www.epfl.ch/about/fr/a-propos
+    - name: education
+      slug: www_epfl_ch_education
+      url: https://www.epfl.ch/education
+    - name: research
+      slug: www_epfl_ch_research
+      url: https://www.epfl.ch/research
+    - name: innovation
+      slug: www_epfl_ch_innovation
+      url: https://www.epfl.ch/innovation
+    - name: schools
+      slug: www_epfl_ch_schools
+      url: https://www.epfl.ch/schools
+    - name: campus
+      slug: www_epfl_ch_campus
+      url: https://www.epfl.ch/campus
+    - name: services
+      slug: www_epfl_ch_campus_services
+      url: https://www.epfl.ch/campus/services
+    - name: labs
+      slug: www.epfl.ch_labs
+      url: https://www.epfl.ch/labs
+
 
   veritas: "{{ sites_from_veritas.stdout | default('[]') | from_json }}"
 
@@ -103,8 +89,8 @@ sources:
   blackbox:
     - name: bbe-ch-zh
       origin: zurich
-      server: "blackbox-exporter:{{ bbe.port | default('9115')}}"
-      auth:
+      server: "{{ blackboxexporter_container_name }}:{{ bbe.port | default('9115')}}"
+      auth: '{{ auth.legacy }}'
     - name: bbe-fr-par
       origin: paris
       server: "bbe-paris.idev-fsd.ml:80"
@@ -120,8 +106,8 @@ sources:
       origin: paris
       server: ressenti-paris.idev-fsd.ml
       auth: '{{ auth.legacy }}'
-    - name: res-fr-par2
-      module: firefox
-      origin: paris2
-      server: ressenti-paris2.idev-fsd.ml
-      auth: '{{ auth.legacy }}'
+    # - name: res-fr-par2
+    #   module: firefox
+    #   origin: paris2
+    #   server: ressenti-paris2.idev-fsd.ml
+    #   auth: '{{ auth.legacy }}'

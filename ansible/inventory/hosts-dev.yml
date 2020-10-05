@@ -2,7 +2,12 @@ all:
   vars:
     runenv: dev
     dnspostfix: "-tst"
+
 noc:
+  children:
+    noc_dev
+
+noc_dev:
   hosts:
     noc_test1:
       ansible_host: noc-tst.idev-fsd.ml
