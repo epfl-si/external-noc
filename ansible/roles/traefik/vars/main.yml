@@ -7,5 +7,4 @@ traefik_image: traefik
 traefik_version: latest
 traefik_web_ui_port: 9199
 
-
 traefik_debug: '{{ dnspostfix == "-tst" }}'

@@ -3,7 +3,7 @@
 grafana_port: 3000
 grafana_container_name: "grafana"
 grafana_image: "grafana/grafana"
-grafana_version: "master"
+grafana_version: "7.2.0"
 
 grafana:
   security:
