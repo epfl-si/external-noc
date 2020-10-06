@@ -50,7 +50,7 @@ class DynamicConfig:
             if wp_env.startswith('unm'):
                 continue
 
-            url = s['url']
+            url = s['url'] if s['url'].endswith('/') else s['url'] + '/'
             targets_by_wp_env.setdefault(wp_env, []).append(url)
         return targets_by_wp_env.items()
 
