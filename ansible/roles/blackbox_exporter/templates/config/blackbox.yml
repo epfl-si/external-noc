@@ -15,6 +15,8 @@ modules:
     http:
       method: GET
       preferred_ip_protocol: ip4
+      headers:
+        Cookie: wordpress_logged_in_bbe_probe=on
   # # TBD: The idea here would be to set the Header to the actual www name and instead do the GET with the IP of A10
   # #      Something equivalent to curl -H "Host: www.epfl.ch" http://128.178.222.108
   # #      In fact this does not work with https :(  we have to find a way to
