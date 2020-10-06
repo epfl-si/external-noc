@@ -15,6 +15,13 @@ modules:
     http:
       method: GET
       preferred_ip_protocol: ip4
+  # To use with caution
+  http_get_no_cf:
+    prober: http
+    timeout: 15s
+    http:
+      method: GET
+      preferred_ip_protocol: ip4
       headers:
         Cookie: wordpress_logged_in_bbe_probe=on
   # # TBD: The idea here would be to set the Header to the actual www name and instead do the GET with the IP of A10
