@@ -63,11 +63,13 @@ route:
       continue: true
       match:
         sendto: telegram
+{% if alertmanager_debug %}
     - receiver: 'debugapi'
       group_by: ['instance']
       continue: true
       match:
         sendto: telegram
+{% endif %}
 
 receivers:
 - name: 'idev-fsd-ops-mails'
@@ -87,7 +89,9 @@ receivers:
   - send_resolved: true
     url: 'http://alert-tg-bot:3000/-460587583'
 
+{% if alertmanager_debug %}
 - name: 'debugapi'
   webhook_configs:
   - send_resolved: true
     url: 'http://debugapi:3000/'
+{% endif %}
