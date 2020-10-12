@@ -17,7 +17,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 8,
-  "iteration": 1602497637714,
+  "iteration": 1602521534187,
   "links": [],
   "panels": [
     {
@@ -162,7 +162,7 @@
       ],
       "targets": [
         {
-          "expr": "probe_http_status_code{job=\"wordpresses@epfl\",origin=\"noc-zurich\",wp_env=~\"$wp_env\"}",
+          "expr": "probe_http_status_code{job=\"wordpresses@epfl\",origin=\"noc-zurich\",wp_env=~\"$wp_env\",instance=~\"$wp_site\"}",
           "instant": true,
           "interval": "",
           "legendFormat": "{{ instance }}",
@@ -171,7 +171,169 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "HTTP Status overview ($wp_env)",
+      "title": "HTTP Status overview ($wp_env / $wp_site)",
+      "type": "grafana-polystat-panel",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ]
+    },
+    {
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a",
+        "#4040a0"
+      ],
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "id": 42,
+      "mappingType": 2,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "pluginVersion": "7.2.0-343c53d6pre",
+      "polystat": {
+        "animationSpeed": 2500,
+        "columnAutoSize": false,
+        "columns": 40,
+        "defaultClickThrough": "",
+        "defaultClickThroughNewTab": false,
+        "defaultClickThroughSanitize": false,
+        "displayLimit": "",
+        "fontAutoColor": true,
+        "fontAutoScale": true,
+        "fontSize": 12,
+        "fontType": "Roboto",
+        "globalDecimals": 2,
+        "globalDisplayMode": "all",
+        "globalDisplayTextTriggeredEmpty": "OK",
+        "globalOperatorName": "avg",
+        "globalUnitFormat": "short",
+        "gradientEnabled": true,
+        "hexagonSortByDirection": 2,
+        "hexagonSortByField": "value",
+        "maxMetrics": 0,
+        "polygonBorderColor": "black",
+        "polygonBorderSize": 2,
+        "polygonGlobalFillColor": "#0a50a1",
+        "radius": 42,
+        "radiusAutoSize": true,
+        "rowAutoSize": true,
+        "rows": "",
+        "shape": "hexagon_pointed_top",
+        "tooltipDisplayMode": "triggered",
+        "tooltipDisplayTextTriggeredEmpty": "OK",
+        "tooltipFontSize": 12,
+        "tooltipFontType": "Roboto",
+        "tooltipPrimarySortDirection": 2,
+        "tooltipPrimarySortField": "thresholdLevel",
+        "tooltipSecondarySortDirection": 2,
+        "tooltipSecondarySortField": "value",
+        "tooltipTimestampEnabled": true,
+        "valueEnabled": true
+      },
+      "rangeMaps": [
+        {
+          "from": "0",
+          "text": "Less than 24h",
+          "to": "86400"
+        },
+        {
+          "from": "86401",
+          "text": "Less than 2 days",
+          "to": "172800"
+        },
+        {
+          "from": "172801",
+          "text": "Between 2 and 7 days",
+          "to": "604800"
+        },
+        {
+          "from": "604801",
+          "text": "More than a week!",
+          "to": ""
+        }
+      ],
+      "savedComposites": [],
+      "savedOverrides": [
+        {
+          "clickThrough": "/d/WPDetails/wordpress-detail?var-wp_site=${__cell_name}",
+          "colors": [
+            "#299c46",
+            "#e5ac0e",
+            "#bf1b00",
+            "#4040a0"
+          ],
+          "decimals": "",
+          "enabled": true,
+          "label": "OVERRIDE 1",
+          "metricName": "/.*/",
+          "newTabEnabled": true,
+          "operatorName": "avg",
+          "prefix": "",
+          "sanitizeURLEnabled": false,
+          "scaledDecimals": null,
+          "suffix": "",
+          "thresholds": [
+            {
+              "color": "#FFF899",
+              "state": 1,
+              "value": 86400
+            },
+            {
+              "color": "#299c46",
+              "state": 0,
+              "value": 0
+            },
+            {
+              "color": "#FF9830",
+              "state": 2,
+              "value": 172800
+            },
+            {
+              "color": "#C4162A",
+              "state": 3,
+              "value": 604800
+            }
+          ],
+          "unitFormat": "s"
+        }
+      ],
+      "targets": [
+        {
+          "expr": "sort_desc(time() - restic_success{url=~\"$wp_site\",wp_env=~\"$wp_env\"})",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{ url }}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Backup overview ($wp_env / $wp_site)",
       "type": "grafana-polystat-panel",
       "valueMaps": [
         {
@@ -247,8 +409,8 @@
       "gridPos": {
         "h": 8,
         "w": 12,
-        "x": 12,
-        "y": 1
+        "x": 0,
+        "y": 9
       },
       "id": 25,
       "options": {
@@ -309,7 +471,7 @@
       "gridPos": {
         "h": 8,
         "w": 12,
-        "x": 0,
+        "x": 12,
         "y": 9
       },
       "id": 39,
@@ -411,8 +573,8 @@
       "gridPos": {
         "h": 8,
         "w": 12,
-        "x": 12,
-        "y": 9
+        "x": 0,
+        "y": 17
       },
       "hiddenSeries": false,
       "id": 35,
@@ -499,7 +661,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 17
+        "y": 25
       },
       "id": 15,
       "panels": [],
@@ -542,7 +704,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 18
+        "y": 26
       },
       "id": 11,
       "interval": null,
@@ -600,7 +762,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 18
+        "y": 26
       },
       "id": 4,
       "interval": null,
@@ -659,7 +821,7 @@
         "h": 12,
         "w": 12,
         "x": 0,
-        "y": 26
+        "y": 34
       },
       "id": 13,
       "options": {
@@ -729,7 +891,7 @@
         "h": 12,
         "w": 12,
         "x": 12,
-        "y": 26
+        "y": 34
       },
       "id": 9,
       "interval": null,
@@ -768,7 +930,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 38
+        "y": 46
       },
       "id": 21,
       "panels": [],
@@ -793,7 +955,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 39
+        "y": 47
       },
       "hiddenSeries": false,
       "id": 2,
@@ -897,7 +1059,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 39
+        "y": 47
       },
       "id": 40,
       "options": {
@@ -946,7 +1108,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 48
+        "y": 56
       },
       "id": 19,
       "panels": [],
@@ -986,7 +1148,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 49
+        "y": 57
       },
       "hiddenSeries": false,
       "id": 8,
@@ -1154,7 +1316,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 49
+        "y": 57
       },
       "id": 41,
       "options": {
@@ -1223,7 +1385,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 57
+        "y": 65
       },
       "hiddenSeries": false,
       "id": 33,
@@ -1328,7 +1490,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 58
+        "y": 66
       },
       "id": 6,
       "options": {
@@ -1366,7 +1528,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 66
+        "y": 74
       },
       "id": 17,
       "panels": [],
@@ -1402,7 +1564,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 67
+        "y": 75
       },
       "id": 27,
       "options": {
@@ -1471,7 +1633,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 67
+        "y": 75
       },
       "id": 28,
       "options": {
@@ -1579,7 +1741,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 75
+        "y": 83
       },
       "id": 29,
       "options": {
@@ -1715,7 +1877,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 75
+        "y": 83
       },
       "id": 30,
       "options": {
@@ -1802,7 +1964,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 83
+        "y": 91
       },
       "id": 31,
       "options": {
@@ -1843,7 +2005,7 @@
       "type": "table"
     }
   ],
-  "refresh": "15m",
+  "refresh": "1m",
   "schemaVersion": 26,
   "style": "dark",
   "tags": [
@@ -1856,6 +2018,7 @@
         "allValue": null,
         "current": {
           "selected": true,
+          "tags": [],
           "text": [
             "All"
           ],
@@ -1879,35 +2042,27 @@
         "tagValuesQuery": "$tag",
         "tags": [
           {
-            "selected": false,
             "text": "form"
           },
           {
-            "selected": false,
             "text": "inside"
           },
           {
-            "selected": false,
             "text": "labs"
           },
           {
-            "selected": false,
             "text": "manager"
           },
           {
-            "selected": false,
             "text": "sandbox"
           },
           {
-            "selected": false,
             "text": "subdomains"
           },
           {
-            "selected": false,
             "text": "subdomains-lite"
           },
           {
-            "selected": false,
             "text": "www"
           }
         ],
@@ -1948,7 +2103,7 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
@@ -1968,5 +2123,5 @@
   "timezone": "",
   "title": "WordPress general",
   "uid": "WordPressMain",
-  "version": 32
+  "version": 34
 }
