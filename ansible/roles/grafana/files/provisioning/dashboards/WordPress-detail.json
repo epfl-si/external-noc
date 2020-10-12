@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 10,
-  "iteration": 1602070401950,
+  "iteration": 1602493301308,
   "links": [],
   "panels": [
     {
@@ -392,6 +392,7 @@
       "targets": [
         {
           "expr": "restic_success{url=\"$wp_site\"} * 1000",
+          "instant": true,
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -1052,5 +1053,5 @@
   "timezone": "",
   "title": "WordPress Detail",
   "uid": "WPDetails",
-  "version": 2
+  "version": 3
 }
