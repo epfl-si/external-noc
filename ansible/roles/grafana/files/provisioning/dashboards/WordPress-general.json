@@ -17,7 +17,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 8,
-  "iteration": 1601913277297,
+  "iteration": 1602497637714,
   "links": [],
   "panels": [
     {
@@ -187,7 +187,8 @@
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "align": null
+            "align": null,
+            "filterable": false
           },
           "mappings": [],
           "thresholds": {
@@ -260,7 +261,7 @@
           }
         ]
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0",
       "targets": [
         {
           "expr": "probe_http_status_code{job=\"wordpresses@epfl\",origin=\"noc-zurich\",wp_env=~\"$wp_env\"} != 200",
@@ -433,7 +434,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -616,7 +617,7 @@
         },
         "showUnfilled": true
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0",
       "targets": [
         {
           "expr": "sort_desc(sum(epfl_wp_site_langs{wp_env=~'$wp_env'})by(lang))",
@@ -637,7 +638,8 @@
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "align": null
+            "align": null,
+            "filterable": false
           },
           "mappings": [],
           "thresholds": {
@@ -669,7 +671,7 @@
           }
         ]
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0",
       "repeat": null,
       "repeatDirection": "h",
       "targets": [
@@ -744,7 +746,7 @@
         },
         "showUnfilled": false
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0",
       "targets": [
         {
           "expr": "sort_desc(sum(epfl_wp_site_langs)by(wp_env,lang))",
@@ -811,7 +813,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -874,7 +876,8 @@
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "align": null
+            "align": null,
+            "filterable": false
           },
           "mappings": [],
           "thresholds": {
@@ -906,7 +909,7 @@
           }
         ]
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0",
       "repeatDirection": "h",
       "targets": [
         {
@@ -1005,7 +1008,7 @@
         "alertThreshold": false
       },
       "percentage": false,
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1081,9 +1084,13 @@
     },
     {
       "datasource": null,
+      "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
+          "custom": {
+            "align": null,
+            "filterable": false
+          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1093,49 +1100,109 @@
                 "value": null
               },
               {
-                "color": "red",
-                "value": 80
+                "color": "#EAB839",
+                "value": 1233
               }
             ]
           },
-          "unit": "decbytes"
+          "unit": "s"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "backup_timestamp"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "light-green",
+                      "value": 86400
+                    },
+                    {
+                      "color": "light-yellow",
+                      "value": 172800
+                    },
+                    {
+                      "color": "light-red",
+                      "value": 259200
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 604800
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-background"
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
-        "h": 8,
+        "h": 9,
         "w": 12,
         "x": 12,
         "y": 49
       },
-      "id": 6,
+      "id": 41,
       "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "last"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Value"
+          }
+        ]
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0",
+      "repeatDirection": "h",
       "targets": [
         {
-          "expr": "sum(restic_s3_total_size)",
-          "interval": "",
-          "legendFormat": "",
+          "expr": "sort_desc(time() - restic_success{url=~\"$wp_site\",wp_env=~\"$wp_env\"})",
+          "format": "table",
+          "instant": true,
+          "interval": "1",
+          "intervalFactor": 1,
+          "legendFormat": "{{ url }}",
           "refId": "A"
         }
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Total size backups",
-      "type": "stat"
+      "title": "Time since success backup ($wp_env)",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "exported_instance": true,
+              "exported_job": true,
+              "instance": true,
+              "job": true,
+              "wp_env": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "Value": "backup_timestamp",
+              "wp_env": ""
+            }
+          }
+        }
+      ],
+      "type": "table"
     },
     {
       "aliasColors": {},
@@ -1176,7 +1243,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1235,13 +1302,71 @@
       }
     },
     {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 58
+      },
+      "id": 6,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.2.0",
+      "targets": [
+        {
+          "expr": "sum(restic_s3_total_size)",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Total size backups",
+      "type": "stat"
+    },
+    {
       "collapsed": false,
       "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 65
+        "y": 66
       },
       "id": 17,
       "panels": [],
@@ -1253,7 +1378,8 @@
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "align": null
+            "align": null,
+            "filterable": false
           },
           "mappings": [],
           "thresholds": {
@@ -1276,7 +1402,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 66
+        "y": 67
       },
       "id": 27,
       "options": {
@@ -1288,7 +1414,7 @@
           }
         ]
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0",
       "targets": [
         {
           "expr": "sort_desc(sum(epfl_menu_count{wp_env=~'$wp_env',url=~'$wp_site'})by(url))",
@@ -1321,7 +1447,8 @@
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "align": null
+            "align": null,
+            "filterable": false
           },
           "mappings": [],
           "thresholds": {
@@ -1344,7 +1471,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 66
+        "y": 67
       },
       "id": 28,
       "options": {
@@ -1356,7 +1483,7 @@
           }
         ]
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0",
       "targets": [
         {
           "expr": "sort_desc(sum(epfl_menu_unique_count{wp_env=~'$wp_env',url=~'$wp_site'})by(url))",
@@ -1390,7 +1517,8 @@
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "align": null
+            "align": null,
+            "filterable": false
           },
           "mappings": [],
           "thresholds": {
@@ -1451,7 +1579,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 74
+        "y": 75
       },
       "id": 29,
       "options": {
@@ -1463,7 +1591,7 @@
           }
         ]
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0",
       "targets": [
         {
           "expr": "sort_desc(epfl_externalmenu_sync_failing_since{wp_env=~'$wp_env',url=~'$wp_site'}*1000)",
@@ -1513,7 +1641,8 @@
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "align": null
+            "align": null,
+            "filterable": false
           },
           "mappings": [],
           "thresholds": {
@@ -1586,7 +1715,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 74
+        "y": 75
       },
       "id": 30,
       "options": {
@@ -1598,7 +1727,7 @@
           }
         ]
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0",
       "targets": [
         {
           "expr": "sort_desc(epfl_externalmenu_sync_last_success{wp_env=~'$wp_env',url=~'$wp_site'}*1000)",
@@ -1648,7 +1777,8 @@
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "align": null
+            "align": null,
+            "filterable": false
           },
           "mappings": [],
           "thresholds": {
@@ -1672,7 +1802,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 82
+        "y": 83
       },
       "id": 31,
       "options": {
@@ -1684,7 +1814,7 @@
           }
         ]
       },
-      "pluginVersion": "7.2.0-343c53d6pre",
+      "pluginVersion": "7.2.0",
       "targets": [
         {
           "expr": "sort_desc(sum(epfl_menu_orphan_count{wp_env=~'$wp_env',url=~'$wp_site'})by(url))",
@@ -1713,7 +1843,7 @@
       "type": "table"
     }
   ],
-  "refresh": "30s",
+  "refresh": "15m",
   "schemaVersion": 26,
   "style": "dark",
   "tags": [
@@ -1726,7 +1856,6 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "tags": [],
           "text": [
             "All"
           ],
@@ -1750,27 +1879,35 @@
         "tagValuesQuery": "$tag",
         "tags": [
           {
+            "selected": false,
             "text": "form"
           },
           {
+            "selected": false,
             "text": "inside"
           },
           {
+            "selected": false,
             "text": "labs"
           },
           {
+            "selected": false,
             "text": "manager"
           },
           {
+            "selected": false,
             "text": "sandbox"
           },
           {
+            "selected": false,
             "text": "subdomains"
           },
           {
+            "selected": false,
             "text": "subdomains-lite"
           },
           {
+            "selected": false,
             "text": "www"
           }
         ],
@@ -1831,5 +1968,5 @@
   "timezone": "",
   "title": "WordPress general",
   "uid": "WordPressMain",
-  "version": 30
+  "version": 32
 }
