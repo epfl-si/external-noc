@@ -49,7 +49,7 @@
       },
       "id": 26,
       "options": {
-        "content": "<img src=\"https://image.thum.io/get/{{ $wp_site }}\" title=\"screenshot of $wp_site\" style=\"width: 100%; height: auto;\"/>",
+        "content": "<img src=\"https://image.thum.io/get/$wp_site\" title=\"screenshot of $wp_site\" style=\"width: 100%; height: auto;\"/>",
         "mode": "html"
       },
       "pluginVersion": "7.1.0",
