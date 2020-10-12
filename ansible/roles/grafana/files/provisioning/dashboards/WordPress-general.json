@@ -165,7 +165,7 @@
           "expr": "probe_http_status_code{job=\"wordpresses@epfl\",origin=\"noc-zurich\",wp_env=~\"$wp_env\"}",
           "instant": true,
           "interval": "",
-          "legendFormat": "  {{ instance }}",
+          "legendFormat": "{{ instance }}",
           "refId": "A"
         }
       ],
