@@ -17,7 +17,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 8,
-  "iteration": 1602521534187,
+  "iteration": 1602579329508,
   "links": [],
   "panels": [
     {
@@ -324,7 +324,7 @@
       ],
       "targets": [
         {
-          "expr": "sort_desc(time() - restic_success{url=~\"$wp_site\",wp_env=~\"$wp_env\"})",
+          "expr": "sort_desc((time() - restic_success{url=~\"$wp_site\",wp_env=~\"$wp_env\"})OR on() vector(31536000))",
           "instant": true,
           "interval": "",
           "legendFormat": "{{ url }}",
@@ -2005,7 +2005,7 @@
       "type": "table"
     }
   ],
-  "refresh": "1m",
+  "refresh": "30s",
   "schemaVersion": 26,
   "style": "dark",
   "tags": [
@@ -2074,6 +2074,7 @@
         "allValue": null,
         "current": {
           "selected": true,
+          "tags": [],
           "text": [
             "All"
           ],
@@ -2123,5 +2124,5 @@
   "timezone": "",
   "title": "WordPress general",
   "uid": "WordPressMain",
-  "version": 34
+  "version": 35
 }
