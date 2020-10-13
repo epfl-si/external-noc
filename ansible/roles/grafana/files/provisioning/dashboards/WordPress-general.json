@@ -17,7 +17,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 8,
-  "iteration": 1602601427713,
+  "iteration": 1602604550414,
   "links": [],
   "panels": [
     {
@@ -2019,6 +2019,7 @@
         "allValue": null,
         "current": {
           "selected": true,
+          "tags": [],
           "text": [
             "All"
           ],
@@ -2039,50 +2040,41 @@
         "regex": "",
         "skipUrlSync": false,
         "sort": 1,
-        "tagValuesQuery": "$tag",
+        "tagValuesQuery": "label_values(up{job=\"wordpresses@epfl\",origin=\"noc-zurich\",probe=\"blackbox\",wp_env=~\"$tag\"},instance)",
         "tags": [
           {
-            "selected": false,
-            "text": "form"
-          },
-          {
-            "selected": false,
-            "text": "inside"
-          },
-          {
-            "selected": false,
-            "text": "labs"
-          },
-          {
-            "selected": false,
-            "text": "manager"
-          },
-          {
-            "selected": false,
-            "text": "sandbox"
-          },
-          {
-            "selected": false,
-            "text": "subdomains"
-          },
-          {
-            "selected": false,
             "text": "subdomains-lite"
           },
           {
-            "selected": false,
+            "text": "form"
+          },
+          {
+            "text": "inside"
+          },
+          {
+            "text": "manager"
+          },
+          {
+            "text": "subdomains"
+          },
+          {
             "text": "www"
+          },
+          {
+            "text": "labs"
+          },
+          {
+            "text": "sandbox"
           }
         ],
-        "tagsQuery": "label_values(wp_env)",
+        "tagsQuery": "label_values(up{job=\"wordpresses@epfl\",origin=\"noc-zurich\",probe=\"blackbox\",wp_env=~\"$wp_env\"},wp_env)",
         "type": "query",
         "useTags": true
       },
       {
         "allValue": null,
         "current": {
-          "selected": true,
-          "tags": [],
+          "selected": false,
           "text": [
             "All"
           ],
@@ -2132,5 +2124,5 @@
   "timezone": "",
   "title": "WordPress general",
   "uid": "WordPressMain",
-  "version": 36
+  "version": 37
 }
