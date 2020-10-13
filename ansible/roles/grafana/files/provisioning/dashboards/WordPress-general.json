@@ -17,7 +17,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 8,
-  "iteration": 1602579329508,
+  "iteration": 1602601427713,
   "links": [],
   "panels": [
     {
@@ -376,7 +376,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 732
+                "value": 892
               }
             ]
           },
@@ -388,7 +388,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 178
+                "value": 144
               }
             ]
           },
@@ -400,7 +400,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 86
+                "value": 162
               }
             ]
           }
@@ -985,7 +985,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(epfl_wp_site_pages{wp_env=~'$wp_env',url=~'$wp_site'})",
+          "expr": "sum(epfl_wp_site_pages{wp_env=~\"$wp_env\",url=~\"$wp_site\"})",
+          "instant": false,
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -1487,7 +1488,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 7,
         "w": 12,
         "x": 12,
         "y": 66
@@ -1528,7 +1529,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 74
+        "y": 73
       },
       "id": 17,
       "panels": [],
@@ -1564,7 +1565,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 75
+        "y": 74
       },
       "id": 27,
       "options": {
@@ -1633,7 +1634,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 75
+        "y": 74
       },
       "id": 28,
       "options": {
@@ -1741,7 +1742,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 83
+        "y": 82
       },
       "id": 29,
       "options": {
@@ -1877,7 +1878,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 83
+        "y": 82
       },
       "id": 30,
       "options": {
@@ -1964,7 +1965,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 91
+        "y": 90
       },
       "id": 31,
       "options": {
@@ -2005,7 +2006,7 @@
       "type": "table"
     }
   ],
-  "refresh": "30s",
+  "refresh": "5m",
   "schemaVersion": 26,
   "style": "dark",
   "tags": [
@@ -2018,7 +2019,6 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "tags": [],
           "text": [
             "All"
           ],
@@ -2027,42 +2027,50 @@
           ]
         },
         "datasource": "idevfsd-prometheus",
-        "definition": "label_values(url)",
+        "definition": "label_values(up{job=\"wordpresses@epfl\",origin=\"noc-zurich\",probe=\"blackbox\",wp_env=~\"$wp_env\"},instance)",
         "hide": 0,
         "includeAll": true,
         "label": "Sites",
         "multi": true,
         "name": "wp_site",
         "options": [],
-        "query": "label_values(url)",
+        "query": "label_values(up{job=\"wordpresses@epfl\",origin=\"noc-zurich\",probe=\"blackbox\",wp_env=~\"$wp_env\"},instance)",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
-        "sort": 0,
+        "sort": 1,
         "tagValuesQuery": "$tag",
         "tags": [
           {
+            "selected": false,
             "text": "form"
           },
           {
+            "selected": false,
             "text": "inside"
           },
           {
+            "selected": false,
             "text": "labs"
           },
           {
+            "selected": false,
             "text": "manager"
           },
           {
+            "selected": false,
             "text": "sandbox"
           },
           {
+            "selected": false,
             "text": "subdomains"
           },
           {
+            "selected": false,
             "text": "subdomains-lite"
           },
           {
+            "selected": false,
             "text": "www"
           }
         ],
@@ -2124,5 +2132,5 @@
   "timezone": "",
   "title": "WordPress general",
   "uid": "WordPressMain",
-  "version": 35
+  "version": 36
 }
