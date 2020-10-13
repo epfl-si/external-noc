@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 10,
-  "iteration": 1602493301308,
+  "id": 11,
+  "iteration": 1602601513320,
   "links": [],
   "panels": [
     {
@@ -211,7 +211,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Duration since last backup",
+      "title": "Last backup have been done since",
       "transformations": [],
       "type": "stat"
     },
@@ -400,7 +400,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Date of last backup",
+      "title": "Last backup date",
       "type": "stat"
     },
     {
@@ -469,27 +469,43 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "light-green",
                 "value": null
+              },
+              {
+                "color": "green",
+                "value": 300
+              },
+              {
+                "color": "light-orange",
+                "value": 600
+              },
+              {
+                "color": "dark-orange",
+                "value": 900
+              },
+              {
+                "color": "dark-red",
+                "value": 1800
               }
             ]
           },
-          "unit": "decbytes"
+          "unit": "s"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 3,
         "w": 6,
         "x": 12,
         "y": 8
       },
-      "id": 20,
+      "id": 16,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
         "justifyMode": "auto",
-        "orientation": "horizontal",
+        "orientation": "auto",
         "reduceOptions": {
           "calcs": [
             "mean"
@@ -502,7 +518,8 @@
       "pluginVersion": "7.2.0",
       "targets": [
         {
-          "expr": "restic_s3_total_size{url=\"$wp_site\"}",
+          "expr": "restic_success{url=\"$wp_site\"} - restic_start{url=\"$wp_site\"}",
+          "instant": true,
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -510,7 +527,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Total size backups",
+      "title": "Duration of last backup",
       "type": "stat"
     },
     {
@@ -569,6 +586,62 @@
     },
     {
       "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 12,
+        "y": 11
+      },
+      "id": 20,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.2.0",
+      "targets": [
+        {
+          "expr": "restic_s3_total_size{url=\"$wp_site\"}",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Total size of $wp_site backups",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "custom": {},
@@ -622,66 +695,6 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "HTTP version",
-      "type": "stat"
-    },
-    {
-      "datasource": null,
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "s"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 6,
-        "x": 12,
-        "y": 12
-      },
-      "id": 16,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.2.0",
-      "targets": [
-        {
-          "expr": "restic_success{url=\"$wp_site\"} - restic_start{url=\"$wp_site\"}",
-          "instant": true,
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Last backup time",
       "type": "stat"
     },
     {
@@ -1053,5 +1066,5 @@
   "timezone": "",
   "title": "WordPress Detail",
   "uid": "WPDetails",
-  "version": 3
+  "version": 9
 }
