@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 8,
-  "iteration": 1602604550414,
+  "id": 11,
+  "iteration": 1602655857886,
   "links": [],
   "panels": [
     {
@@ -1146,7 +1146,7 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 8,
+        "h": 9,
         "w": 12,
         "x": 0,
         "y": 57
@@ -1383,10 +1383,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 8,
+        "h": 9,
         "w": 12,
         "x": 0,
-        "y": 65
+        "y": 66
       },
       "hiddenSeries": false,
       "id": 33,
@@ -1416,7 +1416,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(restic_success{url=~\"$wp_site\",wp_env=~\"$wp_env\"}) by (url) - sum(restic_start{url=~\"$wp_site\",wp_env=~\"$wp_env\"}) by (url)",
+          "expr": "sort_desc(sum(restic_success{url=~\"$wp_site\",wp_env=~\"$wp_env\"}) by (url) - sum(restic_start{url=~\"$wp_site\",wp_env=~\"$wp_env\"}) by (url))",
           "instant": false,
           "interval": "",
           "legendFormat": "{{ url }}",
@@ -1466,6 +1466,128 @@
     },
     {
       "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null,
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 1233
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "backup_timestamp"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "light-green",
+                      "value": 86400
+                    },
+                    {
+                      "color": "light-yellow",
+                      "value": 172800
+                    },
+                    {
+                      "color": "light-red",
+                      "value": 259200
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 604800
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-background"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 66
+      },
+      "id": 43,
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Value"
+          }
+        ]
+      },
+      "pluginVersion": "7.2.0",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "expr": "sort_desc(sum(restic_success{url=~\"$wp_site\",wp_env=~\"$wp_env\"}) by (url) - sum(restic_start{url=~\"$wp_site\",wp_env=~\"$wp_env\"}) by (url))",
+          "format": "table",
+          "instant": true,
+          "interval": "1",
+          "intervalFactor": 1,
+          "legendFormat": "{{ url }}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Last backup duration($wp_env)",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "exported_instance": true,
+              "exported_job": true,
+              "instance": true,
+              "job": true,
+              "wp_env": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "Value": "backup_timestamp",
+              "wp_env": ""
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "custom": {},
@@ -1488,10 +1610,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
+        "h": 9,
         "w": 12,
-        "x": 12,
-        "y": 66
+        "x": 0,
+        "y": 75
       },
       "id": 6,
       "options": {
@@ -1523,13 +1645,133 @@
       "type": "stat"
     },
     {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null,
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Total backup size"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "light-green",
+                      "value": 2000000000
+                    },
+                    {
+                      "color": "light-orange",
+                      "value": 5000000000
+                    },
+                    {
+                      "color": "semi-dark-red",
+                      "value": 10000000000
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 20000000000
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-background"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 75
+      },
+      "id": 44,
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Value"
+          }
+        ]
+      },
+      "pluginVersion": "7.2.0",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "expr": "sort_desc(restic_s3_total_size{url=~\"$wp_site\",wp_env=~\"$wp_env\"})",
+          "format": "table",
+          "instant": true,
+          "interval": "1",
+          "intervalFactor": 1,
+          "legendFormat": "{{ url }}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Last backup size ($wp_env / $wp_site)",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "__name__": true,
+              "exported_instance": true,
+              "exported_job": true,
+              "instance": true,
+              "job": true,
+              "wp_env": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "Value": "Total backup size",
+              "url": "Site",
+              "wp_env": ""
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
       "collapsed": false,
       "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 73
+        "y": 84
       },
       "id": 17,
       "panels": [],
@@ -1565,7 +1807,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 74
+        "y": 85
       },
       "id": 27,
       "options": {
@@ -1634,7 +1876,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 74
+        "y": 85
       },
       "id": 28,
       "options": {
@@ -1742,7 +1984,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 82
+        "y": 93
       },
       "id": 29,
       "options": {
@@ -1878,7 +2120,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 82
+        "y": 93
       },
       "id": 30,
       "options": {
@@ -1965,7 +2207,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 90
+        "y": 101
       },
       "id": 31,
       "options": {
@@ -2019,7 +2261,6 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "tags": [],
           "text": [
             "All"
           ],
@@ -2043,27 +2284,35 @@
         "tagValuesQuery": "label_values(up{job=\"wordpresses@epfl\",origin=\"noc-zurich\",probe=\"blackbox\",wp_env=~\"$tag\"},instance)",
         "tags": [
           {
+            "selected": false,
             "text": "subdomains-lite"
           },
           {
+            "selected": false,
             "text": "form"
           },
           {
+            "selected": false,
             "text": "inside"
           },
           {
+            "selected": false,
             "text": "manager"
           },
           {
+            "selected": false,
             "text": "subdomains"
           },
           {
+            "selected": false,
             "text": "www"
           },
           {
+            "selected": false,
             "text": "labs"
           },
           {
+            "selected": false,
             "text": "sandbox"
           }
         ],
@@ -2074,7 +2323,8 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
+          "selected": true,
+          "tags": [],
           "text": [
             "All"
           ],
@@ -2124,5 +2374,5 @@
   "timezone": "",
   "title": "WordPress general",
   "uid": "WordPressMain",
-  "version": 37
+  "version": 2
 }
