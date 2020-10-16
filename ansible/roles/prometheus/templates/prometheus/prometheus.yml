@@ -60,6 +60,7 @@ scrape_configs:
       'match[]':
         - '{job="wordpress"}'
         - '{job="pushgateway"}'
+        - '{job="wp_disk_usage"}'
     scheme: 'https'
     static_configs:
     - targets: ['prometheus2.128.178.222.83.nip.io']
