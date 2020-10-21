@@ -1,0 +1,41 @@
+{%raw%}
+groups:
+  - name: Site not 200
+    rules:
+    - alert: Site status code is not 200
+      expr: probe_http_status_code{job="wordpresses@epfl",origin="noc-zurich"} != 200 and probe_http_status_code{job="wordpresses@epfl",origin="noc-zurich"}  != 0
+      for: 1m
+      labels:
+        severity: page
+        sendto: telegram
+      annotations:
+        summary: 'HTTP status of {{$labels.instance}} is not 200 ({{$labels.wp_env}})'
+        description: '{{$labels.instance}} of job {{$labels.job}} has not HTTP status == 200 for more than 1 minute (on env: {{$labels.wp_env}}).'
+
+  - name: Site down
+    rules:
+    - alert: Site down
+      expr: up{job="wordpresses@epfl",origin="noc-zurich"} == 0
+      for: 5m
+      labels:
+        severity: page
+        sendto: telegram
+      annotations:
+        summary: 'Instance {{$labels.instance}} down ({{$labels.wp_env}})'
+        description: '{{$labels.instance}} of job {{$labels.job}} has been down for more than 5 minutes (on env: {{$labels.wp_env}}).'
+{%endraw%}
+{% if prometheus_debug %}
+{%raw%}
+  - name: Alert all the things
+    rules:
+    - alert: Just another alert
+      expr: up{instance=~"https://formation-wp.epfl.ch/site1./",job="wordpresses@epfl",origin="noc-zurich",probe="blackbox",wp_env="form"} != 0
+      for: 5m
+      labels:
+        severity: page
+        sendto: telegram
+      annotations:
+        summary: 'Instance {{$labels.instance}} down ({{$labels.wp_env}})'
+        description: '{{$labels.instance}} of job {{$labels.job}} has been down for more than 5 minutes (on env: {{$labels.wp_env}}).'
+{%endraw%}
+{% endif %}

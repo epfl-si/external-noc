@@ -17,6 +17,8 @@ grafana:
     - grafana-piechart-panel
     - grafana-clock-panel
     - grafana-polystat-panel
+    # https://support.cloudflare.com/hc/en-us/articles/115002722267-Install-the-Cloudflare-Grafana-Plugin
+    - cloudflare-app
 
 # The TELEGRAM_BOT_ADMINISTRATOR_ID is @ponsfrilus' account ID 9917772
 telegram:

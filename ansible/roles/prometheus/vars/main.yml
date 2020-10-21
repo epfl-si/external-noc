@@ -5,6 +5,8 @@ prometheus_container_name: "prometheus"
 prometheus_image: "prom/prometheus"
 prometheus_version: "v2.20.1"
 
+prometheus_debug: '{{ dnspostfix == "-tst" }}'
+
 urls:
   fsd:
     - name: gitlab
