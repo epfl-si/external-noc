@@ -26,13 +26,6 @@
     mode: '1777'
     state: touch
 
-# ----------------------------------------------------------------- static files
-- name: Copy prometheus static files
-  copy:
-    src: "{{ role_path }}/files/"
-    dest: "{{ install_path }}/prometheus/"
-  register: _prometheus_static_file
-
 # -------------------------------------------------------------------- Templates
 - name: Copy prometheus template configs
   template:
@@ -40,6 +33,7 @@
     dest: "{{ install_path }}/prometheus/{{ item }}"
   with_items:
     - prometheus.yml
+    - rules/alert-all-the-time-for-tests.yml
     - rules/c2c_federate.yml
   register: _prometheus_template_file
 
@@ -69,7 +63,7 @@
   docker_container:
     name: "{{ prometheus_container_name }}"
     image: "{{ prometheus_image }}:{{ prometheus_version }}"
-    restart: "{{ _prometheus_static_file is changed or _prometheus_template_file is changed }}"
+    restart: "{{ _prometheus_template_file is changed }}"
     command: >-
       --config.file=/etc/prometheus/prometheus.yml
       --web.external-url=https://prometheus{{ dnspostfix }}.{{ frontend.domain }}
