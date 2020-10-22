@@ -17,7 +17,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 11,
-  "iteration": 1602655857886,
+  "iteration": 1603199509832,
   "links": [],
   "panels": [
     {
@@ -1633,7 +1633,7 @@
       "pluginVersion": "7.2.0",
       "targets": [
         {
-          "expr": "sum(restic_s3_total_size)",
+          "expr": "sum(s3_backup_files_total_size{wp_env=~\"$wp_env\",url=~\"$wp_site\"}) + sum(s3_backup_sql_total_size{wp_env=~\"$wp_env\",url=~\"$wp_site\"}) ",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -2261,6 +2261,7 @@
         "allValue": null,
         "current": {
           "selected": true,
+          "tags": [],
           "text": [
             "All"
           ],
@@ -2284,35 +2285,27 @@
         "tagValuesQuery": "label_values(up{job=\"wordpresses@epfl\",origin=\"noc-zurich\",probe=\"blackbox\",wp_env=~\"$tag\"},instance)",
         "tags": [
           {
-            "selected": false,
             "text": "subdomains-lite"
           },
           {
-            "selected": false,
             "text": "form"
           },
           {
-            "selected": false,
             "text": "inside"
           },
           {
-            "selected": false,
             "text": "manager"
           },
           {
-            "selected": false,
             "text": "subdomains"
           },
           {
-            "selected": false,
             "text": "www"
           },
           {
-            "selected": false,
             "text": "labs"
           },
           {
-            "selected": false,
             "text": "sandbox"
           }
         ],
@@ -2372,7 +2365,7 @@
     ]
   },
   "timezone": "",
-  "title": "WordPress general",
-  "uid": "WordPressMain",
-  "version": 2
+  "title": "Main",
+  "uid": "WordPressM",
+  "version": 3
 }
