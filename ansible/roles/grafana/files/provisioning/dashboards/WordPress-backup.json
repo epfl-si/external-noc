@@ -1,0 +1,4350 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 8,
+  "links": [],
+  "panels": [
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 7,
+      "title": "File",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 1
+      },
+      "hiddenSeries": false,
+      "id": 2,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.2.0",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "restic_files_total_file_count{url=~\"$wp_site\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        },
+        {
+          "expr": "s3_backup_files_total_file_count{url=~\"$wp_site\"}",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "B"
+        },
+        {
+          "expr": "wp_disk_usage_files_total{url=~\"$wp_site\"}",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "C"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "File total count",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "hiddenSeries": false,
+      "id": 3,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.2.0",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "restic_files_total_size{url=~\"$wp_site\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        },
+        {
+          "expr": "s3_backup_files_total_size{url=~\"$wp_site\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "B"
+        },
+        {
+          "expr": "wp_disk_usage_size_total{url=~\"$wp_site\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "C"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Files total size",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "bytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 10
+      },
+      "id": 9,
+      "panels": [],
+      "title": "SQL",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 11
+      },
+      "hiddenSeries": false,
+      "id": 5,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.2.0",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "restic_sql_total_file_count{url=~\"$wp_site\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        },
+        {
+          "expr": "s3_backup_sql_total_file_count{url=~\"$wp_site\"}",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "SQL total count",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 11
+      },
+      "hiddenSeries": false,
+      "id": 4,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.2.0",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "restic_sql_total_size{url=~\"$wp_site\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        },
+        {
+          "expr": "s3_backup_sql_total_size{url=~\"$wp_site\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "SQL total size",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 20
+      },
+      "id": 11,
+      "panels": [],
+      "title": "Disk usage",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 21
+      },
+      "hiddenSeries": false,
+      "id": 13,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.2.0",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "wp_disk_usage_files_uploads{url=~\"$wp_site\"}",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        },
+        {
+          "expr": "wp_disk_usage_files_wp_content{url=~\"$wp_site\"}",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "B"
+        },
+        {
+          "refId": "C"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Disk usage files",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 21
+      },
+      "hiddenSeries": false,
+      "id": 14,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.2.0",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "wp_disk_usage_size_uploads{url=~\"$wp_site\"}",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        },
+        {
+          "expr": "wp_disk_usage_size_wp_content{url=~\"$wp_site\"}",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "B"
+        },
+        {
+          "refId": "C"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Disk usage size",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "bytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    }
+  ],
+  "schemaVersion": 26,
+  "style": "dark",
+  "tags": [
+    "wordpress",
+    "provisionned"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "https://www.epfl.ch//",
+          "value": "https://www.epfl.ch//"
+        },
+        "datasource": "idevfsd-prometheus",
+        "definition": "label_values(restic_files_total_file_count{job=\"backup\"},url)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Site",
+        "multi": false,
+        "name": "wp_site",
+        "options": [
+          {
+            "selected": true,
+            "text": "https://2dspintronics2020.epfl.ch//",
+            "value": "https://2dspintronics2020.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://bbpschool.epfl.ch//",
+            "value": "https://bbpschool.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://cmep-microcomb.epfl.ch//",
+            "value": "https://cmep-microcomb.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://concours-alkindi.epfl.ch//",
+            "value": "https://concours-alkindi.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://coreptil.epfl.ch//",
+            "value": "https://coreptil.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://datathink.epfl.ch//",
+            "value": "https://datathink.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://digitalfutures.epfl.ch//",
+            "value": "https://digitalfutures.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://drosophila.epfl.ch//",
+            "value": "https://drosophila.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://dubrovnik.epfl.ch//",
+            "value": "https://dubrovnik.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://formation-wp.epfl.ch/site1/",
+            "value": "https://formation-wp.epfl.ch/site1/"
+          },
+          {
+            "selected": false,
+            "text": "https://formation-wp.epfl.ch/site10/",
+            "value": "https://formation-wp.epfl.ch/site10/"
+          },
+          {
+            "selected": false,
+            "text": "https://formation-wp.epfl.ch/site11/",
+            "value": "https://formation-wp.epfl.ch/site11/"
+          },
+          {
+            "selected": false,
+            "text": "https://formation-wp.epfl.ch/site12/",
+            "value": "https://formation-wp.epfl.ch/site12/"
+          },
+          {
+            "selected": false,
+            "text": "https://formation-wp.epfl.ch/site13/",
+            "value": "https://formation-wp.epfl.ch/site13/"
+          },
+          {
+            "selected": false,
+            "text": "https://formation-wp.epfl.ch/site14/",
+            "value": "https://formation-wp.epfl.ch/site14/"
+          },
+          {
+            "selected": false,
+            "text": "https://formation-wp.epfl.ch/site15/",
+            "value": "https://formation-wp.epfl.ch/site15/"
+          },
+          {
+            "selected": false,
+            "text": "https://formation-wp.epfl.ch/site2/",
+            "value": "https://formation-wp.epfl.ch/site2/"
+          },
+          {
+            "selected": false,
+            "text": "https://formation-wp.epfl.ch/site20/",
+            "value": "https://formation-wp.epfl.ch/site20/"
+          },
+          {
+            "selected": false,
+            "text": "https://formation-wp.epfl.ch/site3/",
+            "value": "https://formation-wp.epfl.ch/site3/"
+          },
+          {
+            "selected": false,
+            "text": "https://formation-wp.epfl.ch/site4/",
+            "value": "https://formation-wp.epfl.ch/site4/"
+          },
+          {
+            "selected": false,
+            "text": "https://formation-wp.epfl.ch/site5/",
+            "value": "https://formation-wp.epfl.ch/site5/"
+          },
+          {
+            "selected": false,
+            "text": "https://formation-wp.epfl.ch/site6/",
+            "value": "https://formation-wp.epfl.ch/site6/"
+          },
+          {
+            "selected": false,
+            "text": "https://formation-wp.epfl.ch/site7/",
+            "value": "https://formation-wp.epfl.ch/site7/"
+          },
+          {
+            "selected": false,
+            "text": "https://formation-wp.epfl.ch/site8/",
+            "value": "https://formation-wp.epfl.ch/site8/"
+          },
+          {
+            "selected": false,
+            "text": "https://formation-wp.epfl.ch/site9/",
+            "value": "https://formation-wp.epfl.ch/site9/"
+          },
+          {
+            "selected": false,
+            "text": "https://iahr2020.epfl.ch//",
+            "value": "https://iahr2020.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://icequbes.epfl.ch//",
+            "value": "https://icequbes.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://imampc20.epfl.ch//",
+            "value": "https://imampc20.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch//",
+            "value": "https://inside.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/achats/",
+            "value": "https://inside.epfl.ch/achats/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/ae/",
+            "value": "https://inside.epfl.ch/ae/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/alumni-scgc/",
+            "value": "https://inside.epfl.ch/alumni-scgc/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/bp1-partages-prets-bonsplans/",
+            "value": "https://inside.epfl.ch/bp1-partages-prets-bonsplans/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/canari2/",
+            "value": "https://inside.epfl.ch/canari2/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/catalyse/",
+            "value": "https://inside.epfl.ch/catalyse/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/cce/",
+            "value": "https://inside.epfl.ch/cce/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/center-of-phenogenomics/",
+            "value": "https://inside.epfl.ch/center-of-phenogenomics/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/chili/",
+            "value": "https://inside.epfl.ch/chili/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/cipd/",
+            "value": "https://inside.epfl.ch/cipd/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/cis/",
+            "value": "https://inside.epfl.ch/cis/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/controle-de-gestion/",
+            "value": "https://inside.epfl.ch/controle-de-gestion/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/corp-id/",
+            "value": "https://inside.epfl.ch/corp-id/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/cryos/",
+            "value": "https://inside.epfl.ch/cryos/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/eln-lims-tutorials/",
+            "value": "https://inside.epfl.ch/eln-lims-tutorials/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/eml-intranet/",
+            "value": "https://inside.epfl.ch/eml-intranet/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/enac-do/",
+            "value": "https://inside.epfl.ch/enac-do/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/equipe-rh/",
+            "value": "https://inside.epfl.ch/equipe-rh/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/events-sv/",
+            "value": "https://inside.epfl.ch/events-sv/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/events/",
+            "value": "https://inside.epfl.ch/events/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/finances/",
+            "value": "https://inside.epfl.ch/finances/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/flexlab/",
+            "value": "https://inside.epfl.ch/flexlab/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/galatea/",
+            "value": "https://inside.epfl.ch/galatea/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/gonczy-lab/",
+            "value": "https://inside.epfl.ch/gonczy-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/help-wordpress/",
+            "value": "https://inside.epfl.ch/help-wordpress/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/ibi_admin/",
+            "value": "https://inside.epfl.ch/ibi_admin/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/ic/",
+            "value": "https://inside.epfl.ch/ic/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/iie/",
+            "value": "https://inside.epfl.ch/iie/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/implicit-bias-seminars/",
+            "value": "https://inside.epfl.ch/implicit-bias-seminars/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/internalhr/",
+            "value": "https://inside.epfl.ch/internalhr/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/internaljobs/",
+            "value": "https://inside.epfl.ch/internaljobs/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/intranet-isic/",
+            "value": "https://inside.epfl.ch/intranet-isic/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/iphys-it/",
+            "value": "https://inside.epfl.ch/iphys-it/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/is-academia/",
+            "value": "https://inside.epfl.ch/is-academia/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/it-cnp/",
+            "value": "https://inside.epfl.ch/it-cnp/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/lai-teaching/",
+            "value": "https://inside.epfl.ch/lai-teaching/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/lap/",
+            "value": "https://inside.epfl.ch/lap/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/lbem/",
+            "value": "https://inside.epfl.ch/lbem/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/lcbc/",
+            "value": "https://inside.epfl.ch/lcbc/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/lch-news/",
+            "value": "https://inside.epfl.ch/lch-news/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/library/",
+            "value": "https://inside.epfl.ch/library/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/lis/",
+            "value": "https://inside.epfl.ch/lis/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/lnco/",
+            "value": "https://inside.epfl.ch/lnco/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/logement/",
+            "value": "https://inside.epfl.ch/logement/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/logementsion/",
+            "value": "https://inside.epfl.ch/logementsion/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/lrm/",
+            "value": "https://inside.epfl.ch/lrm/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/lts4/",
+            "value": "https://inside.epfl.ch/lts4/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/math/",
+            "value": "https://inside.epfl.ch/math/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/med-ev-infos/",
+            "value": "https://inside.epfl.ch/med-ev-infos/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/mouse-line-inventory/",
+            "value": "https://inside.epfl.ch/mouse-line-inventory/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/pols/",
+            "value": "https://inside.epfl.ch/pols/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/portal-xaas/",
+            "value": "https://inside.epfl.ch/portal-xaas/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/promotionssti/",
+            "value": "https://inside.epfl.ch/promotionssti/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/q-lab/",
+            "value": "https://inside.epfl.ch/q-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/sar/",
+            "value": "https://inside.epfl.ch/sar/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/sber/",
+            "value": "https://inside.epfl.ch/sber/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/school-of-life-sciences/",
+            "value": "https://inside.epfl.ch/school-of-life-sciences/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/secure-it/",
+            "value": "https://inside.epfl.ch/secure-it/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/servicedesk/",
+            "value": "https://inside.epfl.ch/servicedesk/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/sgc/",
+            "value": "https://inside.epfl.ch/sgc/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/signatures-electroniques/",
+            "value": "https://inside.epfl.ch/signatures-electroniques/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/ssie/",
+            "value": "https://inside.epfl.ch/ssie/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/sti-comunication/",
+            "value": "https://inside.epfl.ch/sti-comunication/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/sti-conseils/",
+            "value": "https://inside.epfl.ch/sti-conseils/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/sti-faculty-affairs-restricted/",
+            "value": "https://inside.epfl.ch/sti-faculty-affairs-restricted/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/sti-faculty-affairs/",
+            "value": "https://inside.epfl.ch/sti-faculty-affairs/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/sti-finances/",
+            "value": "https://inside.epfl.ch/sti-finances/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/sti-it-admins/",
+            "value": "https://inside.epfl.ch/sti-it-admins/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/sti-it/",
+            "value": "https://inside.epfl.ch/sti-it/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/sti-research/",
+            "value": "https://inside.epfl.ch/sti-research/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/sti-shop/",
+            "value": "https://inside.epfl.ch/sti-shop/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/sti-ta/",
+            "value": "https://inside.epfl.ch/sti-ta/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/stivideoconference/",
+            "value": "https://inside.epfl.ch/stivideoconference/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/sv-commission-enseignement/",
+            "value": "https://inside.epfl.ch/sv-commission-enseignement/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/sv-faculty-meeting-minutes/",
+            "value": "https://inside.epfl.ch/sv-faculty-meeting-minutes/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/sv-infrastructure/",
+            "value": "https://inside.epfl.ch/sv-infrastructure/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/sv-it/",
+            "value": "https://inside.epfl.ch/sv-it/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/sv-school-council-meeting-minutes/",
+            "value": "https://inside.epfl.ch/sv-school-council-meeting-minutes/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/sv-school-direction-minutes/",
+            "value": "https://inside.epfl.ch/sv-school-direction-minutes/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/teaching/",
+            "value": "https://inside.epfl.ch/teaching/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/upoates_intranet/",
+            "value": "https://inside.epfl.ch/upoates_intranet/"
+          },
+          {
+            "selected": false,
+            "text": "https://inside.epfl.ch/wire/",
+            "value": "https://inside.epfl.ch/wire/"
+          },
+          {
+            "selected": false,
+            "text": "https://ivea.epfl.ch//",
+            "value": "https://ivea.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://lqss.epfl.ch//",
+            "value": "https://lqss.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://morss2020.epfl.ch//",
+            "value": "https://morss2020.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://neuromorph.epfl.ch//",
+            "value": "https://neuromorph.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://nm2.epfl.ch//",
+            "value": "https://nm2.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://nrg2021.epfl.ch//",
+            "value": "https://nrg2021.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://omt-sci-comm.epfl.ch//",
+            "value": "https://omt-sci-comm.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://servicedesk-sandbox.epfl.ch//",
+            "value": "https://servicedesk-sandbox.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://smlms.epfl.ch//",
+            "value": "https://smlms.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://swissmetallurgydays.epfl.ch//",
+            "value": "https://swissmetallurgydays.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://tcrt.epfl.ch//",
+            "value": "https://tcrt.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://troyanov60.epfl.ch//",
+            "value": "https://troyanov60.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://unhabitable-habitat.epfl.ch//",
+            "value": "https://unhabitable-habitat.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://wp-metrics.epfl.ch//",
+            "value": "https://wp-metrics.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch//",
+            "value": "https://www.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/about/",
+            "value": "https://www.epfl.ch/about/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/about/alumni/",
+            "value": "https://www.epfl.ch/about/alumni/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/about/campus/",
+            "value": "https://www.epfl.ch/about/campus/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/about/equality/",
+            "value": "https://www.epfl.ch/about/equality/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/about/news-and-media/",
+            "value": "https://www.epfl.ch/about/news-and-media/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/about/overview/",
+            "value": "https://www.epfl.ch/about/overview/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/about/philanthropy/",
+            "value": "https://www.epfl.ch/about/philanthropy/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/about/presidency/",
+            "value": "https://www.epfl.ch/about/presidency/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/about/recruiting/",
+            "value": "https://www.epfl.ch/about/recruiting/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/about/respect/",
+            "value": "https://www.epfl.ch/about/respect/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/about/sustainability/",
+            "value": "https://www.epfl.ch/about/sustainability/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/about/vice-presidencies/",
+            "value": "https://www.epfl.ch/about/vice-presidencies/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/about/working/",
+            "value": "https://www.epfl.ch/about/working/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/",
+            "value": "https://www.epfl.ch/campus/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/art-culture/",
+            "value": "https://www.epfl.ch/campus/art-culture/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/art-culture/museum-exhibitions/",
+            "value": "https://www.epfl.ch/campus/art-culture/museum-exhibitions/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/art-culture/museum-exhibitions/archizoom/",
+            "value": "https://www.epfl.ch/campus/art-culture/museum-exhibitions/archizoom/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/art-culture/museum-exhibitions/artlab/",
+            "value": "https://www.epfl.ch/campus/art-culture/museum-exhibitions/artlab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/art-culture/museum-exhibitions/artlab2/",
+            "value": "https://www.epfl.ch/campus/art-culture/museum-exhibitions/artlab2/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/",
+            "value": "https://www.epfl.ch/campus/associations/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/",
+            "value": "https://www.epfl.ch/campus/associations/list/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/acc/",
+            "value": "https://www.epfl.ch/campus/associations/list/acc/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/adec/",
+            "value": "https://www.epfl.ch/campus/associations/list/adec/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/adele/",
+            "value": "https://www.epfl.ch/campus/associations/list/adele/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/aegc/",
+            "value": "https://www.epfl.ch/campus/associations/list/aegc/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/aegel/",
+            "value": "https://www.epfl.ch/campus/associations/list/aegel/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/aerus/",
+            "value": "https://www.epfl.ch/campus/associations/list/aerus/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/aesv/",
+            "value": "https://www.epfl.ch/campus/associations/list/aesv/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/amac/",
+            "value": "https://www.epfl.ch/campus/associations/list/amac/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/apel/",
+            "value": "https://www.epfl.ch/campus/associations/list/apel/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/apml/",
+            "value": "https://www.epfl.ch/campus/associations/list/apml/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/aro/",
+            "value": "https://www.epfl.ch/campus/associations/list/aro/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/asar/",
+            "value": "https://www.epfl.ch/campus/associations/list/asar/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/ase/",
+            "value": "https://www.epfl.ch/campus/associations/list/ase/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/callista/",
+            "value": "https://www.epfl.ch/campus/associations/list/callista/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/ciel/",
+            "value": "https://www.epfl.ch/campus/associations/list/ciel/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/clubmontagne/",
+            "value": "https://www.epfl.ch/campus/associations/list/clubmontagne/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/cqfd/",
+            "value": "https://www.epfl.ch/campus/associations/list/cqfd/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/dynamic/",
+            "value": "https://www.epfl.ch/campus/associations/list/dynamic/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/enigma/",
+            "value": "https://www.epfl.ch/campus/associations/list/enigma/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/epc/",
+            "value": "https://www.epfl.ch/campus/associations/list/epc/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/epda/",
+            "value": "https://www.epfl.ch/campus/associations/list/epda/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/epic/",
+            "value": "https://www.epfl.ch/campus/associations/list/epic/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/irrotationnels/",
+            "value": "https://www.epfl.ch/campus/associations/list/irrotationnels/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/irsa/",
+            "value": "https://www.epfl.ch/campus/associations/list/irsa/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/ishigo/",
+            "value": "https://www.epfl.ch/campus/associations/list/ishigo/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/messaa/",
+            "value": "https://www.epfl.ch/campus/associations/list/messaa/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/mun/",
+            "value": "https://www.epfl.ch/campus/associations/list/mun/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/oche/",
+            "value": "https://www.epfl.ch/campus/associations/list/oche/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/photonics/",
+            "value": "https://www.epfl.ch/campus/associations/list/photonics/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/planqueer/",
+            "value": "https://www.epfl.ch/campus/associations/list/planqueer/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/plume/",
+            "value": "https://www.epfl.ch/campus/associations/list/plume/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/polydoc/",
+            "value": "https://www.epfl.ch/campus/associations/list/polydoc/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/polyjapan/",
+            "value": "https://www.epfl.ch/campus/associations/list/polyjapan/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/polyvalais/",
+            "value": "https://www.epfl.ch/campus/associations/list/polyvalais/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/qc/",
+            "value": "https://www.epfl.ch/campus/associations/list/qc/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/qed/",
+            "value": "https://www.epfl.ch/campus/associations/list/qed/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/robopoly/",
+            "value": "https://www.epfl.ch/campus/associations/list/robopoly/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/scba/",
+            "value": "https://www.epfl.ch/campus/associations/list/scba/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/spaceat/",
+            "value": "https://www.epfl.ch/campus/associations/list/spaceat/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/spacecraft-team/",
+            "value": "https://www.epfl.ch/campus/associations/list/spacecraft-team/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/svphd/",
+            "value": "https://www.epfl.ch/campus/associations/list/svphd/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/toastmasters/",
+            "value": "https://www.epfl.ch/campus/associations/list/toastmasters/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/tunes/",
+            "value": "https://www.epfl.ch/campus/associations/list/tunes/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/turcopoly/",
+            "value": "https://www.epfl.ch/campus/associations/list/turcopoly/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/uasp/",
+            "value": "https://www.epfl.ch/campus/associations/list/uasp/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/associations/list/yuva/",
+            "value": "https://www.epfl.ch/campus/associations/list/yuva/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/events/",
+            "value": "https://www.epfl.ch/campus/events/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/library/",
+            "value": "https://www.epfl.ch/campus/library/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/mobility/",
+            "value": "https://www.epfl.ch/campus/mobility/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/restaurants-shops-hotels/",
+            "value": "https://www.epfl.ch/campus/restaurants-shops-hotels/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/security-safety/",
+            "value": "https://www.epfl.ch/campus/security-safety/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/services/",
+            "value": "https://www.epfl.ch/campus/services/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/services/audiovisual/",
+            "value": "https://www.epfl.ch/campus/services/audiovisual/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/services/camipro/",
+            "value": "https://www.epfl.ch/campus/services/camipro/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/services/canari/",
+            "value": "https://www.epfl.ch/campus/services/canari/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/services/canari2/",
+            "value": "https://www.epfl.ch/campus/services/canari2/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/services/communication/",
+            "value": "https://www.epfl.ch/campus/services/communication/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/services/finance/",
+            "value": "https://www.epfl.ch/campus/services/finance/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/services/housing/",
+            "value": "https://www.epfl.ch/campus/services/housing/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/services/human-resources/",
+            "value": "https://www.epfl.ch/campus/services/human-resources/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/services/internal-trainings/",
+            "value": "https://www.epfl.ch/campus/services/internal-trainings/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/services/organize-an-event/",
+            "value": "https://www.epfl.ch/campus/services/organize-an-event/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/services/purchasing/",
+            "value": "https://www.epfl.ch/campus/services/purchasing/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/services/real-estate-and-logistics/",
+            "value": "https://www.epfl.ch/campus/services/real-estate-and-logistics/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/services/repro/",
+            "value": "https://www.epfl.ch/campus/services/repro/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/services/ressources/",
+            "value": "https://www.epfl.ch/campus/services/ressources/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/services/travel/",
+            "value": "https://www.epfl.ch/campus/services/travel/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/services/website/",
+            "value": "https://www.epfl.ch/campus/services/website/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/spiritual-care/",
+            "value": "https://www.epfl.ch/campus/spiritual-care/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/sports/",
+            "value": "https://www.epfl.ch/campus/sports/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/campus/visitors/",
+            "value": "https://www.epfl.ch/campus/visitors/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/",
+            "value": "https://www.epfl.ch/education/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/admission/",
+            "value": "https://www.epfl.ch/education/admission/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/bachelor/",
+            "value": "https://www.epfl.ch/education/bachelor/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/continuing-education/",
+            "value": "https://www.epfl.ch/education/continuing-education/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/education-and-science-outreach/",
+            "value": "https://www.epfl.ch/education/education-and-science-outreach/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/educational-initiatives/",
+            "value": "https://www.epfl.ch/education/educational-initiatives/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/international/",
+            "value": "https://www.epfl.ch/education/international/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/master/",
+            "value": "https://www.epfl.ch/education/master/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/phd/",
+            "value": "https://www.epfl.ch/education/phd/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/phd/edam-advanced-manufacturing/",
+            "value": "https://www.epfl.ch/education/phd/edam-advanced-manufacturing/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/phd/edar-architecture-and-sciences-of-the-city/",
+            "value": "https://www.epfl.ch/education/phd/edar-architecture-and-sciences-of-the-city/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/phd/edbb-biotechnology-and-bioengineering/",
+            "value": "https://www.epfl.ch/education/phd/edbb-biotechnology-and-bioengineering/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/phd/edcb-computational-and-quantitative-biology/",
+            "value": "https://www.epfl.ch/education/phd/edcb-computational-and-quantitative-biology/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/phd/edce-civil-and-environmental-engineering/",
+            "value": "https://www.epfl.ch/education/phd/edce-civil-and-environmental-engineering/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/phd/edch-chemistry-and-chemical-engineering/",
+            "value": "https://www.epfl.ch/education/phd/edch-chemistry-and-chemical-engineering/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/phd/eddh-digital-humanities/",
+            "value": "https://www.epfl.ch/education/phd/eddh-digital-humanities/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/phd/edee-electrical-engineering/",
+            "value": "https://www.epfl.ch/education/phd/edee-electrical-engineering/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/phd/edey-energy/",
+            "value": "https://www.epfl.ch/education/phd/edey-energy/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/phd/edfi-finance/",
+            "value": "https://www.epfl.ch/education/phd/edfi-finance/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/phd/edic-computer-and-communication-sciences/",
+            "value": "https://www.epfl.ch/education/phd/edic-computer-and-communication-sciences/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/phd/edma-mathematics/",
+            "value": "https://www.epfl.ch/education/phd/edma-mathematics/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/phd/edme-mechanics/",
+            "value": "https://www.epfl.ch/education/phd/edme-mechanics/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/phd/edmi-microsystems-and-microelectronics/",
+            "value": "https://www.epfl.ch/education/phd/edmi-microsystems-and-microelectronics/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/phd/edms-molecular-life-sciences/",
+            "value": "https://www.epfl.ch/education/phd/edms-molecular-life-sciences/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/phd/edmt-management-of-technology/",
+            "value": "https://www.epfl.ch/education/phd/edmt-management-of-technology/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/phd/edmx-materials-science-and-engineering/",
+            "value": "https://www.epfl.ch/education/phd/edmx-materials-science-and-engineering/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/phd/edne-neuroscience/",
+            "value": "https://www.epfl.ch/education/phd/edne-neuroscience/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/phd/edpo-photonics/",
+            "value": "https://www.epfl.ch/education/phd/edpo-photonics/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/phd/edpy-physics/",
+            "value": "https://www.epfl.ch/education/phd/edpy-physics/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/phd/edrs-robotics-control-and-intelligent-systems/",
+            "value": "https://www.epfl.ch/education/phd/edrs-robotics-control-and-intelligent-systems/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/studies/",
+            "value": "https://www.epfl.ch/education/studies/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/education/teaching/",
+            "value": "https://www.epfl.ch/education/teaching/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/innovation/",
+            "value": "https://www.epfl.ch/innovation/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/innovation/domains/",
+            "value": "https://www.epfl.ch/innovation/domains/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/innovation/industry/",
+            "value": "https://www.epfl.ch/innovation/industry/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/innovation/startup/",
+            "value": "https://www.epfl.ch/innovation/startup/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/",
+            "value": "https://www.epfl.ch/labs/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/ablasserlab/",
+            "value": "https://www.epfl.ch/labs/ablasserlab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/acces/",
+            "value": "https://www.epfl.ch/labs/acces/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/acht/",
+            "value": "https://www.epfl.ch/labs/acht/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/alexandermathis-lab/",
+            "value": "https://www.epfl.ch/labs/alexandermathis-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/alice/",
+            "value": "https://www.epfl.ch/labs/alice/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/amcv/",
+            "value": "https://www.epfl.ch/labs/amcv/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/anchp/",
+            "value": "https://www.epfl.ch/labs/anchp/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/anmath/",
+            "value": "https://www.epfl.ch/labs/anmath/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/anmc/",
+            "value": "https://www.epfl.ch/labs/anmc/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/aphys/",
+            "value": "https://www.epfl.ch/labs/aphys/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/appliedsc/",
+            "value": "https://www.epfl.ch/labs/appliedsc/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/aprl/",
+            "value": "https://www.epfl.ch/labs/aprl/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/aqua/",
+            "value": "https://www.epfl.ch/labs/aqua/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/arg/",
+            "value": "https://www.epfl.ch/labs/arg/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/aspg/",
+            "value": "https://www.epfl.ch/labs/aspg/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/auwerx-lab/",
+            "value": "https://www.epfl.ch/labs/auwerx-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/ban/",
+            "value": "https://www.epfl.ch/labs/ban/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/barth-lab/",
+            "value": "https://www.epfl.ch/labs/barth-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/biorob/",
+            "value": "https://www.epfl.ch/labs/biorob/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/bios/",
+            "value": "https://www.epfl.ch/labs/bios/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/biostat/",
+            "value": "https://www.epfl.ch/labs/biostat/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/bitbol-lab/",
+            "value": "https://www.epfl.ch/labs/bitbol-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/blokesch-lab/",
+            "value": "https://www.epfl.ch/labs/blokesch-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/bnms/",
+            "value": "https://www.epfl.ch/labs/bnms/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/bpe/",
+            "value": "https://www.epfl.ch/labs/bpe/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/brisken-lab/",
+            "value": "https://www.epfl.ch/labs/brisken-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/bucher-lab/",
+            "value": "https://www.epfl.ch/labs/bucher-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/building2050/",
+            "value": "https://www.epfl.ch/labs/building2050/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/c3mp/",
+            "value": "https://www.epfl.ch/labs/c3mp/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/cac/",
+            "value": "https://www.epfl.ch/labs/cac/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/cag/",
+            "value": "https://www.epfl.ch/labs/cag/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/cama/",
+            "value": "https://www.epfl.ch/labs/cama/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/camp/",
+            "value": "https://www.epfl.ch/labs/camp/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/cclab/",
+            "value": "https://www.epfl.ch/labs/cclab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/cdt/",
+            "value": "https://www.epfl.ch/labs/cdt/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/ceat/",
+            "value": "https://www.epfl.ch/labs/ceat/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/cemi/",
+            "value": "https://www.epfl.ch/labs/cemi/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/cfi/",
+            "value": "https://www.epfl.ch/labs/cfi/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/cgd/",
+            "value": "https://www.epfl.ch/labs/cgd/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/chaire-gaz-naturel/",
+            "value": "https://www.epfl.ch/labs/chaire-gaz-naturel/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/chili/",
+            "value": "https://www.epfl.ch/labs/chili/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/clse/",
+            "value": "https://www.epfl.ch/labs/clse/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/cnpa/",
+            "value": "https://www.epfl.ch/labs/cnpa/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/constam-lab/",
+            "value": "https://www.epfl.ch/labs/constam-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/cosmo/",
+            "value": "https://www.epfl.ch/labs/cosmo/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/courtine-lab/",
+            "value": "https://www.epfl.ch/labs/courtine-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/cqsl/",
+            "value": "https://www.epfl.ch/labs/cqsl/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/cryos/",
+            "value": "https://www.epfl.ch/labs/cryos/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/csea/",
+            "value": "https://www.epfl.ch/labs/csea/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/csf/",
+            "value": "https://www.epfl.ch/labs/csf/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/csft/",
+            "value": "https://www.epfl.ch/labs/csft/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/csi/",
+            "value": "https://www.epfl.ch/labs/csi/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/csqi/",
+            "value": "https://www.epfl.ch/labs/csqi/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/ctmc/",
+            "value": "https://www.epfl.ch/labs/ctmc/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/cvlab/",
+            "value": "https://www.epfl.ch/labs/cvlab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/d-vet/",
+            "value": "https://www.epfl.ch/labs/d-vet/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/dangelo-lab/",
+            "value": "https://www.epfl.ch/labs/dangelo-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/data/",
+            "value": "https://www.epfl.ch/labs/data/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/dcml/",
+            "value": "https://www.epfl.ch/labs/dcml/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/dcsl/",
+            "value": "https://www.epfl.ch/labs/dcsl/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/ddmac/",
+            "value": "https://www.epfl.ch/labs/ddmac/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/decode/",
+            "value": "https://www.epfl.ch/labs/decode/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/dedis/",
+            "value": "https://www.epfl.ch/labs/dedis/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/depalma-lab/",
+            "value": "https://www.epfl.ch/labs/depalma-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/deplanckelab/",
+            "value": "https://www.epfl.ch/labs/deplanckelab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/desl-pwrs/",
+            "value": "https://www.epfl.ch/labs/desl-pwrs/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/dhlab/",
+            "value": "https://www.epfl.ch/labs/dhlab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/dias/",
+            "value": "https://www.epfl.ch/labs/dias/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/disal/",
+            "value": "https://www.epfl.ch/labs/disal/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/disopt/",
+            "value": "https://www.epfl.ch/labs/disopt/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/duboule-lab/",
+            "value": "https://www.epfl.ch/labs/duboule-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/dynnet/",
+            "value": "https://www.epfl.ch/labs/dynnet/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/east/",
+            "value": "https://www.epfl.ch/labs/east/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/eceo/",
+            "value": "https://www.epfl.ch/labs/eceo/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/echo/",
+            "value": "https://www.epfl.ch/labs/echo/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/ecol/",
+            "value": "https://www.epfl.ch/labs/ecol/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/ecos/",
+            "value": "https://www.epfl.ch/labs/ecos/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/ecps/",
+            "value": "https://www.epfl.ch/labs/ecps/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/edlab/",
+            "value": "https://www.epfl.ch/labs/edlab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/eelab/",
+            "value": "https://www.epfl.ch/labs/eelab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/eerl/",
+            "value": "https://www.epfl.ch/labs/eerl/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/eesd/",
+            "value": "https://www.epfl.ch/labs/eesd/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/egg/",
+            "value": "https://www.epfl.ch/labs/egg/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/elab/",
+            "value": "https://www.epfl.ch/labs/elab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/emc/",
+            "value": "https://www.epfl.ch/labs/emc/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/eml/",
+            "value": "https://www.epfl.ch/labs/eml/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/emplus/",
+            "value": "https://www.epfl.ch/labs/emplus/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/emsi/",
+            "value": "https://www.epfl.ch/labs/emsi/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/entc/",
+            "value": "https://www.epfl.ch/labs/entc/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/epsl/",
+            "value": "https://www.epfl.ch/labs/epsl/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/esl/",
+            "value": "https://www.epfl.ch/labs/esl/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/far/",
+            "value": "https://www.epfl.ch/labs/far/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/fellay-lab/",
+            "value": "https://www.epfl.ch/labs/fellay-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/ffo/",
+            "value": "https://www.epfl.ch/labs/ffo/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/fimap/",
+            "value": "https://www.epfl.ch/labs/fimap/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/flexlab/",
+            "value": "https://www.epfl.ch/labs/flexlab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/fsl/",
+            "value": "https://www.epfl.ch/labs/fsl/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/galatea/",
+            "value": "https://www.epfl.ch/labs/galatea/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/gbf/",
+            "value": "https://www.epfl.ch/labs/gbf/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/gcb/",
+            "value": "https://www.epfl.ch/labs/gcb/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/gcc/",
+            "value": "https://www.epfl.ch/labs/gcc/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/gdp/",
+            "value": "https://www.epfl.ch/labs/gdp/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/gel/",
+            "value": "https://www.epfl.ch/labs/gel/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/gem/",
+            "value": "https://www.epfl.ch/labs/gem/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/gemini-e3/",
+            "value": "https://www.epfl.ch/labs/gemini-e3/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/gfo/",
+            "value": "https://www.epfl.ch/labs/gfo/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/ggsd/",
+            "value": "https://www.epfl.ch/labs/ggsd/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/gmf/",
+            "value": "https://www.epfl.ch/labs/gmf/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/gonczy-lab/",
+            "value": "https://www.epfl.ch/labs/gonczy-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/gr-cel/",
+            "value": "https://www.epfl.ch/labs/gr-cel/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/gr-fsch/",
+            "value": "https://www.epfl.ch/labs/gr-fsch/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/gr-hill/",
+            "value": "https://www.epfl.ch/labs/gr-hill/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/gr-ost/",
+            "value": "https://www.epfl.ch/labs/gr-ost/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/gr-tes/",
+            "value": "https://www.epfl.ch/labs/gr-tes/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/gr-tr/",
+            "value": "https://www.epfl.ch/labs/gr-tr/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/graefflab/",
+            "value": "https://www.epfl.ch/labs/graefflab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/gramm/",
+            "value": "https://www.epfl.ch/labs/gramm/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/gscp/",
+            "value": "https://www.epfl.ch/labs/gscp/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/gtt/",
+            "value": "https://www.epfl.ch/labs/gtt/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/hanahan-lab/",
+            "value": "https://www.epfl.ch/labs/hanahan-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/herus/",
+            "value": "https://www.epfl.ch/labs/herus/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/hessbellwald-lab/",
+            "value": "https://www.epfl.ch/labs/hessbellwald-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/het/",
+            "value": "https://www.epfl.ch/labs/het/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/hl/",
+            "value": "https://www.epfl.ch/labs/hl/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/hobel/",
+            "value": "https://www.epfl.ch/labs/hobel/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/huelsken-lab/",
+            "value": "https://www.epfl.ch/labs/huelsken-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/hummel-lab/",
+            "value": "https://www.epfl.ch/labs/hummel-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/ibois/",
+            "value": "https://www.epfl.ch/labs/ibois/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/iclab/",
+            "value": "https://www.epfl.ch/labs/iclab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/ict4sm/",
+            "value": "https://www.epfl.ch/labs/ict4sm/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/idephics/",
+            "value": "https://www.epfl.ch/labs/idephics/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/idiap/",
+            "value": "https://www.epfl.ch/labs/idiap/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/iig/",
+            "value": "https://www.epfl.ch/labs/iig/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/iipp/",
+            "value": "https://www.epfl.ch/labs/iipp/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/imac/",
+            "value": "https://www.epfl.ch/labs/imac/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/inl/",
+            "value": "https://www.epfl.ch/labs/inl/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/instantlab/",
+            "value": "https://www.epfl.ch/labs/instantlab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/ipese/",
+            "value": "https://www.epfl.ch/labs/ipese/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/ivrl/",
+            "value": "https://www.epfl.ch/labs/ivrl/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/jaksic-lab/",
+            "value": "https://www.epfl.ch/labs/jaksic-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/k-lab/",
+            "value": "https://www.epfl.ch/labs/k-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/la/",
+            "value": "https://www.epfl.ch/labs/la/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lab-u/",
+            "value": "https://www.epfl.ch/labs/lab-u/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/laba/",
+            "value": "https://www.epfl.ch/labs/laba/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/labos/",
+            "value": "https://www.epfl.ch/labs/labos/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lacal/",
+            "value": "https://www.epfl.ch/labs/lacal/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/laft/",
+            "value": "https://www.epfl.ch/labs/laft/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lai/",
+            "value": "https://www.epfl.ch/labs/lai/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lamd/",
+            "value": "https://www.epfl.ch/labs/lamd/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lammm/",
+            "value": "https://www.epfl.ch/labs/lammm/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lamp/",
+            "value": "https://www.epfl.ch/labs/lamp/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lams/",
+            "value": "https://www.epfl.ch/labs/lams/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lanes/",
+            "value": "https://www.epfl.ch/labs/lanes/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lap/",
+            "value": "https://www.epfl.ch/labs/lap/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lapd/",
+            "value": "https://www.epfl.ch/labs/lapd/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lapi/",
+            "value": "https://www.epfl.ch/labs/lapi/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lapis/",
+            "value": "https://www.epfl.ch/labs/lapis/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/las/",
+            "value": "https://www.epfl.ch/labs/las/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lasa/",
+            "value": "https://www.epfl.ch/labs/lasa/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lashuel-lab/",
+            "value": "https://www.epfl.ch/labs/lashuel-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lasig/",
+            "value": "https://www.epfl.ch/labs/lasig/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/laspe/",
+            "value": "https://www.epfl.ch/labs/laspe/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/last/",
+            "value": "https://www.epfl.ch/labs/last/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lastro/",
+            "value": "https://www.epfl.ch/labs/lastro/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lasur/",
+            "value": "https://www.epfl.ch/labs/lasur/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lbe/",
+            "value": "https://www.epfl.ch/labs/lbe/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lbem/",
+            "value": "https://www.epfl.ch/labs/lbem/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lben/",
+            "value": "https://www.epfl.ch/labs/lben/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lbm/",
+            "value": "https://www.epfl.ch/labs/lbm/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lbmm/",
+            "value": "https://www.epfl.ch/labs/lbmm/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lbni/",
+            "value": "https://www.epfl.ch/labs/lbni/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lbo/",
+            "value": "https://www.epfl.ch/labs/lbo/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lbp/",
+            "value": "https://www.epfl.ch/labs/lbp/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lbs/",
+            "value": "https://www.epfl.ch/labs/lbs/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lca2/",
+            "value": "https://www.epfl.ch/labs/lca2/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lcav/",
+            "value": "https://www.epfl.ch/labs/lcav/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lcbc/",
+            "value": "https://www.epfl.ch/labs/lcbc/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lcbim/",
+            "value": "https://www.epfl.ch/labs/lcbim/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lcbm/",
+            "value": "https://www.epfl.ch/labs/lcbm/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lcc/",
+            "value": "https://www.epfl.ch/labs/lcc/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lce/",
+            "value": "https://www.epfl.ch/labs/lce/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lch/",
+            "value": "https://www.epfl.ch/labs/lch/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lcmd/",
+            "value": "https://www.epfl.ch/labs/lcmd/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lcn/",
+            "value": "https://www.epfl.ch/labs/lcn/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lcom/",
+            "value": "https://www.epfl.ch/labs/lcom/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lcpm/",
+            "value": "https://www.epfl.ch/labs/lcpm/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lcpt/",
+            "value": "https://www.epfl.ch/labs/lcpt/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lcs/",
+            "value": "https://www.epfl.ch/labs/lcs/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lcsa/",
+            "value": "https://www.epfl.ch/labs/lcsa/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lcsb/",
+            "value": "https://www.epfl.ch/labs/lcsb/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lcso/",
+            "value": "https://www.epfl.ch/labs/lcso/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lcvmm/",
+            "value": "https://www.epfl.ch/labs/lcvmm/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/ldm/",
+            "value": "https://www.epfl.ch/labs/ldm/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/leago/",
+            "value": "https://www.epfl.ch/labs/leago/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/leb/",
+            "value": "https://www.epfl.ch/labs/leb/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lemaitrelab/",
+            "value": "https://www.epfl.ch/labs/lemaitrelab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lemr/",
+            "value": "https://www.epfl.ch/labs/lemr/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lepa/",
+            "value": "https://www.epfl.ch/labs/lepa/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/leso/",
+            "value": "https://www.epfl.ch/labs/leso/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/leure/",
+            "value": "https://www.epfl.ch/labs/leure/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lfim/",
+            "value": "https://www.epfl.ch/labs/lfim/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lfmi/",
+            "value": "https://www.epfl.ch/labs/lfmi/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lgb/",
+            "value": "https://www.epfl.ch/labs/lgb/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lgc/",
+            "value": "https://www.epfl.ch/labs/lgc/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lhe/",
+            "value": "https://www.epfl.ch/labs/lhe/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lhst/",
+            "value": "https://www.epfl.ch/labs/lhst/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lhtc/",
+            "value": "https://www.epfl.ch/labs/lhtc/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lif/",
+            "value": "https://www.epfl.ch/labs/lif/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lifmet/",
+            "value": "https://www.epfl.ch/labs/lifmet/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/limno/",
+            "value": "https://www.epfl.ch/labs/limno/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lingner-lab/",
+            "value": "https://www.epfl.ch/labs/lingner-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/linx/",
+            "value": "https://www.epfl.ch/labs/linx/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lions/",
+            "value": "https://www.epfl.ch/labs/lions/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lip/",
+            "value": "https://www.epfl.ch/labs/lip/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lipid/",
+            "value": "https://www.epfl.ch/labs/lipid/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lis/",
+            "value": "https://www.epfl.ch/labs/lis/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lmaf/",
+            "value": "https://www.epfl.ch/labs/lmaf/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lmam/",
+            "value": "https://www.epfl.ch/labs/lmam/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lmc/",
+            "value": "https://www.epfl.ch/labs/lmc/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lmer/",
+            "value": "https://www.epfl.ch/labs/lmer/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lmgn/",
+            "value": "https://www.epfl.ch/labs/lmgn/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lmis1/",
+            "value": "https://www.epfl.ch/labs/lmis1/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lmis2/",
+            "value": "https://www.epfl.ch/labs/lmis2/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lmis4/",
+            "value": "https://www.epfl.ch/labs/lmis4/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lmm/",
+            "value": "https://www.epfl.ch/labs/lmm/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lmom/",
+            "value": "https://www.epfl.ch/labs/lmom/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lms/",
+            "value": "https://www.epfl.ch/labs/lms/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lmsc/",
+            "value": "https://www.epfl.ch/labs/lmsc/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lmtm/",
+            "value": "https://www.epfl.ch/labs/lmtm/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lmts/",
+            "value": "https://www.epfl.ch/labs/lmts/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lnb/",
+            "value": "https://www.epfl.ch/labs/lnb/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lnce/",
+            "value": "https://www.epfl.ch/labs/lnce/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lnco/",
+            "value": "https://www.epfl.ch/labs/lnco/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lnd/",
+            "value": "https://www.epfl.ch/labs/lnd/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lne/",
+            "value": "https://www.epfl.ch/labs/lne/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lnet/",
+            "value": "https://www.epfl.ch/labs/lnet/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lns/",
+            "value": "https://www.epfl.ch/labs/lns/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lo/",
+            "value": "https://www.epfl.ch/labs/lo/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/locbp/",
+            "value": "https://www.epfl.ch/labs/locbp/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lp/",
+            "value": "https://www.epfl.ch/labs/lp/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lpac/",
+            "value": "https://www.epfl.ch/labs/lpac/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lpap/",
+            "value": "https://www.epfl.ch/labs/lpap/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lpbs/",
+            "value": "https://www.epfl.ch/labs/lpbs/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lpdc/",
+            "value": "https://www.epfl.ch/labs/lpdc/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lpdi/",
+            "value": "https://www.epfl.ch/labs/lpdi/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lphe/",
+            "value": "https://www.epfl.ch/labs/lphe/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lpi/",
+            "value": "https://www.epfl.ch/labs/lpi/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lpmat/",
+            "value": "https://www.epfl.ch/labs/lpmat/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lpmc/",
+            "value": "https://www.epfl.ch/labs/lpmc/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lpmn/",
+            "value": "https://www.epfl.ch/labs/lpmn/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lpmv/",
+            "value": "https://www.epfl.ch/labs/lpmv/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lppc/",
+            "value": "https://www.epfl.ch/labs/lppc/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lppt/",
+            "value": "https://www.epfl.ch/labs/lppt/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lpsy/",
+            "value": "https://www.epfl.ch/labs/lpsy/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lptp/",
+            "value": "https://www.epfl.ch/labs/lptp/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lqg/",
+            "value": "https://www.epfl.ch/labs/lqg/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lqm/",
+            "value": "https://www.epfl.ch/labs/lqm/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lqno/",
+            "value": "https://www.epfl.ch/labs/lqno/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lqp/",
+            "value": "https://www.epfl.ch/labs/lqp/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lrese/",
+            "value": "https://www.epfl.ch/labs/lrese/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lrm/",
+            "value": "https://www.epfl.ch/labs/lrm/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lrs/",
+            "value": "https://www.epfl.ch/labs/lrs/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lsbi/",
+            "value": "https://www.epfl.ch/labs/lsbi/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lsci/",
+            "value": "https://www.epfl.ch/labs/lsci/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lse/",
+            "value": "https://www.epfl.ch/labs/lse/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lsen/",
+            "value": "https://www.epfl.ch/labs/lsen/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lsens/",
+            "value": "https://www.epfl.ch/labs/lsens/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lsi/",
+            "value": "https://www.epfl.ch/labs/lsi/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lsir/",
+            "value": "https://www.epfl.ch/labs/lsir/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lsme/",
+            "value": "https://www.epfl.ch/labs/lsme/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lsmo/",
+            "value": "https://www.epfl.ch/labs/lsmo/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lsms/",
+            "value": "https://www.epfl.ch/labs/lsms/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lsp/",
+            "value": "https://www.epfl.ch/labs/lsp/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lspm/",
+            "value": "https://www.epfl.ch/labs/lspm/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lspn/",
+            "value": "https://www.epfl.ch/labs/lspn/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lsu/",
+            "value": "https://www.epfl.ch/labs/lsu/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lsym/",
+            "value": "https://www.epfl.ch/labs/lsym/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lte/",
+            "value": "https://www.epfl.ch/labs/lte/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lth3/",
+            "value": "https://www.epfl.ch/labs/lth3/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/ltm/",
+            "value": "https://www.epfl.ch/labs/ltm/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/ltpn/",
+            "value": "https://www.epfl.ch/labs/ltpn/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/ltqe/",
+            "value": "https://www.epfl.ch/labs/ltqe/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lts4/",
+            "value": "https://www.epfl.ch/labs/lts4/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lts5/",
+            "value": "https://www.epfl.ch/labs/lts5/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lumes/",
+            "value": "https://www.epfl.ch/labs/lumes/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lutolf-lab/",
+            "value": "https://www.epfl.ch/labs/lutolf-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/luts/",
+            "value": "https://www.epfl.ch/labs/luts/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/luxs/",
+            "value": "https://www.epfl.ch/labs/luxs/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/lwe/",
+            "value": "https://www.epfl.ch/labs/lwe/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/mackenziemathis-lab/",
+            "value": "https://www.epfl.ch/labs/mackenziemathis-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/mag/",
+            "value": "https://www.epfl.ch/labs/mag/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/manslab/",
+            "value": "https://www.epfl.ch/labs/manslab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/markram-lab/",
+            "value": "https://www.epfl.ch/labs/markram-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/mathicse/",
+            "value": "https://www.epfl.ch/labs/mathicse/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/mccabelab/",
+            "value": "https://www.epfl.ch/labs/mccabelab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/mckinney-lab/",
+            "value": "https://www.epfl.ch/labs/mckinney-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/mcs/",
+            "value": "https://www.epfl.ch/labs/mcs/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/mcss/",
+            "value": "https://www.epfl.ch/labs/mcss/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/mds/",
+            "value": "https://www.epfl.ch/labs/mds/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/mechanical-spectroscopy/",
+            "value": "https://www.epfl.ch/labs/mechanical-spectroscopy/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/meylan-lab/",
+            "value": "https://www.epfl.ch/labs/meylan-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/microbs/",
+            "value": "https://www.epfl.ch/labs/microbs/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/mlo/",
+            "value": "https://www.epfl.ch/labs/mlo/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/mmspg/",
+            "value": "https://www.epfl.ch/labs/mmspg/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/mns/",
+            "value": "https://www.epfl.ch/labs/mns/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/naef-lab/",
+            "value": "https://www.epfl.ch/labs/naef-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/nal/",
+            "value": "https://www.epfl.ch/labs/nal/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/nam/",
+            "value": "https://www.epfl.ch/labs/nam/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/nanolab/",
+            "value": "https://www.epfl.ch/labs/nanolab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/naveiras-lab/",
+            "value": "https://www.epfl.ch/labs/naveiras-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/nems/",
+            "value": "https://www.epfl.ch/labs/nems/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/nextgen/",
+            "value": "https://www.epfl.ch/labs/nextgen/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/nsbl/",
+            "value": "https://www.epfl.ch/labs/nsbl/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/oateslab/",
+            "value": "https://www.epfl.ch/labs/oateslab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/oes/",
+            "value": "https://www.epfl.ch/labs/oes/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/optim/",
+            "value": "https://www.epfl.ch/labs/optim/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/oricchiolab/",
+            "value": "https://www.epfl.ch/labs/oricchiolab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/pbl/",
+            "value": "https://www.epfl.ch/labs/pbl/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/pcsl/",
+            "value": "https://www.epfl.ch/labs/pcsl/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/pde/",
+            "value": "https://www.epfl.ch/labs/pde/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/pel/",
+            "value": "https://www.epfl.ch/labs/pel/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/perl/",
+            "value": "https://www.epfl.ch/labs/perl/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/persat-lab/",
+            "value": "https://www.epfl.ch/labs/persat-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/phosl/",
+            "value": "https://www.epfl.ch/labs/phosl/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/powerlab/",
+            "value": "https://www.epfl.ch/labs/powerlab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/prob/",
+            "value": "https://www.epfl.ch/labs/prob/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/prst/",
+            "value": "https://www.epfl.ch/labs/prst/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/pvlab/",
+            "value": "https://www.epfl.ch/labs/pvlab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/q-lab/",
+            "value": "https://www.epfl.ch/labs/q-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/qmat/",
+            "value": "https://www.epfl.ch/labs/qmat/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/radtke-lab/",
+            "value": "https://www.epfl.ch/labs/radtke-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/ramdya-lab/",
+            "value": "https://www.epfl.ch/labs/ramdya-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/rao/",
+            "value": "https://www.epfl.ch/labs/rao/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/react/",
+            "value": "https://www.epfl.ch/labs/react/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/resslab/",
+            "value": "https://www.epfl.ch/labs/resslab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/rfic/",
+            "value": "https://www.epfl.ch/labs/rfic/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/rgm/",
+            "value": "https://www.epfl.ch/labs/rgm/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/rrl/",
+            "value": "https://www.epfl.ch/labs/rrl/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/sacs/",
+            "value": "https://www.epfl.ch/labs/sacs/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/salathelab/",
+            "value": "https://www.epfl.ch/labs/salathelab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/sber/",
+            "value": "https://www.epfl.ch/labs/sber/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/schoonjans-lab/",
+            "value": "https://www.epfl.ch/labs/schoonjans-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/sci-sb-rh/",
+            "value": "https://www.epfl.ch/labs/sci-sb-rh/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/sci-sb-sd/",
+            "value": "https://www.epfl.ch/labs/sci-sb-sd/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/sds/",
+            "value": "https://www.epfl.ch/labs/sds/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/sfi-em/",
+            "value": "https://www.epfl.ch/labs/sfi-em/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/sfi-jh/",
+            "value": "https://www.epfl.ch/labs/sfi-jh/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/sfi-pcd/",
+            "value": "https://www.epfl.ch/labs/sfi-pcd/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/sfi-rf/",
+            "value": "https://www.epfl.ch/labs/sfi-rf/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/sfi-sm/",
+            "value": "https://www.epfl.ch/labs/sfi-sm/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/simanis-lab/",
+            "value": "https://www.epfl.ch/labs/simanis-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/skil/",
+            "value": "https://www.epfl.ch/labs/skil/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/slab/",
+            "value": "https://www.epfl.ch/labs/slab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/smal/",
+            "value": "https://www.epfl.ch/labs/smal/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/smat/",
+            "value": "https://www.epfl.ch/labs/smat/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/sois/",
+            "value": "https://www.epfl.ch/labs/sois/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/spoc/",
+            "value": "https://www.epfl.ch/labs/spoc/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/spring/",
+            "value": "https://www.epfl.ch/labs/spring/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/stap/",
+            "value": "https://www.epfl.ch/labs/stap/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/stat/",
+            "value": "https://www.epfl.ch/labs/stat/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/sunmil/",
+            "value": "https://www.epfl.ch/labs/sunmil/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/suter-lab/",
+            "value": "https://www.epfl.ch/labs/suter-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/sxl/",
+            "value": "https://www.epfl.ch/labs/sxl/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/tan/",
+            "value": "https://www.epfl.ch/labs/tan/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/tang-lab/",
+            "value": "https://www.epfl.ch/labs/tang-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/tcl/",
+            "value": "https://www.epfl.ch/labs/tcl/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/tebel/",
+            "value": "https://www.epfl.ch/labs/tebel/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/theos/",
+            "value": "https://www.epfl.ch/labs/theos/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/tic/",
+            "value": "https://www.epfl.ch/labs/tic/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/tis/",
+            "value": "https://www.epfl.ch/labs/tis/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/tml/",
+            "value": "https://www.epfl.ch/labs/tml/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/tn/",
+            "value": "https://www.epfl.ch/labs/tn/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/tne/",
+            "value": "https://www.epfl.ch/labs/tne/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/tom/",
+            "value": "https://www.epfl.ch/labs/tom/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/topo/",
+            "value": "https://www.epfl.ch/labs/topo/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/tox/",
+            "value": "https://www.epfl.ch/labs/tox/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/transp-or/",
+            "value": "https://www.epfl.ch/labs/transp-or/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/tronolab/",
+            "value": "https://www.epfl.ch/labs/tronolab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/tsam/",
+            "value": "https://www.epfl.ch/labs/tsam/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/unfold/",
+            "value": "https://www.epfl.ch/labs/unfold/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/vdg/",
+            "value": "https://www.epfl.ch/labs/vdg/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/vita/",
+            "value": "https://www.epfl.ch/labs/vita/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/vlsc/",
+            "value": "https://www.epfl.ch/labs/vlsc/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/weigert-lab/",
+            "value": "https://www.epfl.ch/labs/weigert-lab/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/labs/wire/",
+            "value": "https://www.epfl.ch/labs/wire/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/",
+            "value": "https://www.epfl.ch/research/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/access-technology/",
+            "value": "https://www.epfl.ch/research/access-technology/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/awards/",
+            "value": "https://www.epfl.ch/research/awards/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/collaborate/",
+            "value": "https://www.epfl.ch/research/collaborate/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/",
+            "value": "https://www.epfl.ch/research/domains/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/bioengineering/",
+            "value": "https://www.epfl.ch/research/domains/bioengineering/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/bluebrain/",
+            "value": "https://www.epfl.ch/research/domains/bluebrain/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/ccmx/",
+            "value": "https://www.epfl.ch/research/domains/ccmx/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/cis/",
+            "value": "https://www.epfl.ch/research/domains/cis/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/cmi/",
+            "value": "https://www.epfl.ch/research/domains/cmi/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/cnp/",
+            "value": "https://www.epfl.ch/research/domains/cnp/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/ecotox/",
+            "value": "https://www.epfl.ch/research/domains/ecotox/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/energy-center/",
+            "value": "https://www.epfl.ch/research/domains/energy-center/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/enterprise-for-society-center/",
+            "value": "https://www.epfl.ch/research/domains/enterprise-for-society-center/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/epfl-ellis/",
+            "value": "https://www.epfl.ch/research/domains/epfl-ellis/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/epfl-space-center/",
+            "value": "https://www.epfl.ch/research/domains/epfl-space-center/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/exaf/",
+            "value": "https://www.epfl.ch/research/domains/exaf/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/habitat/",
+            "value": "https://www.epfl.ch/research/domains/habitat/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/imaging/",
+            "value": "https://www.epfl.ch/research/domains/imaging/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/irgc/",
+            "value": "https://www.epfl.ch/research/domains/irgc/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/lacus/",
+            "value": "https://www.epfl.ch/research/domains/lacus/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/limnc/",
+            "value": "https://www.epfl.ch/research/domains/limnc/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/m2c/",
+            "value": "https://www.epfl.ch/research/domains/m2c/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/mhmc/",
+            "value": "https://www.epfl.ch/research/domains/mhmc/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/ml/",
+            "value": "https://www.epfl.ch/research/domains/ml/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/nutrition-center/",
+            "value": "https://www.epfl.ch/research/domains/nutrition-center/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/optimization/",
+            "value": "https://www.epfl.ch/research/domains/optimization/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/sccer-furies/",
+            "value": "https://www.epfl.ch/research/domains/sccer-furies/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/sdsc/",
+            "value": "https://www.epfl.ch/research/domains/sdsc/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/spacecenter/",
+            "value": "https://www.epfl.ch/research/domains/spacecenter/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/swiss-plasma-center/",
+            "value": "https://www.epfl.ch/research/domains/swiss-plasma-center/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/transportation-center/",
+            "value": "https://www.epfl.ch/research/domains/transportation-center/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/domains/venice-time-machine/",
+            "value": "https://www.epfl.ch/research/domains/venice-time-machine/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/ethic-statement/",
+            "value": "https://www.epfl.ch/research/ethic-statement/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/facilities/",
+            "value": "https://www.epfl.ch/research/facilities/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/facilities/biological-electron-microscopy/",
+            "value": "https://www.epfl.ch/research/facilities/biological-electron-microscopy/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/facilities/biomolecular-screening/",
+            "value": "https://www.epfl.ch/research/facilities/biomolecular-screening/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/facilities/cime/",
+            "value": "https://www.epfl.ch/research/facilities/cime/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/facilities/cmi/",
+            "value": "https://www.epfl.ch/research/facilities/cmi/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/facilities/cytometry/",
+            "value": "https://www.epfl.ch/research/facilities/cytometry/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/facilities/gene-expression-core-facility/",
+            "value": "https://www.epfl.ch/research/facilities/gene-expression-core-facility/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/facilities/gene-therapy/",
+            "value": "https://www.epfl.ch/research/facilities/gene-therapy/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/facilities/histology-core-facility/",
+            "value": "https://www.epfl.ch/research/facilities/histology-core-facility/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/facilities/hydraulic-machines-platform/",
+            "value": "https://www.epfl.ch/research/facilities/hydraulic-machines-platform/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/facilities/proteomics-core-facility/",
+            "value": "https://www.epfl.ch/research/facilities/proteomics-core-facility/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/facilities/ptbiop/",
+            "value": "https://www.epfl.ch/research/facilities/ptbiop/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/facilities/ptpsp/",
+            "value": "https://www.epfl.ch/research/facilities/ptpsp/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/facilities/scitas/",
+            "value": "https://www.epfl.ch/research/facilities/scitas/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/faculty-members/",
+            "value": "https://www.epfl.ch/research/faculty-members/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/open-science/",
+            "value": "https://www.epfl.ch/research/open-science/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/research/services/",
+            "value": "https://www.epfl.ch/research/services/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/schools/",
+            "value": "https://www.epfl.ch/schools/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/schools/cdh/",
+            "value": "https://www.epfl.ch/schools/cdh/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/schools/cdh/lausanne-time-machine/",
+            "value": "https://www.epfl.ch/schools/cdh/lausanne-time-machine/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/schools/cdm/",
+            "value": "https://www.epfl.ch/schools/cdm/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/schools/enac/",
+            "value": "https://www.epfl.ch/schools/enac/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/schools/enac/education/",
+            "value": "https://www.epfl.ch/schools/enac/education/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/schools/ic/",
+            "value": "https://www.epfl.ch/schools/ic/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/schools/ic/ipg/",
+            "value": "https://www.epfl.ch/schools/ic/ipg/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/schools/ic/it/",
+            "value": "https://www.epfl.ch/schools/ic/it/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/schools/ic/tcs/",
+            "value": "https://www.epfl.ch/schools/ic/tcs/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/schools/middle-east/",
+            "value": "https://www.epfl.ch/schools/middle-east/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/schools/sb/",
+            "value": "https://www.epfl.ch/schools/sb/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/schools/sb/research/",
+            "value": "https://www.epfl.ch/schools/sb/research/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/schools/sb/research/iphys/",
+            "value": "https://www.epfl.ch/schools/sb/research/iphys/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/schools/sb/research/isic/",
+            "value": "https://www.epfl.ch/schools/sb/research/isic/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/schools/sb/research/math/",
+            "value": "https://www.epfl.ch/schools/sb/research/math/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/schools/sti/",
+            "value": "https://www.epfl.ch/schools/sti/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/schools/sti/ateliers/",
+            "value": "https://www.epfl.ch/schools/sti/ateliers/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/schools/sti/dechets/",
+            "value": "https://www.epfl.ch/schools/sti/dechets/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/schools/sti/it/",
+            "value": "https://www.epfl.ch/schools/sti/it/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/schools/sv/",
+            "value": "https://www.epfl.ch/schools/sv/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/schools/sv/bmi/",
+            "value": "https://www.epfl.ch/schools/sv/bmi/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/schools/sv/ghi/",
+            "value": "https://www.epfl.ch/schools/sv/ghi/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/schools/sv/isrec/",
+            "value": "https://www.epfl.ch/schools/sv/isrec/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/schools/sv/it/",
+            "value": "https://www.epfl.ch/schools/sv/it/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/schools/sv/sv-in/",
+            "value": "https://www.epfl.ch/schools/sv/sv-in/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.epfl.ch/schools/sv/voir-est-savoir/",
+            "value": "https://www.epfl.ch/schools/sv/voir-est-savoir/"
+          },
+          {
+            "selected": false,
+            "text": "https://www.nolossproject.eu//",
+            "value": "https://www.nolossproject.eu//"
+          },
+          {
+            "selected": false,
+            "text": "https://yac2021.epfl.ch//",
+            "value": "https://yac2021.epfl.ch//"
+          },
+          {
+            "selected": false,
+            "text": "https://yamal.epfl.ch//",
+            "value": "https://yamal.epfl.ch//"
+          }
+        ],
+        "query": "label_values(restic_files_total_file_count{job=\"backup\"},url)",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "WP Backup",
+  "uid": "WordPressB",
+  "version": 2
+}

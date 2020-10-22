@@ -15,8 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 10,
-  "iteration": 1603206451560,
+  "iteration": 1603367810712,
   "links": [],
   "panels": [
     {
@@ -1583,7 +1582,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "https://www.epfl.ch/",
           "value": "https://www.epfl.ch/"
         },
@@ -1627,7 +1626,7 @@
     ]
   },
   "timezone": "",
-  "title": "Detail",
+  "title": "WP Detail",
   "uid": "WordPressD",
-  "version": 5
+  "version": 15
 }
