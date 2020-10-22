@@ -58,13 +58,10 @@ scrape_configs:
     honor_labels: true
     params:
       'match[]':
-        - '{job="wordpress"}'
-        - '{job="pushgateway"}'
-        - '{job="wp_disk_usage"}'
-        - '{job="backup"}'
+        - '{job=~".*"}'
     scheme: 'https'
     static_configs:
-    - targets: ['prometheus2.128.178.222.83.nip.io']
+    - targets: ['prometheus-wwp.epfl.ch']
     basic_auth:
       username: "{{ _noc_secrets.frontend.credentials[1].user }}"
       password: "{{ _noc_secrets.frontend.credentials[1].pass }}"
