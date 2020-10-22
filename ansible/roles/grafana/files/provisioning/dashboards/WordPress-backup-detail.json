@@ -4344,7 +4344,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "WP Backup",
-  "uid": "WordPressB",
+  "title": "WP Detail Backup",
+  "uid": "WordPressDB",
   "version": 2
 }
