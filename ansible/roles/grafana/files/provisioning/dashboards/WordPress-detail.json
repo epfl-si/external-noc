@@ -743,7 +743,7 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 5,
+        "h": 6,
         "w": 24,
         "x": 0,
         "y": 16
@@ -830,7 +830,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 21
+        "y": 16
       },
       "id": 39,
       "panels": [],
@@ -856,7 +856,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 22
+        "y": 17
       },
       "hiddenSeries": false,
       "id": 41,
@@ -960,7 +960,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 22
+        "y": 17
       },
       "hiddenSeries": false,
       "id": 42,
@@ -1062,7 +1062,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 30
+        "y": 25
       },
       "hiddenSeries": false,
       "id": 43,
@@ -1166,7 +1166,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 30
+        "y": 25
       },
       "hiddenSeries": false,
       "id": 44,
@@ -1256,7 +1256,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 38
+        "y": 33
       },
       "id": 34,
       "panels": [],
@@ -1286,7 +1286,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 39
+        "y": 34
       },
       "id": 36,
       "options": {
@@ -1341,7 +1341,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 39
+        "y": 34
       },
       "id": 37,
       "options": {
@@ -1379,7 +1379,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 47
+        "y": 42
       },
       "id": 24,
       "panels": [],
@@ -1404,7 +1404,7 @@
         "h": 10,
         "w": 5,
         "x": 0,
-        "y": 48
+        "y": 43
       },
       "hiddenSeries": false,
       "id": 13,
@@ -1499,7 +1499,7 @@
         "h": 10,
         "w": 9,
         "x": 5,
-        "y": 48
+        "y": 43
       },
       "hiddenSeries": false,
       "id": 14,
@@ -1594,7 +1594,7 @@
         "h": 10,
         "w": 10,
         "x": 14,
-        "y": 48
+        "y": 43
       },
       "hiddenSeries": false,
       "id": 6,
@@ -1683,7 +1683,7 @@
       }
     }
   ],
-  "refresh": false,
+  "refresh": "5m",
   "schemaVersion": 26,
   "style": "dark",
   "tags": [
@@ -1696,8 +1696,8 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "text": "https://www.epfl.ch/labs/alexandermathis-lab/",
-          "value": "https://www.epfl.ch/labs/alexandermathis-lab/"
+          "text": "https://www.epfl.ch/",
+          "value": "https://www.epfl.ch/"
         },
         "datasource": "idevfsd-prometheus",
         "definition": "label_values(instance)",
@@ -1721,8 +1721,8 @@
     ]
   },
   "time": {
-    "from": "2020-10-28T17:53:07.783Z",
-    "to": "2020-10-28T19:11:20.109Z"
+    "from": "now-6h",
+    "to": "now"
   },
   "timepicker": {
     "refresh_intervals": [
