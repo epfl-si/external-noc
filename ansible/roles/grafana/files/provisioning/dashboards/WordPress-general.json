@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 11,
-  "iteration": 1603199509832,
+  "id": 5,
+  "iteration": 1603781093440,
   "links": [],
   "panels": [
     {
@@ -118,7 +118,7 @@
       "savedComposites": [],
       "savedOverrides": [
         {
-          "clickThrough": "/d/WPDetails/wordpress-detail?var-wp_site=${__cell_name}",
+          "clickThrough": "/d/WordPressD/wp-detail?var-wp_site=${__cell_name}",
           "colors": [
             "#299c46",
             "#e5ac0e",
@@ -280,7 +280,7 @@
       "savedComposites": [],
       "savedOverrides": [
         {
-          "clickThrough": "/d/WPDetails/wordpress-detail?var-wp_site=${__cell_name}",
+          "clickThrough": "/d/WordPressD/wp-detail?var-wp_site=${__cell_name}",
           "colors": [
             "#299c46",
             "#e5ac0e",
@@ -1188,7 +1188,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "restic_s3_total_file_count",
+          "expr": "restic_start{url=~\"$wp_site\", wp_env=~\"$wp_env\"}",
           "hide": false,
           "instant": false,
           "interval": "",
@@ -1196,11 +1196,11 @@
           "refId": "A"
         },
         {
-          "expr": "sum(restic_s3_total_file_count)",
+          "expr": "restic_success{url=~\"$wp_site\", wp_env=~\"$wp_env\"}",
           "hide": false,
           "instant": false,
           "interval": "",
-          "legendFormat": "total sum",
+          "legendFormat": "{{ url }} ({{ wp_env }})",
           "refId": "B"
         }
       ],
@@ -1208,7 +1208,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Total files count backups",
+      "title": "Restic start / success ($wp_site / $wp_env)",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1563,7 +1563,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Last backup duration($wp_env)",
+      "title": "Last backup duration ($wp_env)",
       "transformations": [
         {
           "id": "organize",
@@ -1578,7 +1578,8 @@
             },
             "indexByName": {},
             "renameByName": {
-              "Value": "backup_timestamp",
+              "Value": "Duration",
+              "url": "",
               "wp_env": ""
             }
           }
@@ -1641,7 +1642,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Total size backups",
+      "title": "Total size backups ($wp_site/$wp_env)",
       "type": "stat"
     },
     {
@@ -2261,7 +2262,6 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "tags": [],
           "text": [
             "All"
           ],
@@ -2285,27 +2285,35 @@
         "tagValuesQuery": "label_values(up{job=\"wordpresses@epfl\",origin=\"noc-zurich\",probe=\"blackbox\",wp_env=~\"$tag\"},instance)",
         "tags": [
           {
+            "selected": false,
             "text": "subdomains-lite"
           },
           {
+            "selected": false,
             "text": "form"
           },
           {
+            "selected": false,
             "text": "inside"
           },
           {
+            "selected": false,
             "text": "manager"
           },
           {
+            "selected": false,
             "text": "subdomains"
           },
           {
+            "selected": false,
             "text": "www"
           },
           {
+            "selected": false,
             "text": "labs"
           },
           {
+            "selected": false,
             "text": "sandbox"
           }
         ],
@@ -2317,7 +2325,6 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "tags": [],
           "text": [
             "All"
           ],
@@ -2367,5 +2374,5 @@
   "timezone": "",
   "title": "WP Main",
   "uid": "WordPressM",
-  "version": 3
+  "version": 2
 }
