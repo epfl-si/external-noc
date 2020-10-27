@@ -17,7 +17,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 5,
-  "iteration": 1603781093440,
+  "iteration": 1603783574543,
   "links": [],
   "panels": [
     {
@@ -426,7 +426,7 @@
       "pluginVersion": "7.2.0",
       "targets": [
         {
-          "expr": "probe_http_status_code{job=\"wordpresses@epfl\",origin=\"noc-zurich\",wp_env=~\"$wp_env\"} != 200",
+          "expr": "probe_http_status_code{job=\"wordpresses@epfl\",origin=\"noc-zurich\",wp_env=~\"$wp_env\"}",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -436,7 +436,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "HTTP status != 200",
+      "title": "HTTP status",
       "transformations": [
         {
           "id": "organize",
@@ -562,17 +562,18 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "custom": {}
         },
         "overrides": []
       },
-      "fill": 1,
+      "fill": 0,
       "fillGradient": 0,
       "gridPos": {
         "h": 8,
-        "w": 12,
+        "w": 24,
         "x": 0,
         "y": 17
       },
@@ -581,13 +582,13 @@
       "legend": {
         "alignAsTable": true,
         "avg": false,
-        "current": false,
+        "current": true,
         "max": false,
         "min": false,
         "rightSide": true,
         "show": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -606,7 +607,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "probe_http_status_code{job=\"wordpresses@epfl\",origin=\"noc-zurich\",wp_env=~\"$wp_env\"} != 200",
+          "expr": "probe_http_status_code{job=\"wordpresses@epfl\",origin=\"noc-zurich\",wp_env=~\"$wp_env\"}",
           "format": "time_series",
           "interval": "",
           "legendFormat": "{{ instance }}",
@@ -617,7 +618,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Sites != 200",
+      "title": "HTTP Status ($wp_site / $wp_env)",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -2249,7 +2250,7 @@
       "type": "table"
     }
   ],
-  "refresh": "5m",
+  "refresh": "30m",
   "schemaVersion": 26,
   "style": "dark",
   "tags": [
@@ -2354,7 +2355,7 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {
@@ -2374,5 +2375,5 @@
   "timezone": "",
   "title": "WP Main",
   "uid": "WordPressM",
-  "version": 2
+  "version": 3
 }
