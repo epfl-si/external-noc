@@ -15,7 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1603367810712,
+  "id": 4,
+  "iteration": 1603780632191,
   "links": [],
   "panels": [
     {
@@ -477,13 +478,30 @@
       "fieldConfig": {
         "defaults": {
           "custom": {},
-          "mappings": [],
+          "mappings": [
+            {
+              "from": "-60480000",
+              "id": 0,
+              "text": "FAILED",
+              "to": "0",
+              "type": 2,
+              "value": ""
+            }
+          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "light-green",
                 "value": null
+              },
+              {
+                "color": "dark-red",
+                "value": -604800
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 0
               },
               {
                 "color": "green",
@@ -1582,7 +1600,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "https://www.epfl.ch/",
           "value": "https://www.epfl.ch/"
         },
@@ -1628,5 +1646,5 @@
   "timezone": "",
   "title": "WP Detail",
   "uid": "WordPressD",
-  "version": 15
+  "version": 2
 }
