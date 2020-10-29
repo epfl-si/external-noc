@@ -66,9 +66,9 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "epfl_wp_site_plugin_count{url=\"https://www.epfl.ch/campus/services/canari/\"}",
+          "expr": "epfl_wp_site_plugin_count{url=~\"$wp_site\"}",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "{{ instance }}",
           "refId": "A"
         }
       ],
@@ -161,9 +161,9 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "epfl_wp_site_block_count{url=\"https://www.epfl.ch/campus/services/canari/\"}",
+          "expr": "epfl_wp_site_block_count{url=~\"$wp_site\"}",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "{{ instance }}",
           "refId": "A"
         }
       ],
@@ -256,7 +256,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "epfl_wp_site_plugin_name{url=\"https://www.epfl.ch/campus/services/canari/\"}",
+          "expr": "epfl_wp_site_plugin_name{url=~\"$wp_site\"}",
           "interval": "",
           "legendFormat": "{{ pluginName }}",
           "refId": "A"
@@ -351,7 +351,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "epfl_wp_site_block_usage_count{url=\"https://www.epfl.ch/campus/services/canari/\"}",
+          "expr": "epfl_wp_site_block_usage_count{url=~\"$wp_site\"}",
           "interval": "",
           "legendFormat": "{{ blockName }}",
           "refId": "A"
@@ -406,7 +406,34 @@
     "provisionned"
   ],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "https://2dspintronics2020.epfl.ch/",
+          "value": "https://2dspintronics2020.epfl.ch/"
+        },
+        "datasource": "idevfsd-prometheus",
+        "definition": "label_values(instance)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Site",
+        "multi": false,
+        "name": "wp_site",
+        "options": [],
+        "query": "label_values(instance)",
+        "refresh": 1,
+        "regex": "/^https:\\/\\/.*\\.epfl.ch.*/",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
   },
   "time": {
     "from": "now-6h",
@@ -415,6 +442,6 @@
   "timepicker": {},
   "timezone": "",
   "title": "WP Plugins and Blocks",
-  "uid": "WordPressPB",
-  "version": 1
+  "uid": "hPdt-ltGz",
+  "version": 2
 }
