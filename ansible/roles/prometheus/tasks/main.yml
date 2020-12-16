@@ -33,9 +33,14 @@
     dest: "{{ install_path }}/prometheus/{{ item }}"
   with_items:
     - prometheus.yml
-    - rules/alert-all-the-time-for-tests.yml
-    - rules/c2c_federate.yml
   register: _prometheus_template_file
+
+- name: Copy prometheus rules
+  template: 
+    src: "{{ item }}"
+    dest: "{{ install_path }}/prometheus/rules/{{ item | basename }}"
+  with_fileglob:
+    - "templates/prometheus/rules/*"
 
 - name: Copy prometheus-site-service-discovery.py
   template:

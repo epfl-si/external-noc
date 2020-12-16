@@ -1,0 +1,16 @@
+{% if prometheus_debug %}
+{%raw%}
+groups:
+  - name: Alert all the things
+    rules:
+    - alert: Just another alert
+      expr: up{instance=~"https://formation-wp.epfl.ch/site1./",job="wordpresses@epfl",origin="noc-zurich",probe="blackbox",wp_env="form"} != 0
+      for: 5m
+      labels:
+        severity: page
+        sendto: telegram
+      annotations:
+        summary: 'Instance {{$labels.instance}} down ({{$labels.wp_env}})'
+        description: '{{$labels.instance}} of job {{$labels.job}} has been down for more than 5 minutes (on env: {{$labels.wp_env}}).'
+{%endraw%}
+{% endif %}
