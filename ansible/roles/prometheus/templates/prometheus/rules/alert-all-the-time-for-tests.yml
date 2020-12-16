@@ -10,7 +10,7 @@ groups:
         sendto: telegram
       annotations:
         summary: 'HTTP status of {{$labels.instance}} is not 200 ({{$labels.wp_env}})'
-        description: '{{$labels.instance}} of job {{$labels.job}} has not HTTP status == 200 for more than 1 minute (on env: {{$labels.wp_env}}).'
+        description: '{{$labels.instance}} of job {{$labels.job}} has HTTP status == {{ $value }} for more than 1 minute (on env: {{$labels.wp_env}}).'
 
   - name: Site down
     rules:
