@@ -67,8 +67,8 @@ class DynamicConfig:
                     labels=dict(wp_env=wp_env))
                 for wp_env, targets in self.enumerate()])
 
-dc = DynamicConfig()
 while True:
+    dc = DynamicConfig()
     try:
         dc.write_targets()
     except:  # noqa
