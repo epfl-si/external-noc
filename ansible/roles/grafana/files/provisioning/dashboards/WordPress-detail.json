@@ -30,7 +30,7 @@
       },
       "id": 32,
       "panels": [],
-      "title": "General details",
+      "title": "General",
       "type": "row"
     },
     {
@@ -225,7 +225,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Last backup have been done since",
+      "title": "Last backup age",
       "transformations": [],
       "type": "stat"
     },
