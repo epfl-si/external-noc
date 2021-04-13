@@ -46,6 +46,7 @@ scrape_configs:
         - '{service="gitlab"}'
         - '{job="traefik"}'
         - '{job="GitlabStatsExporter"}'
+        - '{job=~"postgres.*exporter.*"}'
     scheme: 'https'
     static_configs:
     - targets: ['gitlab.epfl.ch']
