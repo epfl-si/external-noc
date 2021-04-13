@@ -6,6 +6,8 @@
   local_action:
     module: shell
     cmd: "{{ role_path }}/vars/sites_from_veritas"
+  changed_when: false
+  check_mode: false  ## Meaning that yes, it supports check mode
   register: sites_from_veritas
 
 # ------------------------------------------------------------------ Directories
