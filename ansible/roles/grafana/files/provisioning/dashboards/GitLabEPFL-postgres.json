@@ -17,7 +17,7 @@
   "gnetId": 14114,
   "graphTooltip": 0,
   "id": 17,
-  "iteration": 1618324154806,
+  "iteration": 1618325098862,
   "links": [],
   "panels": [
     {
@@ -1290,7 +1290,7 @@
       }
     }
   ],
-  "refresh": false,
+  "refresh": "1m",
   "schemaVersion": 26,
   "style": "dark",
   "tags": [
@@ -1327,9 +1327,9 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": false,
-          "text": "All",
-          "value": "$__all"
+          "selected": true,
+          "text": "gitlabhq_production",
+          "value": "gitlabhq_production"
         },
         "datasource": "$datasource",
         "definition": "label_values(pg_stat_database_tup_fetched{instance=~\"$instance\",datname!~\"template.*|postgres\"},datname)",
@@ -1434,5 +1434,5 @@
   "timezone": "browser",
   "title": "PostgreSQL Exporter Quickstart and Dashboard",
   "uid": "gitlab-postgres",
-  "version": 2
+  "version": 3
 }
