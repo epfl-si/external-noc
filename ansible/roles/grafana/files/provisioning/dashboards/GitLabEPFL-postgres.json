@@ -12,12 +12,12 @@
       }
     ]
   },
-  "description": "A quickstart to setup the Prometheus PostgreSQL Exporter with preconfigured dashboards, alerting rules, and recording rules.",
+  "description": "Gitlab Prometheus PostgreSQL Exporter with preconfigured dashboards",
   "editable": true,
   "gnetId": 14114,
   "graphTooltip": 0,
   "id": 17,
-  "iteration": 1618325098862,
+  "iteration": 1618382181475,
   "links": [],
   "panels": [
     {
@@ -349,7 +349,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Rows",
+      "title": "PostgreSQL Stats",
       "tooltip": {
         "msResolution": true,
         "shared": true,
@@ -1294,14 +1294,15 @@
   "schemaVersion": 26,
   "style": "dark",
   "tags": [
-    "postgres"
+    "postgres",
+    "gitlab"
   ],
   "templating": {
     "list": [
       {
         "allValue": ".*",
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "All",
           "value": "$__all"
         },
@@ -1352,7 +1353,7 @@
       },
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "idevfsd-prometheus",
           "value": "idevfsd-prometheus"
         },
@@ -1363,6 +1364,7 @@
         "name": "datasource",
         "options": [],
         "query": "prometheus",
+        "queryValue": "",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -1432,7 +1434,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "PostgreSQL Exporter Quickstart and Dashboard",
+  "title": "Gitlab PostgreSQL",
   "uid": "gitlab-postgres",
-  "version": 3
+  "version": 6
 }
