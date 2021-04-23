@@ -1,0 +1,17 @@
+- name: deploy netdata container
+  docker_container:
+    name: "{{ netdata_container_name }}"
+    image: "{{ netdata_image }}:{{ netdata_version }}"
+    state: started
+    #restart: "{{ _netdata_static_config is changed }}"
+    detach: yes
+    restart_policy: unless-stopped
+    network_mode: "{{ backend_network_name }}"
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.netdata.rule: "Host(`nd{{ dnspostfix }}.{{ frontend.domain }}`)"
+      traefik.http.routers.netdata.entrypoints: "websecure"
+      traefik.http.routers.netdata.tls.certresolver: "letsencrypt"
+      traefik.docker.network: "{{ backend_network_name }}"
+      traefik.http.middlewares.netdata_auth.basicauth.users: "{{ frontend.htpass }}"
+      traefik.http.middlewares.netdata_auth.basicauth.removeheader: "true"

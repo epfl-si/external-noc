@@ -77,3 +77,7 @@
     - name: mgmt
       role: ../roles/mgmt
       tags: mgmt
+
+    - name: netdata
+      role: ../roles/netdata
+      tags: netdata
