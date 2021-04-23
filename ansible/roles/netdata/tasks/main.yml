@@ -7,6 +7,12 @@
     detach: yes
     restart_policy: unless-stopped
     network_mode: "{{ backend_network_name }}"
+    volumes:
+      - /etc/passwd:/host/etc/passwd:ro
+      - /etc/group:/host/etc/group:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /etc/os-release:/host/etc/os-release:ro
     labels:
       traefik.enable: "true"
       traefik.http.routers.netdata.rule: "Host(`nd{{ dnspostfix }}.{{ frontend.domain }}`)"
@@ -15,3 +21,4 @@
       traefik.docker.network: "{{ backend_network_name }}"
       traefik.http.middlewares.netdata_auth.basicauth.users: "{{ frontend.htpass }}"
       traefik.http.middlewares.netdata_auth.basicauth.removeheader: "true"
+      traefik.http.routers.netdata.middlewares: "netdata_auth"
