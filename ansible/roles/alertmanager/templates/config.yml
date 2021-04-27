@@ -53,7 +53,9 @@ route:
   # overwritten on each.
   
   routes:
-    - receiver: 'alert-tg-bot'
+{% if alertmanager_debug %}
+    # NOC-TST
+    - receiver: 'alert-tg-bot-test'
       group_by: ['instance']
       group_wait: 45s
       group_interval: 10m # Usually ~5 mins or more.
@@ -63,11 +65,25 @@ route:
       continue: true
       match:
         sendto: telegram
+
     - receiver: 'debugapi'
       group_by: ['instance']
       continue: true
       match:
         sendto: telegram
+{% else %}
+    # NOC-PROD
+    - receiver: 'alert-tg-bot-prod'
+      group_by: ['instance']
+      group_wait: 45s
+      group_interval: 10m # Usually ~5 mins or more.
+      # https://prometheus.io/docs/alerting/latest/configuration/#route
+      # If continue is true on a matching node, the alert will continue matching 
+      # against subsequent siblings
+      continue: true
+      match:
+        sendto: telegram
+{% endif %}
 
 receivers:
 - name: 'idev-fsd-ops-mails'
@@ -82,12 +98,22 @@ receivers:
   email_configs:
   - to: 'idev-fsd-monitoring@groupes.epfl.ch'
 
-- name: 'alert-tg-bot'
+{% if alertmanager_debug %}
+- name: 'alert-tg-bot-test'
   webhook_configs:
   - send_resolved: true
+    # AlertmanagerGroup (Test)
     url: 'http://alert-tg-bot:3000/-460587583'
 
 - name: 'debugapi'
   webhook_configs:
   - send_resolved: true
     url: 'http://debugapi:3000/'
+
+{% else %}
+- name: 'alert-tg-bot-prod'
+  webhook_configs:
+  - send_resolved: true
+    # AlertmanagerGroup (Prod)
+    url: 'http://alert-tg-bot:3000/-471504808'
+{% endif %}

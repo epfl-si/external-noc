@@ -58,3 +58,4 @@
     detach: yes
     restart_policy: unless-stopped
     network_mode: "{{ backend_network_name }}"
+  when: alertmanager_debug

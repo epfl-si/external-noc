@@ -1,0 +1,15 @@
+{%raw%}
+groups:
+  - name: Site not 200
+    rules:
+    - alert: Site status code is not 200
+      expr: probe_http_status_code{job="wordpresses@epfl",origin="noc-zurich"} != 200 and probe_http_status_code{job="wordpresses@epfl",origin="noc-zurich"} != 0
+      for: 2m
+      labels:
+        severity: page
+        sendto: telegram
+      annotations:
+        summary: '{{ $labels.instance }} HTTP status is {{ $value }}!'
+        description: '{{ $labels.instance }} of job {{ $labels.job }} has HTTP status == {{ $value }} for more than 2 minutes (on env: {{ $labels.wp_env }}).'
+{%endraw%}
+

@@ -6,6 +6,8 @@
   local_action:
     module: shell
     cmd: "{{ role_path }}/vars/sites_from_veritas"
+  changed_when: false
+  check_mode: false  ## Meaning that yes, it supports check mode
   register: sites_from_veritas
 
 # ------------------------------------------------------------------ Directories
@@ -26,13 +28,6 @@
     mode: '1777'
     state: touch
 
-# ----------------------------------------------------------------- static files
-- name: Copy prometheus static files
-  copy:
-    src: "{{ role_path }}/files/"
-    dest: "{{ install_path }}/prometheus/"
-  register: _prometheus_static_file
-
 # -------------------------------------------------------------------- Templates
 - name: Copy prometheus template configs
   template:
@@ -40,8 +35,14 @@
     dest: "{{ install_path }}/prometheus/{{ item }}"
   with_items:
     - prometheus.yml
-    - rules/c2c_federate.yml
   register: _prometheus_template_file
+
+- name: Copy prometheus rules
+  template: 
+    src: "{{ item }}"
+    dest: "{{ install_path }}/prometheus/rules/{{ item | basename }}"
+  with_fileglob:
+    - "templates/prometheus/rules/*"
 
 - name: Copy prometheus-site-service-discovery.py
   template:
@@ -69,7 +70,7 @@
   docker_container:
     name: "{{ prometheus_container_name }}"
     image: "{{ prometheus_image }}:{{ prometheus_version }}"
-    restart: "{{ _prometheus_static_file is changed or _prometheus_template_file is changed }}"
+    restart: "{{ _prometheus_template_file is changed }}"
     command: >-
       --config.file=/etc/prometheus/prometheus.yml
       --web.external-url=https://prometheus{{ dnspostfix }}.{{ frontend.domain }}
