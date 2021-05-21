@@ -23,6 +23,8 @@ grafana:
     - cloudflare-app
     # https://grafana.com/grafana/plugins/frser-sqlite-datasource/
     - frser-sqlite-datasource
+    # https://grafana.com/grafana/plugins/simpod-json-datasource/
+    - simpod-json-datasource
 
 # The TELEGRAM_BOT_ADMINISTRATOR_ID is @ponsfrilus' account ID 9917772
 telegram:
