@@ -1,0 +1,13 @@
+{%raw%}
+groups:
+  - name: Monitoring targets
+    rules:
+    - alert: Prometheus monitoring target is unavailable
+      expr: up{probe!~".*ressenti.*",job!="wordpresses@epfl"} < 1
+      for: 15m
+      labels:
+        severity: page
+        sendto: telegram
+      annotations:
+        summary: 'Prometheus target "{{$labels.job}}" is unreachable (instance = {{$labels.instance}}, probe = "{{$labels.probe}}")'
+{%endraw%}
