@@ -20,7 +20,19 @@
     - "{{ install_path }}/prometheus"
     - "{{ install_path }}/prometheus/dynamic"
 
+- name: Check whether dynamic/targets.json is present
+  stat:
+    path: "{{ install_path }}/prometheus/dynamic/targets.json"
+  register: _dynamic_targets_json
+
 - name: ensure dynamic/targets.json is present
+  when: >-
+    _dynamic_targets_json is defined
+    and not (
+    _dynamic_targets_json.stat
+    and
+    _dynamic_targets_json.stat.isreg
+    )
   file:
     path: "{{ install_path }}/prometheus/dynamic/targets.json"
     owner: root
