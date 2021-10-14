@@ -82,7 +82,12 @@
   docker_container:
     name: "{{ prometheus_container_name }}"
     image: "{{ prometheus_image }}:{{ prometheus_version }}"
-    restart: "{{ _prometheus_template_file is changed }}"
+    restart: >-
+      {{
+      (_prometheus_template_file is defined and _prometheus_template_file is changed)
+      or
+      ("prometheus.force-restart" in ansible_run_tags)
+      }}
     command: >-
       --config.file=/etc/prometheus/prometheus.yml
       --web.external-url=https://prometheus{{ dnspostfix }}.{{ frontend.domain }}
@@ -108,3 +113,5 @@
       traefik.http.routers.prometheus.middlewares: "prometheus_auth"
       traefik.http.middlewares.prometheus_auth.basicauth.users: "{{ frontend.htpass }}"
       traefik.http.middlewares.prometheus_auth.basicauth.removeheader: "true"
+  tags:
+   - prometheus.force-restart
