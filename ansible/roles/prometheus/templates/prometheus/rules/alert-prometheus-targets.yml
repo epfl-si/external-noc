@@ -3,7 +3,7 @@ groups:
   - name: Monitoring targets
     rules:
     - alert: Prometheus monitoring target is unavailable
-      expr: up{probe!~".*ressenti.*",job!="wordpresses@epfl"} < 1
+      expr: up{probe!~".*ressenti.*",wp_env!~".+",url!~".+"} < 1
       for: 15m
       labels:
         severity: page
