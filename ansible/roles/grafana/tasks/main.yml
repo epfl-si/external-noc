@@ -34,10 +34,15 @@
   register: grafana_config_files
 
 # -------------------------------------------------------------------- Container
+- name: "Pull Grafana {{ grafana_image_qualified }}"
+  community.docker.docker_image:
+    name: "{{ grafana_image_qualified }}"
+    source: pull
+
 - name: Run grafana
   docker_container:
     name: "{{ grafana_container_name }}"
-    image: "{{ grafana_image }}:{{ grafana_version }}"
+    image: "{{ grafana_image_qualified }}"
     detach: yes
     restart_policy: unless-stopped
     network_mode: "{{ backend_network_name }}"
