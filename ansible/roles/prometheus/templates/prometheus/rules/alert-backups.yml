@@ -1,9 +1,9 @@
 {%raw%}
 groups:
-  - name: Backup date > 3 days
+  - name: Backup date > 7 days
     rules:
-    - alert: No backup data from more that 3 days
-      expr: (time() - restic_success) > 259200
+    - alert: No backup data from more that 7 days
+      expr: (time() - restic_success) > 604800
       for: 15m
       labels:
         severity: page
@@ -12,4 +12,3 @@ groups:
         summary: '{{ $labels.url }} have not been backuped since more than 3 days!'
         description: '{{ $labels.url }} of job {{ $labels.job }} has restic_success == {{ $value }}seconds (on env: {{$labels.wp_env}}).'
 {%endraw%}
-
