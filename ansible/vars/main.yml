@@ -1,4 +1,4 @@
-_noc_secrets: "{{ lookup('file', '/keybase/team/epfl_idevfsd/idevfsd-NOC/ansible_noc_secrets.yml') | from_yaml }}"
+_noc_secrets: "{{ lookup('pipe', 'keybase fs read /keybase/team/epfl_idevfsd/idevfsd-NOC/ansible_noc_secrets.yml') | from_yaml }}"
 install_path: '/srv/noc'
 data_path: "/volumes/data1/noc/data"
 
@@ -20,4 +20,4 @@ docker__users: ["{{ ansible_user }}"]
 # traefik_letsencrypt_staging: true
 
 # To scrape https://gitlab.epfl.ch/GitlabStatistics
-_gitlab_statistics_exporter_secrets: "{{ lookup('file', '/keybase/team/epfl_gitlab/GitlabStatisticsPrometheusExporter.yml') | from_yaml }}"
+_gitlab_statistics_exporter_secrets: "{{ lookup('pipe', 'keybase fs read /keybase/team/epfl_gitlab/GitlabStatisticsPrometheusExporter.yml') | from_yaml }}"
