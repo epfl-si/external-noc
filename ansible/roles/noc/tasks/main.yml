@@ -6,7 +6,7 @@
 # ------------------------------------------------ Check that keybase is mounted
 - name: Check whether "keys/private_key.pkcs7.pem" is present
   tags: prefly
-  local_action: command keybase fs read /keybase/team/epfl_idevfsd/idevfsd-NOC/keys/private_key.pkcs7.pem | grep -sq 'END RSA PRIVATE KEY'
+  local_action: shell keybase fs read /keybase/team/epfl_idevfsd/idevfsd-NOC/keys/private_key.pkcs7.pem | grep -sq 'END RSA PRIVATE KEY'
   register: checkprivatekey
   check_mode: no
   ignore_errors: yes
