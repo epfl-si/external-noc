@@ -6,6 +6,6 @@
 .ruby-version
 *.pyc
 *.retry
-/ansible/ansible-deps-cache
+ansible-deps-cache
 zf_*
 
