@@ -17,14 +17,14 @@
     - data
     - data/plugins
 
-- name: Copy grafana static files
+- name: Copy Grafana static files
   copy:
     src: "provisioning/"
     dest: "{{ data_path }}/grafana/provisioning/"
   register: grafana_static_files
 
 # -------------------------------------------------------------------- Templates
-- name: Copy grafana template config
+- name: Copy Grafana template config
   template:
     src: "grafana/{{ item }}"
     dest: "{{ data_path }}/grafana/{{ item }}"
@@ -41,7 +41,7 @@
     name: "{{ grafana_image_qualified }}"
     source: pull
 
-- name: Run grafana
+- name: Run Grafana
   docker_container:
     name: "{{ grafana_container_name }}"
     image: "{{ grafana_image_qualified }}"

@@ -1,5 +1,5 @@
 ---
-# vars for grafana
+# vars for Grafana
 grafana_port: 3000
 grafana_container_name: "grafana"
 grafana_image: "grafana/grafana"
