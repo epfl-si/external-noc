@@ -18,14 +18,6 @@ grafana:
     - grafana-piechart-panel
     - grafana-clock-panel
     - grafana-polystat-panel
-    # https://grafana.com/grafana/plugins/camptocamp-prometheus-alertmanager-datasource/installation
-    - camptocamp-prometheus-alertmanager-datasource
-    # https://support.cloudflare.com/hc/en-us/articles/115002722267-Install-the-Cloudflare-Grafana-Plugin
-    - cloudflare-app
-    # https://grafana.com/grafana/plugins/frser-sqlite-datasource/
-    - frser-sqlite-datasource
-    # https://grafana.com/grafana/plugins/simpod-json-datasource/
-    - simpod-json-datasource
 
 # The TELEGRAM_BOT_ADMINISTRATOR_ID is @ponsfrilus' account ID 9917772
 telegram:
