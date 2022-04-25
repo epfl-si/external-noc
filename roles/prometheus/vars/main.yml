@@ -3,7 +3,7 @@
 prometheus_port: 9090
 prometheus_container_name: "prometheus"
 prometheus_image: "prom/prometheus"
-prometheus_version: "v2.20.1"
+prometheus_version: "v2.35.0"
 
 prometheus_debug: '{{ dnspostfix == "-tst" }}'
 
