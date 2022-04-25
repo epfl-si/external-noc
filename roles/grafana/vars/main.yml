@@ -3,7 +3,7 @@
 grafana_port: 3000
 grafana_container_name: "grafana"
 grafana_image: "grafana/grafana"
-grafana_version: "8.3.1"
+grafana_version: "8.5.0"
 grafana_image_qualified: "{{ grafana_image }}:{{ grafana_version }}"
 
 grafana:
