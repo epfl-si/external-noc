@@ -54,7 +54,7 @@
     src: "{{ item }}"
     dest: "{{ install_path }}/prometheus/rules/{{ item | basename }}"
   with_fileglob:
-    - "templates/prometheus/rules/*"
+    - "templates/prometheus/rules/*.yml"
 
 - name: Copy prometheus-site-service-discovery.py
   template:
