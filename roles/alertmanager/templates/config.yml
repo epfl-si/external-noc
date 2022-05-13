@@ -73,7 +73,7 @@ route:
         sendto: telegram
 {% else %}
     # NOC-PROD
-    - receiver: 'alert-tg-bot-prod'
+    - receiver: 'alert-tg-bot-prod-wwp'
       group_by: ['instance']
       group_wait: 45s
       group_interval: 10m # Usually ~5 mins or more.
@@ -111,7 +111,7 @@ receivers:
     url: 'http://debugapi:3000/'
 
 {% else %}
-- name: 'alert-tg-bot-prod'
+- name: 'alert-tg-bot-prod-wwp'
   webhook_configs:
   - send_resolved: true
     # AlertmanagerGroup (Prod)
