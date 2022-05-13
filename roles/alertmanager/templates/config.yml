@@ -126,7 +126,7 @@ receivers:
   webhook_configs:
   - send_resolved: true
     # AlertmanagerGroup (Prod)
-    url: 'http://alert-tg-bot:3000/-471504808'
+    url: 'http://alert-tg-bot:3000/-1001593917916'
 
 - name: 'alert-tg-bot-prod-phdassess'
   webhook_configs:
