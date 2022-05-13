@@ -9,6 +9,7 @@ groups:
       labels:
         severity: page
         sendto: telegram
+        app: wordpress
       annotations:
         summary: 'Instance {{$labels.instance}} down ({{$labels.wp_env}})'
         description: '{{$labels.instance}} of job {{$labels.job}} has been down for more than 5 minutes (on env: {{$labels.wp_env}}).'

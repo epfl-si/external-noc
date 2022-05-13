@@ -8,8 +8,11 @@ groups:
       labels:
         severity: page
         sendto: telegram
+        app: phdassess
       annotations:
-        summary: "Production Zeebe quorum doesn't currently have a leader."
-        description: 'See https://prometheus-phdassess.epfl.ch/graph?g0.expr=atomix_role{app_instance%3D"prod"}&g0.tab=0'
+        description: |-
+          Production Zeebe quorum doesn't currently have a leader.
+
+          See https://prometheus-phdassess.epfl.ch/graph?g0.expr=atomix_role{app_instance%3D"prod"}&g0.tab=0
 {%endraw%}
 

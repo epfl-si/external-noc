@@ -8,6 +8,7 @@ groups:
       labels:
         severity: page
         sendto: telegram
+        app: wordpress
       annotations:
         summary: '{{ $labels.instance }} HTTP status is {{ $value }}!'
         description: '{{ $labels.instance }} of job {{ $labels.job }} has HTTP status == {{ $value }} for more than 2 minutes (on env: {{ $labels.wp_env }}).'

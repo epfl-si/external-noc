@@ -83,6 +83,17 @@ route:
       continue: true
       match:
         sendto: telegram
+        app: wordpress
+
+    - receiver: 'alert-tg-bot-prod-phdassess'
+      group_by: ['instance']
+      group_wait: 45s
+      group_interval: 10m
+      continue: true
+      match:
+        sendto: telegram
+        app: phdassess
+
 {% endif %}
 
 receivers:
@@ -116,4 +127,10 @@ receivers:
   - send_resolved: true
     # AlertmanagerGroup (Prod)
     url: 'http://alert-tg-bot:3000/-471504808'
+
+- name: 'alert-tg-bot-prod-phdassess'
+  webhook_configs:
+  - send_resolved: true
+    # “PhDAssess” group
+    url: 'http://alert-tg-bot:3000/-508771387'
 {% endif %}

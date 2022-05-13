@@ -8,6 +8,7 @@ groups:
       labels:
         severity: page
         sendto: telegram
+        app: wordpress
       annotations:
         summary: 'Prometheus target "{{$labels.job}}" is unreachable (instance = {{$labels.instance}}, probe = "{{$labels.probe}}")'
 {%endraw%}
