@@ -55,6 +55,7 @@
     dest: "{{ install_path }}/prometheus/rules/{{ item | basename }}"
   with_fileglob:
     - "templates/prometheus/rules/*.yml"
+  register: _prometheus_rules
 
 - name: Copy prometheus-site-service-discovery.py
   template:
@@ -85,6 +86,8 @@
     restart: >-
       {{
       (_prometheus_template_file is defined and _prometheus_template_file is changed)
+      or
+      ( (_prometheus_rules | default({})) is changed)
       or
       ("prometheus.force-restart" in ansible_run_tags)
       }}
