@@ -1,0 +1,15 @@
+{%raw%}
+groups:
+  - name: Zeebe
+    rules:
+    - alert: No Zeebe leader
+      expr: count(atomix_role{app_instance="prod"} >= 3) != 1
+      for: 5m
+      labels:
+        severity: page
+        sendto: telegram
+      annotations:
+        summary: "Production Zeebe quorum doesn't currently have a leader."
+        description: 'See https://prometheus-phdassess.epfl.ch/graph?g0.expr=atomix_role{app_instance%3D"prod"}&g0.tab=0'
+{%endraw%}
+
