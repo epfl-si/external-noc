@@ -2,8 +2,15 @@
 groups:
   - name: Zeebe
     rules:
+
+    ###############################################################
     - alert: No Zeebe leader
-      expr: count(atomix_role{app_instance="prod"} >= 3) != 1
+      expr: |-
+        count by (partition, partitionGroupName) (
+          atomix_role{app_instance="prod"}
+          == 3
+        )
+        != 1
       for: 5m
       labels:
         severity: page
@@ -11,8 +18,85 @@ groups:
         app: phdassess
       annotations:
         description: |-
-          Production Zeebe quorum doesn't currently have a leader.
+          Production Zeebe quorum doesn't currently have exactly one leader (it has {{ $value }}).
 
-          See https://prometheus-phdassess.epfl.ch/graph?g0.expr=atomix_role{app_instance%3D"prod"}&g0.tab=0
+          See https://prometheus-phdassess.epfl.ch/graph?g0.expr=atomix_role%7Bapp_instance%3D%22prod%22%7D&g0.tab=0
+
+    ###############################################################
+    - alert: Absentee quorum
+      expr: |-
+        (
+          count by (partition, partitionGroupName) (
+            atomix_role{app_instance="prod"}
+            == 1
+          )
+          +
+          count by (partition, partitionGroupName) (
+            atomix_role{app_instance="prod"}
+            == 3
+          )
+          -
+          count by (partition, partitionGroupName) (
+            atomix_role{app_instance="prod"}
+          )
+        )
+        > 0
+      for: 5m
+      labels:
+        severity: page
+        sendto: telegram
+        app: phdassess
+      annotations:
+        description: |-
+          Production Zeebe quorum has absentees.
+
+          All quorum members should participate in the Raft protocol, either as a leader or a follower. This is not the case currently.
+
+          See https://prometheus.idev-fsd.ml/graph?g0.expr=atomix_role%7Bapp_instance%3D%22prod%22%7D&g0.tab=0
+
+    ###############################################################
+    - alert: Incomplete quorum
+      expr: |-
+        count by (partition, partitionGroupName) (
+          atomix_role{app_instance="prod"}
+        )
+        != 3
+      for: 1h
+      labels:
+        severity: page
+        sendto: telegram
+        app: phdassess
+      annotations:
+        description: |-
+          Production Zeebe quorum is comprised of {{ $value }} members instead of 3.
+
+          See https://prometheus-phdassess.epfl.ch/graph?g0.expr=atomix_role%7Bapp_instance%3D"prod"%7D&g0.tab=0
+
+    ###############################################################
+    - alert: Confused quorum
+      # Note: for whatever reason, the
+      # zeebe_gateway_topology_partition_roles gauge doesn't have a
+      # partitionGroupName label. This could be a bug (to be fixed in
+      # a future version of Zeebe); we are leaving the by (...,
+      # partitionGroupName) agregations as a future-proofing measure.
+      expr: |-
+        stddev by (partition, partitionGroupName) (
+          count_values by (broker, partition, partitionGroupName) (
+            "zeebe_quorum_member",
+            zeebe_gateway_topology_partition_roles{app_instance="prod"}
+          )
+        )
+        > 0
+      for: 5m
+      labels:
+        severity: page
+        sendto: telegram
+        app: phdassess
+      annotations:
+        description: |-
+          Production Zeebe quorum is confused.
+
+          Members of the quorum have different ideas about who is a leader and who is a follower.
+
+          See https://prometheus-phdassess.epfl.ch/graph?g0.expr=zeebe_gateway_topology_partition_roles%7Bapp_instance%3D%22prod%22%7D&g0.tab=0
 {%endraw%}
-
