@@ -4,7 +4,7 @@ groups:
     rules:
 
     ###############################################################
-    - alert: No Zeebe leader
+    - alert: ZeebeQuorumNoLeader
       expr: |-
         count by (partition, partitionGroupName) (
           atomix_role{app_instance="prod"}
@@ -23,7 +23,7 @@ groups:
           See https://prometheus-phdassess.epfl.ch/graph?g0.expr=atomix_role%7Bapp_instance%3D%22prod%22%7D&g0.tab=0
 
     ###############################################################
-    - alert: Absentee quorum
+    - alert: ZeebeQuorumAbsentee
       expr: |-
         (
           count by (partition, partitionGroupName) (
@@ -55,7 +55,7 @@ groups:
           See https://prometheus.idev-fsd.ml/graph?g0.expr=atomix_role%7Bapp_instance%3D%22prod%22%7D&g0.tab=0
 
     ###############################################################
-    - alert: Incomplete quorum
+    - alert: ZeebeQuorumIncomplete
       expr: |-
         count by (partition, partitionGroupName) (
           atomix_role{app_instance="prod"}
@@ -73,7 +73,7 @@ groups:
           See https://prometheus-phdassess.epfl.ch/graph?g0.expr=atomix_role%7Bapp_instance%3D"prod"%7D&g0.tab=0
 
     ###############################################################
-    - alert: Confused quorum
+    - alert: ZeebeQuorumConfused
       # Note: for whatever reason, the
       # zeebe_gateway_topology_partition_roles gauge doesn't have a
       # partitionGroupName label. This could be a bug (to be fixed in
