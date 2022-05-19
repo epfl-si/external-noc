@@ -6,7 +6,7 @@ groups:
     ###############################################################
     - alert: ZeebeQuorumNoLeader
       expr: |-
-        count by (partition, partitionGroupName) (
+        count by (job, partition, partitionGroupName) (
           atomix_role{app_instance="prod"}
           == 3
         )
@@ -26,17 +26,17 @@ groups:
     - alert: ZeebeQuorumAbsentee
       expr: |-
         (
-          count by (partition, partitionGroupName) (
+          count by (job, partition, partitionGroupName) (
             atomix_role{app_instance="prod"}
             == 1
           )
           +
-          count by (partition, partitionGroupName) (
+          count by (job, partition, partitionGroupName) (
             atomix_role{app_instance="prod"}
             == 3
           )
           -
-          count by (partition, partitionGroupName) (
+          count by (job, partition, partitionGroupName) (
             atomix_role{app_instance="prod"}
           )
         )
@@ -57,7 +57,7 @@ groups:
     ###############################################################
     - alert: ZeebeQuorumIncomplete
       expr: |-
-        count by (partition, partitionGroupName) (
+        count by (job, partition, partitionGroupName) (
           atomix_role{app_instance="prod"}
         )
         != 3
@@ -80,7 +80,7 @@ groups:
       # a future version of Zeebe); we are leaving the by (...,
       # partitionGroupName) agregations as a future-proofing measure.
       expr: |-
-        stddev by (partition, partitionGroupName) (
+        stddev by (job, partition, partitionGroupName) (
           count_values by (broker, partition, partitionGroupName) (
             "zeebe_quorum_member",
             zeebe_gateway_topology_partition_roles{app_instance="prod"}
