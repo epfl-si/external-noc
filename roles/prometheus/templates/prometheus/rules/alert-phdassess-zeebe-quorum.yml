@@ -116,3 +116,20 @@ groups:
 
           See https://prometheus-phdassess.epfl.ch/graph?g0.expr=zeebe_health%7Bapp_instance%3D%22prod%22%7D&g0.tab=0
 {%endraw%}
+
+    ###############################################################
+    - alert: ZeebeQuorumNotMakingProgress
+      expr: |-
+        increase(atomix_partition_raft_commit_index{app_instance="prod"}[5m])
+        < 250
+      for: 5m
+      labels:
+        severity: page
+        sendto: telegram
+        app: phdassess
+        description: |-
+          Production Zeebe quorum is not making progress.
+
+          The Raft commit index is growing too slowly.
+
+          See https://prometheus-phdassess.epfl.ch/graph?g0.expr=atomix_partition_raft_commit_index%7Bapp_instance%3D%22prod%22%7D&g0.tab=0
