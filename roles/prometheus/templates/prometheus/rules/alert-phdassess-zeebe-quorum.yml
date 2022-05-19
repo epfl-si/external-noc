@@ -81,7 +81,7 @@ groups:
       # partitionGroupName) agregations as a future-proofing measure.
       expr: |-
         stddev by (job, partition, partitionGroupName) (
-          count_values by (broker, partition, partitionGroupName) (
+          count_values by (broker, job, partition, partitionGroupName) (
             "zeebe_quorum_member",
             zeebe_gateway_topology_partition_roles{app_instance="prod"}
           )
