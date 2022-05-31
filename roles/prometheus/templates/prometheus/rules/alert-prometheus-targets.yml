@@ -11,4 +11,5 @@ groups:
         app: wordpress
       annotations:
         summary: 'Prometheus target "{{$labels.job}}" is unreachable (instance = {{$labels.instance}}, probe = "{{$labels.probe}}")'
+        description: 'The prometheus target {{ $labels.instance }} is unreachable (job={{ $labels.job }})'
 {%endraw%}
