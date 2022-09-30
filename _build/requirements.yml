@@ -1,0 +1,12 @@
+---
+collections:
+  - name: ansible.posix
+  - name: ansible.windows
+  - name: awx.awx
+  - name: containers.podman
+  - name: kubernetes.core
+  - name: redhatinsights.insights
+  - name: theforeman.foreman
+
+roles:
+  - name: nickjj.docker

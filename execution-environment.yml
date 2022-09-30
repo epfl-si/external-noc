@@ -1,10 +1,10 @@
 ---
 version: 1
 dependencies:
-  galaxy: requirements.yml
-  system: bindep.txt
+  galaxy: _build/requirements.yml
+  system: _build/bindep.txt
   # wheel deps should be used only for packages that are not available as rpms
-  python: requirements.txt
+  python: _build/requirements.txt
 additional_build_steps:
   append:
     - >-
