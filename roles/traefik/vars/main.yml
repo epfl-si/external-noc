@@ -3,7 +3,7 @@
 traefik_state_path: "{{ install_path }}/traefik"
 traefik_container_name: traefik
 traefik_image: traefik
-traefik_version: 2.6
+traefik_version: 2.9.1
 
 traefik_web_ui_port: 9199
 
