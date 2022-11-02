@@ -407,6 +407,7 @@
       "fieldConfig": {
         "defaults": {
           "custom": {
+            "align": "auto",
             "displayMode": "auto",
             "filterable": false,
             "inspect": false
@@ -861,6 +862,7 @@
       "fieldConfig": {
         "defaults": {
           "custom": {
+            "align": "auto",
             "displayMode": "auto",
             "filterable": false,
             "inspect": false
@@ -1118,6 +1120,7 @@
       "fieldConfig": {
         "defaults": {
           "custom": {
+            "align": "auto",
             "displayMode": "auto",
             "filterable": false,
             "inspect": false
@@ -1335,6 +1338,7 @@
       "fieldConfig": {
         "defaults": {
           "custom": {
+            "align": "auto",
             "displayMode": "auto",
             "filterable": false,
             "inspect": false
@@ -1511,7 +1515,8 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "sort_desc(sum(restic_success{url=~\"$wp_site\",wp_env=~\"$wp_env\"}) by (url) - sum(restic_start{url=~\"$wp_site\",wp_env=~\"$wp_env\"}) by (url))",
+          "editorMode": "code",
+          "expr": "sort_desc(restic_success{url=~\"$wp_site\",wp_env=~\"$wp_env\"} - restic_start{url=~\"$wp_site\",wp_env=~\"$wp_env\"} > 0)",
           "instant": false,
           "interval": "",
           "legendFormat": "{{ url }}",
@@ -1557,6 +1562,7 @@
       "fieldConfig": {
         "defaults": {
           "custom": {
+            "align": "auto",
             "displayMode": "auto",
             "filterable": false,
             "inspect": false
@@ -1755,6 +1761,7 @@
       "fieldConfig": {
         "defaults": {
           "custom": {
+            "align": "auto",
             "displayMode": "auto",
             "filterable": false,
             "inspect": false
@@ -1914,6 +1921,7 @@
       "fieldConfig": {
         "defaults": {
           "custom": {
+            "align": "auto",
             "displayMode": "auto",
             "filterable": false,
             "inspect": false
@@ -1996,6 +2004,7 @@
       "fieldConfig": {
         "defaults": {
           "custom": {
+            "align": "auto",
             "displayMode": "auto",
             "filterable": false,
             "inspect": false
@@ -2079,6 +2088,7 @@
       "fieldConfig": {
         "defaults": {
           "custom": {
+            "align": "auto",
             "displayMode": "auto",
             "filterable": false,
             "inspect": false
@@ -2216,6 +2226,7 @@
       "fieldConfig": {
         "defaults": {
           "custom": {
+            "align": "auto",
             "displayMode": "auto",
             "filterable": false,
             "inspect": false
@@ -2365,6 +2376,7 @@
       "fieldConfig": {
         "defaults": {
           "custom": {
+            "align": "auto",
             "displayMode": "auto",
             "filterable": false,
             "inspect": false
@@ -2538,6 +2550,6 @@
   "timezone": "",
   "title": "WP Main",
   "uid": "WordPressM",
-  "version": 1,
+  "version": 5,
   "weekStart": ""
 }
