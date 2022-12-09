@@ -17,10 +17,18 @@
     - data
     - data/plugins
 
-- name: Copy Grafana static files
+- name: Copy Grafana provisionned dashboards
   copy:
-    src: "provisioning/"
-    dest: "{{ data_path }}/grafana/provisioning/"
+    src: "provisioning/dashboards/{{ item }}"
+    dest: "{{ data_path }}/grafana/provisioning/dashboards/"
+  with_items:
+    - dashboards.yml
+    - GitLab/
+    - Go/
+    - GoTest/
+    - NOC/
+    - PhDAssess/
+    - WordPress/
   register: grafana_static_files
 
 # -------------------------------------------------------------------- Templates
