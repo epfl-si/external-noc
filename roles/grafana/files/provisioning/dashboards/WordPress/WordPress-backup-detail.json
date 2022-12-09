@@ -823,7 +823,8 @@
   "schemaVersion": 26,
   "style": "dark",
   "tags": [
-    "wordpress",
+    "WordPress",
+    "Backup",
     "provisionned"
   ],
   "templating": {

@@ -2562,7 +2562,9 @@
   "schemaVersion": 26,
   "style": "dark",
   "tags": [
-    "gitlab"
+    "gitlab",
+    "statistics",
+    "provisionned"
   ],
   "templating": {
     "list": []

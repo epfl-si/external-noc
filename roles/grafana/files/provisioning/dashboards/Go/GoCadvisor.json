@@ -728,8 +728,11 @@
   "schemaVersion": 37,
   "style": "dark",
   "tags": [
+    "provisionned",
     "cadvisor",
-    "docker"
+    "docker",
+    "GoEPFL",
+    "go.epfl.ch"
   ],
   "templating": {
     "list": [

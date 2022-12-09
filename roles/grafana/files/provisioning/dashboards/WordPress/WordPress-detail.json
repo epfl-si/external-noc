@@ -1687,7 +1687,8 @@
   "schemaVersion": 26,
   "style": "dark",
   "tags": [
-    "wordpress",
+    "WordPress",
+    "Details",
     "provisionned"
   ],
   "templating": {

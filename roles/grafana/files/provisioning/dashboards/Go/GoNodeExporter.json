@@ -23005,7 +23005,10 @@
   "schemaVersion": 37,
   "style": "dark",
   "tags": [
-    "linux"
+    "provisionned",
+    "nodeExporter",
+    "GoEPFL",
+    "go.epfl.ch"
   ],
   "templating": {
     "list": [

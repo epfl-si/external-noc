@@ -2457,7 +2457,8 @@
   "schemaVersion": 37,
   "style": "dark",
   "tags": [
-    "wordpress",
+    "WordPress",
+    "General",
     "provisionned"
   ],
   "templating": {
