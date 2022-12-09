@@ -31,6 +31,7 @@
   with_items:
     - conf/grafana.ini
     - provisioning/datasources/idevfsd-prometheus.yml
+    - provisioning/datasources/go-prom-ds.yml
     - provisioning/datasources/go-test-prom-ds.yml
     - provisioning/notifiers/telegram.yml
   register: grafana_config_files
