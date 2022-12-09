@@ -2548,8 +2548,8 @@
     ]
   },
   "timezone": "",
-  "title": "WP Main",
-  "uid": "WordPressM",
+  "title": "WordPress Main",
+  "uid": "WordPressMain",
   "version": 5,
   "weekStart": ""
 }
