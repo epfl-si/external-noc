@@ -24,7 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 32,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -82,8 +81,8 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 11,
+        "h": 7,
+        "w": 24,
         "x": 0,
         "y": 0
       },
@@ -177,10 +176,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 13,
-        "x": 11,
-        "y": 0
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 7
       },
       "id": 5,
       "options": {
@@ -201,22 +200,105 @@
             "uid": "PA7DAED22D5425F49"
           },
           "editorMode": "code",
-          "expr": "zeebe_db_column_family_entries{column_family=\"INCIDENTS\"}",
+          "expr": "sum(zeebe_db_column_family_incident_entries)",
           "hide": false,
-          "legendFormat": "{{column_family}}",
+          "legendFormat": "INCIDENT",
           "range": true,
           "refId": "A"
         }
       ],
+      "transformations": [],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto",
+            "filterable": true,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 7
+      },
+      "id": 8,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Value (lastNotNull)"
+          }
+        ]
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
+          "editorMode": "builder",
+          "expr": "zeebe_db_column_family_incident_entries",
+          "format": "table",
+          "legendFormat": "{{error_message}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Errored",
       "transformations": [
         {
-          "id": "labelsToFields",
+          "id": "groupBy",
           "options": {
-            "valueLabel": "column_family"
+            "fields": {
+              "Value": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "error_message": {
+                "aggregations": [],
+                "operation": "groupby"
+              }
+            }
           }
         }
       ],
-      "type": "timeseries"
+      "type": "table"
     },
     {
       "datasource": {
@@ -273,7 +355,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 8
+        "y": 16
       },
       "id": 1,
       "options": {
@@ -367,7 +449,7 @@
         "h": 5,
         "w": 24,
         "x": 0,
-        "y": 15
+        "y": 23
       },
       "id": 3,
       "options": {
