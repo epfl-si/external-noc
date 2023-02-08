@@ -17,10 +17,18 @@
     - data
     - data/plugins
 
-- name: Copy Grafana static files
+- name: Copy Grafana provisionned dashboards
   copy:
-    src: "provisioning/"
-    dest: "{{ data_path }}/grafana/provisioning/"
+    src: "provisioning/dashboards/{{ item }}"
+    dest: "{{ data_path }}/grafana/provisioning/dashboards/"
+  with_items:
+    - dashboards.yml
+    - GitLab/
+    - Go/
+    - GoTest/
+    - NOC/
+    - PhDAssess/
+    - WordPress/
   register: grafana_static_files
 
 # -------------------------------------------------------------------- Templates
@@ -31,6 +39,7 @@
   with_items:
     - conf/grafana.ini
     - provisioning/datasources/idevfsd-prometheus.yml
+    - provisioning/datasources/go-prom-ds.yml
     - provisioning/datasources/go-test-prom-ds.yml
     - provisioning/notifiers/telegram.yml
   register: grafana_config_files

@@ -3,19 +3,29 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
         "type": "dashboard"
       }
     ]
   },
   "description": "Stats from https://github.com/epfl-dojo/GitlabStatisticsPrometheusExporter",
   "editable": true,
-  "gnetId": null,
+  "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": 42,
   "links": [
     {
       "icon": "external link",
@@ -35,29 +45,67 @@
       "url": "https://grafana.idev-fsd.ml/render/d/rDWoD7vGz/gitlab-statistics?orgId=1&refresh=10s&from=now-24h&to=now-1m&width=2000&height=2400"
     }
   ],
+  "liveNow": false,
   "panels": [
     {
-      "collapsed": false,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
+      "description": "",
       "gridPos": {
-        "h": 1,
+        "h": 2,
         "w": 24,
         "x": 0,
         "y": 0
       },
+      "id": 52,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<center><h1>GitLab EPFL statistics</h1></center>",
+        "mode": "html"
+      },
+      "pluginVersion": "9.2.1",
+      "type": "text"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 2
+      },
       "id": 21,
       "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "General info",
       "type": "row"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -75,7 +123,7 @@
         "h": 8,
         "w": 4,
         "x": 0,
-        "y": 1
+        "y": 3
       },
       "id": 2,
       "options": {
@@ -92,9 +140,13 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-e616dea4pre",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "gitlab_users_total",
           "instant": false,
           "interval": "",
@@ -102,19 +154,17 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Users",
       "type": "stat"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -132,7 +182,7 @@
         "h": 8,
         "w": 2,
         "x": 4,
-        "y": 1
+        "y": 3
       },
       "id": 11,
       "options": {
@@ -149,9 +199,13 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-e616dea4pre",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "gitlab_groups_total",
           "instant": false,
           "interval": "",
@@ -159,19 +213,17 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Groups",
       "type": "stat"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -189,7 +241,7 @@
         "h": 8,
         "w": 2,
         "x": 6,
-        "y": 1
+        "y": 3
       },
       "id": 3,
       "options": {
@@ -206,9 +258,13 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-e616dea4pre",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "gitlab_projects_total",
           "instant": false,
           "interval": "",
@@ -216,19 +272,17 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Projects",
       "type": "stat"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "decimals": 0,
           "mappings": [],
           "min": 2593,
@@ -249,7 +303,7 @@
         "h": 8,
         "w": 2,
         "x": 8,
-        "y": 1
+        "y": 3
       },
       "id": 4,
       "options": {
@@ -266,9 +320,13 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-e616dea4pre",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "gitlab_issues_total",
           "instant": false,
           "interval": "",
@@ -276,6 +334,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "gitlab_issues_total+5",
           "hide": true,
           "interval": "",
@@ -283,6 +345,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "gitlab_issues_total-5",
           "hide": true,
           "interval": "",
@@ -290,19 +356,17 @@
           "refId": "C"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Issues",
       "type": "stat"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -320,7 +384,7 @@
         "h": 8,
         "w": 2,
         "x": 10,
-        "y": 1
+        "y": 3
       },
       "id": 6,
       "options": {
@@ -337,9 +401,13 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-e616dea4pre",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "gitlab_forks_total",
           "instant": false,
           "interval": "",
@@ -347,19 +415,17 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Forks",
       "type": "stat"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -377,7 +443,7 @@
         "h": 8,
         "w": 2,
         "x": 12,
-        "y": 1
+        "y": 3
       },
       "id": 7,
       "options": {
@@ -394,9 +460,13 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-e616dea4pre",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "gitlab_merge_requests_total",
           "instant": false,
           "interval": "",
@@ -404,19 +474,17 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "PRs",
       "type": "stat"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -434,7 +502,7 @@
         "h": 8,
         "w": 2,
         "x": 14,
-        "y": 1
+        "y": 3
       },
       "id": 5,
       "options": {
@@ -451,9 +519,13 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-e616dea4pre",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "gitlab_ssh_keys_total",
           "instant": false,
           "interval": "",
@@ -461,19 +533,17 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "SSH Keys",
       "type": "stat"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -491,7 +561,7 @@
         "h": 8,
         "w": 2,
         "x": 16,
-        "y": 1
+        "y": 3
       },
       "id": 8,
       "options": {
@@ -508,9 +578,13 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-e616dea4pre",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "gitlab_notes_total",
           "instant": false,
           "interval": "",
@@ -518,19 +592,17 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Notes",
       "type": "stat"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -548,7 +620,7 @@
         "h": 8,
         "w": 2,
         "x": 18,
-        "y": 1
+        "y": 3
       },
       "id": 9,
       "options": {
@@ -565,9 +637,13 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-e616dea4pre",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "gitlab_snippets_total",
           "instant": false,
           "interval": "",
@@ -575,19 +651,17 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Snippets",
       "type": "stat"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -605,7 +679,7 @@
         "h": 8,
         "w": 2,
         "x": 20,
-        "y": 1
+        "y": 3
       },
       "id": 10,
       "options": {
@@ -622,9 +696,13 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-e616dea4pre",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "gitlab_milestones_total",
           "instant": false,
           "interval": "",
@@ -632,19 +710,17 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Milestones",
       "type": "stat"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -662,7 +738,7 @@
         "h": 8,
         "w": 2,
         "x": 22,
-        "y": 1
+        "y": 3
       },
       "id": 12,
       "options": {
@@ -679,9 +755,13 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-e616dea4pre",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "gitlab_active_users_total",
           "instant": false,
           "interval": "",
@@ -689,22 +769,32 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Active Users",
       "type": "stat"
     },
     {
       "collapsed": false,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 9
+        "y": 11
       },
       "id": 23,
       "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Users info",
       "type": "row"
     },
@@ -713,12 +803,9 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
       },
       "fill": 1,
       "fillGradient": 0,
@@ -726,7 +813,7 @@
         "h": 8,
         "w": 9,
         "x": 0,
-        "y": 10
+        "y": 12
       },
       "hiddenSeries": false,
       "id": 14,
@@ -746,17 +833,20 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.0-e616dea4pre",
+      "pluginVersion": "9.2.1",
       "pointradius": 2,
       "points": true,
       "renderer": "flot",
-      "repeat": null,
       "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "gitlab_users_total",
           "instant": false,
           "interval": "",
@@ -765,9 +855,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Users Total",
       "tooltip": {
         "shared": true,
@@ -776,9 +864,7 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -788,32 +874,26 @@
           "format": "none",
           "label": "",
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -831,7 +911,7 @@
         "h": 8,
         "w": 5,
         "x": 9,
-        "y": 10
+        "y": 12
       },
       "id": 27,
       "interval": "",
@@ -850,9 +930,13 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-e616dea4pre",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "floor(delta(gitlab_active_users_total[4w]))",
           "format": "time_series",
           "instant": true,
@@ -861,19 +945,17 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Last month new users",
       "type": "stat"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -891,7 +973,7 @@
         "h": 8,
         "w": 5,
         "x": 14,
-        "y": 10
+        "y": 12
       },
       "id": 31,
       "interval": "",
@@ -910,9 +992,13 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-e616dea4pre",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "floor(delta(gitlab_active_users_total[1w]))",
           "format": "time_series",
           "instant": true,
@@ -921,19 +1007,17 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Last week new users",
       "type": "stat"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -951,7 +1035,7 @@
         "h": 8,
         "w": 5,
         "x": 19,
-        "y": 10
+        "y": 12
       },
       "id": 24,
       "interval": "",
@@ -970,9 +1054,13 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-e616dea4pre",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "floor(delta(gitlab_active_users_total[1d]))",
           "format": "time_series",
           "instant": true,
@@ -981,22 +1069,32 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Last day new users",
       "type": "stat"
     },
     {
       "collapsed": false,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 18
+        "y": 20
       },
       "id": 29,
       "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Groups info",
       "type": "row"
     },
@@ -1005,12 +1103,9 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
       },
       "fill": 1,
       "fillGradient": 0,
@@ -1018,7 +1113,7 @@
         "h": 8,
         "w": 9,
         "x": 0,
-        "y": 19
+        "y": 21
       },
       "hiddenSeries": false,
       "id": 30,
@@ -1038,7 +1133,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.0-e616dea4pre",
+      "pluginVersion": "9.2.1",
       "pointradius": 2,
       "points": true,
       "renderer": "flot",
@@ -1053,6 +1148,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "gitlab_groups_total",
           "instant": false,
           "interval": "",
@@ -1061,9 +1160,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Groups Total",
       "tooltip": {
         "shared": true,
@@ -1072,9 +1169,7 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -1084,32 +1179,26 @@
           "format": "none",
           "label": "",
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1127,7 +1216,7 @@
         "h": 8,
         "w": 5,
         "x": 9,
-        "y": 19
+        "y": 21
       },
       "id": 19,
       "interval": "",
@@ -1146,9 +1235,13 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-e616dea4pre",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "floor(delta(gitlab_groups_total[4w]))",
           "format": "time_series",
           "instant": true,
@@ -1157,19 +1250,17 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Last month new groups",
       "type": "stat"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1187,7 +1278,7 @@
         "h": 8,
         "w": 5,
         "x": 14,
-        "y": 19
+        "y": 21
       },
       "id": 37,
       "interval": "",
@@ -1206,9 +1297,13 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-e616dea4pre",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "floor(delta(gitlab_groups_total[1w]))",
           "format": "time_series",
           "instant": true,
@@ -1217,19 +1312,17 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Last week new groups",
       "type": "stat"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1247,7 +1340,7 @@
         "h": 8,
         "w": 5,
         "x": 19,
-        "y": 19
+        "y": 21
       },
       "id": 33,
       "interval": "",
@@ -1266,9 +1359,13 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-e616dea4pre",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "floor(delta(gitlab_groups_total[1d]))",
           "format": "time_series",
           "instant": true,
@@ -1277,22 +1374,32 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Last day new groups",
       "type": "stat"
     },
     {
       "collapsed": false,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 27
+        "y": 29
       },
       "id": 35,
       "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Projects info",
       "type": "row"
     },
@@ -1301,12 +1408,9 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
       },
       "fill": 1,
       "fillGradient": 0,
@@ -1314,7 +1418,7 @@
         "h": 8,
         "w": 9,
         "x": 0,
-        "y": 28
+        "y": 30
       },
       "hiddenSeries": false,
       "id": 36,
@@ -1334,7 +1438,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.0-e616dea4pre",
+      "pluginVersion": "9.2.1",
       "pointradius": 2,
       "points": true,
       "renderer": "flot",
@@ -1349,6 +1453,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "gitlab_projects_total",
           "instant": false,
           "interval": "",
@@ -1357,9 +1465,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Projects Total",
       "tooltip": {
         "shared": true,
@@ -1368,9 +1474,7 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -1380,32 +1484,26 @@
           "format": "none",
           "label": "",
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1423,7 +1521,7 @@
         "h": 8,
         "w": 5,
         "x": 9,
-        "y": 28
+        "y": 30
       },
       "id": 32,
       "interval": "",
@@ -1442,9 +1540,13 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-e616dea4pre",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "floor(delta(gitlab_projects_total[4w]))",
           "format": "time_series",
           "instant": true,
@@ -1453,19 +1555,17 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Last month new projects",
       "type": "stat"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1483,7 +1583,7 @@
         "h": 8,
         "w": 5,
         "x": 14,
-        "y": 28
+        "y": 30
       },
       "id": 45,
       "interval": "",
@@ -1502,9 +1602,13 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-e616dea4pre",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "floor(delta(gitlab_projects_total[1w]))",
           "format": "time_series",
           "instant": true,
@@ -1513,19 +1617,17 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Last week new projects",
       "type": "stat"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1543,7 +1645,7 @@
         "h": 8,
         "w": 5,
         "x": 19,
-        "y": 28
+        "y": 30
       },
       "id": 39,
       "interval": "",
@@ -1562,9 +1664,13 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0-e616dea4pre",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "floor(delta(gitlab_projects_total[1d]))",
           "format": "time_series",
           "instant": true,
@@ -1573,22 +1679,32 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Last day new projects",
       "type": "stat"
     },
     {
       "collapsed": false,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 36
+        "y": 38
       },
       "id": 41,
       "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Issues, forks and PRs info",
       "type": "row"
     },
@@ -1597,7 +1713,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -1610,7 +1729,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 37
+        "y": 39
       },
       "hiddenSeries": false,
       "id": 42,
@@ -1645,6 +1764,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "gitlab_issues_total",
           "instant": false,
           "interval": "",
@@ -1653,9 +1776,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Issues Total",
       "tooltip": {
         "shared": true,
@@ -1664,9 +1785,7 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -1676,22 +1795,16 @@
           "format": "none",
           "label": "",
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -1699,7 +1812,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -1712,7 +1828,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 37
+        "y": 39
       },
       "hiddenSeries": false,
       "id": 43,
@@ -1747,6 +1863,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "gitlab_forks_total",
           "instant": false,
           "interval": "",
@@ -1755,9 +1875,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Forks Total",
       "tooltip": {
         "shared": true,
@@ -1766,9 +1884,7 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -1778,22 +1894,16 @@
           "format": "none",
           "label": "",
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -1801,7 +1911,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -1814,7 +1927,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 37
+        "y": 39
       },
       "hiddenSeries": false,
       "id": 44,
@@ -1849,6 +1962,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "gitlab_merge_requests_total",
           "instant": false,
           "interval": "",
@@ -1857,9 +1974,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "PRs Total",
       "tooltip": {
         "shared": true,
@@ -1868,9 +1983,7 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -1880,39 +1993,33 @@
           "format": "none",
           "label": "",
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
+          "custom": {},
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "semi-dark-blue",
-                "value": null
+                "color": "semi-dark-blue"
               }
             ]
           }
@@ -1923,7 +2030,7 @@
         "h": 5,
         "w": 4,
         "x": 0,
-        "y": 45
+        "y": 47
       },
       "id": 46,
       "interval": "",
@@ -1945,6 +2052,10 @@
       "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "floor(delta(gitlab_issues_total[4w]))",
           "format": "time_series",
           "instant": true,
@@ -1953,26 +2064,24 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Last month new issues",
       "type": "stat"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
+          "custom": {},
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "light-blue",
-                "value": null
+                "color": "light-blue"
               }
             ]
           }
@@ -1983,7 +2092,7 @@
         "h": 5,
         "w": 4,
         "x": 4,
-        "y": 45
+        "y": 47
       },
       "id": 38,
       "interval": "",
@@ -2005,6 +2114,10 @@
       "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "floor(delta(gitlab_issues_total[1w]))",
           "format": "time_series",
           "instant": true,
@@ -2013,26 +2126,24 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Last week new issues",
       "type": "stat"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
+          "custom": {},
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "semi-dark-blue",
-                "value": null
+                "color": "semi-dark-blue"
               }
             ]
           }
@@ -2043,7 +2154,7 @@
         "h": 5,
         "w": 4,
         "x": 8,
-        "y": 45
+        "y": 47
       },
       "id": 48,
       "interval": "",
@@ -2065,6 +2176,10 @@
       "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "floor(delta(gitlab_forks_total[4w]))",
           "format": "time_series",
           "instant": true,
@@ -2073,26 +2188,24 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Last month new forks",
       "type": "stat"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
+          "custom": {},
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "light-blue",
-                "value": null
+                "color": "light-blue"
               }
             ]
           }
@@ -2103,7 +2216,7 @@
         "h": 5,
         "w": 4,
         "x": 12,
-        "y": 45
+        "y": 47
       },
       "id": 47,
       "interval": "",
@@ -2125,6 +2238,10 @@
       "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "floor(delta(gitlab_forks_total[1w]))",
           "format": "time_series",
           "instant": true,
@@ -2133,26 +2250,24 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Last week new forks",
       "type": "stat"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
+          "custom": {},
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "semi-dark-blue",
-                "value": null
+                "color": "semi-dark-blue"
               }
             ]
           }
@@ -2163,7 +2278,7 @@
         "h": 5,
         "w": 4,
         "x": 16,
-        "y": 45
+        "y": 47
       },
       "id": 50,
       "interval": "",
@@ -2185,6 +2300,10 @@
       "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "floor(delta(gitlab_merge_requests_total[4w]))",
           "format": "time_series",
           "instant": true,
@@ -2193,26 +2312,24 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Last month new PRs",
       "type": "stat"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null
-          },
+          "custom": {},
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "light-blue",
-                "value": null
+                "color": "light-blue"
               }
             ]
           }
@@ -2223,7 +2340,7 @@
         "h": 5,
         "w": 4,
         "x": 20,
-        "y": 45
+        "y": 47
       },
       "id": 49,
       "interval": "",
@@ -2245,6 +2362,10 @@
       "pluginVersion": "7.2.0-e616dea4pre",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "floor(delta(gitlab_merge_requests_total[1w]))",
           "format": "time_series",
           "instant": true,
@@ -2253,22 +2374,32 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Last week new PRs",
       "type": "stat"
     },
     {
       "collapsed": false,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 50
+        "y": 52
       },
       "id": 26,
       "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Other",
       "type": "row"
     },
@@ -2277,7 +2408,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -2290,7 +2424,7 @@
         "h": 9,
         "w": 8,
         "x": 0,
-        "y": 51
+        "y": 53
       },
       "hiddenSeries": false,
       "id": 16,
@@ -2320,6 +2454,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "avg(gitlab_groups_total/gitlab_users_total)",
           "interval": "",
           "legendFormat": "gitlab_active_users_total / gitlab_groups_total",
@@ -2327,9 +2465,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Groups per users",
       "tooltip": {
         "shared": true,
@@ -2338,33 +2474,24 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -2372,7 +2499,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -2385,7 +2515,7 @@
         "h": 9,
         "w": 8,
         "x": 8,
-        "y": 51
+        "y": 53
       },
       "hiddenSeries": false,
       "id": 17,
@@ -2415,6 +2545,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "avg(gitlab_issues_total/gitlab_users_total)",
           "interval": "",
           "legendFormat": "gitlab_users_total/gitlab_issues_total",
@@ -2422,9 +2556,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Issues per users",
       "tooltip": {
         "shared": true,
@@ -2433,33 +2565,24 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -2467,7 +2590,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -2480,7 +2606,7 @@
         "h": 10,
         "w": 8,
         "x": 16,
-        "y": 51
+        "y": 53
       },
       "hiddenSeries": false,
       "id": 18,
@@ -2510,6 +2636,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
           "expr": "avg(gitlab_ssh_keys_total/gitlab_users_total)",
           "interval": "",
           "legendFormat": "gitlab_ssh_keys_total/gitlab_users_total",
@@ -2517,9 +2647,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "SSH Keys per users",
       "tooltip": {
         "shared": true,
@@ -2528,57 +2656,53 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     }
   ],
-  "refresh": "10s",
-  "schemaVersion": 26,
+  "refresh": "",
+  "schemaVersion": 37,
   "style": "dark",
   "tags": [
-    "gitlab"
+    "gitlab",
+    "statistics",
+    "provisionned"
   ],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-7d",
     "to": "now-1m"
   },
   "timepicker": {
-    "nowDelay": "1m",
+    "nowDelay": "5m",
     "refresh_intervals": [
-      "10s"
+      "1m",
+      "5m",
+      "10m"
     ]
   },
   "timezone": "",
   "title": "Gitlab Statistics",
   "uid": "rDWoD7vGz",
-  "version": 4
+  "version": 4,
+  "weekStart": ""
 }

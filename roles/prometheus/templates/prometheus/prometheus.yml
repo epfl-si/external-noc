@@ -88,17 +88,39 @@ scrape_configs:
       username: "{{ _noc_secrets.prometheus.auth.gotest.username }}"
       password: "{{ _noc_secrets.prometheus.auth.gotest.password }}"
 
+  # Metrics from go.epfl.ch
+  - job_name: 'go@epfl'
+    metrics_path: /prometheus/federate
+    honor_labels: true
+    params:
+      'match[]':
+        # https://stackoverflow.com/a/39253848/960623
+        # - '{__name__=~".+"}'
+        # Just testing another way to say "I want them all!"
+        - '{job!=""}'
+    scheme: 'https'
+    static_configs:
+    - targets: 
+      - 'go.epfl.ch'
+      labels:
+        env: 'go'
+    basic_auth:
+      username: "{{ _noc_secrets.prometheus.auth.go.username }}"
+      password: "{{ _noc_secrets.prometheus.auth.go.password }}"
+
   # Metrics from phd-annual-report.epfl.ch
   - job_name: 'phdassess@epfl'
     metrics_path: /federate
     honor_labels: true
     params:
       'match[]':
-        - '{__name__=~"(atomix.*|zeebe.*|up)"}'
+        - '{__name__=~"(atomix.*|zeebe.*|nodejs.*|process.*|up)"}'
     scheme: 'https'
     static_configs:
     - targets:
       - 'prometheus-phdassess.epfl.ch'
+      labels:
+        service: 'phdassess'
     basic_auth:
       username: "{{ _noc_secrets.prometheus.auth.phdassess.username }}"
       password: "{{ _noc_secrets.prometheus.auth.phdassess.password }}"
@@ -110,6 +132,12 @@ scrape_configs:
     static_configs:
     - targets:
       - 'people.epfl.ch'
+  - job_name: people/probe
+    metrics_path: /cgi-bin/probe?metrics=1
+    scheme: https
+    static_configs:
+    - targets:
+      - people.epfl.ch
 
   # File-based service discovery of WordPresses
   # (https://prometheus.io/docs/prometheus/latest/configuration/configuration/#file_sd_config)

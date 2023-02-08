@@ -481,7 +481,11 @@
   "refresh": "10s",
   "schemaVersion": 36,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "PhDAssess",
+    "ZeebeeDB",
+    "provisionned"
+  ],
   "templating": {
     "list": []
   },

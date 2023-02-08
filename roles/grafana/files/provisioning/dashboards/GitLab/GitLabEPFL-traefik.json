@@ -1228,9 +1228,8 @@
   "style": "dark",
   "tags": [
     "traefik",
-    "load-balancer",
-    "docker",
-    "prometheus"
+    "provisionned",
+    "gitlab"
   ],
   "templating": {
     "list": [

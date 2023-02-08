@@ -413,7 +413,9 @@
   "style": "dark",
   "tags": [
     "prometheus",
-    "alerts"
+    "alerts",
+    "provisionned",
+    "meMyselfandI"
   ],
   "templating": {
     "list": [

@@ -53,17 +53,17 @@ to deploy each brick individually, using Ansible tags.
 ```
 $ git clone git@github.com:epfl-si/external-noc.git
 $ cd external-noc
-$ ./ansible/nocsible --check
+$ ./nocsible --check
 ```
 
 ## Test
 ```
-./ansible/nocsible
+./nocsible
 ```
 
 ## Prod
 ```
-./ansible/nocsible --prod
+./nocsible --prod
 ```
 
 # Links
