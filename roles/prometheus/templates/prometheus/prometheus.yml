@@ -114,11 +114,13 @@ scrape_configs:
     honor_labels: true
     params:
       'match[]':
-        - '{__name__=~"(atomix.*|zeebe.*|up)"}'
+        - '{__name__=~"(atomix.*|zeebe.*|nodejs.*|process.*|up)"}'
     scheme: 'https'
     static_configs:
     - targets:
       - 'prometheus-phdassess.epfl.ch'
+      labels:
+        service: 'phdassess'
     basic_auth:
       username: "{{ _noc_secrets.prometheus.auth.phdassess.username }}"
       password: "{{ _noc_secrets.prometheus.auth.phdassess.password }}"
