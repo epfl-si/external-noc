@@ -38,7 +38,7 @@
         "x": 0,
         "y": 0
       },
-      "id": 14,
+      "id": 1,
       "panels": [],
       "title": "Meteor NodeJS app",
       "type": "row"
@@ -61,7 +61,7 @@
         "y": 1
       },
       "hiddenSeries": false,
-      "id": 6,
+      "id": 2,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -161,7 +161,7 @@
         "y": 1
       },
       "hiddenSeries": false,
-      "id": 8,
+      "id": 3,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -276,7 +276,7 @@
         "x": 19,
         "y": 1
       },
-      "id": 2,
+      "id": 4,
       "interval": "",
       "links": [],
       "maxDataPoints": 100,
@@ -359,7 +359,7 @@
         "x": 19,
         "y": 4
       },
-      "id": 4,
+      "id": 5,
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -411,7 +411,7 @@
         "y": 8
       },
       "hiddenSeries": false,
-      "id": 7,
+      "id": 6,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -534,7 +534,7 @@
         "y": 8
       },
       "hiddenSeries": false,
-      "id": 9,
+      "id": 7,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -634,7 +634,7 @@
         "y": 15
       },
       "hiddenSeries": false,
-      "id": 10,
+      "id": 8,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -724,7 +724,7 @@
         "y": 15
       },
       "hiddenSeries": false,
-      "id": 11,
+      "id": 9,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -814,7 +814,7 @@
         "y": 15
       },
       "hiddenSeries": false,
-      "id": 12,
+      "id": 10,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -894,7 +894,7 @@
         "x": 0,
         "y": 23
       },
-      "id": 6,
+      "id": 11,
       "panels": [],
       "title": "Zeebe",
       "type": "row"
@@ -962,7 +962,7 @@
         "x": 0,
         "y": 24
       },
-      "id": 4,
+      "id": 12,
       "options": {
         "legend": {
           "calcs": [],
@@ -1065,7 +1065,7 @@
         "x": 12,
         "y": 24
       },
-      "id": 3,
+      "id": 13,
       "options": {
         "legend": {
           "calcs": [],
@@ -1153,7 +1153,7 @@
         "x": 0,
         "y": 32
       },
-      "id": 6,
+      "id": 14,
       "options": {
         "legend": {
           "calcs": [],
@@ -1251,7 +1251,7 @@
         "x": 0,
         "y": 39
       },
-      "id": 5,
+      "id": 15,
       "options": {
         "legend": {
           "calcs": [],
@@ -1317,7 +1317,7 @@
         "x": 12,
         "y": 39
       },
-      "id": 8,
+      "id": 16,
       "options": {
         "footer": {
           "fields": "",
@@ -1430,7 +1430,7 @@
         "x": 0,
         "y": 48
       },
-      "id": 1,
+      "id": 17,
       "options": {
         "legend": {
           "calcs": [],
