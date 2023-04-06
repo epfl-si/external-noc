@@ -1,0 +1,43 @@
+{%raw%}
+groups:
+  - name: ZeebeDb
+    rules:
+
+    ###############################################################
+    - alert: ZeebeDbIncidents
+      expr: |-
+        rate(
+          zeebe_db_column_family_incident_entries{
+            error_message!='Expected at least one condition to evaluate to true, or to have a default flow'
+          }[1h]
+        )
+        != 0
+      for: 1m
+      labels:
+        severity: page
+        sendto: telegram
+        app: phdassess
+      annotations:
+        description: |-
+          Zeebe db is encountering new incidents. Rate: {{ $value }}/sec
+          See https://grafana.idev-fsd.ml/d/huA0tuunk/phdassess?orgId=1&from=now-1h&to=now
+
+    ###############################################################
+    - alert: ZeebeDbIncidentsKnownToBeRaising
+      expr: |-
+        rate(
+          zeebe_db_column_family_incident_entries{
+            error_message='Expected at least one condition to evaluate to true, or to have a default flow'
+          }[1h]
+        )
+        > 0.52
+      for: 1m
+      labels:
+        severity: page
+        sendto: telegram
+        app: phdassess
+      annotations:
+        description: |-
+          Zeebe db is encountering a incident that is known to raise, but he is raising too fast at the moment !. Rate: {{ $value }}/sec
+          See https://grafana.idev-fsd.ml/d/huA0tuunk/phdassess?orgId=1&from=now-1h&to=now
+{%endraw%}
