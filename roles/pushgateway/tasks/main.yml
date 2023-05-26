@@ -11,7 +11,7 @@
       max-file: "3"
     labels:
       traefik.enable: "true"
-      traefik.http.routers.pushgateway.rule: "Host(`pgw{{ dnspostfix }}.{{ frontend.domain }}`)"
+      traefik.http.routers.pushgateway.rule: "Host(`pgw{{ dns_suffix }}.{{ frontend.domain }}`,`pgw.noc{{ dns_suffix }}.{{ frontend.alt_domain }}`)"
       traefik.http.routers.pushgateway.entrypoints: "websecure"
       traefik.http.routers.pushgateway.tls.certresolver: "letsencrypt"
       traefik.docker.network: "{{ backend_network_name }}"

@@ -7,4 +7,4 @@ traefik_version: 2.9.1
 
 traefik_web_ui_port: 9199
 
-traefik_debug: '{{ dnspostfix == "-tst" }}'
+traefik_debug: '{{ dns_suffix == "-test" }}'

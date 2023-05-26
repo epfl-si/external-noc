@@ -22,7 +22,7 @@
         --storage.path=/tmp 
         --log.level=debug
       {% endif %}
-      --web.external-url=https://am{{ dnspostfix }}.{{ frontend.domain }}
+      --web.external-url=https://am{{ dns_suffix }}.{{ frontend.domain }}
     restart_policy: unless-stopped
     network_mode: "{{ backend_network_name }}"
     mounts: "{{ mounts[runenv] }}"
@@ -32,7 +32,7 @@
       max-file: "3"
     labels:
       traefik.enable: "true"
-      traefik.http.routers.alertmanager.rule: "Host(`am{{ dnspostfix }}.{{ frontend.domain }}`)"
+      traefik.http.routers.alertmanager.rule: "Host(`am{{ dns_suffix }}.{{ frontend.domain }}`, `am.noc{{ dns_suffix }}.{{ frontend.alt_domain }}`)"
       traefik.http.routers.alertmanager.entrypoints: "websecure"
       traefik.http.routers.alertmanager.tls.certresolver: "letsencrypt"
       traefik.docker.network: "{{ backend_network_name }}"

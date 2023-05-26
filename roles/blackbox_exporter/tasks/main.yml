@@ -29,7 +29,7 @@
       max-file: "3"
     labels:
       traefik.enable: "true"
-      traefik.http.routers.bbe.rule: "Host(`bbe{{ dnspostfix }}.{{ frontend.domain }}`)"
+      traefik.http.routers.bbe.rule: "Host(`bbe{{ dns_suffix }}.{{ frontend.domain }}`, `bbe.noc{{ dns_suffix }}.{{ frontend.alt_domain }}`)"
       traefik.http.routers.bbe.entrypoints: "websecure"
       traefik.http.routers.bbe.tls.certresolver: "letsencrypt"
       traefik.docker.network: "{{ backend_network_name }}"

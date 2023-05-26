@@ -52,7 +52,7 @@ route:
   
   routes:
 {% if alertmanager_debug %}
-    # NOC-TST
+    # NOC-TEST
     - receiver: 'debugapi'
       group_by: ['instance']
       continue: true

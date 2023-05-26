@@ -71,7 +71,7 @@
       max-file: "3"
     labels:
       traefik.enable: "true"
-      traefik.http.routers.grafana.rule: "Host(`grafana{{ dnspostfix }}.{{ frontend.domain }}`)"
+      traefik.http.routers.grafana.rule: "Host(`grafana{{ dns_suffix }}.{{ frontend.domain }}`, `grafana.noc{{ dns_suffix }}.{{ frontend.alt_domain }}`)"
       traefik.http.routers.grafana.entrypoints: "websecure"
       traefik.http.routers.grafana.tls.certresolver: "letsencrypt"
       traefik.docker.network: "{{ backend_network_name }}"

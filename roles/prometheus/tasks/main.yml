@@ -93,7 +93,7 @@
       }}
     command: >-
       --config.file=/etc/prometheus/prometheus.yml
-      --web.external-url=https://prometheus{{ dnspostfix }}.{{ frontend.domain }}
+      --web.external-url=https://prometheus{{ dns_suffix }}.{{ frontend.domain }}
       {% if runenv == "dev" %}
         --log.level=debug
       {% endif %}
@@ -109,7 +109,7 @@
       max-file: "3"
     labels:
       traefik.enable: "true"
-      traefik.http.routers.prometheus.rule: "Host(`prometheus{{ dnspostfix }}.{{ frontend.domain }}`)"
+      traefik.http.routers.prometheus.rule: "Host(`prometheus{{ dns_suffix }}.{{ frontend.domain }}`,`prometheus.noc{{ dns_suffix }}.{{ frontend.alt_domain }}`)"
       traefik.http.routers.prometheus.entrypoints: "websecure"
       traefik.http.routers.prometheus.tls.certresolver: "letsencrypt"
       traefik.docker.network: "{{ backend_network_name }}"

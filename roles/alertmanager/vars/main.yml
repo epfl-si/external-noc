@@ -6,4 +6,4 @@ alertmanager_image: quay.io/prometheus/alertmanager
 alertmanager_version: "latest"
 alertmanager_port: 9093
 
-alertmanager_debug: '{{ dnspostfix == "-tst" }}'
+alertmanager_debug: '{{ dns_suffix == "-test" }}'
