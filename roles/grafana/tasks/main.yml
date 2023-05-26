@@ -57,7 +57,11 @@
     detach: yes
     restart_policy: unless-stopped
     recreate: >-
-      {{ grafana_config_files is defined and grafana_config_files is changed or grafana_static_files is defined and grafana_static_files is changed }}
+      {{
+        (grafana_config_files is defined and grafana_config_files is changed) 
+        or 
+        (grafana_static_files is defined and grafana_static_files is changed) 
+      }}
     network_mode: "{{ backend_network_name }}"
     volumes:
       - "{{ data_path }}/grafana/data:/var/lib/grafana"
