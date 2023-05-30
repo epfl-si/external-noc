@@ -12,8 +12,8 @@ grafana:
   github:
     client_id: '{{ _noc_secrets.grafana.github.client_id }}'
     client_secret: '{{ _noc_secrets.grafana.github.client_secret }}'
-    client_id_tst: '{{ _noc_secrets.grafana.github.client_id_tst }}'
-    client_secret_tst: '{{ _noc_secrets.grafana.github.client_secret_tst }}'
+    client_id_test: '{{ _noc_secrets.grafana.github.client_id_test }}'
+    client_secret_test: '{{ _noc_secrets.grafana.github.client_secret_test }}'
   plugins:
     - grafana-piechart-panel
     - grafana-clock-panel
