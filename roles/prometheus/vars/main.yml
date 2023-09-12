@@ -95,7 +95,7 @@ sources:
       auth: '{{ auth.legacy }}'
     - name: bbe-fr-par
       origin: paris
-      server: "bbe-paris.idev-fsd.ml:80"
+      server: "bbe-paris.noc{{ dns_suffix }}.{{ frontend.domain }}:80"
       auth: '{{ auth.legacy }}'
   ressenti:
     - name: res-ch-zh
@@ -106,10 +106,10 @@ sources:
     - name: res-fr-par
       module: firefox
       origin: paris
-      server: ressenti-paris.idev-fsd.ml
+      server: ressenti-paris.noc{{ dns_suffix }}.{{ frontend.domain }}
       auth: '{{ auth.legacy }}'
     # - name: res-fr-par2
     #   module: firefox
     #   origin: paris2
-    #   server: ressenti-paris2.idev-fsd.ml
+    #   server: ressenti-paris2..noc{{ dns_suffix }}.{{ frontend.domain }}
     #   auth: '{{ auth.legacy }}'

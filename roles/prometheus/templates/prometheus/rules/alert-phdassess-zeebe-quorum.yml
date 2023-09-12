@@ -1,4 +1,4 @@
-{%raw%}
+{% raw %}
 groups:
   - name: Zeebe
     rules:
@@ -52,7 +52,9 @@ groups:
 
           All quorum members should participate in the Raft protocol, either as a leader or a follower. This is not the case currently.
 
-          See https://prometheus.idev-fsd.ml/graph?g0.expr=atomix_role%7Bapp_instance%3D%22prod%22%7D&g0.tab=0
+{% endraw %}
+          See https://prometheus.noc{{ dns_suffix }}.{{ frontend.domain }}/graph?g0.expr=atomix_role%7Bapp_instance%3D%22prod%22%7D&g0.tab=0
+{% raw %}
 
     ###############################################################
     - alert: ZeebeQuorumIncomplete
@@ -115,7 +117,6 @@ groups:
           Production Zeebe quorum is unhealthy.
 
           See https://prometheus-phdassess.epfl.ch/graph?g0.expr=zeebe_health%7Bapp_instance%3D%22prod%22%7D&g0.tab=0
-{%endraw%}
 
     ###############################################################
     - alert: ZeebeQuorumNotMakingProgressOnNFS
@@ -150,3 +151,4 @@ groups:
           The Raft commit index is growing too slowly.
 
           See https://prometheus-phdassess.epfl.ch/graph?g0.expr=atomix_partition_raft_commit_index%7Bapp_instance%3D%22prod%22%7D&g0.tab=0
+{% endraw %}

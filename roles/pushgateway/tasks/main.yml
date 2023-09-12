@@ -11,10 +11,10 @@
       max-file: "3"
     labels:
       traefik.enable: "true"
-      traefik.http.routers.pushgateway.rule: "Host(`pgw{{ dns_suffix }}.{{ frontend.domain }}`,`pgw.noc{{ dns_suffix }}.{{ frontend.alt_domain }}`)"
+      traefik.http.routers.pushgateway.rule: "Host(`pgw.noc{{ dns_suffix }}.{{ frontend.domain }}`)"
       traefik.http.routers.pushgateway.entrypoints: "websecure"
       traefik.http.routers.pushgateway.tls.certresolver: "letsencrypt"
       traefik.docker.network: "{{ backend_network_name }}"
       traefik.http.routers.pushgateway.middlewares: "pushgateway_auth"
-      traefik.http.middlewares.pushgateway_auth.basicauth.users: "{{ frontend.htpass }}"
+      traefik.http.middlewares.pushgateway_auth.basicauth.users: "{{ traefik_htpass }}"
       traefik.http.middlewares.pushgateway_auth.basicauth.removeheader: "true"

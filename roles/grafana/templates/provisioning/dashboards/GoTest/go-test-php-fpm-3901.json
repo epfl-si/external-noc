@@ -1,3 +1,4 @@
+{% raw %}
 {
   "annotations": {
     "list": [
@@ -26,7 +27,8 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 3901,
   "graphTooltip": 0,
-  "id": 67,
+  "id": 17,
+  "iteration": 1650904490433,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -37,7 +39,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "go_prom"
+        "uid": "go_test_prom"
       },
       "description": "Total number of accepted connections",
       "fill": 1,
@@ -67,7 +69,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "9.2.1",
+      "pluginVersion": "8.5.0",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -77,10 +79,6 @@
       "steppedLine": false,
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "go_prom"
-          },
           "expr": "SUM(phpfpm_accepted_connections_total{instance=~\"^$Host$\"}) by (instance)",
           "format": "time_series",
           "interval": "",
@@ -126,7 +124,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "go_prom"
+        "uid": "go_test_prom"
       },
       "fill": 1,
       "fillGradient": 0,
@@ -155,7 +153,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "9.2.1",
+      "pluginVersion": "8.5.0",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -165,10 +163,6 @@
       "steppedLine": false,
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "go_prom"
-          },
           "expr": "SUM(phpfpm_active_max_processes{instance=~\"^$Host$\"}) by (instance)",
           "format": "time_series",
           "interval": "",
@@ -214,7 +208,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "go_prom"
+        "uid": "go_test_prom"
       },
       "fill": 1,
       "fillGradient": 0,
@@ -243,7 +237,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "9.2.1",
+      "pluginVersion": "8.5.0",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -253,10 +247,6 @@
       "steppedLine": false,
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "go_prom"
-          },
           "expr": "SUM(phpfpm_listen_queue_connections{instance=~\"^$Host$\"}) by (instance)",
           "format": "time_series",
           "interval": "",
@@ -302,7 +292,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "go_prom"
+        "uid": "go_test_prom"
       },
       "description": "The length of the socket queue, dictating maximum number of pending connections",
       "fill": 1,
@@ -332,7 +322,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "9.2.1",
+      "pluginVersion": "8.5.0",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -342,10 +332,6 @@
       "steppedLine": false,
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "go_prom"
-          },
           "expr": "SUM(phpfpm_listen_queue_length_connections{instance=~\"^$Host$\"}) by (instance)",
           "format": "time_series",
           "interval": "",
@@ -391,7 +377,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "go_prom"
+        "uid": "go_test_prom"
       },
       "description": "Max number of connections the listen queue has reached since FPM start",
       "fill": 1,
@@ -421,7 +407,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "9.2.1",
+      "pluginVersion": "8.5.0",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -431,10 +417,6 @@
       "steppedLine": false,
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "go_prom"
-          },
           "expr": "sum(phpfpm_listen_queue_max_connections{instance=~\"^$Host$\"}) by (instance)",
           "format": "time_series",
           "intervalFactor": 2,
@@ -479,7 +461,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "go_prom"
+        "uid": "go_test_prom"
       },
       "description": "Number of times the process limit has been reached",
       "fill": 1,
@@ -509,7 +491,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "9.2.1",
+      "pluginVersion": "8.5.0",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -519,10 +501,6 @@
       "steppedLine": false,
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "go_prom"
-          },
           "expr": "sum(phpfpm_max_children_reached_total{instance=~\"^$Host$\"}) by (instance)",
           "format": "time_series",
           "intervalFactor": 2,
@@ -567,7 +545,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "go_prom"
+        "uid": "go_test_prom"
       },
       "fill": 1,
       "fillGradient": 0,
@@ -596,7 +574,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "9.2.1",
+      "pluginVersion": "8.5.0",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -606,10 +584,6 @@
       "steppedLine": false,
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "go_prom"
-          },
           "expr": "sum(phpfpm_processes_total{instance=~\"^$Host$\"}) by (instance, state)",
           "format": "time_series",
           "interval": "",
@@ -655,7 +629,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "go_prom"
+        "uid": "go_test_prom"
       },
       "description": "Number of requests that exceed request_slowlog_timeout",
       "fill": 1,
@@ -685,7 +659,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "9.2.1",
+      "pluginVersion": "8.5.0",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -695,10 +669,6 @@
       "steppedLine": false,
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "go_prom"
-          },
           "expr": "sum(phpfpm_slow_requests_total{instance=~\"^$Host$\"}) by (instance)",
           "format": "time_series",
           "interval": "",
@@ -738,13 +708,13 @@
       }
     }
   ],
-  "schemaVersion": 37,
+  "schemaVersion": 36,
   "style": "dark",
   "tags": [
-    "GoEPFL",
-    "go.epfl.ch",
+    "provisionned",
     "php-fpm",
-    "provisionned"
+    "GoEPFL",
+    "go-tst.epfl.ch"
   ],
   "templating": {
     "list": [
@@ -756,7 +726,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "go_prom"
+          "uid": "go_test_prom"
         },
         "definition": "",
         "hide": 0,
@@ -766,7 +736,7 @@
         "options": [],
         "query": {
           "query": "label_values(phpfpm_accepted_connections_total, instance)",
-          "refId": "go-prometheus-Host-Variable-Query"
+          "refId": "go-test-prometheus-Host-Variable-Query"
         },
         "refresh": 1,
         "regex": "",
@@ -780,7 +750,7 @@
     ]
   },
   "time": {
-    "from": "now-2d",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
@@ -808,9 +778,10 @@
       "30d"
     ]
   },
-  "timezone": "",
-  "title": "Go | PHP-FPM (3901)",
-  "uid": "M_q2c6KVz",
-  "version": 2,
+  "timezone": "browser",
+  "title": "Go TEST PHP-FPM",
+  "uid": "go-test-php-fpm",
+  "version": 1,
   "weekStart": ""
 }
+{% endraw %}

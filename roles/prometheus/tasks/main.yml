@@ -93,7 +93,7 @@
       }}
     command: >-
       --config.file=/etc/prometheus/prometheus.yml
-      --web.external-url=https://prometheus{{ dns_suffix }}.{{ frontend.domain }}
+      --web.external-url=https://prometheus.noc{{ dns_suffix }}.{{ frontend.domain }}
       {% if runenv == "dev" %}
         --log.level=debug
       {% endif %}
@@ -109,12 +109,12 @@
       max-file: "3"
     labels:
       traefik.enable: "true"
-      traefik.http.routers.prometheus.rule: "Host(`prometheus{{ dns_suffix }}.{{ frontend.domain }}`,`prometheus.noc{{ dns_suffix }}.{{ frontend.alt_domain }}`)"
+      traefik.http.routers.prometheus.rule: "Host(`prometheus.noc{{ dns_suffix }}.{{ frontend.domain }}`)"
       traefik.http.routers.prometheus.entrypoints: "websecure"
       traefik.http.routers.prometheus.tls.certresolver: "letsencrypt"
       traefik.docker.network: "{{ backend_network_name }}"
       traefik.http.routers.prometheus.middlewares: "prometheus_auth"
-      traefik.http.middlewares.prometheus_auth.basicauth.users: "{{ frontend.htpass }}"
+      traefik.http.middlewares.prometheus_auth.basicauth.users: "{{ traefik_htpass }}"
       traefik.http.middlewares.prometheus_auth.basicauth.removeheader: "true"
   tags:
    - prometheus.force-restart

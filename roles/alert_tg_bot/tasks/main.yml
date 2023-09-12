@@ -9,7 +9,7 @@
       LOG_LEVEL: "{{ 'error' if runenv == 'prod' else 'debug' }}"
       AM_BASIC_AUTH_USER: "{{ _noc_secrets.frontend.credentials[2].user }}"
       AM_BASIC_AUTH_PASS: "{{ _noc_secrets.frontend.credentials[2].pass }}"
-      AM_URL: "https://am.noc{{ dns_suffix }}.{{ frontend.alt_domain }}"
+      AM_URL: "https://am.noc{{ dns_suffix }}.{{ frontend.domain }}"
     detach: yes
     restart_policy: unless-stopped
     network_mode: "{{ backend_network_name }}"

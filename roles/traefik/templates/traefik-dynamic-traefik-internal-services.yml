@@ -3,13 +3,13 @@
 http:
   routers:
     traefik:
-      rule: "Host(`traefik{{ dns_suffix }}.{{ frontend.domain }}`,`traefik.noc{{ dns_suffix }}.{{ frontend.alt_domain }}`)"
+      rule: "Host(`traefik.noc{{ dns_suffix }}.{{ frontend.domain }}`)"
       service: "api@internal"
       entryPoints: ["websecure"]
       {{ letsencrypt_boilerplate }}
 
     metrics:
-      rule: "Host(`traefik{{ dns_suffix }}.{{ frontend.domain }}`,`traefik.noc{{ dns_suffix }}.{{ frontend.alt_domain }}`) && PathPrefix(`/metrics`)"
+      rule: "Host(`traefik.noc{{ dns_suffix }}.{{ frontend.domain }}`) && PathPrefix(`/metrics`)"
       service: "prometheus@internal"
       entryPoints: ["websecure"]
       {{ letsencrypt_boilerplate }}

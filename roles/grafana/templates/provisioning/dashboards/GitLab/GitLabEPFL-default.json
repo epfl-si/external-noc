@@ -1,3 +1,4 @@
+{% raw %}
 {
   "annotations": {
     "list": [
@@ -269,7 +270,9 @@
         {
           "targetBlank": true,
           "title": "Users details",
-          "url": "https://grafana-tst.idev-fsd.ml/d/O816VntWz/gitlab?from=now-24h&to=now&fullscreen&panelId=6"
+{% endraw %}
+          "url": "https://grafana-tst.noc{{ dns_suffix }}.{{ frontend.domain }}/d/O816VntWz/gitlab?from=now-24h&to=now&fullscreen&panelId=6"
+{% raw %}
         },
         {
           "title": "",
@@ -465,7 +468,9 @@
         {
           "targetBlank": true,
           "title": "Projects details",
-          "url": "https://grafana-tst.idev-fsd.ml/d/O816VntWz/gitlab?from=now-24h&to=now&fullscreen&panelId=4"
+{% endraw %}
+          "url": "https://grafana-tst.noc{{ dns_suffix }}.{{ frontend.domain }}/d/O816VntWz/gitlab?from=now-24h&to=now&fullscreen&panelId=4"
+{% raw %}
         }
       ],
       "mappingType": 1,
@@ -1475,3 +1480,4 @@
   "uid": "GitlabEPFL",
   "version": 20926
 }
+{% endraw %}

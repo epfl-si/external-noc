@@ -1,3 +1,4 @@
+{% raw %}
 {
   "annotations": {
     "list": [
@@ -1744,3 +1745,4 @@
   "uid": "WordPressD",
   "version": 5
 }
+{% endraw %}

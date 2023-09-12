@@ -1,3 +1,4 @@
+{% raw %}
 {
   "annotations": {
     "list": [
@@ -29,15 +30,14 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 12250,
   "graphTooltip": 0,
-  "id": 15,
-  "iteration": 1650903981028,
+  "id": 62,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "go_test_prom"
+        "uid": "go_prom"
       },
       "gridPos": {
         "h": 1,
@@ -46,6 +46,15 @@
         "y": 0
       },
       "id": 16,
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "go_prom"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Global stats",
       "type": "row"
     },
@@ -56,7 +65,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "go_test_prom"
+        "uid": "go_prom"
       },
       "fieldConfig": {
         "defaults": {
@@ -93,7 +102,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.0",
+      "pluginVersion": "9.2.1",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -103,6 +112,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "go_prom"
+          },
           "expr": "sum(traefik_service_request_duration_seconds_sum{}) by (service) / sum(traefik_service_request_duration_seconds_count{}) by (service)",
           "format": "time_series",
           "interval": "",
@@ -154,7 +167,7 @@
       },
       "datasource": {
         "type": "prometheus",
-        "uid": "go_test_prom"
+        "uid": "go_prom"
       },
       "fontSize": "80%",
       "format": "short",
@@ -177,6 +190,10 @@
       "strokeWidth": 1,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "go_prom"
+          },
           "expr": "sum(rate(traefik_service_requests_total[5m])) by (service) ",
           "format": "time_series",
           "interval": "",
@@ -198,7 +215,7 @@
       },
       "datasource": {
         "type": "prometheus",
-        "uid": "go_test_prom"
+        "uid": "go_prom"
       },
       "fontSize": "80%",
       "format": "short",
@@ -221,6 +238,10 @@
       "strokeWidth": 1,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "go_prom"
+          },
           "expr": "sum(rate(traefik_entrypoint_requests_total{entrypoint =~ \"$entrypoint\"}[5m])) by (entrypoint) ",
           "format": "time_series",
           "interval": "",
@@ -240,7 +261,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "go_test_prom"
+        "uid": "go_prom"
       },
       "fieldConfig": {
         "defaults": {
@@ -277,7 +298,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.0",
+      "pluginVersion": "9.2.1",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -287,6 +308,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "go_prom"
+          },
           "expr": "rate(traefik_entrypoint_requests_total{entrypoint=~\"$entrypoint\",code=\"200\"}[5m])",
           "format": "time_series",
           "interval": "",
@@ -332,7 +357,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "go_test_prom"
+        "uid": "go_prom"
       },
       "fieldConfig": {
         "defaults": {
@@ -369,7 +394,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.0",
+      "pluginVersion": "9.2.1",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -379,6 +404,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "go_prom"
+          },
           "expr": "rate(traefik_entrypoint_requests_total{entrypoint=~\"$entrypoint\",code!=\"200\"}[5m])",
           "format": "time_series",
           "intervalFactor": 2,
@@ -420,7 +449,7 @@
       "collapsed": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "go_test_prom"
+        "uid": "go_prom"
       },
       "gridPos": {
         "h": 1,
@@ -430,13 +459,22 @@
       },
       "id": 10,
       "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "go_prom"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "$service stats",
       "type": "row"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "go_test_prom"
+        "uid": "go_prom"
       },
       "fieldConfig": {
         "defaults": {
@@ -495,9 +533,13 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.0",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "go_prom"
+          },
           "expr": "sum(traefik_service_request_duration_seconds_sum{service=\"$service\"}) / sum(traefik_service_requests_total{service=\"$service\"}) * 1000",
           "format": "time_series",
           "interval": "",
@@ -518,7 +560,7 @@
       },
       "datasource": {
         "type": "prometheus",
-        "uid": "go_test_prom"
+        "uid": "go_prom"
       },
       "fontSize": "80%",
       "format": "short",
@@ -542,6 +584,10 @@
       "strokeWidth": 1,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "go_prom"
+          },
           "expr": "traefik_service_requests_total{service=\"$service\"}",
           "format": "time_series",
           "interval": "",
@@ -561,7 +607,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "go_test_prom"
+        "uid": "go_prom"
       },
       "fieldConfig": {
         "defaults": {
@@ -598,7 +644,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.0",
+      "pluginVersion": "9.2.1",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -608,6 +654,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "go_prom"
+          },
           "expr": "sum(rate(traefik_service_requests_total{service=\"$service\"}[5m]))",
           "format": "time_series",
           "interval": "",
@@ -650,14 +700,13 @@
     }
   ],
   "refresh": "5m",
-  "schemaVersion": 36,
+  "schemaVersion": 37,
   "style": "dark",
   "tags": [
-    "provisionned",
-    "prometheus",
-    "traefik",
     "GoEPFL",
-    "go-tst.epfl.ch"
+    "go.epfl.ch",
+    "traefik",
+    "provisionned"
   ],
   "templating": {
     "list": [
@@ -669,7 +718,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "go_test_prom"
+          "uid": "go_prom"
         },
         "definition": "label_values(service)",
         "hide": 0,
@@ -679,7 +728,7 @@
         "options": [],
         "query": {
           "query": "label_values(service)",
-          "refId": "go-test-prometheus-service-Variable-Query"
+          "refId": "go-prometheus-service-Variable-Query"
         },
         "refresh": 1,
         "regex": "",
@@ -692,17 +741,13 @@
       },
       {
         "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "go_test_prom"
+          "uid": "go_prom"
         },
         "definition": "",
         "hide": 0,
@@ -712,7 +757,7 @@
         "options": [],
         "query": {
           "query": "label_values(entrypoint)",
-          "refId": "go-test-prometheus-entrypoint-Variable-Query"
+          "refId": "go-prometheus-entrypoint-Variable-Query"
         },
         "refresh": 1,
         "regex": "",
@@ -754,9 +799,10 @@
       "30d"
     ]
   },
-  "timezone": "browser",
-  "title": "Go TEST Traefik 2.2",
-  "uid": "go-test-traefik",
-  "version": 1,
+  "timezone": "",
+  "title": "Go | Traefik 2.2 (12250)",
+  "uid": "O23g2BeWk",
+  "version": 2,
   "weekStart": ""
 }
+{% endraw %}

@@ -7,7 +7,7 @@
   with_items:
     - conf
 
-- name: Create writable directories to be used as mount points
+- name: Create writable directories
   file:
     path: "{{ data_path }}/grafana/{{ item }}"
     state: directory
@@ -16,23 +16,46 @@
     - logs
     - data
     - data/plugins
+    - provisioning/dashboards/GitLab
+    - provisioning/dashboards/Go
+    - provisioning/dashboards/GoTest
+    - provisioning/dashboards/NOC
+    - provisioning/dashboards/PhDAssess
+    - provisioning/dashboards/WordPress
 
-- name: Copy Grafana provisionned dashboards
-  copy:
+- name: Grafana provisionned dashboards
+  template:
     src: "provisioning/dashboards/{{ item }}"
-    dest: "{{ data_path }}/grafana/provisioning/dashboards/"
+    dest: "{{ data_path }}/grafana/provisioning/dashboards/{{ item }}"
   with_items:
     - dashboards.yml
-    - GitLab/
-    - Go/
-    - GoTest/
-    - NOC/
-    - PhDAssess/
-    - WordPress/
-  register: grafana_static_files
+    - GitLab/GitLabEPFL-default.json
+    - GitLab/GitLabEPFL-statistics.json
+    - GitLab/GitLabEPFL-postgres.json
+    - GitLab/GitLabEPFL-traefik.json
+    - Go/GoCadvisor.json
+    - Go/GoNodeExporter.json
+    - Go/GoPostgres-9528.json
+    - Go/GoNginx-12708.json
+    - Go/GoPHP-FPM-3901.json
+    - Go/GoTraefik-12250.json
+    - GoTest/go-test-nginx.json
+    - GoTest/go-test-php-fpm-3901.json
+    - GoTest/go-test-traefik-12250.json
+    - GoTest/go-test-node-exporter.json
+    - GoTest/go-test-postgres-db-9628.json
+    - NOC/NodeExporter.json
+    - NOC/Prometheus-Alerts.json
+    - PhDAssess/PhDAssess.json
+    - WordPress/Ressenti.json
+    - WordPress/WordPress-general.json
+    - WordPress/WordPress-backup-detail.json
+    - WordPress/WordPress-plugins-and-blocks.json
+    - WordPress/WordPress-detail.json
+  register: grafana_templates
 
 # -------------------------------------------------------------------- Templates
-- name: Copy Grafana template config
+- name: Grafana template config
   template:
     src: "grafana/{{ item }}"
     dest: "{{ data_path }}/grafana/{{ item }}"
@@ -58,9 +81,9 @@
     restart_policy: unless-stopped
     recreate: >-
       {{
-        (grafana_config_files is defined and grafana_config_files is changed) 
-        or 
-        (grafana_static_files is defined and grafana_static_files is changed) 
+        (grafana_config_files is defined and grafana_config_files is changed)
+        or
+        (grafana_templates is defined and grafana_templates is changed)
       }}
     network_mode: "{{ backend_network_name }}"
     volumes:
@@ -75,7 +98,7 @@
       max-file: "3"
     labels:
       traefik.enable: "true"
-      traefik.http.routers.grafana.rule: "Host(`grafana{{ dns_suffix }}.{{ frontend.domain }}`, `grafana.noc{{ dns_suffix }}.{{ frontend.alt_domain }}`)"
+      traefik.http.routers.grafana.rule: "Host(`grafana.noc{{ dns_suffix }}.{{ frontend.domain }}`)"
       traefik.http.routers.grafana.entrypoints: "websecure"
       traefik.http.routers.grafana.tls.certresolver: "letsencrypt"
       traefik.docker.network: "{{ backend_network_name }}"

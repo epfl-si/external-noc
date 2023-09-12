@@ -5,10 +5,10 @@ data_path: "/volumes/data1/noc/data"
 backend_network_name: "traefik"
 
 frontend:
-  domain: idev-fsd.ml
-  alt_domain: fsd.team
+  domain: fsd.team
   protocol: https
-  htpass: "{% set comma = joiner(', ') %}{% for cred in _noc_secrets.frontend.credentials %}{{ comma() }}{{ cred.user }}:{{ cred.pass | password_hash('bcrypt', _noc_secrets.frontend.salt) }}{% endfor %}"
+
+traefik_htpass: "{% set comma = joiner(', ') %}{% for cred in _noc_secrets.frontend.credentials %}{{ comma() }}{{ cred.user }}:{{ cred.pass | password_hash('bcrypt', _noc_secrets.frontend.salt) }}{% endfor %}"
 
 # vars for nickjj.docker
 docker__edition: "ce"

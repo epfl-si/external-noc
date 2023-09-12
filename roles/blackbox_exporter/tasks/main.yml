@@ -29,10 +29,10 @@
       max-file: "3"
     labels:
       traefik.enable: "true"
-      traefik.http.routers.bbe.rule: "Host(`bbe{{ dns_suffix }}.{{ frontend.domain }}`, `bbe.noc{{ dns_suffix }}.{{ frontend.alt_domain }}`)"
+      traefik.http.routers.bbe.rule: "Host(`bbe.noc{{ dns_suffix }}.{{ frontend.domain }}`)"
       traefik.http.routers.bbe.entrypoints: "websecure"
       traefik.http.routers.bbe.tls.certresolver: "letsencrypt"
       traefik.docker.network: "{{ backend_network_name }}"
       traefik.http.routers.bbe.middlewares: "bbe_auth"
-      traefik.http.middlewares.bbe_auth.basicauth.users: "{{ frontend.htpass }}"
+      traefik.http.middlewares.bbe_auth.basicauth.users: "{{ traefik_htpass }}"
       traefik.http.middlewares.bbe_auth.basicauth.removeheader: "true"
