@@ -3,7 +3,20 @@ groups:
   - name: Site not 200
     rules:
     - alert: Site status code is not 200
-      expr: probe_http_status_code{job="wordpresses@epfl",origin="noc-zurich"} != 200 and probe_http_status_code{job="wordpresses@epfl",origin="noc-zurich"} != 0
+      expr: probe_http_status_code{job="wordpresses@epfl",origin="noc-zurich",wp_env!="inside"} != 200 and probe_http_status_code{job="wordpresses@epfl",origin="noc-zurich",wp_env!="inside"} != 0
+      for: 2m
+      labels:
+        severity: page
+        sendto: telegram
+        app: wordpress
+      annotations:
+        summary: '{{ $labels.instance }} HTTP status is {{ $value }}!'
+        description: '{{ $labels.instance }} of job {{ $labels.job }} has HTTP status == {{ $value }} for more than 2 minutes (on env: {{ $labels.wp_env }}).'
+
+  - name: Inside site not 200 or 301
+    rules:
+    - alert: Inside site status code is neither 200 nor 301
+      expr: probe_http_status_code{job="wordpresses@epfl",origin="noc-zurich",wp_env="inside"} != 200 and probe_http_status_code{job="wordpresses@epfl",origin="noc-zurich",wp_env="inside"} != 301 and probe_http_status_code{job="wordpresses@epfl",origin="noc-zurich",wp_env="inside"} != 0
       for: 2m
       labels:
         severity: page
