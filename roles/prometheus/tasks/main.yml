@@ -114,7 +114,7 @@
       traefik.http.routers.prometheus.tls.certresolver: "letsencrypt"
       traefik.docker.network: "{{ backend_network_name }}"
       traefik.http.routers.prometheus.middlewares: "prometheus_auth"
-      traefik.http.middlewares.prometheus_auth.basicauth.users: "{{ frontend.htpass }}"
+      traefik.http.middlewares.prometheus_auth.basicauth.users: "{{ traefik_htpass }}"
       traefik.http.middlewares.prometheus_auth.basicauth.removeheader: "true"
   tags:
    - prometheus.force-restart

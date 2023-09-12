@@ -37,7 +37,7 @@
       traefik.http.routers.alertmanager.tls.certresolver: "letsencrypt"
       traefik.docker.network: "{{ backend_network_name }}"
       traefik.http.routers.alertmanager.middlewares: "alertmanager_auth"
-      traefik.http.middlewares.alertmanager_auth.basicauth.users: "{{ frontend.htpass }}"
+      traefik.http.middlewares.alertmanager_auth.basicauth.users: "{{ traefik_htpass }}"
       traefik.http.middlewares.alertmanager_auth.basicauth.removeheader: "true"
   vars:
     mounts:

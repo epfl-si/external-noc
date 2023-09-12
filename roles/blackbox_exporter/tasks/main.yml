@@ -34,5 +34,5 @@
       traefik.http.routers.bbe.tls.certresolver: "letsencrypt"
       traefik.docker.network: "{{ backend_network_name }}"
       traefik.http.routers.bbe.middlewares: "bbe_auth"
-      traefik.http.middlewares.bbe_auth.basicauth.users: "{{ frontend.htpass }}"
+      traefik.http.middlewares.bbe_auth.basicauth.users: "{{ traefik_htpass }}"
       traefik.http.middlewares.bbe_auth.basicauth.removeheader: "true"
