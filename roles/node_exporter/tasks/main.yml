@@ -17,7 +17,7 @@
       max-file: "3"
     labels:
       traefik.enable: "true"
-      traefik.http.routers.nodeexporter.rule: "Host(`nodeexporter{{ dns_suffix }}.{{ frontend.domain }}`,`nodeexporter.noc{{ dns_suffix }}.{{ frontend.alt_domain }}`)"
+      traefik.http.routers.nodeexporter.rule: "Host(`nodeexporter.noc{{ dns_suffix }}.{{ frontend.domain }}`)"
       traefik.http.routers.nodeexporter.entrypoints: "websecure"
       traefik.http.routers.nodeexporter.tls.certresolver: "letsencrypt"
       traefik.docker.network: "{{ backend_network_name }}"
