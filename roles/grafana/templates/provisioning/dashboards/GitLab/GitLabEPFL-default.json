@@ -1,3 +1,4 @@
+{% raw %}
 {
   "annotations": {
     "list": [
@@ -1475,3 +1476,4 @@
   "uid": "GitlabEPFL",
   "version": 20926
 }
+{% endraw %}

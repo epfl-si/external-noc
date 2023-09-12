@@ -1,3 +1,4 @@
+{% raw %}
 {
   "annotations": {
     "list": [
@@ -1439,3 +1440,4 @@
   "uid": "gitlab-postgres",
   "version": 6
 }
+{% endraw %}

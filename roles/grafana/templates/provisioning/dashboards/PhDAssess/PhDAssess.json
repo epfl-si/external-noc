@@ -1,3 +1,4 @@
+{% raw %}
 {
   "annotations": {
     "list": [
@@ -1555,3 +1556,4 @@
   "version": 7,
   "weekStart": ""
 }
+{% endraw %}

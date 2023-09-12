@@ -1,3 +1,4 @@
+{% raw %}
 {
   "annotations": {
     "list": [
@@ -21,12 +22,12 @@
       }
     ]
   },
-  "description": "Official dashboard for NGINX Prometheus exporter for https://github.com/nginxinc/nginx-prometheus-exporter",
+  "description": "Official dashboard for NGINX Prometheus exporter",
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "gnetId": 12708,
   "graphTooltip": 0,
-  "id": 65,
+  "id": 18,
+  "iteration": 1650904764139,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -34,7 +35,7 @@
       "collapsed": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "go_prom"
+        "uid": "go_test_prom"
       },
       "gridPos": {
         "h": 1,
@@ -44,22 +45,13 @@
       },
       "id": 4,
       "panels": [],
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "go_prom"
-          },
-          "refId": "A"
-        }
-      ],
       "title": "Status",
       "type": "row"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "go_prom"
+        "uid": "go_test_prom"
       },
       "description": "",
       "fieldConfig": {
@@ -124,15 +116,11 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.2.1",
+      "pluginVersion": "8.5.0",
       "repeat": "instance",
       "repeatDirection": "h",
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "go_prom"
-          },
           "expr": "nginx_up{instance=~\"$instance\"}",
           "format": "time_series",
           "instant": false,
@@ -147,25 +135,16 @@
       "collapsed": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "go_prom"
+        "uid": "go_test_prom"
       },
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 4
+        "y": 7
       },
       "id": 6,
       "panels": [],
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "go_prom"
-          },
-          "refId": "A"
-        }
-      ],
       "title": "Metrics",
       "type": "row"
     },
@@ -176,7 +155,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "go_prom"
+        "uid": "go_test_prom"
       },
       "description": "",
       "fill": 1,
@@ -185,7 +164,7 @@
         "h": 10,
         "w": 12,
         "x": 0,
-        "y": 5
+        "y": 8
       },
       "hiddenSeries": false,
       "id": 10,
@@ -209,7 +188,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "9.2.1",
+      "pluginVersion": "8.5.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -219,10 +198,6 @@
       "steppedLine": false,
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "go_prom"
-          },
           "expr": "irate(nginx_connections_accepted{instance=~\"$instance\"}[5m])",
           "format": "time_series",
           "instant": false,
@@ -231,10 +206,6 @@
           "refId": "A"
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "go_prom"
-          },
           "expr": "irate(nginx_connections_handled{instance=~\"$instance\"}[5m])",
           "format": "time_series",
           "instant": false,
@@ -283,7 +254,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "go_prom"
+        "uid": "go_test_prom"
       },
       "decimals": 0,
       "fill": 1,
@@ -292,7 +263,7 @@
         "h": 10,
         "w": 12,
         "x": 12,
-        "y": 5
+        "y": 8
       },
       "hiddenSeries": false,
       "id": 12,
@@ -315,7 +286,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "9.2.1",
+      "pluginVersion": "8.5.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -325,10 +296,6 @@
       "steppedLine": false,
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "go_prom"
-          },
           "expr": "nginx_connections_active{instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 1,
@@ -336,10 +303,6 @@
           "refId": "A"
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "go_prom"
-          },
           "expr": "nginx_connections_reading{instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 1,
@@ -347,10 +310,6 @@
           "refId": "B"
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "go_prom"
-          },
           "expr": "nginx_connections_waiting{instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 1,
@@ -358,10 +317,6 @@
           "refId": "C"
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "go_prom"
-          },
           "expr": "nginx_connections_writing{instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 1,
@@ -408,7 +363,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "go_prom"
+        "uid": "go_test_prom"
       },
       "fill": 1,
       "fillGradient": 0,
@@ -416,7 +371,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 15
+        "y": 18
       },
       "hiddenSeries": false,
       "id": 15,
@@ -437,7 +392,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "9.2.1",
+      "pluginVersion": "8.5.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -447,10 +402,6 @@
       "steppedLine": false,
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "go_prom"
-          },
           "expr": "irate(nginx_http_requests_total{instance=~\"$instance\"}[5m])",
           "format": "time_series",
           "intervalFactor": 1,
@@ -490,21 +441,23 @@
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 37,
+  "schemaVersion": 36,
   "style": "dark",
   "tags": [
-    "GoEPFL",
-    "go.epfl.ch",
+    "provisionned",
     "nginx",
-    "provisionned"
+    "prometheus",
+    "nginx prometheus exporter",
+    "GoEPFL",
+    "go-tst.epfl.ch"
   ],
   "templating": {
     "list": [
       {
         "current": {
-          "selected": false,
-          "text": "default",
-          "value": "default"
+          "selected": true,
+          "text": "go-test-prometheus",
+          "value": "go-test-prometheus"
         },
         "hide": 0,
         "includeAll": false,
@@ -513,6 +466,7 @@
         "name": "DS_PROMETHEUS",
         "options": [],
         "query": "prometheus",
+        "queryValue": "",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -520,13 +474,17 @@
       },
       {
         "current": {
-          "selected": false,
-          "text": "All",
-          "value": "$__all"
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "go_prom"
+          "uid": "go_test_prom"
         },
         "definition": "label_values(nginx_up, instance)",
         "hide": 0,
@@ -537,7 +495,7 @@
         "options": [],
         "query": {
           "query": "label_values(nginx_up, instance)",
-          "refId": "go-prometheus-instance-Variable-Query"
+          "refId": "go-test-prometheus-instance-Variable-Query"
         },
         "refresh": 1,
         "regex": "",
@@ -579,9 +537,10 @@
       "30d"
     ]
   },
-  "timezone": "",
-  "title": "Go | NGINX exporter (12708)",
-  "uid": "MsjffzSZz",
-  "version": 2,
+  "timezone": "browser",
+  "title": "Go TEST NGINX",
+  "uid": "go-test-nginx",
+  "version": 1,
   "weekStart": ""
 }
+{% endraw %}

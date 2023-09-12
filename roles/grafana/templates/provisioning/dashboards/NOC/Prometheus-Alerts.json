@@ -1,3 +1,4 @@
+{% raw %}
 {
   "annotations": {
     "list": [
@@ -560,3 +561,4 @@
   "uid": "pa",
   "version": 3
 }
+{% endraw %}
