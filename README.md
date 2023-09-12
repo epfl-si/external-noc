@@ -1,4 +1,4 @@
-# iDev-FSD external NOC
+# ISAS-FSD external NOC
 
 # About
 
@@ -29,9 +29,9 @@ of the tools such as python, pip module, ansible modules, ruby, etc.
 
 ## Keybase
 
-The secrets in this project are stored on a static yaml file on the team's 
-keybase (`/keybase/team/epfl_idevfsd/idevfsd-NOC/ansible_noc_secrets.yml`). An 
-Ansible file lookup will get them, meaning that access to this file is mandatory 
+The secrets in this project are stored on a static yaml file on the team's
+keybase (`/keybase/team/epfl_idevfsd/idevfsd-NOC/ansible_noc_secrets.yml`). An
+Ansible file lookup will get them, meaning that access to this file is mandatory
 and that it has to be mounted.
 
 # Deployment
