@@ -23,7 +23,7 @@
     - provisioning/dashboards/PhDAssess
     - provisioning/dashboards/WordPress
 
-- name: Copy Grafana provisionned dashboards
+- name: Grafana provisionned dashboards
   template:
     src: "provisioning/dashboards/{{ item }}"
     dest: "{{ data_path }}/grafana/provisioning/dashboards/{{ item }}"
@@ -55,7 +55,7 @@
   register: grafana_templates
 
 # -------------------------------------------------------------------- Templates
-- name: Copy Grafana template config
+- name: Grafana template config
   template:
     src: "grafana/{{ item }}"
     dest: "{{ data_path }}/grafana/{{ item }}"
