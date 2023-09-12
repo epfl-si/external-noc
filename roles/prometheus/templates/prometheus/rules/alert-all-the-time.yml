@@ -1,7 +1,7 @@
 {% if prometheus_debug %}
 {%raw%}
 groups:
-  - name: Alert all the things
+  - name: Alert all the time
     rules:
     - alert: Just another alert
       expr: vector(1)
