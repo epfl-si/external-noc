@@ -81,7 +81,7 @@ scrape_configs:
     scheme: 'https'
     static_configs:
     - targets: 
-      - 'go-tst.idev-fsd.ml'
+      - 'go-tst.noc{{ dns_suffix }}.{{ frontend.domain }}'
       labels:
         env: 'gotest'
     basic_auth:

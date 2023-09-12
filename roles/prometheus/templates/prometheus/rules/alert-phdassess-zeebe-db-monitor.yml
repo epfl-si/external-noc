@@ -1,5 +1,5 @@
-{%raw%}
-groups:
+{% raw %}
+%groups:
   - name: ZeebeDb
     rules:
 
@@ -20,7 +20,9 @@ groups:
       annotations:
         description: |-
           Zeebe db is encountering new incidents. Rate: {{ $value }}/sec
-          See https://grafana.idev-fsd.ml/d/huA0tuunk/phdassess?orgId=1&from=now-1h&to=now
+{% endraw %}
+          See https://grafana.noc{{ dns_suffix }}.{{ frontend.domain }}/d/huA0tuunk/phdassess?orgId=1&from=now-1h&to=now
+{% raw %}
 
     ###############################################################
     - alert: ZeebeDbIncidentsKnownToBeRaising
@@ -39,5 +41,5 @@ groups:
       annotations:
         description: |-
           Zeebe db is encountering a incident that is known to raise, but he is raising too fast at the moment !. Rate: {{ $value }}/sec
-          See https://grafana.idev-fsd.ml/d/huA0tuunk/phdassess?orgId=1&from=now-1h&to=now
-{%endraw%}
+{% endraw %}
+          See https://grafana.noc{{ dns_suffix }}.{{ frontend.domain }}/d/huA0tuunk/phdassess?orgId=1&from=now-1h&to=now

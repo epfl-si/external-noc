@@ -43,7 +43,9 @@
       "title": "Render",
       "tooltip": "Render this dashboard in PNG",
       "type": "link",
-      "url": "https://grafana.idev-fsd.ml/render/d/rDWoD7vGz/gitlab-statistics?orgId=1&refresh=10s&from=now-24h&to=now-1m&width=2000&height=2400"
+{% endraw %}
+      "url": "https://grafana.noc{{ dns_suffix }}.{{ frontend.domain }}/render/d/rDWoD7vGz/gitlab-statistics?orgId=1&refresh=10s&from=now-24h&to=now-1m&width=2000&height=2400"
+{% raw %}
     }
   ],
   "liveNow": false,
