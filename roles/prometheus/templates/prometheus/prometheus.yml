@@ -114,7 +114,7 @@ scrape_configs:
     honor_labels: true
     params:
       'match[]':
-        - '{__name__=~"(atomix.*|zeebe.*|nodejs.*|process.*|up)"}'
+        - '{__name__=~"(atomix.*|zeebe.*|nodejs.*|process.*|phdassess.*|up)"}'
     scheme: 'https'
     static_configs:
     - targets:
