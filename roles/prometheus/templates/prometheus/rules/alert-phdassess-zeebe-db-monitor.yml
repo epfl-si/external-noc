@@ -4,6 +4,20 @@ groups:
     rules:
 
     ###############################################################
+    - alert: ZeebeBackloggedActivatableJobs
+      expr: |-
+        zeebe_db_column_family_entries{column_family="JOB_ACTIVATABLE"}
+        != 0
+      for: 1h
+      labels:
+        severity: page
+        sendto: telegram
+        app: phdassess
+      annotations:
+        description: |-
+          Zeebe's ActivateJobs gRPC is backlogged. {{ $value }} jobs are activatable.
+
+    ###############################################################
     - alert: ZeebeDbIncidents
       expr: |-
         rate(
