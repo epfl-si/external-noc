@@ -82,7 +82,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "9.2.1",
+      "pluginVersion": "9.5.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -182,7 +182,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "9.2.1",
+      "pluginVersion": "9.5.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -295,7 +295,7 @@
         },
         "textMode": "name"
       },
-      "pluginVersion": "9.2.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
           "datasource": {
@@ -377,7 +377,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.2.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
           "datasource": {
@@ -433,7 +433,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "9.2.1",
+      "pluginVersion": "9.5.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -555,7 +555,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "9.2.1",
+      "pluginVersion": "9.5.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -656,7 +656,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "9.2.1",
+      "pluginVersion": "9.5.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -746,7 +746,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "9.2.1",
+      "pluginVersion": "9.5.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -836,7 +836,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "9.2.1",
+      "pluginVersion": "9.5.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1196,11 +1196,111 @@
         "type": "prometheus",
         "uid": "PA7DAED22D5425F49"
       },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": -1,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 39
+      },
+      "id": 18,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PA7DAED22D5425F49"
+          },
+          "editorMode": "code",
+          "expr": "zeebe_db_column_family_entries{column_family=\"JOB_ACTIVATABLE\"}",
+          "hide": false,
+          "legendFormat": "{{column_family}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {
+            "valueLabel": "column_family"
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PA7DAED22D5425F49"
+      },
       "fieldConfig": {
         "defaults": {
           "custom": {
             "align": "auto",
-            "displayMode": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
             "filterable": true,
             "inspect": false
           },
@@ -1225,11 +1325,13 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 39
+        "y": 46
       },
       "id": 16,
       "options": {
+        "cellHeight": "sm",
         "footer": {
+          "countRows": false,
           "fields": "",
           "reducer": [
             "sum"
@@ -1244,7 +1346,7 @@
           }
         ]
       },
-      "pluginVersion": "9.2.1",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
           "datasource": {
@@ -1340,7 +1442,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 39
+        "y": 46
       },
       "id": 15,
       "options": {
@@ -1430,7 +1532,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 48
+        "y": 55
       },
       "id": 17,
       "options": {
@@ -1464,8 +1566,8 @@
       "type": "timeseries"
     }
   ],
-  "refresh": false,
-  "schemaVersion": 37,
+  "refresh": "",
+  "schemaVersion": 38,
   "style": "dark",
   "tags": [
     "nodejs",
@@ -1553,7 +1655,7 @@
   "timezone": "",
   "title": "PhDAssess",
   "uid": "huA0tuunk",
-  "version": 7,
+  "version": 21,
   "weekStart": ""
 }
 {% endraw %}
