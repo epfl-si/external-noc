@@ -93,10 +93,6 @@ sources:
       origin: zurich
       server: "{{ blackboxexporter_container_name }}:{{ bbe.port | default('9115')}}"
       auth: '{{ auth.legacy }}'
-    - name: bbe-fr-par
-      origin: paris
-      server: "bbe-paris.noc{{ dns_suffix }}.{{ frontend.domain }}:80"
-      auth: '{{ auth.legacy }}'
   ressenti:
     - name: res-ch-zh
       module: firefox
