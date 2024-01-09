@@ -1,0 +1,19 @@
+# Alert on `up` not being 1 in `service="phdassess"`
+#
+# Note: after cleaning up the false negatives, we would at some point like to generalize this across the fleet.
+{% raw %}
+groups:
+  - name: PhDAssessUp
+    rules:
+      - alert: "PhDAssess: Prometheus scrapes failing"
+        expr: |-
+            up{service="phdassess"}
+            == 0
+        for: 30m
+        labels:
+          severity: page
+          sendto: telegram
+        annotations:
+          description: |-
+            Some Prometheus targets in PhDAssess are failing their scrapes.
+{% endraw %}
