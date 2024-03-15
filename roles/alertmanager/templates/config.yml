@@ -123,5 +123,5 @@ receivers:
   webhook_configs:
   - send_resolved: true
     # “PhDAssess” group
-    url: 'http://alert-tg-bot:3000/-508771387'
+    url: 'http://alert-tg-bot:3000/-1001848690641'
 {% endif %}
