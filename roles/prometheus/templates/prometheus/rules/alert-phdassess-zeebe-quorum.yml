@@ -122,7 +122,7 @@ groups:
     - alert: ZeebeQuorumNotMakingProgressOnNFS
       expr: |-
         increase(atomix_partition_raft_commit_index{app_instance="prod",persistence="nfs"}[5m])
-        < 250
+        < 100
       for: 60m
       labels:
         severity: page
@@ -139,7 +139,7 @@ groups:
     - alert: ZeebeQuorumNotMakingProgress
       expr: |-
         increase(atomix_partition_raft_commit_index{app_instance="prod",persistence!="nfs"}[5m])
-        < 250
+        < 100
       for: 5m
       labels:
         severity: page
