@@ -335,28 +335,6 @@
           "interval": "",
           "legendFormat": "Gitlab Total Projects",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PA7DAED22D5425F49"
-          },
-          "expr": "gitlab_issues_total+5",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PA7DAED22D5425F49"
-          },
-          "expr": "gitlab_issues_total-5",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "test",
-          "refId": "C"
         }
       ],
       "title": "Issues",
