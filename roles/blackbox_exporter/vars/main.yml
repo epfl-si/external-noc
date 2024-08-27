@@ -3,5 +3,5 @@
 blackboxexporter_state_path: "{{ install_path }}/blackboxexporter"
 blackboxexporter_container_name: blackboxexporter
 blackboxexporter_image: prom/blackbox-exporter
-blackboxexporter_version: v0.22.0
+blackboxexporter_version: v0.25.0
 blackboxexporter_port: 9115
