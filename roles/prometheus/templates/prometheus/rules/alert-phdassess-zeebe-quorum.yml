@@ -138,7 +138,9 @@ groups:
     ###############################################################
     - alert: ZeebeQuorumNotMakingProgress
       expr: |-
+        max(
         increase(atomix_partition_raft_commit_index{app_instance="prod",persistence!="nfs"}[5m])
+        )
         < 100
       for: 5m
       labels:
