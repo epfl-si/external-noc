@@ -75,6 +75,12 @@
         - noc
         - pushgateway
 
+    - name: kuma
+      role: roles/kuma
+      tags:
+        - noc
+        - kuma
+
     - name: mgmt
       role: roles/mgmt
       tags: mgmt
