@@ -13,7 +13,7 @@
 - name: Postfix black hole
   docker_container:
     name: postfix-blackhole
-    image: boky/postfix
+    image: boky/postfix:latest-alpine
     restart: "{{ _postfix_config is changed }}"
     ports:
       - '25:25'
