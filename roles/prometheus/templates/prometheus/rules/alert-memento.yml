@@ -1,0 +1,14 @@
+{% raw %}
+groups:
+  - name: Memento Down
+    rules:
+    - alert: Memento Down
+      expr: up{job="memento"} == 0
+      for: 1m
+      labels:
+        severity: critical
+        sendto: memento-email
+      annotations:
+        summary: 'Memento is Down'
+        description: 'Service is unreachable for more than 1 minute.'
+{% endraw %}
