@@ -19,6 +19,7 @@
     - provisioning/dashboards/GitLab
     - provisioning/dashboards/Go
     - provisioning/dashboards/GoTest
+    - provisioning/dashboards/Memento
     - provisioning/dashboards/NOC
     - provisioning/dashboards/PhDAssess
     - provisioning/dashboards/WordPress
@@ -44,6 +45,7 @@
     - GoTest/go-test-traefik-12250.json
     - GoTest/go-test-node-exporter.json
     - GoTest/go-test-postgres-db-9628.json
+    - Memento/Memento-status.json
     - NOC/NodeExporter.json
     - NOC/Prometheus-Alerts.json
     - PhDAssess/PhDAssess.json
