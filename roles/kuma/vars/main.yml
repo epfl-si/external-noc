@@ -1,0 +1,7 @@
+---
+# vars for Kuma
+kuma_port: 3001
+kuma_container_name: "kuma"
+kuma_image: "louislam/uptime-kuma"
+kuma_version: "1"
+kuma_image_qualified: "{{ kuma_image }}:{{ kuma_version }}"
