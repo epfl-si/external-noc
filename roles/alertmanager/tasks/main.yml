@@ -22,7 +22,7 @@
         --storage.path=/tmp 
         --log.level=debug
       {% endif %}
-      --web.external-url=https://am{{ dns_suffix }}.{{ frontend.domain }}
+      --web.external-url=https://am.noc{{ dns_suffix }}.{{ frontend.domain }}
     restart_policy: unless-stopped
     network_mode: "{{ backend_network_name }}"
     mounts: "{{ mounts[runenv] }}"
