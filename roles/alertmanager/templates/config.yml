@@ -85,6 +85,10 @@ route:
         sendto: telegram
         app: phdassess
 
+    - receiver: 'isas-fsd-memento-mails'
+      match: 
+        sendto: memento-email
+
 {% endif %}
 
 receivers:
@@ -99,6 +103,11 @@ receivers:
 - name: 'idev-fsd-mails'
   email_configs:
   - to: 'fsd-monitoring@epfl.ch'
+
+- name: 'isas-fsd-memento-mails'
+  email_configs:
+  - to: 'isas-fsd-memento-monitoring@groupes.epfl.ch'
+    send_resolved: true
 
 {% if alertmanager_debug %}
 - name: 'alert-tg-bot-test'
