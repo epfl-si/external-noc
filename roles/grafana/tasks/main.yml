@@ -46,6 +46,7 @@
     - GoTest/go-test-node-exporter.json
     - GoTest/go-test-postgres-db-9628.json
     - Memento/Memento-status.json
+    - Memento/Memento-statistics.json
     - NOC/NodeExporter.json
     - NOC/Prometheus-Alerts.json
     - PhDAssess/PhDAssess.json
