@@ -126,7 +126,7 @@ scrape_configs:
     metrics_path: /check-prometheus/
     scheme: 'https'
     static_configs:
-      - targets: ['prod-memento-origin.epfl.ch:443']
+      - targets: ['memento.epfl.ch:443']
 
   # File-based service discovery of WordPresses
   # (https://prometheus.io/docs/prometheus/latest/configuration/configuration/#file_sd_config)
