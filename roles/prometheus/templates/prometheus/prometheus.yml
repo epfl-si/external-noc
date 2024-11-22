@@ -127,6 +127,13 @@ scrape_configs:
     scheme: 'https'
     static_configs:
       - targets: ['memento.epfl.ch:443']
+  - job_name: 'memento-stats'
+    scrape_interval: 10m
+    scrape_timeout: 30s
+    metrics_path: /stats-prometheus/
+    scheme: 'https'
+    static_configs:
+      - targets: ['memento.epfl.ch:443']
 
   # File-based service discovery of WordPresses
   # (https://prometheus.io/docs/prometheus/latest/configuration/configuration/#file_sd_config)
