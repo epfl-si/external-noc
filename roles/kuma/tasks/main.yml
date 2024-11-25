@@ -1,0 +1,32 @@
+---
+
+- name: Create the Kuma volume
+  file:
+    path: "{{ data_path }}/kuma/data"
+    state: directory
+
+- name: Run Kuma
+  docker_container:
+    name: "{{ kuma_container_name }}"
+    image: "{{ kuma_image_qualified }}"
+    detach: yes
+    restart_policy: unless-stopped
+    recreate: >-
+      {{
+        (kuma_config_files is defined and kuma_config_files is changed)
+        or
+        (kuma_templates is defined and kuma_templates is changed)
+      }}
+    network_mode: "{{ backend_network_name }}"
+    volumes:
+      - "{{ data_path }}/kuma/data:/app/data"
+    log_driver: json-file
+    log_options:
+      max-size: 50m
+      max-file: "3"
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.kuma.rule: "Host(`kuma.noc{{ dns_suffix }}.{{ frontend.domain }}`)"
+      traefik.http.routers.kuma.entrypoints: "websecure"
+      traefik.http.routers.kuma.tls.certresolver: "letsencrypt"
+      traefik.docker.network: "{{ backend_network_name }}"
