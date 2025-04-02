@@ -16,7 +16,6 @@
 - name: External NOC
   hosts: noc
   gather_facts: no   # Not yet
-  # Variables common to all roles
   roles:
     - name: docker
       role: nickjj.docker
