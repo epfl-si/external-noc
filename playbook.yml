@@ -5,9 +5,18 @@
       debug:
         msg: "Starting ansible with {{ runenv }} environment."
 
+- name: Networking configuration (DHCP / DNS)
+  hosts: all
+  gather_facts: yes
+  roles:
+    - role: roles/networking
+      tags: networking
+      apply:
+        tags: networking
+
 - name: Postfix mail black hole
   hosts: noc_dev
-  gather_facts: no   # Not yet
+  gather_facts: no
   roles:
     - name: postfix
       role: roles/postfix
@@ -15,7 +24,7 @@
 
 - name: External NOC
   hosts: noc
-  gather_facts: no   # Not yet
+  gather_facts: no
   roles:
     - name: docker
       role: nickjj.docker

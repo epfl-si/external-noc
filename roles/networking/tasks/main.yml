@@ -1,0 +1,39 @@
+- ansible.builtin.copy:
+    dest: "/etc/netplan/your-dns-sucks.yaml"
+    content: |
+      network:
+        version: 2
+        ethernets:
+          {{ ansible_default_ipv4.interface }}:
+            # After careful consideration, I have come to the conclusion
+            # that the SWITCHEngines DNS server sucks.
+            dhcp4-overrides:
+              use-dns: false
+              use-domains: false
+            # Also, Jammy's systemd-resolved absolutely needs an external
+            # DNS server; it won't “go off-the-grid” and resolve from the
+            # root servers.
+            nameservers:
+              addresses: [8.8.8.8]
+  vars:
+    _iface: "{{ ansible_default_ipv4.interface }}"
+  register: _networkd_config
+
+- when: _networkd_config is changed
+  block:
+    - shell:
+        warn: false
+        cmd: |
+          set -e -x
+          rm -f /run/systemd/netif/leases/* \
+                /run/systemd/netif/links/* \
+                /run/systemd/netif/state \
+                /run/systemd/resolve/resolv.conf
+          netplan apply
+    - ansible.builtin.systemd:
+        state: restarted
+        name: "{{ item }}"
+        daemon_reload: true
+      with_items:
+        - systemd-networkd
+        - systemd-resolved
