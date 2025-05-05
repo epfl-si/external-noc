@@ -2,7 +2,7 @@
   docker_container:
     name: alert-tg-bot
     image: epflsi/alert-tg-bot
-    pull: "{{ 'no' if runenv == 'prod' else 'yes' }}"
+    pull: "{{ 'False' if runenv == 'prod' else 'True' }}"
     env:
       TELEGRAM_BOT_TOKEN: "{{ _noc_secrets.telegram.TOKEN.prod if runenv == 'prod' else _noc_secrets.telegram.TOKEN.test }}"
       DEBUG: "{{ 'false' if runenv == 'prod' else 'true' }}"
