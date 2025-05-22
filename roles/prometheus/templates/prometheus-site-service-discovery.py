@@ -42,17 +42,11 @@ class DynamicConfig:
         return self._sites
 
     def enumerate(self):
-        targets_by_wp_env = {}
+        targets = []
         for s in self.sites:
-            if not s['wpInfra']:
-                continue
-            wp_env = s['openshiftEnv']
-            if wp_env.startswith('unm'):
-                continue
-
             url = s['url'] if s['url'].endswith('/') else s['url'] + '/'
-            targets_by_wp_env.setdefault(wp_env, []).append(url)
-        return targets_by_wp_env.items()
+            targets.append(url)
+        return targets
 
     def _write(self, struct):
         tmpTarget = self.targetPath + '.tmp'
@@ -61,11 +55,7 @@ class DynamicConfig:
         os.rename(tmpTarget, self.targetPath)
 
     def write_targets(self):
-        self._write([
-                dict(
-                    targets=targets,
-                    labels=dict(wp_env=wp_env))
-                for wp_env, targets in self.enumerate()])
+        self._write([dict(targets=self.enumerate())])
 
 while True:
     dc = DynamicConfig()
