@@ -1,0 +1,15 @@
+{%raw%}
+groups:
+  - name: GitLab disk is nearly full
+    rules:
+    - alert: GitLab disk is nearly full
+      expr: floor(node_filesystem_free_bytes{device=~"/dev.*gitlab.*"} / 1048576) < 10 * 1024
+      for: 5m
+      labels:
+        severity: page
+        sendto: telegram
+        app: gitlab
+      annotations:
+        summary: 'GitLab disk is nearly full'
+        description: 'The {{ $labels.fstype }} partition {{ $labels.device }} has only {{ value }} megabytes remaining.'
+{%endraw%}
