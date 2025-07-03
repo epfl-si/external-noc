@@ -49,6 +49,9 @@ class DynamicConfig:
 			if s['infrastructure'] != "Kubernetes":
 				continue
 
+			if "monitored" not in s or not s['monitored']:
+				continue
+
 			targets.setdefault(s["infrastructure"], []).append(url)
         return targets.items()
 
