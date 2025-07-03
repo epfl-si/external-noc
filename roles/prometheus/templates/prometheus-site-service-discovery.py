@@ -42,17 +42,17 @@ class DynamicConfig:
         return self._sites
 
     def enumerate(self):
-        targets = []
+        targets = {}
         for s in self.sites:
             url = s['url'] if s['url'].endswith('/') else s['url'] + '/'
 
-			if s['infrastructure'] != "Kubernetes":
-				continue
+            if s['infrastructure'] != "Kubernetes":
+                continue
 
-			if "monitored" not in s or not s['monitored']:
-				continue
+            if "monitored" not in s or not s['monitored']:
+                continue
 
-			targets.setdefault(s["infrastructure"], []).append(url)
+            targets.setdefault(s["infrastructure"], []).append(url)
         return targets.items()
 
     def _write(self, struct):
