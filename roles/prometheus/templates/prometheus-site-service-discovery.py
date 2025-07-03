@@ -45,8 +45,12 @@ class DynamicConfig:
         targets = []
         for s in self.sites:
             url = s['url'] if s['url'].endswith('/') else s['url'] + '/'
-            targets.append(url)
-        return targets
+
+			if s['infrastructure'] != "Kubernetes":
+				continue
+
+			targets.setdefault(s["infrastructure"], []).append(url)
+        return targets.items()
 
     def _write(self, struct):
         tmpTarget = self.targetPath + '.tmp'
