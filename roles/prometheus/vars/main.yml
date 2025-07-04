@@ -3,7 +3,7 @@
 prometheus_port: 9090
 prometheus_container_name: "prometheus"
 prometheus_image: "prom/prometheus"
-prometheus_version: "v2.54.0"
+prometheus_version: "v3.4.2"
 
 prometheus_debug: '{{ dns_suffix == "-test" }}'
 
@@ -59,7 +59,6 @@ urls:
       slug: www.epfl.ch_labs
       url: https://www.epfl.ch/labs
 
-
   veritas: "{{ sites_from_veritas.stdout | default('[]') | from_json }}"
 
 c2c:
@@ -92,10 +91,10 @@ sources:
     - name: bbe-ch-zh
       origin: zurich
       server: "{{ blackboxexporter_container_name }}:{{ bbe.port | default('9115')}}"
-      auth: '{{ auth.legacy }}'
+      auth: "{{ auth.legacy }}"
   ressenti:
     - name: res-ch-zh
       module: firefox
       origin: zurich
       server: prob.86.119.40.68.nip.io
-      auth: '{{ auth.legacy }}'
+      auth: "{{ auth.legacy }}"
