@@ -1,15 +1,6 @@
 ---
 # tasks file for prometheus
 
-# ------------------------------------------------------------------- wp-veritas
-- name: Get URLs from wp-veritas API
-  local_action:
-    module: shell
-    cmd: "{{ role_path }}/vars/sites_from_veritas"
-  changed_when: false
-  check_mode: false  ## Meaning that yes, it supports check mode
-  register: sites_from_veritas
-
 # ------------------------------------------------------------------ Directories
 - name: Create writable directories to be used as mount points
   file:
