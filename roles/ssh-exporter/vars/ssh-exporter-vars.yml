@@ -1,0 +1,2 @@
+ssh_exporter_image_name: ssh-exporter
+ssh_exporter_container_name: ssh-exporter

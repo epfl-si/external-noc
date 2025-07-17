@@ -1,0 +1,52 @@
+- tags: always
+  include_vars: ssh-exporter-vars.yml
+
+- name: Work directory
+  file:
+    path: "{{ install_path }}/ssh-exporter"
+    state: directory
+
+- name: Dockerfile
+  template:
+    src: "Dockerfile"
+    dest: "{{ install_path }}/ssh-exporter/Dockerfile"
+
+- name: ssh-exporter image
+  docker_image:
+    name: "{{ ssh_exporter_image_name }}"
+    source: build
+    force_source: true
+    build:
+      pull: no
+      path: "{{ install_path }}/ssh-exporter/"
+  register: _ssh_exporter_image
+
+- name: ssh-exporter configuration file
+  template:
+    src: "config.yml"
+    dest: "{{ install_path }}/ssh-exporter/config.yml"
+  register: _ssh_exporter_config
+
+- name: ssh-exporter (bogus) private key
+  community.crypto.openssh_keypair:
+    path: "{{ install_path }}/ssh-exporter/id_rsa"
+  register: _ssh_exporter_key
+
+- name: ssh-exporter container
+  docker_container:
+    name: "{{ ssh_exporter_container_name }}"
+    image: "{{ ssh_exporter_image_name }}"
+    detach: yes
+    recreate: >-
+      {{ _ssh_exporter_image is changed
+         or _ssh_exporter_config is changed
+         or _ssh_exporter_key is changed
+      }}
+    restart_policy: unless-stopped
+    network_mode: "{{ backend_network_name }}"
+    log_driver: json-file
+    log_options:
+      max-size: 50m
+      max-file: "3"
+    volumes:
+      - "{{ install_path }}/ssh-exporter:/app"

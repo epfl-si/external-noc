@@ -85,6 +85,14 @@ route:
         sendto: telegram
         app: phdassess
 
+    - receiver: 'alert-tg-bot-gitlab'
+      group_by: ['instance']
+      group_wait: 45s
+      group_interval: 10m
+      match:
+        sendto: telegram
+        app: gitlab
+
     - receiver: 'isas-fsd-memento-mails'
       match: 
         sendto: memento-email
@@ -133,4 +141,11 @@ receivers:
   - send_resolved: true
     # “PhDAssess” group
     url: 'http://alert-tg-bot:3000/-1001848690641'
+
+- name: 'alert-tg-bot-gitlab'
+  webhook_configs:
+  - send_resolved: true
+    # XXX Can't seem to be able to send to GitLab BoFH Lounge for some
+    # reason (id is -191868146 according to the Telegram Web app)
+    url: 'http://alert-tg-bot:3000/-1001593917916'
 {% endif %}
