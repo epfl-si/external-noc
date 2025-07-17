@@ -131,6 +131,13 @@ scrape_configs:
     #   username: xxx
     #   password: xxx
 
+  - job_name: "gitlab"
+    static_configs:
+      - targets: ['ssh-exporter:9428']
+    metrics_path: /probe
+    params:
+      pattern: ['.*']
+
   # Prometheus Blackbox exporter scraper
 {% for resconf in sources.blackbox %}
   - job_name: 'blackbox-{{ resconf.origin }}'

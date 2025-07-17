@@ -1,0 +1,19 @@
+{% raw %}
+groups:
+  - name: GitLab
+    rules:
+
+    ###############################################################
+    - alert: GitLab ssh unreachable
+      expr: |-
+        ssh_exporter_ssh_nego_ok_exit_status
+        != 1
+      for: 5m
+      labels:
+        severity: page
+        sendto: telegram
+        app: gitlab
+      annotations:
+        description: |-
+          GitLab's ssh port is down!
+{% endraw %}
