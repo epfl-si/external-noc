@@ -36,24 +36,6 @@ scrape_configs:
     static_configs:
     - targets: ['nodeexporter:9100']
 
-  # Metrics from gitlab.epfl.ch (serving containers + homemade from
-  # https://github.com/epfl-dojo/GitlabStatisticsPrometheusExporter)
-  - job_name: 'gitlab@epfl'
-    metrics_path: /federate
-    honor_labels: true
-    params:
-      'match[]':
-        - '{service="gitlab"}'
-        - '{job="traefik"}'
-        - '{job="GitlabStatsExporter"}'
-        - '{job=~"postgres.*exporter.*"}'
-    scheme: 'https'
-    static_configs:
-    - targets: ['gitlab.epfl.ch']
-    basic_auth:
-      username: "{{ auth.gitlab.username }}"
-      password: "{{ auth.gitlab.password }}"
-
   # Metrics from go.epfl.ch
   - job_name: 'go@epfl'
     metrics_path: /prometheus/federate
@@ -148,8 +130,6 @@ scrape_configs:
     # basic_auth:
     #   username: xxx
     #   password: xxx
-
-
 
   # Prometheus Blackbox exporter scraper
 {% for resconf in sources.blackbox %}
