@@ -31,4 +31,19 @@ groups:
         description: |-
           GitLab sign-in page should serve 200, and should *not*
           offer to log in with email and password.
+
+    ###############################################################
+    - alert: GitLab is not serving the test public project
+      expr: |-
+        probe_success{instance="https://gitlab.epfl.ch/isas-fsd/test-project"}
+        != 1
+      for: 5m
+      labels:
+        severity: page
+        sendto: telegram
+        app: gitlab
+      annotations:
+        description: |-
+          GitLab test project at https://gitlab.epfl.ch/isas-fsd/test-project
+          appears to be broken.
 {% endraw %}
