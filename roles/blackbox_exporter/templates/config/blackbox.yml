@@ -35,6 +35,17 @@ modules:
   #   http:
   #     method: GET
   #     preferred_ip_protocol: ip4
+  https_gitlab_users_signin:
+    prober: http
+    timeout: 5s
+    http:
+      method: GET
+      valid_status_codes: [200]
+      preferred_ip_protocol: ip4
+      fail_if_not_ssl: true
+      fail_if_body_matches_regexp:
+      - "adresse de courriel"
+      - "primary email"
   tcp_connect:
     prober: tcp
     timeout: 5s
