@@ -16,4 +16,19 @@ groups:
       annotations:
         description: |-
           GitLab's ssh port is down!
+
+    ###############################################################
+    - alert: GitLab user login page is in trouble
+      expr: |-
+        probe_success{instance="https://gitlab.epfl.ch/users/sign_in"}
+        != 1
+      for: 5m
+      labels:
+        severity: page
+        sendto: telegram
+        app: gitlab
+      annotations:
+        description: |-
+          GitLab sign-in page should serve 200, and should *not*
+          offer to log in with email and password.
 {% endraw %}
