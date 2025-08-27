@@ -49,22 +49,12 @@
     chdir: "{{ noc_install_path }}/"
   changed_when: false
 
-- name: Removed unnecessary docker-py
-  pip:
-    name:
-      - docker-py
-    state: absent
-  tags: pip
-
 - name: Install the required Python APIs
-  pip:
+  apt:
     name:
-      - docker
+      - python3-docker
       - docker-compose
-      - requests
-      # For the latter, a dab of
-      # https://stackoverflow.com/a/57607284/435004 may or may not be
-      # required.
+      - python3-requests
     state: present
   tags: pip
 
