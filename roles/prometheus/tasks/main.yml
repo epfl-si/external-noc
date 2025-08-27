@@ -2,7 +2,7 @@
 # tasks file for prometheus
 
 # ------------------------------------------------------------------ Directories
-- name: Create writable directories to be used as mount points
+- name: Create writable directories for prometheus
   file:
     path: "{{ item }}"
     state: directory
@@ -10,6 +10,9 @@
   with_items:
     - "{{ install_path }}/prometheus"
     - "{{ install_path }}/prometheus/dynamic"
+    - "{{ install_path }}/prometheus/rules"
+    - "{{ data_path }}/prometheus"
+    - "{{ data_path }}/prometheus/data"
 
 - name: Check whether dynamic/targets.json is present
   stat:
@@ -22,13 +25,13 @@
     and not (
     _dynamic_targets_json.stat
     and
-    _dynamic_targets_json.stat.isreg
+    _dynamic_targets_json.stat.isreg | default(False)
     )
   file:
     path: "{{ install_path }}/prometheus/dynamic/targets.json"
     owner: root
     group: root
-    mode: '1777'
+    mode: "1777"
     state: touch
 
 # -------------------------------------------------------------------- Templates
@@ -41,7 +44,7 @@
   register: _prometheus_template_file
 
 - name: Copy prometheus rules
-  template: 
+  template:
     src: "{{ item }}"
     dest: "{{ install_path }}/prometheus/rules/{{ item | basename }}"
   with_fileglob:
@@ -108,4 +111,4 @@
       traefik.http.middlewares.prometheus_auth.basicauth.users: "{{ traefik_htpass }}"
       traefik.http.middlewares.prometheus_auth.basicauth.removeheader: "true"
   tags:
-   - prometheus.force-restart
+    - prometheus.force-restart
