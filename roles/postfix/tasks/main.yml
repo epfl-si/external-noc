@@ -10,6 +10,10 @@
     mode: "0755"
   register: _postfix_config
 
+- name: "Create docker {{ backend_network_name }} network"
+  docker_network:
+    name: "{{ backend_network_name }}"
+
 - name: Postfix black hole
   docker_container:
     name: postfix-blackhole
