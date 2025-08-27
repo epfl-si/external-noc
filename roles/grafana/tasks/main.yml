@@ -23,6 +23,8 @@
     - provisioning/dashboards/NOC
     - provisioning/dashboards/PhDAssess
     - provisioning/dashboards/WordPress
+    - provisioning/datasources
+    - provisioning/notifiers
 
 - name: Grafana provisionned dashboards
   template:
