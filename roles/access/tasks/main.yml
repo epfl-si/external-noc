@@ -1,0 +1,9 @@
+- tags: always
+  include_vars: access-vars.yml
+
+- name: ssh key
+  ansible.posix.authorized_key:
+    user: root
+    state: present
+    key: https://github.com/{{ item.github }}.keys
+  with_items: "{{ access_admin_accounts }}"
