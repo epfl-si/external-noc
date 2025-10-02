@@ -10,7 +10,7 @@ noc:
 noc_test:
   hosts:
     noc_test1:
-      ansible_host: 86.119.39.25
+      ansible_host: noc-test.fsd.team
       ansible_port: 22
       ansible_user: root
       noc_install_path: /srv/noc
