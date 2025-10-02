@@ -31,9 +31,6 @@ urls:
     - name: memento
       slug: memento
       url: https://memento.epfl.ch
-    - name: people
-      slug: people
-      url: https://people.epfl.ch
     - name: epfl-about
       slug: www_epfl_ch_about
       url: https://www.epfl.ch/about/fr/a-propos
