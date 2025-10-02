@@ -14,6 +14,36 @@
 #       apply:
 #         tags: networking
 
+- name: ssh access
+  hosts: all
+  gather_facts: no
+  roles:
+    - role: roles/access
+      tags:
+        - ssh
+        - access
+      apply:
+        tags:
+          - ssh
+          - access
+
+- name: Networking configuration (DHCP / DNS)
+  hosts: all
+  gather_facts: yes
+  roles:
+    - role: roles/networking
+      tags: networking
+      apply:
+        tags: networking
+
+- name: Postfix mail black hole
+  hosts: noc_dev
+  gather_facts: no
+  roles:
+    - name: postfix
+      role: roles/postfix
+      tags: postfix
+
 - name: External NOC
   hosts: noc
   gather_facts: no
