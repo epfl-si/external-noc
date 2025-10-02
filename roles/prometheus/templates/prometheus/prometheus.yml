@@ -73,20 +73,6 @@ scrape_configs:
       username: "{{ _noc_secrets.prometheus.auth.phdassess.username }}"
       password: "{{ _noc_secrets.prometheus.auth.phdassess.password }}"
 
-  # Metrics from people.epfl.ch
-  - job_name: 'people'
-    metrics_path: /images/metrics
-    scheme: 'https'
-    static_configs:
-    - targets:
-      - 'people.epfl.ch'
-  - job_name: people/probe
-    metrics_path: /cgi-bin/probe?metrics=1
-    scheme: https
-    static_configs:
-    - targets:
-      - people.epfl.ch
-
   # Metrics from memento.epfl.ch
   - job_name: 'memento'
     metrics_path: /check-prometheus/
