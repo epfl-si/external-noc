@@ -1238,32 +1238,6 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "ressenti_firefox_zurich",
-          "value": "ressenti_firefox_zurich"
-        },
-        "datasource": "idevfsd-prometheus",
-        "definition": "",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Job:",
-        "multi": false,
-        "name": "job",
-        "options": [],
-        "query": "label_values(job)",
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 2,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allValue": null,
-        "current": {
-          "selected": false,
           "text": "All",
           "value": "$__all"
         },
