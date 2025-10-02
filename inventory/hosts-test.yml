@@ -1,13 +1,13 @@
 all:
   vars:
-    runenv: dev
+    runenv: test
     dns_suffix: "-test"
 
 noc:
   children:
-    noc_dev
+    noc_test
 
-noc_dev:
+noc_test:
   hosts:
     noc_test1:
       ansible_host: 86.119.39.25
