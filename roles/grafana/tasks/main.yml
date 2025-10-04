@@ -1,11 +1,9 @@
 ---
 # ------------------------------------------------- Directories and static files
-- name: Create various destination directories for noc files
+- name: "{{ data_path }}/grafana/conf"
   file:
-    path: "{{ data_path }}/grafana/{{ item }}"
+    path: "{{ data_path }}/grafana/conf"
     state: directory
-  with_items:
-    - conf
 
 - name: Create writable directories
   file:
