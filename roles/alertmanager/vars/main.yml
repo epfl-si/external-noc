@@ -1,5 +1,5 @@
 ---
-# vars file for idevfsd-traefik
+# vars file for the alertmanager role
 alertmanager_state_path: "{{ install_path }}/alertmanager"
 alertmanager_container_name: alertmanager
 alertmanager_image: quay.io/prometheus/alertmanager
