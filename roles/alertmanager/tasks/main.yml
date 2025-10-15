@@ -25,7 +25,7 @@
       --web.external-url=https://am.noc{{ dns_suffix }}.{{ frontend.domain }}
     restart_policy: unless-stopped
     network_mode: "{{ backend_network_name }}"
-    mounts: "{{ mounts[runenv] }}"
+    mounts: "{{ _mounts[runenv] }}"
     log_driver: json-file
     log_options:
       max-size: 50m
@@ -40,14 +40,14 @@
       traefik.http.middlewares.alertmanager_auth.basicauth.users: "{{ traefik_htpass }}"
       traefik.http.middlewares.alertmanager_auth.basicauth.removeheader: "true"
   vars:
-    mounts:
-      prod: "{{ [config_mount] }}"
-      test: "{{ [config_mount, fake_alertmanager_state_volume] }}"
-    config_mount:
+    _mounts:
+      prod: "{{ [_config_mount] }}"
+      test: "{{ [_config_mount, _fake_alertmanager_state_volume] }}"
+    _config_mount:
       type: bind
       source: "{{ alertmanager_state_path }}/config"
       target: "/config"
-    fake_alertmanager_state_volume:
+    _fake_alertmanager_state_volume:
       type: tmpfs
       target: "/alertmanager2"
 
