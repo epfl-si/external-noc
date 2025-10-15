@@ -37,7 +37,8 @@
       traefik.http.routers.alertmanager.tls.certresolver: "letsencrypt"
       traefik.docker.network: "{{ backend_network_name }}"
       traefik.http.routers.alertmanager.middlewares: "alertmanager_auth"
-      traefik.http.middlewares.alertmanager_auth.basicauth.users: "{{ traefik_htpass }}"
+      traefik.http.middlewares.alertmanager_auth.basicauth.users: >-
+        {{ _htpasswds.splitlines() | join(",") }}
       traefik.http.middlewares.alertmanager_auth.basicauth.removeheader: "true"
   vars:
     _mounts:
@@ -50,6 +51,19 @@
     _fake_alertmanager_state_volume:
       type: tmpfs
       target: "/alertmanager2"
+    _htpasswds: |
+      {% for c in _alertmanager_credentials %}
+      {{ c.user }}:{{ c.password
+                      | default(c.pass)
+                      | ansible.builtin.password_hash(
+                                  hashtype="bcrypt",
+                                  salt=_noc_secrets.frontend.salt) }}
+      {% endfor %}
+    _alertmanager_credentials: >-
+      {{ (_noc_secrets.frontend.credentials | selectattr("user", "==", "admin"))
+      + [ _noc_secrets.alertmanager.gitlab ] }}
+    _alertmanager_gitlab_rancher_credentials: >-
+      {{ _noc_secrets.alertmanager.gitlab }}
 
 - name: Run debugapi
   docker_container:
