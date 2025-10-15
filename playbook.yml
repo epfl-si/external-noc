@@ -36,14 +36,6 @@
       apply:
         tags: networking
 
-- name: Postfix mail black hole
-  hosts: noc_dev
-  gather_facts: no
-  roles:
-    - name: postfix
-      role: roles/postfix
-      tags: postfix
-
 - name: External NOC
   hosts: noc
   gather_facts: no
