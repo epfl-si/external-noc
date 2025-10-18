@@ -73,6 +73,23 @@ scrape_configs:
       username: "{{ _noc_secrets.prometheus.auth.phdassess.username }}"
       password: "{{ _noc_secrets.prometheus.auth.phdassess.password }}"
 
+  # Metrics from the GitLab Rancher cluster
+  - job_name: 'gitlab@epfl'
+    metrics_path: /federate
+    honor_labels: true
+    params:
+      'match[]':
+        - '{__name__=~"(gitlab_external_.*|up)"}'
+    scheme: 'https'
+    static_configs:
+    - targets:
+      - 'gitlab-prometheus.epfl.ch'
+      labels:
+        service: 'gitlab'
+    basic_auth:
+      username: "{{ _noc_secrets.prometheus.federation.gitlab.username }}"
+      password: "{{ _noc_secrets.prometheus.federation.gitlab.password }}"
+
   # Metrics from memento.epfl.ch
   - job_name: 'memento'
     metrics_path: /check-prometheus/
