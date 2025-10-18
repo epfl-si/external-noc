@@ -79,7 +79,7 @@ scrape_configs:
     honor_labels: true
     params:
       'match[]':
-        - '{__name__=~"(gitlab_external_.*|up)"}'
+        - '{__name__=~"(gitlab_external_.*|gitlab_.*_total|up)"}'
     scheme: 'https'
     static_configs:
     - targets:
