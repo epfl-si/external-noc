@@ -91,7 +91,7 @@ route:
       group_interval: 10m
       match:
         sendto: telegram
-        app: gitlab
+        service: gitlab
 
     - receiver: 'isas-fsd-memento-mails'
       match: 
