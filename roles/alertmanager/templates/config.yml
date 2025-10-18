@@ -51,6 +51,10 @@ route:
   # overwritten on each.
   
   routes:
+    - receiver: null
+      match:
+        severity: none
+
 {% if alertmanager_debug %}
     # NOC-TEST
     - receiver: 'debugapi'
