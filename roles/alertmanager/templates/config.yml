@@ -97,6 +97,14 @@ route:
         sendto: telegram
         service: gitlab
 
+    - receiver: 'alert-tg-bot-gitlab'
+      group_by: ['instance']
+      group_wait: 45s
+      group_interval: 10m
+      match:
+        sendto: telegram
+        app: gitlab
+
     - receiver: 'isas-fsd-memento-mails'
       match: 
         sendto: memento-email
