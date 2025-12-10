@@ -58,5 +58,5 @@ groups:
       annotations:
         description: |-
           GitLab test project at https://gitlab.epfl.ch/isas-fsd/test-project
-          appears to be broken.
+          appears to be unreachable over {{ $labels.protocol }}.
 {% endraw %}

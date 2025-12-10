@@ -43,6 +43,14 @@ modules:
       preferred_ip_protocol: ip4
       follow_redirects: false
       fail_if_not_ssl: true
+  https_v6_get_no_redirects:
+    prober: http
+    timeout: 15s
+    http:
+      method: GET
+      preferred_ip_protocol: ip6
+      follow_redirects: false
+      fail_if_not_ssl: true
   https_gitlab_users_signin:
     prober: http
     timeout: 5s
