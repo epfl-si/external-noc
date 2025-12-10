@@ -40,7 +40,7 @@ platform_check () {
     if ! test -f ansible-deps-cache/.versions 2>/dev/null; then
         curl https://raw.githubusercontent.com/epfl-si/ansible.suitcase/master/install.sh | \
             SUITCASE_DIR=$PWD/ansible-deps-cache \
-            SUITCASE_PIP_EXTRA="bcrypt passlib" \
+            SUITCASE_PIP_EXTRA="bcrypt passlib dnspython" \
             SUITCASE_ANSIBLE_VERSION=11.5.0 \
             SUITCASE_ANSIBLE_REQUIREMENTS=requirements.yml \
             bash -x
