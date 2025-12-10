@@ -5,7 +5,18 @@ scripts:
     timeout: 5s
     pattern: 'Welcome'
     credentials:
-    - host: gitlab.epfl.ch
+    - host: >-
+        {{ lookup("community.dns.lookup", "gitlab.epfl.ch", type="A") }}
+      port: 22
+      user: git
+      keyfile: /app/id_rsa
+  - name: ssh6_nego_ok
+    script: ":"
+    timeout: 5s
+    pattern: 'Welcome'
+    credentials:
+    - host: >-
+        [{{ lookup("community.dns.lookup", "gitlab.epfl.ch", type="AAAA") }}]
       port: 22
       user: git
       keyfile: /app/id_rsa

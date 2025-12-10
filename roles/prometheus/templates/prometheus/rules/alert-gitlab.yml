@@ -4,7 +4,7 @@ groups:
     rules:
 
     ###############################################################
-    - alert: GitLab ssh unreachable
+    - alert: GitLab ssh unreachable (IPv4)
       expr: |-
         ssh_exporter_ssh_nego_ok_exit_status
         != 1
@@ -16,6 +16,19 @@ groups:
       annotations:
         description: |-
           GitLab's ssh port is down!
+
+    - alert: GitLab ssh unreachable (IPv6)
+      expr: |-
+        ssh_exporter_ssh6_nego_ok_exit_status
+        != 1
+      for: 5m
+      labels:
+        severity: page
+        sendto: telegram
+        app: gitlab
+      annotations:
+        description: |-
+          GitLab's ssh port is down over IPv6!
 
     ###############################################################
     - alert: GitLab user login page is in trouble
