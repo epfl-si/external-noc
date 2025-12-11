@@ -61,3 +61,4 @@
 - name: "Create docker {{ backend_network_name }} network"
   docker_network:
     name: "{{ backend_network_name }}"
+    enable_ipv6: true
