@@ -5,15 +5,6 @@
       debug:
         msg: "Starting ansible with {{ runenv }} environment."
 
-# - name: Networking configuration (DHCP / DNS)
-#   hosts: all
-#   gather_facts: yes
-#   roles:
-#     - role: roles/networking
-#       tags: networking
-#       apply:
-#         tags: networking
-
 - name: ssh access
   hosts: all
   gather_facts: no
@@ -26,15 +17,6 @@
         tags:
           - ssh
           - access
-
-- name: Networking configuration (DHCP / DNS)
-  hosts: all
-  gather_facts: yes
-  roles:
-    - role: roles/networking
-      tags: networking
-      apply:
-        tags: networking
 
 - name: External NOC
   hosts: noc
