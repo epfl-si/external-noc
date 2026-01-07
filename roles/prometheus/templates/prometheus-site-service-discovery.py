@@ -44,7 +44,8 @@ class DynamicConfig:
     @property
     def targets(self):
         return [ self.canonical_url(s['url'])
-                 for s in self.sites ]
+                 for s in self.sites
+                 if s.get('monitored', True) ]
 
     def _write(self, struct):
         tmpTarget = self.targetPath + '.tmp'
