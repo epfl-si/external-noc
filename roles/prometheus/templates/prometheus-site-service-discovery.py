@@ -41,12 +41,10 @@ class DynamicConfig:
             self._sites = json.loads(self._get_json())
         return self._sites
 
-    def enumerate(self):
-        targets = []
-        for s in self.sites:
-            url = s['url'] if s['url'].endswith('/') else s['url'] + '/'
-            targets.append(url)
-        return targets
+    @property
+    def targets(self):
+        return [ self.canonical_url(s['url'])
+                 for s in self.sites ]
 
     def _write(self, struct):
         tmpTarget = self.targetPath + '.tmp'
@@ -55,7 +53,10 @@ class DynamicConfig:
         os.rename(tmpTarget, self.targetPath)
 
     def write_targets(self):
-        self._write([dict(targets=self.enumerate())])
+        self._write([dict(targets=self.targets)])
+
+    def canonical_url(self, url):
+        return url if url.endswith('/') else url + '/'
 
 while True:
     dc = DynamicConfig()
