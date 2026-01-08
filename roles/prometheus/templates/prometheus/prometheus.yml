@@ -56,23 +56,6 @@ scrape_configs:
       username: "{{ _noc_secrets.prometheus.auth.go.username }}"
       password: "{{ _noc_secrets.prometheus.auth.go.password }}"
 
-  # Metrics from phd-annual-report.epfl.ch
-  - job_name: 'phdassess@epfl'
-    metrics_path: /federate
-    honor_labels: true
-    params:
-      'match[]':
-        - '{__name__=~"(atomix.*|zeebe.*|nodejs.*|process.*|phdassess.*|up)"}'
-    scheme: 'https'
-    static_configs:
-    - targets:
-      - 'prometheus-phdassess.epfl.ch'
-      labels:
-        service: 'phdassess'
-    basic_auth:
-      username: "{{ _noc_secrets.prometheus.auth.phdassess.username }}"
-      password: "{{ _noc_secrets.prometheus.auth.phdassess.password }}"
-
   # Metrics from the GitLab Rancher cluster
   - job_name: 'gitlab@epfl'
     metrics_path: /federate

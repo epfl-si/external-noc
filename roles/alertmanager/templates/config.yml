@@ -81,14 +81,6 @@ route:
         sendto: telegram
         app: wordpress
 
-    - receiver: 'alert-tg-bot-prod-phdassess'
-      group_by: ['instance']
-      group_wait: 45s
-      group_interval: 10m
-      match:
-        sendto: telegram
-        app: phdassess
-
     - receiver: 'alert-tg-bot-gitlab'
       group_by: ['instance']
       group_wait: 45s
@@ -147,12 +139,6 @@ receivers:
   - send_resolved: true
     # AlertmanagerGroup (Prod)
     url: 'http://alert-tg-bot:3000/-1001593917916'
-
-- name: 'alert-tg-bot-prod-phdassess'
-  webhook_configs:
-  - send_resolved: true
-    # “PhDAssess” group
-    url: 'http://alert-tg-bot:3000/-1001848690641'
 
 - name: 'alert-tg-bot-gitlab'
   webhook_configs:

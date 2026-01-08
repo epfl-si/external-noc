@@ -19,7 +19,6 @@
     - provisioning/dashboards/GoTest
     - provisioning/dashboards/Memento
     - provisioning/dashboards/NOC
-    - provisioning/dashboards/PhDAssess
     - provisioning/dashboards/WordPress
     - provisioning/datasources
     - provisioning/notifiers
@@ -49,7 +48,6 @@
     - Memento/Memento-statistics.json
     - NOC/NodeExporter.json
     - NOC/Prometheus-Alerts.json
-    - PhDAssess/PhDAssess.json
     - WordPress/WordPress-general.json
     - WordPress/WordPress-backup-detail.json
     - WordPress/WordPress-plugins-and-blocks.json
