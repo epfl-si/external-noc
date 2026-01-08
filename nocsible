@@ -53,7 +53,7 @@ inventory_mode="test"
 inventories () {
     case "$inventory_mode" in
         test) echo "-i inventory/hosts-test.yml"  ;;
-        prod) echo "-i inventory/hosts-prod.yml"  ;;
+        prod) echo "-i inventory/hosts-prod.yml -i inventory/hosts-test.yml"  ;;
         *) fatal "Invalid inventory_mode" ;;
     esac
 

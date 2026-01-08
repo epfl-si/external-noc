@@ -1,8 +1,3 @@
-all:
-  vars:
-    runenv: prod
-    dns_suffix: ""
-
 noc:
   children:
     noc_prod
@@ -14,3 +9,5 @@ noc_prod:
       ansible_port: 22
       ansible_user: root
       noc_install_path: /srv/noc
+      runenv: prod
+      dns_suffix: ""
