@@ -49,8 +49,6 @@
     - NOC/NodeExporter.json
     - NOC/Prometheus-Alerts.json
     - WordPress/WordPress-general.json
-    - WordPress/WordPress-backup-detail.json
-    - WordPress/WordPress-plugins-and-blocks.json
     - WordPress/WordPress-detail.json
   register: grafana_templates
 
