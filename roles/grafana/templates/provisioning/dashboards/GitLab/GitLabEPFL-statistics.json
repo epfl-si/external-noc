@@ -212,7 +212,7 @@
           "expr": "max by (namespace) (gitlab_groups_total)",
           "instant": false,
           "interval": "",
-          "legendFormat": "Gitlab Total Projects",
+          "legendFormat": "Gitlab Total Groups",
           "refId": "A"
         }
       ],
@@ -332,7 +332,7 @@
           "expr": "max by (namespace) (gitlab_issues_total)",
           "instant": false,
           "interval": "",
-          "legendFormat": "Gitlab Total Projects",
+          "legendFormat": "Gitlab Total Issues",
           "refId": "A"
         }
       ],
@@ -391,7 +391,7 @@
           "expr": "max by (namespace) (gitlab_forks_total)",
           "instant": false,
           "interval": "",
-          "legendFormat": "Gitlab Total Projects",
+          "legendFormat": "Gitlab Total Forks",
           "refId": "A"
         }
       ],
@@ -509,7 +509,7 @@
           "expr": "max by (namespace) (gitlab_ssh_keys_total)",
           "instant": false,
           "interval": "",
-          "legendFormat": "Gitlab Total Projects",
+          "legendFormat": "Gitlab Total SSH Keys",
           "refId": "A"
         }
       ],
@@ -568,7 +568,7 @@
           "expr": "max by (namespace) (gitlab_notes_total)",
           "instant": false,
           "interval": "",
-          "legendFormat": "Gitlab Total Projects",
+          "legendFormat": "Gitlab Total Notes",
           "refId": "A"
         }
       ],
@@ -627,7 +627,7 @@
           "expr": "max by (namespace) (gitlab_snippets_total)",
           "instant": false,
           "interval": "",
-          "legendFormat": "Gitlab Total Projects",
+          "legendFormat": "Gitlab Total Snippets",
           "refId": "A"
         }
       ],
@@ -686,7 +686,7 @@
           "expr": "max by (namespace) (gitlab_milestones_total)",
           "instant": false,
           "interval": "",
-          "legendFormat": "Gitlab Total Projects",
+          "legendFormat": "Gitlab Total Milestones",
           "refId": "A"
         }
       ],
@@ -745,7 +745,7 @@
           "expr": "max by (namespace) (gitlab_active_users_total)",
           "instant": false,
           "interval": "",
-          "legendFormat": "Gitlab Total Projects",
+          "legendFormat": "Gitlab Active Users",
           "refId": "A"
         }
       ],
@@ -921,7 +921,7 @@
           "format": "time_series",
           "instant": true,
           "interval": "",
-          "legendFormat": "Last week new users",
+          "legendFormat": "Last month new users",
           "refId": "A"
         }
       ],
@@ -1288,7 +1288,7 @@
           "format": "time_series",
           "instant": true,
           "interval": "",
-          "legendFormat": "Last week new groupes",
+          "legendFormat": "Last week new groups",
           "refId": "A"
         }
       ],
