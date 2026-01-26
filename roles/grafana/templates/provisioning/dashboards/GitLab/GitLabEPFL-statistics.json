@@ -150,7 +150,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "gitlab_users_total",
+          "expr": "max by (namespace) (gitlab_users_total)",
           "instant": false,
           "interval": "",
           "legendFormat": "Gitlab Total Users",
@@ -209,7 +209,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "gitlab_groups_total",
+          "expr": "max by (namespace) (gitlab_groups_total)",
           "instant": false,
           "interval": "",
           "legendFormat": "Gitlab Total Projects",
@@ -268,7 +268,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "gitlab_projects_total",
+          "expr": "max by (namespace) (gitlab_projects_total)",
           "instant": false,
           "interval": "",
           "legendFormat": "Gitlab Total Projects",
@@ -329,7 +329,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "gitlab_issues_total",
+          "expr": "max by (namespace) (gitlab_issues_total)",
           "instant": false,
           "interval": "",
           "legendFormat": "Gitlab Total Projects",
@@ -388,7 +388,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "gitlab_forks_total",
+          "expr": "max by (namespace) (gitlab_forks_total)",
           "instant": false,
           "interval": "",
           "legendFormat": "Gitlab Total Projects",
@@ -447,7 +447,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "gitlab_merge_requests_total",
+          "expr": "max by (namespace) (gitlab_merge_requests_total)",
           "instant": false,
           "interval": "",
           "legendFormat": "Gitlab Total PRs",
@@ -506,7 +506,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "gitlab_ssh_keys_total",
+          "expr": "max by (namespace) (gitlab_ssh_keys_total)",
           "instant": false,
           "interval": "",
           "legendFormat": "Gitlab Total Projects",
@@ -565,7 +565,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "gitlab_notes_total",
+          "expr": "max by (namespace) (gitlab_notes_total)",
           "instant": false,
           "interval": "",
           "legendFormat": "Gitlab Total Projects",
@@ -624,7 +624,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "gitlab_snippets_total",
+          "expr": "max by (namespace) (gitlab_snippets_total)",
           "instant": false,
           "interval": "",
           "legendFormat": "Gitlab Total Projects",
@@ -683,7 +683,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "gitlab_milestones_total",
+          "expr": "max by (namespace) (gitlab_milestones_total)",
           "instant": false,
           "interval": "",
           "legendFormat": "Gitlab Total Projects",
@@ -742,7 +742,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "gitlab_active_users_total",
+          "expr": "max by (namespace) (gitlab_active_users_total)",
           "instant": false,
           "interval": "",
           "legendFormat": "Gitlab Total Projects",
@@ -827,7 +827,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "gitlab_users_total",
+          "expr": "max by (namespace) (gitlab_users_total)",
           "instant": false,
           "interval": "",
           "legendFormat": "users",
@@ -917,7 +917,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "floor(delta(gitlab_active_users_total[4w]))",
+          "expr": "max by (namespace) (floor(delta(gitlab_active_users_total[4w])))",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -979,7 +979,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "floor(delta(gitlab_active_users_total[1w]))",
+          "expr": "max by (namespace) (floor(delta(gitlab_active_users_total[1w])))",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -1041,7 +1041,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "floor(delta(gitlab_active_users_total[1d]))",
+          "expr": "max by (namespace) (floor(delta(gitlab_active_users_total[1d])))",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -1132,7 +1132,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "gitlab_groups_total",
+          "expr": "max by (namespace) (gitlab_groups_total)",
           "instant": false,
           "interval": "",
           "legendFormat": "groups",
@@ -1222,7 +1222,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "floor(delta(gitlab_groups_total[4w]))",
+          "expr": "max by (namespace) (floor(delta(gitlab_groups_total[4w])))",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -1284,7 +1284,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "floor(delta(gitlab_groups_total[1w]))",
+          "expr": "max by (namespace) (floor(delta(gitlab_groups_total[1w])))",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -1346,7 +1346,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "floor(delta(gitlab_groups_total[1d]))",
+          "expr": "max by (namespace) (floor(delta(gitlab_groups_total[1d])))",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -1437,7 +1437,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "gitlab_projects_total",
+          "expr": "max by (namespace) (gitlab_projects_total)",
           "instant": false,
           "interval": "",
           "legendFormat": "projects",
@@ -1527,7 +1527,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "floor(delta(gitlab_projects_total[4w]))",
+          "expr": "max by (namespace) (floor(delta(gitlab_projects_total[4w])))",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -1589,7 +1589,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "floor(delta(gitlab_projects_total[1w]))",
+          "expr": "max by (namespace) (floor(delta(gitlab_projects_total[1w])))",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -1651,7 +1651,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "floor(delta(gitlab_projects_total[1d]))",
+          "expr": "max by (namespace) (floor(delta(gitlab_projects_total[1d])))",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -1748,7 +1748,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "gitlab_issues_total",
+          "expr": "max by (namespace) (gitlab_issues_total)",
           "instant": false,
           "interval": "",
           "legendFormat": "issues",
@@ -1847,7 +1847,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "gitlab_forks_total",
+          "expr": "max by (namespace) (gitlab_forks_total)",
           "instant": false,
           "interval": "",
           "legendFormat": "forks",
@@ -1946,7 +1946,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "gitlab_merge_requests_total",
+          "expr": "max by (namespace) (gitlab_merge_requests_total)",
           "instant": false,
           "interval": "",
           "legendFormat": "PRs",
@@ -2036,7 +2036,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "floor(delta(gitlab_issues_total[4w]))",
+          "expr": "max by (namespace) (floor(delta(gitlab_issues_total[4w])))",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -2098,7 +2098,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "floor(delta(gitlab_issues_total[1w]))",
+          "expr": "max by (namespace) (floor(delta(gitlab_issues_total[1w])))",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -2160,7 +2160,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "floor(delta(gitlab_forks_total[4w]))",
+          "expr": "max by (namespace) (floor(delta(gitlab_forks_total[4w])))",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -2222,7 +2222,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "floor(delta(gitlab_forks_total[1w]))",
+          "expr": "max by (namespace) (floor(delta(gitlab_forks_total[1w])))",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -2284,7 +2284,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "floor(delta(gitlab_merge_requests_total[4w]))",
+          "expr": "max by (namespace) (floor(delta(gitlab_merge_requests_total[4w])))",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -2346,7 +2346,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "floor(delta(gitlab_merge_requests_total[1w]))",
+          "expr": "max by (namespace) (floor(delta(gitlab_merge_requests_total[1w])))",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -2438,7 +2438,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "avg(gitlab_groups_total/gitlab_users_total)",
+          "expr": "max by (namespace) (avg(gitlab_groups_total/gitlab_users_total))",
           "interval": "",
           "legendFormat": "gitlab_active_users_total / gitlab_groups_total",
           "refId": "A"
@@ -2529,7 +2529,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "avg(gitlab_issues_total/gitlab_users_total)",
+          "expr": "max by (namespace) (avg(gitlab_issues_total/gitlab_users_total))",
           "interval": "",
           "legendFormat": "gitlab_users_total/gitlab_issues_total",
           "refId": "A"
@@ -2620,7 +2620,7 @@
             "type": "prometheus",
             "uid": "PA7DAED22D5425F49"
           },
-          "expr": "avg(gitlab_ssh_keys_total/gitlab_users_total)",
+          "expr": "max by (namespace) (avg(gitlab_ssh_keys_total/gitlab_users_total))",
           "interval": "",
           "legendFormat": "gitlab_ssh_keys_total/gitlab_users_total",
           "refId": "A"
