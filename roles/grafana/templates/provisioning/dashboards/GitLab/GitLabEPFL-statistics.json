@@ -2531,7 +2531,7 @@
           },
           "expr": "max by (namespace) (avg(gitlab_issues_total/gitlab_users_total))",
           "interval": "",
-          "legendFormat": "gitlab_users_total/gitlab_issues_total",
+          "legendFormat": "gitlab_users_total / gitlab_issues_total",
           "refId": "A"
         }
       ],
@@ -2622,7 +2622,7 @@
           },
           "expr": "max by (namespace) (avg(gitlab_ssh_keys_total/gitlab_users_total))",
           "interval": "",
-          "legendFormat": "gitlab_ssh_keys_total/gitlab_users_total",
+          "legendFormat": "gitlab_ssh_keys_total / gitlab_users_total",
           "refId": "A"
         }
       ],
