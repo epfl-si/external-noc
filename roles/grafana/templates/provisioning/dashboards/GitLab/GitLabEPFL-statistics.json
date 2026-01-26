@@ -450,11 +450,11 @@
           "expr": "max by (namespace) (gitlab_merge_requests_total)",
           "instant": false,
           "interval": "",
-          "legendFormat": "Gitlab Total PRs",
+          "legendFormat": "Gitlab Total MRs",
           "refId": "A"
         }
       ],
-      "title": "PRs",
+      "title": "MRs",
       "type": "stat"
     },
     {
@@ -1685,7 +1685,7 @@
           "refId": "A"
         }
       ],
-      "title": "Issues, forks and PRs info",
+      "title": "Issues, forks and MR info",
       "type": "row"
     },
     {
@@ -1933,7 +1933,7 @@
       "renderer": "flot",
       "seriesOverrides": [
         {
-          "alias": "PRs",
+          "alias": "MRs",
           "color": "#5794F2"
         }
       ],
@@ -1949,13 +1949,13 @@
           "expr": "max by (namespace) (gitlab_merge_requests_total)",
           "instant": false,
           "interval": "",
-          "legendFormat": "PRs",
+          "legendFormat": "MRs",
           "refId": "A"
         }
       ],
       "thresholds": [],
       "timeRegions": [],
-      "title": "PRs Total",
+      "title": "MRs Total",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -2288,11 +2288,11 @@
           "format": "time_series",
           "instant": true,
           "interval": "",
-          "legendFormat": "Last month new PRs",
+          "legendFormat": "Last month new MRs",
           "refId": "A"
         }
       ],
-      "title": "Last month new PRs",
+      "title": "Last month new MRs",
       "type": "stat"
     },
     {
@@ -2350,11 +2350,11 @@
           "format": "time_series",
           "instant": true,
           "interval": "",
-          "legendFormat": "Last week new PRs",
+          "legendFormat": "Last week new MRs",
           "refId": "A"
         }
       ],
-      "title": "Last week new PRs",
+      "title": "Last week new MRs",
       "type": "stat"
     },
     {
