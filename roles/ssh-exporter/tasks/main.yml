@@ -1,3 +1,7 @@
+# @TODO: https://github.com/Nordstrom/ssh_exporter is not avalaible anymore
+
+---
+
 - tags: always
   include_vars: ssh-exporter-vars.yml
 
