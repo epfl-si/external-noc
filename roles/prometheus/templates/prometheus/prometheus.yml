@@ -36,25 +36,25 @@ scrape_configs:
     static_configs:
     - targets: ['nodeexporter:9100']
 
-  # Metrics from go.epfl.ch
-  - job_name: 'go@epfl'
-    metrics_path: /prometheus/federate
-    honor_labels: true
-    params:
-      'match[]':
-        # https://stackoverflow.com/a/39253848/960623
-        # - '{__name__=~".+"}'
-        # Just testing another way to say "I want them all!"
-        - '{job!=""}'
-    scheme: 'https'
-    static_configs:
-    - targets: 
-      - 'go.epfl.ch'
-      labels:
-        env: 'go'
-    basic_auth:
-      username: "{{ _noc_secrets.prometheus.auth.go.username }}"
-      password: "{{ _noc_secrets.prometheus.auth.go.password }}"
+  # # Metrics from go.epfl.ch
+  # - job_name: 'go@epfl'
+  #   metrics_path: /prometheus/federate
+  #   honor_labels: true
+  #   params:
+  #     'match[]':
+  #       # https://stackoverflow.com/a/39253848/960623
+  #       # - '{__name__=~".+"}'
+  #       # Just testing another way to say "I want them all!"
+  #       - '{job!=""}'
+  #   scheme: 'https'
+  #   static_configs:
+  #   - targets: 
+  #     - 'go.epfl.ch'
+  #     labels:
+  #       env: 'go'
+  #   basic_auth:
+  #     username: "{{ _noc_secrets.prometheus.auth.go.username }}"
+  #     password: "{{ _noc_secrets.prometheus.auth.go.password }}"
 
   # Metrics from the GitLab Rancher cluster
   - job_name: 'gitlab@epfl'
