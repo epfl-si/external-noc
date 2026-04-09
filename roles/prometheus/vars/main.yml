@@ -12,12 +12,6 @@ urls:
     - name: gitlab
       slug: gitlab
       url: https://gitlab.epfl.ch
-    - name: go
-      slug: go
-      url: https://go.epfl.ch
-    - name: igm
-      slug: igm
-      url: https://sti.epfl.ch/research/institutes/igm
     - name: support-epfl
       slug: support-epfl
       url: https://support.epfl.ch/epfl
