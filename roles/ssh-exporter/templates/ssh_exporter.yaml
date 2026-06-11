@@ -1,0 +1,6 @@
+modules:
+  default:
+    user: git
+    private_key: /app/id_rsa
+    command_expect: "Welcome to GitLab"
+    timeout: 5

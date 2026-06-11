@@ -27,8 +27,8 @@
 
 - name: ssh-exporter configuration file
   template:
-    src: "config.yml"
-    dest: "{{ install_path }}/ssh-exporter/config.yml"
+    src: "ssh_exporter.yaml"
+    dest: "{{ install_path }}/ssh-exporter/ssh_exporter.yaml"
   register: _ssh_exporter_config
 
 - name: ssh-exporter (bogus) private key

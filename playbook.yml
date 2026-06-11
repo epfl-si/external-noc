@@ -66,12 +66,11 @@
         - noc
         - nodeexporter
 
-    # The upstream (https://github.com/Nordstrom/ssh_exporter) is gone...
-    # - name: ssh exporter
-    #   role: roles/ssh-exporter
-    #   tags:
-    #     - noc
-    #     - ssh-exporter
+    - name: ssh exporter
+      role: roles/ssh-exporter
+      tags:
+        - noc
+        - ssh-exporter
 
     - name: prometheus
       role: roles/prometheus

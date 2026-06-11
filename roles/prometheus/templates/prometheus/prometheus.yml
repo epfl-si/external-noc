@@ -117,12 +117,40 @@ scrape_configs:
     #   username: xxx
     #   password: xxx
 
-  - job_name: "gitlab"
+  - job_name: "gitlab-ssh"
+    metrics_path: /ssh
     static_configs:
-      - targets: ['ssh-exporter:9428']
-    metrics_path: /probe
-    params:
-      pattern: ['.*']
+      - labels:
+          protocol: ipv4
+        targets:
+          - >-
+            {{ lookup("community.dns.lookup", "gitlab-ssh.epfl.ch",
+                      type="A") }}:22
+      - labels:
+          protocol: ipv6
+        targets:
+          - >-
+            [{{ lookup("community.dns.lookup", "gitlab-ssh.epfl.ch",
+                      type="AAAA") }}]:22
+
+    relabel_configs:
+    - source_labels: [__address__]
+      target_label: __param_target
+    - source_labels: [__param_target]
+      target_label: instance
+    - target_label: __address__
+      replacement: ssh-exporter:9312
+    - source_labels: [module]
+      target_label: __param_module
+    metric_relabel_configs:
+    - regex: "^(module)$"
+      action: labeldrop
+
+  - job_name: "ssh-exporter"
+    metrics_path: /metrics
+    static_configs:
+    - targets:
+      - ssh-exporter:9312
 
   - job_name: "gitlab-blackbox-users-signin"
     static_configs:
