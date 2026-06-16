@@ -1,6 +1,6 @@
 """Automatically compute targets for the production WordPress Prometheus.
 
-Every 60 seconds, enumerate Web sites in wp-veritas and produce a number
+Every 300 seconds, enumerate Web sites in wp-veritas and produce a number
 of dynamic targets for it.
 
 See https://github.com/epfl-si/wp-ops/blob/master/ansible/roles/wordpress-openshift-namespace/templates/prometheus-menu-service-discovery.py
@@ -10,6 +10,7 @@ from datetime import datetime
 import json
 import logging
 import os
+import socket
 import time
 import traceback
 import urllib.request
@@ -32,7 +33,7 @@ class DynamicConfig:
             flush=True)
 
     def _get_json(self):
-        res = urllib.request.urlopen(self.url)
+        res = urllib.request.urlopen(self.url, timeout=30)
         return ''.join(res.read().decode("utf-8"))
 
     @property
@@ -65,4 +66,8 @@ while True:
         dc.write_targets()
     except:  # noqa
         logging.error(traceback.format_exc())
+    except socket.timeout:
+        logging.error("Request timed out after 30s.")
+    except Exception:  # noqa
+        logging.error("Error during target update: %s", traceback.format_exc())
     time.sleep(dc.frequency)
