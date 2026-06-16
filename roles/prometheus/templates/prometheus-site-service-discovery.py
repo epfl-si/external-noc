@@ -15,6 +15,12 @@ import time
 import traceback
 import urllib.request
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(message)s",
+    datefmt="%Y-%m-%dT%H:%M:%S"
+)
+
 class DynamicConfig:
 
     targetPath = "/srv/dynamic/targets.json"
@@ -26,11 +32,10 @@ class DynamicConfig:
         else:
             self.targetPath = DynamicConfig.targetPath
         self.frequency = frequency
-        print(f"{datetime.now().isoformat()} Configurator started !"
-              f"\n\t - url: {self.url}"
-              f"\n\t - dynamic file: {self.targetPath}"
-              f"\n\t - frequency: {self.frequency}s",
-            flush=True)
+        logging.info(
+            "Configurator started! url=%s dynamic_file=%s frequency=%ss",
+            self.url, self.targetPath, self.frequency
+        )
 
     def _get_json(self):
         res = urllib.request.urlopen(self.url, timeout=30)
@@ -63,9 +68,10 @@ class DynamicConfig:
 while True:
     dc = DynamicConfig()
     try:
+        logging.info("Updating targets...")
         dc.write_targets()
-    except:  # noqa
-        logging.error(traceback.format_exc())
+        logging.info("Targets updated successfully (%d targets written to %s). Sleeping %ss.",
+                     len(dc.targets), dc.targetPath, dc.frequency)
     except socket.timeout:
         logging.error("Request timed out after 30s.")
     except Exception:  # noqa
