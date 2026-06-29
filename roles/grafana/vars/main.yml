@@ -9,11 +9,12 @@ grafana_image_qualified: "{{ grafana_image }}:{{ grafana_version }}"
 grafana:
   security:
     admin_password: '{{ _noc_secrets.grafana.security.admin_password }}'
-  github:
-    client_id: '{{ _noc_secrets.grafana.github.client_id }}'
-    client_secret: '{{ _noc_secrets.grafana.github.client_secret }}'
-    client_id_test: '{{ _noc_secrets.grafana.github.client_id_test }}'
-    client_secret_test: '{{ _noc_secrets.grafana.github.client_secret_test }}'
+  entra:
+    client_id: '{{ _noc_secrets.grafana.entra.client_id }}'
+    client_secret: '{{ _noc_secrets.grafana.entra.client_secret }}'
+    tenant: '{{ _noc_secrets.grafana.entra.tenant }}'
+    client_id_test: '{{ _noc_secrets.grafana.entra.client_id_test }}'
+    client_secret_test: '{{ _noc_secrets.grafana.entra.client_secret_test }}'
   plugins:
     - grafana-piechart-panel
     - grafana-clock-panel
