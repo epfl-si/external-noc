@@ -142,6 +142,6 @@ receivers:
 - name: 'alert-tg-bot-gitlab'
   webhook_configs:
   - send_resolved: true
-    # “gitlab BOFH lounge” group
-    url: 'http://alert-tg-bot:3000/-1002852067440'
+    # “📢 GitLab@EPFL Alerts” group
+    url: 'http://alert-tg-bot:3000/-1003963422861'
 {% endif %}
